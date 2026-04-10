@@ -19,7 +19,7 @@ export function BlogSection() {
   ];
 
   return (
-    <section className="section-blue px-4 md:px-12 lg:px-24 py-12 md:py-24">
+    <section className="section-pink px-4 md:px-12 lg:px-24 py-12 md:py-24">
       <AnimatedSection>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="flex flex-col gap-4 md:gap-6">

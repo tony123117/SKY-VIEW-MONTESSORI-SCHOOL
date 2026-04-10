@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export function HeroSection() {
   return (
-    <div className="relative overflow-hidden font-heading min-h-screen section-pink">
+    <div className="relative overflow-hidden font-heading min-h-screen section-blue">
       <FloatingIcons />
       <div className="flex flex-col items-center justify-center gap-6 md:gap-[37px] py-10 md:py-20 px-4">
         <motion.div

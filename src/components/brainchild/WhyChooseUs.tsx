@@ -6,7 +6,7 @@ import { AnimatedSection } from "./AnimatedSection";
 
 export function WhyChooseUs() {
   return (
-    <section className="section-blue p-6 md:p-12 lg:p-24 font-body relative">
+    <section className="section-pink p-6 md:p-12 lg:p-24 font-body relative">
       <img
         src={doodles}
         alt="doodles"

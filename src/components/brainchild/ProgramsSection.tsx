@@ -28,7 +28,7 @@ export default function ProgramsSection() {
   ];
 
   return (
-    <section className="relative section-pink px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body">
+    <section className="relative section-blue px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body">
       <div className="max-w-[1440px] mx-auto">
         <img src={rock} alt="rock" className="absolute left-10 md:left-20 top-10 w-[100px] md:w-[156px] hidden md:block opacity-60" />
 
