@@ -7,32 +7,32 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 12%;
+    --foreground: 220 20% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 12%;
+    --card-foreground: 220 20% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 12%;
+    --popover-foreground: 220 20% 15%;
 
-    --primary: 0 94% 38%;
-    --primary-foreground: 0 0% 95%;
+    --primary: 330 70% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 9%;
+    --secondary: 215 80% 50%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 40% 97%;
+    --muted: 330 30% 96%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 0 100% 94%;
-    --accent-foreground: 0 100% 50%;
+    --accent: 330 80% 94%;
+    --accent-foreground: 330 70% 45%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0 60% 90%;
+    --border: 330 30% 90%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 0 94% 38%;
+    --ring: 330 70% 55%;
 
     --radius: 0.5rem;
 
@@ -48,12 +48,13 @@
     --font-heading: 'Manrope', sans-serif;
     --font-body: 'Montserrat', sans-serif;
 
-    --brand-red: 0 94% 38%;
-    --brand-dark: 244 64% 14%;
-    --brand-light-pink: 0 100% 97%;
-    --footer-bg: 0 58% 96%;
+    --brand-pink: 330 70% 55%;
+    --brand-blue: 215 80% 50%;
+    --brand-dark: 220 30% 15%;
+    --brand-light-pink: 330 60% 96%;
+    --footer-bg: 330 40% 96%;
     --text-muted-gray: 220 5% 60%;
-    --text-dark: 0 0% 12%;
+    --text-dark: 220 20% 15%;
   }
 }
 
