@@ -19,20 +19,20 @@ export function BlogSection() {
   ];
 
   return (
-    <section className="px-4 md:px-12 lg:px-24 py-12 md:py-24">
+    <section className="section-blue px-4 md:px-12 lg:px-24 py-12 md:py-24">
       <AnimatedSection>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="flex flex-col gap-4 md:gap-6">
-            <h2 className="text-2xl md:text-[40px] font-medium font-body">
+            <h2 className="text-2xl md:text-[40px] font-medium font-body text-brand-dark">
               From Our Learning Journal
             </h2>
-            <p className="max-w-[757px] text-foreground font-heading text-sm md:text-base">
+            <p className="max-w-[757px] text-muted-foreground font-heading text-sm md:text-base">
               Thoughts, insights, and updates from our school community—shared to
               support parents, inspire learning, and offer a closer look into life
               at Brainchild.
             </p>
           </div>
-          <BrainButton variant="primary">View all</BrainButton>
+          <BrainButton variant="secondary">View all</BrainButton>
         </div>
       </AnimatedSection>
 

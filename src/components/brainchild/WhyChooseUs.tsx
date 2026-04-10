@@ -6,22 +6,22 @@ import { AnimatedSection } from "./AnimatedSection";
 
 export function WhyChooseUs() {
   return (
-    <section className="bg-brand-light-pink p-6 md:p-12 lg:p-24 font-body relative">
+    <section className="section-blue p-6 md:p-12 lg:p-24 font-body relative">
       <img
         src={doodles}
         alt="doodles"
-        className="absolute right-0 top-0 w-[300px] md:w-[641px] hidden md:block"
+        className="absolute right-0 top-0 w-[300px] md:w-[641px] hidden md:block opacity-30"
       />
       <img
         src={seconddoodles}
         alt="doodles"
-        className="absolute right-0 bottom-0 w-[300px] md:w-[641px] hidden md:block"
+        className="absolute right-0 bottom-0 w-[300px] md:w-[641px] hidden md:block opacity-30"
       />
 
       <div className="relative">
         <AnimatedSection>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <h2 className="text-2xl md:text-[40px] text-foreground">Why Choose us?</h2>
+            <h2 className="text-2xl md:text-[40px] text-brand-dark">Why Choose us?</h2>
             <BrainButton variant="primary" className="w-full md:w-auto">
               Enroll today
             </BrainButton>

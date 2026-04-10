@@ -28,52 +28,54 @@ export default function ProgramsSection() {
   ];
 
   return (
-    <section className="relative max-w-[1440px] mx-auto px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body">
-      <img src={rock} alt="rock" className="absolute left-10 md:left-20 top-10 w-[100px] md:w-[156px] hidden md:block" />
+    <section className="relative section-pink px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body">
+      <div className="max-w-[1440px] mx-auto">
+        <img src={rock} alt="rock" className="absolute left-10 md:left-20 top-10 w-[100px] md:w-[156px] hidden md:block opacity-60" />
 
-      <AnimatedSection>
-        <div className="mb-10 md:mb-20">
-          <h2 className="text-2xl md:text-3xl font-semibold text-center md:text-right">
-            <span className="text-primary">Teaching Programs,</span>
-            <br />
-            Designed For Every Age.
-          </h2>
+        <AnimatedSection>
+          <div className="mb-10 md:mb-20">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center md:text-right">
+              <span className="text-primary">Teaching Programs,</span>
+              <br />
+              <span className="text-brand-dark">Designed For Every Age.</span>
+            </h2>
+          </div>
+        </AnimatedSection>
+
+        {/* Mobile/Tablet: grid layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:hidden">
+          {programs.map((prog, i) => (
+            <AnimatedSection key={prog.title} delay={0.1 * i}>
+              <ProgramCard {...prog} />
+            </AnimatedSection>
+          ))}
         </div>
-      </AnimatedSection>
 
-      {/* Mobile/Tablet: grid layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:hidden">
-        {programs.map((prog, i) => (
-          <AnimatedSection key={prog.title} delay={0.1 * i}>
-            <ProgramCard {...prog} />
+        {/* Desktop: absolute positioned layout with center image */}
+        <div className="relative h-[700px] hidden lg:block">
+          <AnimatedSection className="absolute left-40 -top-[60px]" delay={0.1}>
+            <ProgramCard {...programs[0]} />
           </AnimatedSection>
-        ))}
-      </div>
 
-      {/* Desktop: absolute positioned layout with center image */}
-      <div className="relative h-[700px] hidden lg:block">
-        <AnimatedSection className="absolute left-40 -top-[60px]" delay={0.1}>
-          <ProgramCard {...programs[0]} />
-        </AnimatedSection>
+          <AnimatedSection className="absolute right-0 top-20 text-right" delay={0.2}>
+            <ProgramCard {...programs[1]} />
+          </AnimatedSection>
 
-        <AnimatedSection className="absolute right-0 top-20 text-right" delay={0.2}>
-          <ProgramCard {...programs[1]} />
-        </AnimatedSection>
+          <AnimatedSection className="absolute left-2 bottom-[108px]" delay={0.3}>
+            <ProgramCard {...programs[2]} />
+          </AnimatedSection>
 
-        <AnimatedSection className="absolute left-2 bottom-[108px]" delay={0.3}>
-          <ProgramCard {...programs[2]} />
-        </AnimatedSection>
+          <AnimatedSection className="absolute right-40 -bottom-[120px] z-10" delay={0.4}>
+            <ProgramCard {...programs[3]} />
+          </AnimatedSection>
 
-        <AnimatedSection className="absolute right-40 -bottom-[120px] z-10" delay={0.4}>
-          <ProgramCard {...programs[3]} />
-        </AnimatedSection>
-
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <img
-            src={programbg}
-            alt="Students"
-            className="rounded-full object-cover w-[648px] h-[630px]"
-          />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <img
+              src={programbg}
+              alt="Students"
+              className="rounded-full object-cover w-[648px] h-[630px]"
+            />
+          </div>
         </div>
       </div>
     </section>
