@@ -2,33 +2,53 @@ import { MdOutlineArrowUpward } from "react-icons/md";
 import BrainButton from "./BrainButton";
 import { HeroCarousel } from "./HeroCarousel";
 import { FloatingIcons } from "./FloatingIcons";
+import { motion } from "framer-motion";
 
 export function HeroSection() {
   return (
     <div className="relative overflow-hidden font-heading min-h-screen">
       <FloatingIcons />
-      <div className="flex flex-col items-center justify-center gap-[37px] py-20">
-        <div className="text-center leading-[3rem]">
-          <span className="text-primary text-[60px] font-bold text-center">
+      <div className="flex flex-col items-center justify-center gap-6 md:gap-[37px] py-10 md:py-20 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-center leading-tight md:leading-[3rem]"
+        >
+          <span className="text-primary text-3xl md:text-5xl lg:text-[60px] font-bold text-center">
             Unlock a More
           </span>
-          <h1 className="text-[60px] font-bold text-center">
+          <h1 className="text-3xl md:text-5xl lg:text-[60px] font-bold text-center">
             Thoughtful Way to Learn.
           </h1>
-        </div>
-        <p className="max-w-[625px] text-center text-[17px]">
+        </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="max-w-[625px] text-center text-sm md:text-[17px] px-4"
+        >
           We focus on more than academics. Our approach blends discipline,
           curiosity, and care to prepare students for lifelong learning.
-        </p>
-        <div className="flex gap-2">
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="flex gap-2"
+        >
           <BrainButton variant="secondary">
             Enroll my child <MdOutlineArrowUpward />
           </BrainButton>
           <BrainButton variant="abstract">Tour Our Campus</BrainButton>
-        </div>
-        <div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
           <HeroCarousel />
-        </div>
+        </motion.div>
       </div>
     </div>
   );
