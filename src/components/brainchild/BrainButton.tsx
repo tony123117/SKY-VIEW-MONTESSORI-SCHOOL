@@ -10,13 +10,13 @@ type ButtonProps = {
 };
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-2 px-4 py-2 rounded-[14px] font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover-scale";
+  "inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-[14px] font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover-scale";
 
 const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  primary: "bg-primary text-primary-foreground w-[100px] hover:shadow-lg hover:shadow-primary/30",
-  secondary: "bg-accent text-accent-foreground hover:shadow-lg hover:shadow-accent/30",
-  abstract: "bg-muted text-foreground border border-border hover:border-primary/50",
-  outline: "border border-foreground/30 text-foreground hover:border-primary hover:text-primary",
+  primary: "bg-primary text-primary-foreground hover:shadow-lg hover:shadow-primary/30",
+  secondary: "bg-secondary text-secondary-foreground hover:shadow-lg hover:shadow-secondary/30",
+  abstract: "bg-white text-brand-dark border border-border hover:border-primary hover:text-primary",
+  outline: "border border-brand-dark text-brand-dark hover:border-primary hover:text-primary",
 };
 
 export default function BrainButton({

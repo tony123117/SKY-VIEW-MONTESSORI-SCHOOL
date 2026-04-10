@@ -11,29 +11,25 @@ export function ParentSection() {
 
   const testimonials: Testimonial[] = [
     {
-      testimonial:
-        "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
+      testimonial: "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
       profileImage: profile,
       name: "Jane Doe",
       description: "Parent",
     },
     {
-      testimonial:
-        "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
+      testimonial: "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
       profileImage: profile,
       name: "Jane Doe",
       description: "Parent",
     },
     {
-      testimonial:
-        "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
+      testimonial: "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
       profileImage: profile,
       name: "Jane Doe",
       description: "Parent",
     },
     {
-      testimonial:
-        "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
+      testimonial: "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
       profileImage: profile,
       name: "Jane Doe",
       description: "Parent",
@@ -49,12 +45,12 @@ export function ParentSection() {
   };
 
   return (
-    <section className="font-body relative">
+    <section className="font-body relative section-pink">
       <AnimatedSection>
         <div className="px-4 md:px-12 lg:px-24 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="max-w-[495px] relative">
             <img src={line} alt="line" className="absolute top-12 left-[12.5rem] hidden md:block" />
-            <h2 className="text-2xl md:text-[40px] font-medium">
+            <h2 className="text-2xl md:text-[40px] font-medium text-brand-dark">
               See what Parents say about us
             </h2>
           </div>
@@ -62,13 +58,13 @@ export function ParentSection() {
           <div className="flex gap-4 md:gap-6">
             <button
               onClick={slidePrev}
-              className="bg-card w-12 h-12 md:w-20 md:h-20 shadow rounded-full flex items-center justify-center"
+              className="bg-card w-12 h-12 md:w-20 md:h-20 shadow rounded-full flex items-center justify-center text-brand-dark hover:shadow-lg transition-shadow"
             >
               <MdArrowBackIos />
             </button>
             <button
               onClick={slideNext}
-              className="bg-primary text-primary-foreground w-12 h-12 md:w-20 md:h-20 shadow rounded-full flex items-center justify-center"
+              className="bg-secondary text-secondary-foreground w-12 h-12 md:w-20 md:h-20 shadow rounded-full flex items-center justify-center hover:shadow-lg transition-shadow"
             >
               <MdArrowForwardIos />
             </button>
