@@ -57,6 +57,15 @@ export default {
           dark: "hsl(var(--brand-dark))",
           "light-pink": "hsl(var(--brand-light-pink))",
         },
+        school: {
+          pink: "hsl(var(--school-pink))",
+          "pink-light": "hsl(var(--school-pink-light))",
+          blue: "hsl(var(--school-blue))",
+          "blue-light": "hsl(var(--school-blue-light))",
+          navy: "hsl(var(--school-navy))",
+          yellow: "hsl(var(--school-yellow))",
+          green: "hsl(var(--school-green))",
+        },
         footer: {
           bg: "hsl(var(--footer-bg))",
         },
