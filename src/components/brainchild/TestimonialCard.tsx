@@ -11,18 +11,19 @@ export function TestimonialCard({
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="w-[500px] h-[248px] rounded-[20px] p-10 flex flex-col gap-5 shadow-sm bg-white border border-white/80 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"
+      className="w-full h-auto min-h-[220px] rounded-2xl p-8 flex flex-col gap-4 shadow-md bg-white/95 backdrop-blur-sm border border-white/60 hover:shadow-xl hover:shadow-secondary/15 transition-all duration-300 group"
     >
-      <p className="text-brand-dark">{testimonial}</p>
-      <div className="flex items-center mt-auto">
+      <div className="text-secondary text-2xl opacity-40 font-serif">"</div>
+      <p className="text-foreground/80 text-sm leading-relaxed -mt-4">{testimonial}</p>
+      <div className="flex items-center mt-auto pt-2 border-t border-border/50">
         <img
           src={profileImage}
           alt={name}
-          className="w-[60px] h-[60px] rounded-full mr-4 object-cover"
+          className="w-12 h-12 rounded-full mr-3 object-cover ring-2 ring-primary/20"
         />
         <div>
-          <h3 className="font-semibold text-brand-dark">{name}</h3>
-          <p className="text-muted-foreground text-sm">{description}</p>
+          <h3 className="font-heading font-bold text-foreground text-sm">{name}</h3>
+          <p className="text-muted-foreground text-xs">{description}</p>
         </div>
       </div>
     </motion.div>

@@ -11,28 +11,28 @@ export function ParentSection() {
 
   const testimonials: Testimonial[] = [
     {
-      testimonial: "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
+      testimonial: "Brainchild has been a blessing for our family. My daughter looks forward to school every single day. The teachers truly care about each child's growth.",
       profileImage: profile,
-      name: "Jane Doe",
-      description: "Parent",
+      name: "Mrs. Okonkwo",
+      description: "Parent of a Primary 3 student",
     },
     {
-      testimonial: "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
+      testimonial: "The transformation in my son's confidence and reading skills has been remarkable. I'm so grateful we chose Brainchild International.",
       profileImage: profile,
-      name: "Jane Doe",
-      description: "Parent",
+      name: "Mr. Eze",
+      description: "Parent of a Nursery 2 student",
     },
     {
-      testimonial: "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
+      testimonial: "Safe, nurturing, and academically excellent. Brainchild checks all the boxes for us. Our children are thriving here.",
       profileImage: profile,
-      name: "Jane Doe",
-      description: "Parent",
+      name: "Mrs. Adeyemi",
+      description: "Parent of two students",
     },
     {
-      testimonial: "Thank You for your service. I am very pleased with the result. I have seen exponential growth in my business and it's all thanks to your amazing service.",
+      testimonial: "The school's approach to character building alongside academics is exactly what we wanted. They genuinely prepare children for life.",
       profileImage: profile,
-      name: "Jane Doe",
-      description: "Parent",
+      name: "Dr. Nnamdi",
+      description: "Parent of a Primary 5 student",
     },
   ];
 
@@ -45,26 +45,27 @@ export function ParentSection() {
   };
 
   return (
-    <section className="font-body relative section-blue">
+    <section className="font-body relative section-blue overflow-hidden">
       <AnimatedSection>
         <div className="px-4 md:px-12 lg:px-24 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="max-w-[495px] relative">
-            <img src={line} alt="line" className="absolute top-12 left-[12.5rem] hidden md:block" />
-            <h2 className="text-2xl md:text-[40px] font-medium text-brand-dark">
-              See what Parents say about us
+            <img src={line} alt="" className="absolute top-12 left-[12.5rem] hidden md:block" />
+            <span className="text-xs font-semibold text-white/80 bg-secondary/30 px-3 py-1 rounded-full inline-block mb-3">💬 Testimonials</span>
+            <h2 className="text-2xl md:text-[40px] font-heading font-bold text-foreground">
+              See What Parents Say About Us
             </h2>
           </div>
 
-          <div className="flex gap-4 md:gap-6">
+          <div className="flex gap-4">
             <button
               onClick={slidePrev}
-              className="bg-card w-12 h-12 md:w-20 md:h-20 shadow rounded-full flex items-center justify-center text-brand-dark hover:shadow-lg transition-shadow"
+              className="bg-white w-12 h-12 md:w-16 md:h-16 shadow-md rounded-full flex items-center justify-center text-foreground hover:shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
             >
               <MdArrowBackIos />
             </button>
             <button
               onClick={slideNext}
-              className="bg-secondary text-secondary-foreground w-12 h-12 md:w-20 md:h-20 shadow rounded-full flex items-center justify-center hover:shadow-lg transition-shadow"
+              className="bg-secondary text-secondary-foreground w-12 h-12 md:w-16 md:h-16 shadow-md rounded-full flex items-center justify-center hover:shadow-lg hover:scale-105 transition-all duration-300"
             >
               <MdArrowForwardIos />
             </button>
@@ -74,11 +75,11 @@ export function ParentSection() {
 
       <div className="pl-4 md:pl-16 overflow-hidden pb-12">
         <div
-          className="flex gap-4 md:gap-8 transition-transform duration-500 ease-in-out"
+          className="flex gap-4 md:gap-6 transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * (100 / Math.min(testimonials.length, 3))}%)` }}
         >
           {testimonials.map((item, index) => (
-            <div key={index} className="min-w-[85%] sm:min-w-[45%] lg:min-w-[calc(33.33%-1.33rem)] shrink-0">
+            <div key={index} className="min-w-[85%] sm:min-w-[45%] lg:min-w-[calc(33.33%-1rem)] shrink-0">
               <TestimonialCard {...item} />
             </div>
           ))}

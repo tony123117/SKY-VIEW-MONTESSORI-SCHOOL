@@ -11,8 +11,8 @@ export default function ProgramsSection() {
       cta: "Enroll now",
     },
     {
-      title: "Creche",
-      description: "A safe and nurturing space where love comes first. Our creche provides attentive care, comfort, and early stimulation, ensuring every baby receives the warmth and attention they need to grow confidently.",
+      title: "Crèche",
+      description: "A safe and nurturing space where love comes first. Our crèche provides attentive care, comfort, and early stimulation, ensuring every baby receives the warmth and attention they need to grow confidently.",
       cta: "Enroll now",
     },
     {
@@ -28,16 +28,17 @@ export default function ProgramsSection() {
   ];
 
   return (
-    <section className="relative section-blue px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body">
+    <section className="relative section-blue px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
-        <img src={rock} alt="rock" className="absolute left-10 md:left-20 top-10 w-[100px] md:w-[156px] hidden md:block opacity-60" />
+        <img src={rock} alt="" className="absolute left-10 md:left-20 top-10 w-[100px] md:w-[156px] hidden md:block opacity-40" />
 
         <AnimatedSection>
-          <div className="mb-10 md:mb-20">
-            <h2 className="text-2xl md:text-3xl font-semibold text-center md:text-right">
+          <div className="mb-10 md:mb-20 text-center">
+            <span className="text-xs font-semibold text-white/80 bg-secondary/30 px-3 py-1 rounded-full inline-block mb-3">📚 Our Programs</span>
+            <h2 className="text-2xl md:text-4xl font-heading font-bold">
               <span className="text-primary">Teaching Programs,</span>
               <br />
-              <span className="text-brand-dark">Designed For Every Age.</span>
+              <span className="text-foreground">Designed For Every Age.</span>
             </h2>
           </div>
         </AnimatedSection>
@@ -72,8 +73,8 @@ export default function ProgramsSection() {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <img
               src={programbg}
-              alt="Students"
-              className="rounded-full object-cover w-[648px] h-[630px]"
+              alt="Happy students learning"
+              className="rounded-full object-cover w-[648px] h-[630px] shadow-2xl ring-4 ring-white/30"
             />
           </div>
         </div>
