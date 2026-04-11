@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:wght@100..900&family=Fredoka:wght@300..700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -15,16 +15,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 30% 15%;
 
-    --primary: 330 65% 55%;
+    --primary: 330 85% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 215 70% 50%;
+    --secondary: 205 85% 50%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 220 20% 94%;
-    --muted-foreground: 220 10% 45%;
+    --muted-foreground: 220 10% 40%;
 
-    --accent: 215 70% 50%;
+    --accent: 205 85% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -32,34 +32,39 @@
 
     --border: 220 20% 88%;
     --input: 220 20% 88%;
-    --ring: 330 65% 55%;
+    --ring: 330 85% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 330 65% 55%;
+    --sidebar-primary: 330 85% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 70% 50%;
+    --sidebar-accent: 205 85% 50%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 330 65% 55%;
+    --sidebar-ring: 330 85% 55%;
 
-    --font-heading: 'Manrope', sans-serif;
+    --font-heading: 'Fredoka', 'Manrope', sans-serif;
     --font-body: 'Montserrat', sans-serif;
 
-    /* Section backgrounds */
-    --bg-pink: #FE9EC7;
-    --bg-pink-deep: 330 55% 88%;
-    --bg-blue: 215 60% 94%;
-    --bg-blue-deep: 215 55% 88%;
+    /* School brand colors */
+    --school-pink: 330 85% 55%;
+    --school-pink-light: 330 80% 92%;
+    --school-pink-soft: 330 70% 96%;
+    --school-blue: 205 85% 50%;
+    --school-blue-light: 205 80% 92%;
+    --school-blue-soft: 205 70% 96%;
+    --school-navy: 215 60% 18%;
+    --school-yellow: 45 95% 55%;
+    --school-green: 150 60% 45%;
 
-    --brand-pink: 330 65% 55%;
-    --brand-blue: 215 70% 50%;
+    --brand-pink: 330 85% 55%;
+    --brand-blue: 205 85% 50%;
     --brand-dark: 220 30% 15%;
-    --brand-light-pink: 330 60% 94%;
-    --footer-bg: 215 55% 18%;
-    --text-muted-gray: 220 10% 45%;
+    --brand-light-pink: 330 80% 94%;
+    --footer-bg: 215 60% 14%;
+    --text-muted-gray: 220 10% 40%;
     --text-dark: 220 30% 15%;
   }
 }
@@ -74,6 +79,10 @@
     font-family: var(--font-body);
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
   .story-link * {
     @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
   }
@@ -82,16 +91,31 @@
     @apply transition-transform duration-200 hover:scale-105;
   }
 
+  /* Vibrant school section backgrounds */
   .section-pink {
-    background: #F9B2D7;
+    background: linear-gradient(160deg, #FFB6D9 0%, #FF8EC4 40%, #FFA0CC 100%);
   }
 
   .section-blue {
-    background: #89D4FF;
+    background: linear-gradient(160deg, #89D4FF 0%, #5CB8F0 40%, #7CC8FF 100%);
+  }
+
+  .section-pink-soft {
+    background: linear-gradient(160deg, #FFF0F6 0%, #FFE0EE 50%, #FFF5F9 100%);
+  }
+
+  .section-blue-soft {
+    background: linear-gradient(160deg, #EBF5FF 0%, #D6ECFF 50%, #F0F8FF 100%);
   }
 
   .section-blue-dark {
-    background: linear-gradient(135deg, hsl(215 55% 18%) 0%, hsl(220 50% 15%) 100%);
+    background: linear-gradient(135deg, hsl(215 60% 14%) 0%, hsl(220 55% 10%) 100%);
+  }
+
+  /* School-themed decorative elements */
+  .school-pattern {
+    background-image: radial-gradient(circle at 20% 80%, rgba(255,182,217,0.15) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(137,212,255,0.15) 0%, transparent 50%);
   }
 }
 
@@ -99,6 +123,17 @@
   0% { transform: translateY(0px); }
   50% { transform: translateY(-15px); }
   100% { transform: translateY(0px); }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
 }
 
 .animate-float {
@@ -111,4 +146,12 @@
 
 .animate-float-fast {
   animation: float 4s ease-in-out infinite;
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 3s ease-in-out infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 4s ease-in-out infinite;
 }

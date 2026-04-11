@@ -4,31 +4,43 @@ import doodles from "@/assets/choosedoodles.png";
 import seconddoodles from "@/assets/secondchoosedoodles.png";
 import { AnimatedSection } from "./AnimatedSection";
 
+const reasons = [
+  { number: "01", title: "Home-Centred Approach", description: "Children are comfortable and confident in our classrooms, feeling safe and secure to explore and learn." },
+  { number: "02", title: "Expert Educators", description: "Our passionate, trained teachers bring creativity and patience to every lesson, ensuring every child thrives." },
+  { number: "03", title: "Modern Curriculum", description: "We blend Nigerian and British curricula with 21st-century skills, preparing students for a global future." },
+  { number: "04", title: "Safe Environment", description: "Security and well-being come first. Our campus is designed to give parents peace of mind every day." },
+  { number: "05", title: "Character Building", description: "We nurture values like respect, empathy, and responsibility alongside academic excellence." },
+  { number: "06", title: "Small Class Sizes", description: "Every child gets personal attention with our carefully maintained teacher-to-student ratios." },
+];
+
 export function WhyChooseUs() {
   return (
-    <section className="section-pink p-6 md:p-12 lg:p-24 font-body relative">
+    <section className="section-pink p-6 md:p-12 lg:p-24 font-body relative overflow-hidden">
       <img
         src={doodles}
-        alt="doodles"
-        className="absolute right-0 top-0 w-[300px] md:w-[641px] hidden md:block opacity-30"
+        alt=""
+        className="absolute right-0 top-0 w-[300px] md:w-[641px] hidden md:block opacity-20"
       />
       <img
         src={seconddoodles}
-        alt="doodles"
-        className="absolute right-0 bottom-0 w-[300px] md:w-[641px] hidden md:block opacity-30"
+        alt=""
+        className="absolute right-0 bottom-0 w-[300px] md:w-[641px] hidden md:block opacity-20"
       />
 
-      <div className="relative">
+      <div className="relative max-w-[1400px] mx-auto">
         <AnimatedSection>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <h2 className="text-2xl md:text-[40px] text-brand-dark">Why Choose us?</h2>
-            <BrainButton variant="primary" className="w-full md:w-auto">
+            <div>
+              <span className="text-xs font-semibold text-white/80 bg-primary/30 px-3 py-1 rounded-full inline-block mb-3">✨ Why Us</span>
+              <h2 className="text-2xl md:text-[40px] text-foreground font-heading font-bold">Why Choose Us?</h2>
+            </div>
+            <BrainButton variant="secondary" className="w-full md:w-auto">
               Enroll today
             </BrainButton>
           </div>
         </AnimatedSection>
         <AnimatedSection delay={0.1}>
-          <p className="mt-6 md:mt-10 text-muted-foreground font-heading max-w-4xl text-sm md:text-base">
+          <p className="mt-6 md:mt-10 text-foreground/70 font-body max-w-4xl text-sm md:text-base leading-relaxed">
             At Brainchild Int&apos;l, we focus on more than academics. We create a
             supportive space where children feel safe, curious, and confident to
             learn. Every decision we make is guided by care, clarity, and your
@@ -36,14 +48,10 @@ export function WhyChooseUs() {
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 mt-8 md:mt-10">
-          {["01", "02", "03", "04", "05", "06"].map((num, i) => (
-            <AnimatedSection key={num} delay={0.1 * i}>
-              <WhyChooseUsCard
-                number={num}
-                title="Home-Centred Approach"
-                description="Children are comfortable and confident in our classrooms, feeling safe and secure to explore and learn."
-              />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-8 md:mt-12">
+          {reasons.map((item, i) => (
+            <AnimatedSection key={item.number} delay={0.08 * i}>
+              <WhyChooseUsCard {...item} />
             </AnimatedSection>
           ))}
         </div>

@@ -19,29 +19,32 @@ export function BlogSection() {
   ];
 
   return (
-    <section className="section-pink px-4 md:px-12 lg:px-24 py-12 md:py-24">
-      <AnimatedSection>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div className="flex flex-col gap-4 md:gap-6">
-            <h2 className="text-2xl md:text-[40px] font-medium font-body text-brand-dark">
-              From Our Learning Journal
-            </h2>
-            <p className="max-w-[757px] text-muted-foreground font-heading text-sm md:text-base">
-              Thoughts, insights, and updates from our school community—shared to
-              support parents, inspire learning, and offer a closer look into life
-              at Brainchild.
-            </p>
+    <section className="section-pink px-4 md:px-12 lg:px-24 py-12 md:py-24 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto">
+        <AnimatedSection>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-semibold text-white/80 bg-primary/30 px-3 py-1 rounded-full inline-block w-fit">📝 Blog</span>
+              <h2 className="text-2xl md:text-[40px] font-heading font-bold text-foreground">
+                From Our Learning Journal
+              </h2>
+              <p className="max-w-[757px] text-foreground/70 font-body text-sm md:text-base leading-relaxed">
+                Thoughts, insights, and updates from our school community—shared to
+                support parents, inspire learning, and offer a closer look into life
+                at Brainchild.
+              </p>
+            </div>
+            <BrainButton variant="secondary">View all</BrainButton>
           </div>
-          <BrainButton variant="secondary">View all</BrainButton>
-        </div>
-      </AnimatedSection>
+        </AnimatedSection>
 
-      <div className="mt-10 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-18">
-        {[0, 1, 2, 3].map((i) => (
-          <AnimatedSection key={i} delay={0.1 * i}>
-            <BlogGrid posts={posts} />
-          </AnimatedSection>
-        ))}
+        <div className="mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {[0, 1, 2, 3].map((i) => (
+            <AnimatedSection key={i} delay={0.1 * i}>
+              <BlogGrid posts={posts} />
+            </AnimatedSection>
+          ))}
+        </div>
       </div>
     </section>
   );
