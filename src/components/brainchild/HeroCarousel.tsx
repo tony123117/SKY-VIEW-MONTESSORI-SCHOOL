@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import hero1 from "@/assets/heroimage.png";
-import teachers from "@/assets/teachers.jpg"; 
-import students from "@/assets/students.jpg";
-import grad from "@/assets/grad.jpg";
+import heroImg from "@/assets/heroimage.png";
+import teachersImg from "@/assets/teachers.jpg";
+import studentsImg from "@/assets/students.jpg";
+import gradImg from "@/assets/grad.jpg";
 
-const images = [hero1, teachers, students, grad];
+const images = [heroImg, teachersImg, studentsImg, gradImg];
 
 export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
