@@ -12,7 +12,7 @@ export function FloatingIcons() {
       <img src={icon1} alt="" className="absolute top-[12.5rem] left-10 animate-float-fast w-12" />
       <img src={icon4} alt="" className="absolute top-[7.5rem] right-24 animate-float w-12" />
       <img src={icon3} alt="" className="absolute top-[20rem] right-24 animate-float w-12" />
-      <img src={arrow} alt="" className="absolute top-[12.5rem] left-40 animate-float w-16" />
+      <img src={arrow} alt="" className="absolute top-[10.5rem] left-40 animate-float w-30 z-auto" />
     </div>
   );
 }

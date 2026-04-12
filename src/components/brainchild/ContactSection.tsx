@@ -24,7 +24,12 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-pink-soft px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body relative overflow-hidden">
+    <section 
+      id="contact" 
+      // pb-56 creates the background for the image to overlap
+      // Removed overflow-hidden so the image/shadow can "bleed" out
+      className="section-pink-soft px-4 md:px-12 lg:px-24 pt-12 md:pt-24 pb-32 md:pb-56 font-body relative"
+    >
       <div className="absolute top-8 left-12 text-3xl animate-float opacity-20 pointer-events-none">✉️</div>
       <div className="absolute bottom-16 right-8 text-4xl animate-bounce-gentle opacity-15 pointer-events-none">🏫</div>
 
@@ -40,11 +45,9 @@ export function ContactSection() {
         </AnimatedSection>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8">
-          {/* Contact Info */}
           <AnimatedSection delay={0.1} className="lg:col-span-2">
             <div className="bg-white/95 backdrop-blur-sm border border-white/60 rounded-2xl p-6 md:p-8 shadow-md h-full flex flex-col gap-6">
               <h3 className="text-xl font-heading font-bold text-foreground">Reach Us Directly</h3>
-
               {[
                 { icon: <FiPhone className="w-5 h-5" />, label: "Phone", values: ["+234 706 117 5897", "+234 705 449 8469"], color: "bg-secondary/10 text-secondary" },
                 { icon: <FiMail className="w-5 h-5" />, label: "Email", values: ["info@brainchildschoolsint.com"], color: "bg-primary/10 text-primary" },
@@ -62,7 +65,6 @@ export function ContactSection() {
                   </div>
                 </div>
               ))}
-
               <div className="mt-auto pt-4 border-t border-border/30">
                 <p className="text-xs text-muted-foreground">
                   <strong>School Hours:</strong><br />
@@ -73,61 +75,36 @@ export function ContactSection() {
             </div>
           </AnimatedSection>
 
-          {/* Contact Form */}
           <AnimatedSection delay={0.2} className="lg:col-span-3">
             <motion.form
               onSubmit={handleSubmit}
               className="bg-white/95 backdrop-blur-sm border border-white/60 rounded-2xl p-6 md:p-8 shadow-md"
             >
               <h3 className="text-xl font-heading font-bold text-foreground mb-6">Send Us a Message</h3>
-
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
                   <label className="text-sm font-semibold text-foreground mb-1 block">Parent's Name *</label>
-                  <input
-                    type="text" name="parentName" required value={formData.parentName} onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
-                    placeholder="e.g. Mrs. Okonkwo"
-                  />
+                  <input type="text" name="parentName" required value={formData.parentName} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="e.g. Mrs. Okonkwo" />
                 </div>
                 <div>
                   <label className="text-sm font-semibold text-foreground mb-1 block">Child's Name *</label>
-                  <input
-                    type="text" name="childName" required value={formData.childName} onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
-                    placeholder="e.g. Chioma"
-                  />
+                  <input type="text" name="childName" required value={formData.childName} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="e.g. Chioma" />
                 </div>
               </div>
-
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
                   <label className="text-sm font-semibold text-foreground mb-1 block">Email Address *</label>
-                  <input
-                    type="email" name="email" required value={formData.email} onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
-                    placeholder="parent@email.com"
-                  />
+                  <input type="email" name="email" required value={formData.email} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="parent@email.com" />
                 </div>
                 <div>
                   <label className="text-sm font-semibold text-foreground mb-1 block">Phone Number *</label>
-                  <input
-                    type="tel" name="phone" required value={formData.phone} onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
-                    placeholder="+234 xxx xxx xxxx"
-                  />
+                  <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="+234 xxx xxx xxxx" />
                 </div>
               </div>
-
               <div className="mb-6">
                 <label className="text-sm font-semibold text-foreground mb-1 block">Message</label>
-                <textarea
-                  name="message" rows={4} value={formData.message} onChange={handleChange}
-                  className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
-                  placeholder="Tell us about your child's age, interests, or any questions you have..."
-                />
+                <textarea name="message" rows={4} value={formData.message} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none" placeholder="Tell us about your child's age, interests, or any questions you have..." />
               </div>
-
               <BrainButton variant="primary" type="submit" className="w-full sm:w-auto">
                 Send Message <FiSend />
               </BrainButton>

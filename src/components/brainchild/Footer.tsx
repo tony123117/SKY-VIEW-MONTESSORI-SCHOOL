@@ -17,17 +17,15 @@ export function Footer() {
       
       {/* Top Image */}
       {/* Floating Image ABOVE footer */}
-        <div className="px-4 md:px-12 lg:px-24 flex justify-center">
-          <div className="relative w-full max-w-4xl -mb-16 z-10 relative ">
-            <div className="overflow-hidden rounded-[28px] shadow-2xl ">
-              <img
-                src={footerImage}
-                alt="Build a better future"
-                className="w-full h-auto object-cover "
-              />
-            </div>
-          </div>
+        <div className="px-4 md:px-12 lg:px-24 flex justify-center relative z-20 -mt-20 md:-mt-20">
+        <div className="w-full max-w-4xl shadow-2xl rounded-[28px] overflow-hidden"> 
+          <img
+            src={footerImage}
+            alt="Build a better future"
+            className="w-full h-auto object-cover block"
+          />
         </div>
+      </div>
 
       <AnimatedSection>
         <div className="px-4 md:px-12 lg:px-24 pt-12 md:pt-20">
