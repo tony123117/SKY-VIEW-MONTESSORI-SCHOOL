@@ -19,20 +19,19 @@ export function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
     alert("Thank you! We'll get back to you soon.");
     setFormData({ parentName: "", childName: "", email: "", phone: "", message: "" });
   };
 
   return (
-    <section id="contact" className="section-blue px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body relative overflow-hidden">
-      <div className="absolute top-8 left-12 text-3xl animate-float opacity-25">✉️</div>
-      <div className="absolute bottom-16 right-8 text-4xl animate-bounce-gentle opacity-20">🏫</div>
+    <section id="contact" className="section-pink-soft px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body relative overflow-hidden">
+      <div className="absolute top-8 left-12 text-3xl animate-float opacity-20 pointer-events-none">✉️</div>
+      <div className="absolute bottom-16 right-8 text-4xl animate-bounce-gentle opacity-15 pointer-events-none">🏫</div>
 
       <div className="max-w-[1400px] mx-auto">
         <AnimatedSection>
           <div className="text-center mb-12">
-            <span className="text-xs font-semibold text-secondary bg-white/60 px-3 py-1 rounded-full inline-block mb-3">📞 Get In Touch</span>
+            <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full inline-block mb-3">📞 Get In Touch</span>
             <h2 className="text-2xl md:text-[40px] font-heading font-bold text-foreground">Contact Us</h2>
             <p className="mt-4 text-foreground/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
               Have questions about enrollment or our programs? We'd love to hear from you!
@@ -40,19 +39,19 @@ export function ContactSection() {
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8">
           {/* Contact Info */}
           <AnimatedSection delay={0.1} className="lg:col-span-2">
             <div className="bg-white/95 backdrop-blur-sm border border-white/60 rounded-2xl p-6 md:p-8 shadow-md h-full flex flex-col gap-6">
               <h3 className="text-xl font-heading font-bold text-foreground">Reach Us Directly</h3>
 
               {[
-                { icon: <FiPhone className="w-5 h-5" />, label: "Phone", values: ["+234 706 117 5897", "+234 705 449 8469"] },
-                { icon: <FiMail className="w-5 h-5" />, label: "Email", values: ["info@brainchildschoolsint.com"] },
-                { icon: <FiMapPin className="w-5 h-5" />, label: "Address", values: ["No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu"] },
+                { icon: <FiPhone className="w-5 h-5" />, label: "Phone", values: ["+234 706 117 5897", "+234 705 449 8469"], color: "bg-secondary/10 text-secondary" },
+                { icon: <FiMail className="w-5 h-5" />, label: "Email", values: ["info@brainchildschoolsint.com"], color: "bg-primary/10 text-primary" },
+                { icon: <FiMapPin className="w-5 h-5" />, label: "Address", values: ["No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu"], color: "bg-accent/15 text-accent" },
               ].map((item) => (
                 <div key={item.label} className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center flex-shrink-0">
+                  <div className={`w-10 h-10 rounded-xl ${item.color} flex items-center justify-center flex-shrink-0`}>
                     {item.icon}
                   </div>
                   <div>
@@ -78,8 +77,6 @@ export function ContactSection() {
           <AnimatedSection delay={0.2} className="lg:col-span-3">
             <motion.form
               onSubmit={handleSubmit}
-              whileHover={{ y: -2 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="bg-white/95 backdrop-blur-sm border border-white/60 rounded-2xl p-6 md:p-8 shadow-md"
             >
               <h3 className="text-xl font-heading font-bold text-foreground mb-6">Send Us a Message</h3>
@@ -89,7 +86,7 @@ export function ContactSection() {
                   <label className="text-sm font-semibold text-foreground mb-1 block">Parent's Name *</label>
                   <input
                     type="text" name="parentName" required value={formData.parentName} onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary/30 focus:border-secondary transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
                     placeholder="e.g. Mrs. Okonkwo"
                   />
                 </div>
@@ -97,7 +94,7 @@ export function ContactSection() {
                   <label className="text-sm font-semibold text-foreground mb-1 block">Child's Name *</label>
                   <input
                     type="text" name="childName" required value={formData.childName} onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary/30 focus:border-secondary transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
                     placeholder="e.g. Chioma"
                   />
                 </div>
@@ -108,7 +105,7 @@ export function ContactSection() {
                   <label className="text-sm font-semibold text-foreground mb-1 block">Email Address *</label>
                   <input
                     type="email" name="email" required value={formData.email} onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary/30 focus:border-secondary transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
                     placeholder="parent@email.com"
                   />
                 </div>
@@ -116,7 +113,7 @@ export function ContactSection() {
                   <label className="text-sm font-semibold text-foreground mb-1 block">Phone Number *</label>
                   <input
                     type="tel" name="phone" required value={formData.phone} onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary/30 focus:border-secondary transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
                     placeholder="+234 xxx xxx xxxx"
                   />
                 </div>
@@ -126,7 +123,7 @@ export function ContactSection() {
                 <label className="text-sm font-semibold text-foreground mb-1 block">Message</label>
                 <textarea
                   name="message" rows={4} value={formData.message} onChange={handleChange}
-                  className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary/30 focus:border-secondary transition-all resize-none"
+                  className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
                   placeholder="Tell us about your child's age, interests, or any questions you have..."
                 />
               </div>

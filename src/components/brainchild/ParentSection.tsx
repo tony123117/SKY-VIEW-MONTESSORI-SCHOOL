@@ -45,12 +45,15 @@ export function ParentSection() {
   };
 
   return (
-    <section className="font-body relative section-blue overflow-hidden">
+    <section className="font-body relative section-blue-soft overflow-hidden">
+      <div className="absolute top-6 right-10 text-3xl animate-float opacity-20 pointer-events-none">💬</div>
+      <div className="absolute bottom-10 left-8 text-2xl animate-wiggle opacity-15 pointer-events-none">🌟</div>
+
       <AnimatedSection>
         <div className="px-4 md:px-12 lg:px-24 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="max-w-[495px] relative">
             <img src={line} alt="" className="absolute top-20 left-[12.5rem] hidden md:block" />
-            <span className="text-xs font-semibold text-white/80 bg-secondary/30 px-3 py-1 rounded-full inline-block mb-3">💬 Testimonials</span>
+            <span className="text-xs font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full inline-block mb-3">💬 Testimonials</span>
             <h2 className="text-2xl md:text-[40px] font-heading font-bold text-foreground">
               See What Parents Say About Us
             </h2>
@@ -59,13 +62,13 @@ export function ParentSection() {
           <div className="flex gap-4">
             <button
               onClick={slidePrev}
-              className="bg-white w-12 h-12 md:w-16 md:h-16 shadow-md rounded-full flex items-center justify-center text-foreground hover:shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
+              className="bg-white w-12 h-12 md:w-14 md:h-14 shadow-md rounded-full flex items-center justify-center text-foreground hover:shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
             >
               <MdArrowBackIos />
             </button>
             <button
               onClick={slideNext}
-              className="bg-secondary text-secondary-foreground w-12 h-12 md:w-16 md:h-16 shadow-md rounded-full flex items-center justify-center hover:shadow-lg hover:scale-105 transition-all duration-300"
+              className="bg-secondary text-secondary-foreground w-12 h-12 md:w-14 md:h-14 shadow-md rounded-full flex items-center justify-center hover:shadow-lg hover:scale-105 transition-all duration-300"
             >
               <MdArrowForwardIos />
             </button>
