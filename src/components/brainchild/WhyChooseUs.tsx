@@ -5,7 +5,7 @@ import seconddoodles from "@/assets/secondchoosedoodles.png";
 import { AnimatedSection } from "./AnimatedSection";
 
 // 1. IMPORT ALL IMAGES HERE
-import classImg from "@/assets/class.jpg"; 
+import creativeImg from "@/assets/creative.jpeg"; 
 import teachersImg from "@/assets/teachers.jpg";
 import enterImg from "@/assets/enter.jpg";
 import outsideImg from "@/assets/outside.jpg";
@@ -17,7 +17,7 @@ const reasons = [
     title: "Home-Centred Approach", 
     description: "Children are comfortable and confident in our classrooms, feeling safe and secure to explore and learn.", 
     color: "text-amber-500", 
-    image: classImg // 2. USE THE IMPORTED VARIABLE
+    image: creativeImg // 2. USE THE IMPORTED VARIABLE
   },
   { 
     number: "02", 
@@ -52,7 +52,7 @@ const reasons = [
     title: "Small Class Sizes", 
     description: "Every child gets personal attention with our carefully maintained teacher-to-student ratios.", 
     color: "text-green-500" ,
-    image: classImg
+    image: creativeImg
   },
 ];
 

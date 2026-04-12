@@ -5,10 +5,11 @@ import BlogCard from "./BlogCard";
 
 import { AnimatedSection } from "./AnimatedSection";
 import { BlogPost } from "@/types/blogs";
-import classImg from "@/assets/class.jpg"; 
+import creativeImg from "@/assets/creative.jpeg"; 
 import teachersImg from "@/assets/teachers.jpg";
 import enterImg from "@/assets/enter.jpg";
 import outsideImg from "@/assets/outside.jpg";
+import danceImg from "@/assets/dance.jpeg";
 
 export function BlogSection() {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
@@ -40,7 +41,7 @@ export function BlogSection() {
       id: "3",
       title: "HOME LESSONS POLICY",
       excerpt: "Teachers maintain professional relationships with parents. Private lessons require clearance from school management to protect integrity and effectiveness.",
-      coverImage: classImg,
+      coverImage: creativeImg,
       author: "Admin",
       publishedAt: "2026-02-01",
       slug: "home-lessons-policy",
@@ -73,7 +74,7 @@ export function BlogSection() {
       id: "6",
       title: "THE POWER OF CREATIVE PLAY",
       excerpt: "Why we prioritize playground time. Learn how social interaction and physical activities build character and leadership from a young age.",
-      coverImage: classImg, // Using your existing imported image
+      coverImage: danceImg, // Using your existing imported image
       author: "Teacher",
       publishedAt: "2026-03-20",
       slug: "power-of-creative-play",

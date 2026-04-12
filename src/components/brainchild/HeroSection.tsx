@@ -3,7 +3,8 @@ import BrainButton from "./BrainButton";
 import { HeroCarousel } from "./HeroCarousel";
 import { FloatingIcons } from "./FloatingIcons";
 import { motion } from "framer-motion";
-import principalImg from "@/assets/teachers.jpg"; // Replace with actual principal photo if available
+
+import principalImg from "@/assets/ijeoma.jpeg"; // Replace with actual principal photo if available
 
 export function HeroSection() {
   return (
