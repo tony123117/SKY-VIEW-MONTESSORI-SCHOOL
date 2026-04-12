@@ -46,6 +46,8 @@ export function ParentSection() {
 
   return (
     <section className="font-body relative section-blue overflow-hidden">
+      <div className="absolute top-8 right-10 text-3xl animate-float opacity-20 pointer-events-none">💝</div>
+      <div className="absolute bottom-10 left-12 text-2xl animate-wiggle opacity-15 pointer-events-none">🌻</div>
       <AnimatedSection>
         <div className="px-4 md:px-12 lg:px-24 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="max-w-[495px] relative">
