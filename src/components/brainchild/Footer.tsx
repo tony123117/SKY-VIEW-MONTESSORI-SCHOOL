@@ -101,7 +101,7 @@ export function Footer() {
 
           {/* Bottom */}
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 pb-6 gap-4 border-t border-white/10 mt-10">
-            <p className="text-white/30 text-sm">
+            <p className="text-white text-sm">
               Bravotechmedia © 2026, All Rights Reserved
             </p>
             <div className="flex gap-2">

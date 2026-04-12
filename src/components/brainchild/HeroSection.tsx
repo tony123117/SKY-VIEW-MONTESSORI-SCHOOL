@@ -131,7 +131,7 @@ export function HeroSection() {
                     Dr. Ijeoma O.
                   </h3>
                   <p className="text-sm text-primary uppercase tracking-[0.25em] font-black">
-                    Principal & Founder
+                    Director & Founder of Brain Child Int'l School
                   </p>
                 </div>
               </div>
