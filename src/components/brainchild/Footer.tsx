@@ -105,11 +105,7 @@ export function Footer() {
               Bravotechmedia © 2026, All Rights Reserved
             </p>
             <div className="flex gap-2">
-              {[{ src: visa, alt: "Visa" }, { src: mastercard, alt: "Mastercard" }, { src: paypal, alt: "PayPal" }, { src: applepay, alt: "Apple Pay" }, { src: gpay, alt: "Google Pay" }].map((icon) => (
-                <div key={icon.alt} className="opacity-50 hover:opacity-100 transition-opacity">
-                  <img src={icon.src} alt={icon.alt} className="w-[40px] h-[26px] invert" />
-                </div>
-              ))}
+             
             </div>
           </div>
         </div>

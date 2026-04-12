@@ -127,7 +127,7 @@ export function HeroSection() {
                 
                 <div className="mt-8 text-center">
                   <h3 className="font-heading font-bold text-2xl md:text-3xl text-blue-900 mb-1">
-                    Mrs. Jane Doe
+                    Dr. Ijeoma O.
                   </h3>
                   <p className="text-sm text-primary uppercase tracking-[0.25em] font-black">
                     Principal & Founder

@@ -36,7 +36,9 @@ export default function ProgramsSection() {
   ];
 
   return (
-    <section className="relative section-white px-4 md:px-12 lg:px-24 pt-12 md:pt-24 font-body overflow-hidden h-[1150px]">
+    /* FIXED: Removed fixed h-[1150px]. Added h-auto and md:h-[1150px] for desktop only. 
+       Added pb-12 to ensure spacing at the bottom on mobile. */
+    <section className="relative section-white px-4 md:px-12 lg:px-24 pt-12 md:pt-24 pb-12 md:pb-0 font-body overflow-hidden h-auto lg:h-[1150px]">
       {/* Decorations */}
       <div className="absolute top-8 right-12 text-3xl animate-float opacity-25 pointer-events-none">📐</div>
       <div className="absolute bottom-16 left-8 text-4xl animate-bounce-gentle opacity-20 pointer-events-none">🎯</div>
@@ -55,8 +57,8 @@ export default function ProgramsSection() {
           </div>
         </AnimatedSection>
 
-        {/* Mobile/Tablet: proper grid layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 lg:hidden">
+        {/* Mobile/Tablet: proper grid layout - FIXED: Removed gap-5 and added better stacking behavior */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-6 lg:hidden">
           {programs.map((prog, i) => (
             <AnimatedSection key={prog.title} delay={0.1 * i}>
               <ProgramCard {...prog} />

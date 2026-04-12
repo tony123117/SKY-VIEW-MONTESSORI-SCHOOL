@@ -22,7 +22,7 @@ export function BlogSection() {
       author: "Admins",
       publishedAt: "2026-02-01",
       slug: "extra-curricular-activities",
-      link: "/blog/extra-curricular-activities",
+      link: "/blog",
       color: "text-pink-500"
     },
     {
@@ -33,7 +33,7 @@ export function BlogSection() {
       author: "Admin",
       publishedAt: "2026-02-01",
       slug: "punctuality-attendance",
-      link: "/blog/punctuality-attendance",
+      link: "/blog",
       color: "text-pink-500"
     },
     {
@@ -44,7 +44,7 @@ export function BlogSection() {
       author: "Admin",
       publishedAt: "2026-02-01",
       slug: "home-lessons-policy",
-      link: "/blog/home-lessons-policy",
+      link: "/blog",
       color: "text-pink-500"
     },
    {
@@ -55,7 +55,7 @@ export function BlogSection() {
       author: "Admin",
       publishedAt: "2026-02-15",
       slug: "digital-literacy-early-years",
-      link: "/blog/digital-literacy-early-years",
+      link: "/blog",
       color: "text-blue-500"
     },
     {
@@ -66,7 +66,7 @@ export function BlogSection() {
       author: "School Nurse",
       publishedAt: "2026-03-05",
       slug: "nutrition-and-brain-development",
-      link: "/blog/nutrition-and-brain-development",
+      link: "/blog",
       color: "text-green-500"
     },
     {
@@ -77,7 +77,7 @@ export function BlogSection() {
       author: "Teacher",
       publishedAt: "2026-03-20",
       slug: "power-of-creative-play",
-      link: "/blog/power-of-creative-play",
+      link: "/blog",
       color: "text-amber-500"
     },
   ];
