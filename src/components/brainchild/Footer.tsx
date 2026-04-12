@@ -8,14 +8,31 @@ import mastercard from "@/assets/icons/mastercard.png";
 import paypal from "@/assets/icons/paypal.png";
 import applepay from "@/assets/icons/applepay.png";
 import gpay from "@/assets/icons/gpay.png";
+import footerImage from "@/assets/image.png"; 
 import { AnimatedSection } from "./AnimatedSection";
 
 export function Footer() {
   return (
     <footer className="section-blue-dark font-heading text-white/90">
+      
+      {/* Top Image */}
+      {/* Floating Image ABOVE footer */}
+        <div className="px-4 md:px-12 lg:px-24 flex justify-center">
+          <div className="relative w-full max-w-4xl -mb-16 z-10 relative ">
+            <div className="overflow-hidden rounded-[28px] shadow-2xl ">
+              <img
+                src={footerImage}
+                alt="Build a better future"
+                className="w-full h-auto object-cover "
+              />
+            </div>
+          </div>
+        </div>
+
       <AnimatedSection>
         <div className="px-4 md:px-12 lg:px-24 pt-12 md:pt-20">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-10">
+            
             {/* Brand */}
             <div className="flex flex-col gap-4 text-white/60 col-span-2 md:col-span-1">
               <div className="flex items-start gap-3">
