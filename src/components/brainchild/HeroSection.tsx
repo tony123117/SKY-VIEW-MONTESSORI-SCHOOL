@@ -20,7 +20,7 @@ export function HeroSection() {
           className="text-center"
         >
           <motion.span
-            className="inline-block bg-white/60 backdrop-blur-sm text-secondary text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-secondary/20"
+            className="inline-block bg-white/60 backdrop-blur-sm text-white text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-secondary/20"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -28,7 +28,7 @@ export function HeroSection() {
             🎓 Enrolment Open for 2026/2027 Session
           </motion.span>
           <div className="leading-tight md:leading-[3.5rem] mt-2">
-            <span className="text-secondary text-3xl md:text-5xl lg:text-[60px] font-bold">
+            <span className="text-white text-3xl md:text-5xl lg:text-[60px] font-bold">
               Unlock a More
             </span>
             <h1 className="text-3xl md:text-5xl lg:text-[60px] font-bold text-foreground">
@@ -40,7 +40,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="max-w-[600px] text-center text-sm md:text-base px-4 text-foreground/70 leading-relaxed"
+          className="max-w-[600px] text-center text-white md:text-base px-4 text-foreground/70 leading-relaxed"
         >
           We focus on more than academics. Our approach blends discipline,
           curiosity, and care to prepare students for lifelong learning.
@@ -51,10 +51,17 @@ export function HeroSection() {
           transition={{ duration: 0.7, delay: 0.4 }}
           className="flex gap-3"
         >
-          <BrainButton variant="primary">
-            Enroll my child <MdOutlineArrowUpward />
-          </BrainButton>
-          <BrainButton variant="abstract">Tour Our Campus</BrainButton>
+          <BrainButton variant="primary" className="bg-white">
+  <span className="text--500 flex items-center gap-2">
+    Enroll my child <MdOutlineArrowUpward />
+  </span>
+</BrainButton>
+
+<BrainButton variant="abstract" className="bg-white">
+  <span className="text-yellow-500 flex items-center gap-2">
+    Tour Our Campus
+  </span>
+</BrainButton>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

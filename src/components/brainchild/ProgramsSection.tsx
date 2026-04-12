@@ -6,29 +6,37 @@ import { AnimatedSection } from "./AnimatedSection";
 export default function ProgramsSection() {
   const programs = [
     {
-      title: "Pre-Nursery",
-      description: "Here, curiosity is encouraged and learning feels like play. Children are introduced to early learning concepts through fun, exploration, and guided activities that spark imagination and confidence.",
-      cta: "Enroll now",
-    },
-    {
-      title: "Crèche",
-      description: "A safe and nurturing space where love comes first. Our crèche provides attentive care, comfort, and early stimulation, ensuring every baby receives the warmth and attention they need to grow confidently.",
+      title: "Pre-School",
+      age: "Ages 1½ – 2",
+      Grade: "Pre-School",
+      description: "Here, curiosity is encouraged and learning feels like play. Children are introduced to early learning concepts through fun exploration, guided activities, and sensory discovery.",
       cta: "Enroll now",
     },
     {
       title: "Nursery 1–3",
-      description: "Our nursery program blends structure with creativity. Pupils are introduced to key subjects and hands-on activities designed to develop thinking skills, independence, and a love for learning.",
+      age: "Ages 2½ – 5",
+      Grade: "Nursery 1–3",
+      description: "Our nursery programme blends structure with creativity. Pupils are introduced to key subjects and hands-on activities designed to develop thinking skills and independence.",
       cta: "Enroll now",
     },
     {
-      title: "Primary 1–6",
-      description: "At this stage, learning deepens and character grows. Pupils are guided academically and socially to think critically, speak confidently, take responsibility, and prepare for examinations.",
+      title: "Lower Grade",
+      age: "Ages 5½ – 8",
+      Grade: "Grade 1–3",
+      description: "At this stage, foundational academics take shape. Pupils develop literacy, numeracy, and critical thinking through structured lessons that make learning engaging and exciting.",
+      cta: "Enroll now",
+    },
+    {
+      title: "Higher Grade",
+      age: "Ages 8½ – 11",
+      Grade: "Grade 4–6",
+      description: "Learning deepens and character grows. Higher grade pupils are equipped with advanced skills, broader subject knowledge, and the confidence to excel beyond the classroom.",
       cta: "Enroll now",
     },
   ];
 
   return (
-    <section className="relative section-blue px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body overflow-hidden">
+    <section className="relative section-white px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
         <img src={rock} alt="" className="absolute left-10 md:left-20 top-10 w-[100px] md:w-[156px] hidden md:block opacity-40" />
 

@@ -11,7 +11,7 @@ export function TestimonialCard({
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="w-full h-auto min-h-[220px] rounded-2xl p-8 flex flex-col gap-4 shadow-md bg-white/95 backdrop-blur-sm border border-white/60 hover:shadow-xl hover:shadow-secondary/15 transition-all duration-300 group"
+      className="w-[500px] h-auto min-h-[220px] rounded-2xl p-8 flex flex-col gap-4 shadow-md bg-white/95 backdrop-blur-sm border border-white/60 hover:shadow-xl hover:shadow-secondary/15 transition-all duration-300 group"
     >
       <div className="text-secondary text-2xl opacity-40 font-serif">"</div>
       <p className="text-foreground/80 text-sm leading-relaxed -mt-4">{testimonial}</p>

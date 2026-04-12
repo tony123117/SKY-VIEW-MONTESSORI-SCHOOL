@@ -45,11 +45,11 @@ export function ParentSection() {
   };
 
   return (
-    <section className="font-body relative section-blue overflow-hidden">
+    <section className="font-body relative section-white overflow-hidden">
       <AnimatedSection>
         <div className="px-4 md:px-12 lg:px-24 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="max-w-[495px] relative">
-            <img src={line} alt="" className="absolute top-12 left-[12.5rem] hidden md:block" />
+            <img src={line} alt="" className="absolute top-20 left-[12.5rem] hidden md:block" />
             <span className="text-xs font-semibold text-white/80 bg-secondary/30 px-3 py-1 rounded-full inline-block mb-3">💬 Testimonials</span>
             <h2 className="text-2xl md:text-[40px] font-heading font-bold text-foreground">
               See What Parents Say About Us

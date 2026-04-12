@@ -15,6 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 30% 15%;
 
+
     --primary: 338 90% 58%;
     --primary-foreground: 0 0% 100%;
 
@@ -93,11 +94,15 @@
 
   /* Vibrant school section backgrounds */
   .section-pink {
-    background: linear-gradient(160deg, #FFDCEC 0%, #FFC2DD 40%, #FFD0E5 100%);
+   background: linear-gradient(160deg, #D4F0FF 0%, #B0E2FF 40%, #C5EBFF 100%);
   }
 
   .section-blue {
-    background: linear-gradient(160deg, #D4F0FF 0%, #B0E2FF 40%, #C5EBFF 100%);
+    background: #FF6EC7
+    
+  }
+  .section-white {
+    background: WHITE;
   }
 
   .section-pink-soft {
@@ -105,7 +110,7 @@
   }
 
   .section-blue-soft {
-    background: linear-gradient(160deg, #EBF5FF 0%, #D6ECFF 50%, #F0F8FF 100%);
+    background: WHITE;
   }
 
   .section-blue-dark {
