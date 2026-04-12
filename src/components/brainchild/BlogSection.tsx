@@ -19,7 +19,7 @@ export function BlogSection() {
       title: "EXTRA-CURRICULAR ACTIVITIES",
       excerpt: "Culinary, Public Speaking, Science and Mathematics, Arts and Crafts, Theatre/Drama , Dance, swimming. Each child chooses two clubs ",
       coverImage: enterImg,
-      author: "Admin",
+      author: "Admins",
       publishedAt: "2026-02-01",
       slug: "extra-curricular-activities",
       link: "/blog/extra-curricular-activities",
