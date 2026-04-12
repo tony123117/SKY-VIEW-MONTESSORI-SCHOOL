@@ -15,26 +15,28 @@ const reasons = [
 
 export function WhyChooseUs() {
   return (
-    <section className="section-pink p-6 md:p-12 lg:p-24 font-body relative overflow-hidden">
+    <section className="section-pink-soft p-6 md:p-12 lg:p-24 font-body relative overflow-hidden">
+      <div className="absolute top-6 left-8 text-3xl animate-float opacity-20 pointer-events-none">🌈</div>
+      <div className="absolute bottom-10 right-12 text-2xl animate-wiggle opacity-20 pointer-events-none">🎯</div>
       <img
         src={doodles}
         alt=""
-        className="absolute right-0 top-0 w-[300px] md:w-[641px] hidden md:block opacity-20"
+        className="absolute right-0 top-0 w-[300px] md:w-[641px] hidden md:block opacity-15"
       />
       <img
         src={seconddoodles}
         alt=""
-        className="absolute right-0 bottom-0 w-[300px] md:w-[641px] hidden md:block opacity-20"
+        className="absolute right-0 bottom-0 w-[300px] md:w-[641px] hidden md:block opacity-15"
       />
 
       <div className="relative max-w-[1400px] mx-auto">
         <AnimatedSection>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <span className="text-xs font-semibold text-white/80 bg-primary/30 px-3 py-1 rounded-full inline-block mb-3">✨ Why Us</span>
+              <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full inline-block mb-3">✨ Why Us</span>
               <h2 className="text-2xl md:text-[40px] text-foreground font-heading font-bold">Why Choose Us?</h2>
             </div>
-            <BrainButton variant="secondary" className="w-full md:w-auto">
+            <BrainButton variant="primary" className="w-full md:w-auto">
               Enroll today
             </BrainButton>
           </div>

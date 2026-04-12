@@ -37,12 +37,16 @@ export default function ProgramsSection() {
 
   return (
     <section className="relative section-blue px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body overflow-hidden">
+      {/* Decorations */}
+      <div className="absolute top-8 right-12 text-3xl animate-float opacity-25 pointer-events-none">📐</div>
+      <div className="absolute bottom-16 left-8 text-4xl animate-bounce-gentle opacity-20 pointer-events-none">🎯</div>
+
       <div className="max-w-[1440px] mx-auto">
         <img src={rock} alt="" className="absolute left-10 md:left-20 top-10 w-[100px] md:w-[156px] hidden md:block opacity-40" />
 
         <AnimatedSection>
-          <div className="mb-10 md:mb-20 text-center">
-            <span className="text-xs font-semibold text-white/80 bg-secondary/30 px-3 py-1 rounded-full inline-block mb-3">📚 Our Programs</span>
+          <div className="mb-10 md:mb-16 text-center">
+            <span className="text-xs font-semibold text-secondary bg-white/70 px-3 py-1 rounded-full inline-block mb-3">📚 Our Programs</span>
             <h2 className="text-2xl md:text-4xl font-heading font-bold">
               <span className="text-primary">Teaching Programs,</span>
               <br />
@@ -51,8 +55,8 @@ export default function ProgramsSection() {
           </div>
         </AnimatedSection>
 
-        {/* Mobile/Tablet: grid layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:hidden">
+        {/* Mobile/Tablet: proper grid layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 lg:hidden">
           {programs.map((prog, i) => (
             <AnimatedSection key={prog.title} delay={0.1 * i}>
               <ProgramCard {...prog} />

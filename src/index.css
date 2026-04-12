@@ -15,18 +15,17 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 30% 15%;
 
-
-    --primary: 338 90% 58%;
+    --primary: 338 82% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 90% 48%;
+    --secondary: 205 85% 50%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 220 20% 94%;
     --muted-foreground: 220 10% 40%;
 
-    --accent: 205 85% 50%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 42 95% 55%;
+    --accent-foreground: 0 0% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -50,20 +49,20 @@
     --font-body: 'Montserrat', sans-serif;
 
     /* School brand colors */
-    --school-pink: 330 85% 55%;
-    --school-pink-light: 330 80% 92%;
-    --school-pink-soft: 330 70% 96%;
+    --school-pink: 338 82% 55%;
+    --school-pink-light: 338 80% 92%;
+    --school-pink-soft: 338 70% 96%;
     --school-blue: 205 85% 50%;
     --school-blue-light: 205 80% 92%;
     --school-blue-soft: 205 70% 96%;
     --school-navy: 215 60% 18%;
-    --school-yellow: 45 95% 55%;
+    --school-yellow: 42 95% 55%;
     --school-green: 150 60% 45%;
 
-    --brand-pink: 330 85% 55%;
+    --brand-pink: 338 82% 55%;
     --brand-blue: 205 85% 50%;
     --brand-dark: 220 30% 15%;
-    --brand-light-pink: 330 80% 94%;
+    --brand-light-pink: 338 80% 94%;
     --footer-bg: 215 60% 14%;
     --text-muted-gray: 220 10% 40%;
     --text-dark: 220 30% 15%;
@@ -96,29 +95,34 @@
     @apply transition-transform duration-200 hover:scale-105;
   }
 
-  /* Vibrant school section backgrounds */
+  /* Section backgrounds — lighter, airy pastels */
   .section-pink {
-   background: linear-gradient(160deg, #D4F0FF 0%, #B0E2FF 40%, #C5EBFF 100%);
+    background: linear-gradient(160deg, #FFF0F6 0%, #FFD6E8 40%, #FFE8F2 100%);
   }
 
   .section-blue {
-    background: #FF6EC7
-    
+    background: linear-gradient(160deg, #E8F4FD 0%, #CCE8FF 40%, #DFF0FF 100%);
   }
+
   .section-white {
-    background: WHITE;
+    background: white;
   }
 
   .section-pink-soft {
-    background: linear-gradient(160deg, #FFF0F6 0%, #FFE0EE 50%, #FFF5F9 100%);
+    background: linear-gradient(160deg, #FFF5FA 0%, #FFE8F2 50%, #FFF0F8 100%);
   }
 
   .section-blue-soft {
-    background: WHITE;
+    background: linear-gradient(160deg, #F0F8FF 0%, #E0F0FF 50%, #F5FAFF 100%);
   }
 
   .section-blue-dark {
     background: linear-gradient(135deg, hsl(215 60% 14%) 0%, hsl(220 55% 10%) 100%);
+  }
+
+  /* Hero gradient — vibrant but readable */
+  .section-hero-pink {
+    background: linear-gradient(160deg, #FF7EB3 0%, #FF5BA1 40%, #FF8EC4 70%, #FFB3D9 100%);
   }
 
   /* School-themed decorative elements */
