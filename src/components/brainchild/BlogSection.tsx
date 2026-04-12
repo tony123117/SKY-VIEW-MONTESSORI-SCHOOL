@@ -74,7 +74,7 @@ export function BlogSection() {
       title: "THE POWER OF CREATIVE PLAY",
       excerpt: "Why we prioritize playground time. Learn how social interaction and physical activities build character and leadership from a young age.",
       coverImage: classImg, // Using your existing imported image
-      author: "Admin",
+      author: "Teacher",
       publishedAt: "2026-03-20",
       slug: "power-of-creative-play",
       link: "/blog/power-of-creative-play",
