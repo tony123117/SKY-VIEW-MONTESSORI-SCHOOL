@@ -10,6 +10,7 @@ import applepay from "@/assets/icons/applepay.png";
 import gpay from "@/assets/icons/gpay.png";
 import footerImage from "@/assets/image.png"; 
 import { AnimatedSection } from "./AnimatedSection";
+import BrainChildLogo from "./BrainChildLogo";
 
 export function Footer() {
   return (
@@ -37,9 +38,9 @@ export function Footer() {
                 <img src={logo} alt="Brainchild Logo" className="w-[48px] h-[48px] flex-shrink-0" />
                 <div>
                   <h3 className="text-lg text-primary font-bold leading-tight">
-                    Brainchild
+                    {BrainChildLogo()}
                   </h3>
-                  <p className="text-secondary text-xs font-medium">Int&apos;l Schools</p>
+                  
                 </div>
               </div>
               <p className="text-sm leading-relaxed">
