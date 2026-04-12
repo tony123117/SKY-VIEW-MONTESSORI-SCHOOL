@@ -4,44 +4,59 @@ import doodles from "@/assets/choosedoodles.png";
 import seconddoodles from "@/assets/secondchoosedoodles.png";
 import { AnimatedSection } from "./AnimatedSection";
 
+// 1. IMPORT ALL IMAGES HERE
+import classImg from "@/assets/class.jpg"; 
+import teachersImg from "@/assets/teachers.jpg";
+import enterImg from "@/assets/enter.jpg";
+import outsideImg from "@/assets/outside.jpg";
+// Note: Make sure these filenames match your folder exactly (case-sensitive!)
+
 const reasons = [
   { 
     number: "01", 
     title: "Home-Centred Approach", 
     description: "Children are comfortable and confident in our classrooms, feeling safe and secure to explore and learn.", 
-    color: "text-amber-500" // Changed from section-yellow
+    color: "text-amber-500", 
+    image: classImg // 2. USE THE IMPORTED VARIABLE
   },
   { 
     number: "02", 
     title: "Expert Educators", 
     description: "Our passionate, trained teachers bring creativity and patience to every lesson, ensuring every child thrives.", 
-    color: "text-pink-500" // Changed from section-pink
+    color: "text-pink-500", 
+    image: teachersImg
   },
   { 
     number: "03", 
     title: "Modern Curriculum", 
     description: "We blend Nigerian and British curricula with 21st-century skills, preparing students for a global future.", 
-    color: "text-blue-500" 
+    color: "text-blue-500", 
+    image: enterImg
   },
   { 
     number: "04", 
     title: "Safe Environment", 
     description: "Security and well-being come first. Our campus is designed to give parents peace of mind every day.", 
-    color: "text-cyan-500" // Changed from section-blue
+    color: "text-cyan-500", 
+    image: outsideImg
   },
   { 
     number: "05", 
     title: "Character Building", 
     description: "We nurture values like respect, empathy, and responsibility alongside academic excellence.", 
-    color: "text-purple-500" 
+    color: "text-purple-500" ,
+    image: enterImg 
   },
   { 
     number: "06", 
     title: "Small Class Sizes", 
     description: "Every child gets personal attention with our carefully maintained teacher-to-student ratios.", 
-    color: "text-green-500" 
+    color: "text-green-500" ,
+    image: classImg
   },
 ];
+
+
 
 export function WhyChooseUs() {
   return (

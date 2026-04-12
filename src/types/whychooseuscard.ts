@@ -3,4 +3,5 @@ export interface WhyChooseUsCardProps {
   title: string;
   description: string;
   color: string;
+  image: string; // Add this line
 }

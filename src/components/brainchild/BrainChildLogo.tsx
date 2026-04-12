@@ -16,10 +16,14 @@ const NavLogo = () => {
 
   return (
     <div className="flex flex-col items-center leading-none select-none group cursor-pointer">
-      {/* BRAIN CHILD - Mini Version */}
+      {/* BRAIN CHILD - Upright Version */}
       <div 
-        className="flex gap-1 text-xl font-bold italic tracking-tighter"
-        style={{ fontFamily: '"Bubblegum Sans", cursive', ...miniStickerFilter }}
+        className="flex gap-1 text-xl font-bold tracking-tighter not-italic"
+        style={{ 
+          fontFamily: '"Bubblegum Sans", cursive', 
+          fontStyle: 'normal', // Forces font to not be italic
+          ...miniStickerFilter 
+        }}
       >
         {"BRAIN".split("").map((char, i) => (
           <span key={i} className={colors[i % colors.length]}>{char}</span>
@@ -33,7 +37,11 @@ const NavLogo = () => {
       {/* Int'l School, Enugu - Micro Version */}
       <p 
         className="text-[8px] uppercase font-black tracking-[0.1em] text-[#1E3A8A] mt-[-2px]"
-        style={{ fontFamily: 'sans-serif', ...miniStickerFilter }}
+        style={{ 
+          fontFamily: 'sans-serif', 
+          fontStyle: 'normal', // Forces font to not be italic
+          ...miniStickerFilter 
+        }}
       >
         Int'l School, Enugu
       </p>

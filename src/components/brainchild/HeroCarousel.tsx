@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import hero1 from "@/assets/heroimage.png";
+import teachers from "@/assets/teachers.jpg"; 
+import students from "@/assets/students.jpg";
+import grad from "@/assets/grad.jpg";
 
-const images = [hero1, hero1, hero1, hero1];
+const images = [hero1, teachers, students, grad];
 
 export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
@@ -15,24 +18,27 @@ export function HeroCarousel() {
 
   return (
     <div className="w-full flex flex-col items-center px-4 md:px-0">
-      <div className="w-full max-w-[1118px] overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl ring-4 ring-white/20">
+      {/* 1. Added a fixed responsive height to the container */}
+      <div className="w-full max-w-[1118px] h-[300px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl ring-4 ring-white/20">
         <div
-          className="flex transition-transform duration-700 ease-in-out"
+          className="flex h-full transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
           {images.map((src, index) => (
-            <div key={index} className="w-full shrink-0">
+            <div key={index} className="w-full h-full shrink-0">
               <img
                 src={src}
                 alt="Brainchild students in school"
                 loading="lazy"
-                className="w-full h-auto object-cover"
+                /* 2. Changed h-auto to h-full and added object-center */
+                className="w-full h-full object-cover object-center"
               />
             </div>
           ))}
         </div>
       </div>
 
+      {/* Indicators */}
       <div className="flex gap-2.5 mt-5">
         {images.map((_, index) => (
           <button
