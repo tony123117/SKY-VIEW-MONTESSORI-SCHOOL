@@ -67,7 +67,9 @@ export function BlogSection() {
   ];
 
   return (
-    <section className="section-pink px-4 md:px-12 lg:px-24 py-12 md:py-24 overflow-hidden">
+    <section className="section-pink px-4 md:px-12 lg:px-24 py-12 md:py-24 overflow-hidden relative">
+      <div className="absolute top-10 right-16 text-3xl animate-float-slow opacity-20 pointer-events-none">✏️</div>
+      <div className="absolute bottom-16 left-10 text-2xl animate-bounce-gentle opacity-15 pointer-events-none">📝</div>
       <div className="max-w-[1400px] mx-auto">
         <AnimatedSection>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">

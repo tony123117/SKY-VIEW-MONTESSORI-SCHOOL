@@ -45,7 +45,7 @@ export function ParentSection() {
   };
 
   return (
-    <section className="font-body relative section-white overflow-hidden">
+    <section className="font-body relative section-blue overflow-hidden">
       <AnimatedSection>
         <div className="px-4 md:px-12 lg:px-24 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="max-w-[495px] relative">

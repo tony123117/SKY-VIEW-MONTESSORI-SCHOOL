@@ -4,8 +4,33 @@ import BrainButton from "./BrainButton";
 import { FiUser, FiMenu, FiX } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 
+const navItems = [
+  { label: "Home", href: "#home" },
+  { label: "About Us", href: "#about" },
+  { label: "Programs", href: "#programs" },
+  { label: "Admissions", href: "#admissions" },
+  { label: "Blog", href: "#blog" },
+  { label: "Contact us", href: "#contact" },
+];
+
+function smoothScroll(href: string) {
+  const id = href.replace("#", "");
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else if (href === "#home") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    smoothScroll(href);
+    setMenuOpen(false);
+  };
 
   return (
     <nav className="flex justify-between items-center px-4 md:px-8 lg:px-12 pt-4 pb-3 sticky top-0 z-50 bg-white/90 backdrop-blur-lg font-heading border-b border-primary/10 shadow-sm">
@@ -23,13 +48,14 @@ export function Navbar() {
 
       {/* Desktop nav */}
       <ul className="hidden lg:flex gap-6 items-center">
-        {["Home", "About Us", "Admissions", "Blog", "Careers", "Contact us"].map((item) => (
-          <li key={item}>
+        {navItems.map((item) => (
+          <li key={item.label}>
             <a
-              href="/"
+              href={item.href}
+              onClick={(e) => handleClick(e, item.href)}
               className="text-foreground/80 text-sm font-medium hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
             >
-              {item}
+              {item.label}
             </a>
           </li>
         ))}
@@ -60,9 +86,14 @@ export function Navbar() {
             exit={{ opacity: 0, y: -10 }}
             className="absolute top-full left-0 w-full bg-white shadow-xl lg:hidden z-50 p-6 flex flex-col gap-4 border-t border-primary/10"
           >
-            {["Home", "About Us", "Admissions", "Blog", "Careers", "Contact us"].map((item) => (
-              <a key={item} href="/" className="text-lg text-foreground hover:text-primary transition-colors font-medium" onClick={() => setMenuOpen(false)}>
-                {item}
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => handleClick(e, item.href)}
+                className="text-lg text-foreground hover:text-primary transition-colors font-medium"
+              >
+                {item.label}
               </a>
             ))}
             <div className="flex gap-3 mt-2">

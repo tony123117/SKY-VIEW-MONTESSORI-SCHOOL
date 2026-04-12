@@ -7,6 +7,11 @@ import { motion } from "framer-motion";
 export function HeroSection() {
   return (
     <div className="relative overflow-hidden font-heading min-h-screen section-blue">
+      {/* Childish floating decorations */}
+      <div className="absolute top-20 left-10 text-3xl animate-float opacity-20 pointer-events-none">🎒</div>
+      <div className="absolute top-40 right-20 text-4xl animate-float-slow opacity-15 pointer-events-none">✨</div>
+      <div className="absolute bottom-40 left-20 text-3xl animate-bounce-gentle opacity-20 pointer-events-none">🌟</div>
+      <div className="absolute bottom-20 right-10 text-2xl animate-wiggle opacity-15 pointer-events-none">📚</div>
       <FloatingIcons />
       {/* Decorative blobs */}
       <div className="absolute top-20 -left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
