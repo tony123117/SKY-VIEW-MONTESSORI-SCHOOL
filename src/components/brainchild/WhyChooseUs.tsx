@@ -37,7 +37,7 @@ const reasons = [
     number: "04", 
     title: "Safe Environment", 
     description: "Security and well-being come first. Our campus is designed to give parents peace of mind every day.", 
-    color: "text-cyan-500", 
+    color: "text-cyan-600", 
     image: outsideImg
   },
   { 
