@@ -90,7 +90,7 @@ export function Footer() {
               <ul className="flex flex-col gap-2.5 text-white/50 text-sm">
                 <li className="hover:text-primary cursor-pointer transition-colors">+234 706 117 5897</li>
                 <li className="hover:text-primary cursor-pointer transition-colors">+234 705 449 8469</li>
-                <li className="hover:text-secondary cursor-pointer transition-colors break-all">info@brainchildschoolsint.com</li>
+                <li className="hover:text-secondary cursor-pointer transition-colors break-all"> info@brainchildintschools.com</li>
                 <li className="hover:text-primary cursor-pointer transition-colors leading-relaxed">
                   No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu
                 </li>

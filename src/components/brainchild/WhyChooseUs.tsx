@@ -5,12 +5,42 @@ import seconddoodles from "@/assets/secondchoosedoodles.png";
 import { AnimatedSection } from "./AnimatedSection";
 
 const reasons = [
-  { number: "01", title: "Home-Centred Approach", description: "Children are comfortable and confident in our classrooms, feeling safe and secure to explore and learn." },
-  { number: "02", title: "Expert Educators", description: "Our passionate, trained teachers bring creativity and patience to every lesson, ensuring every child thrives." },
-  { number: "03", title: "Modern Curriculum", description: "We blend Nigerian and British curricula with 21st-century skills, preparing students for a global future." },
-  { number: "04", title: "Safe Environment", description: "Security and well-being come first. Our campus is designed to give parents peace of mind every day." },
-  { number: "05", title: "Character Building", description: "We nurture values like respect, empathy, and responsibility alongside academic excellence." },
-  { number: "06", title: "Small Class Sizes", description: "Every child gets personal attention with our carefully maintained teacher-to-student ratios." },
+  { 
+    number: "01", 
+    title: "Home-Centred Approach", 
+    description: "Children are comfortable and confident in our classrooms, feeling safe and secure to explore and learn.", 
+    color: "text-amber-500" // Changed from section-yellow
+  },
+  { 
+    number: "02", 
+    title: "Expert Educators", 
+    description: "Our passionate, trained teachers bring creativity and patience to every lesson, ensuring every child thrives.", 
+    color: "text-pink-500" // Changed from section-pink
+  },
+  { 
+    number: "03", 
+    title: "Modern Curriculum", 
+    description: "We blend Nigerian and British curricula with 21st-century skills, preparing students for a global future.", 
+    color: "text-blue-500" 
+  },
+  { 
+    number: "04", 
+    title: "Safe Environment", 
+    description: "Security and well-being come first. Our campus is designed to give parents peace of mind every day.", 
+    color: "text-cyan-500" // Changed from section-blue
+  },
+  { 
+    number: "05", 
+    title: "Character Building", 
+    description: "We nurture values like respect, empathy, and responsibility alongside academic excellence.", 
+    color: "text-purple-500" 
+  },
+  { 
+    number: "06", 
+    title: "Small Class Sizes", 
+    description: "Every child gets personal attention with our carefully maintained teacher-to-student ratios.", 
+    color: "text-green-500" 
+  },
 ];
 
 export function WhyChooseUs() {
@@ -34,13 +64,28 @@ export function WhyChooseUs() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
               <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full inline-block mb-3">✨ Why Us</span>
-              <h2 className="text-2xl md:text-[40px] text-foreground font-heading font-bold">Why Choose Us?</h2>
+              <h2 className="text-2xl md:text-[40px] text-foreground font-heading font-bold text-blue-500">Why Choose Us?</h2>
             </div>
-            <BrainButton variant="primary" className="w-full md:w-auto">
-              Enroll today
-            </BrainButton>
+
+            {/* --- FIXED ENROLL BUTTON WRAPPER --- */}
+            <div className="relative w-full md:w-auto">
+              <BrainButton variant="primary" className="w-full md:w-auto">
+                Enroll today
+              </BrainButton>
+              <a 
+                href="https://portal.brainchildintschools.com/enroll" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="absolute inset-0 z-10 cursor-pointer"
+              >
+                <span className="sr-only">Enroll today</span>
+              </a>
+            </div>
+            {/* ---------------------------------- */}
+            
           </div>
         </AnimatedSection>
+        
         <AnimatedSection delay={0.1}>
           <p className="mt-6 md:mt-10 text-foreground/70 font-body max-w-4xl text-sm md:text-base leading-relaxed">
             At Brainchild Int&apos;l, we focus on more than academics. We create a

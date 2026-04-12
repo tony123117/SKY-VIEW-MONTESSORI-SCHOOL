@@ -12,12 +12,12 @@ export default function ProgramCard({ title, age, Grade, description, cta }: Pro
         <span className="text-secondary text-lg">📖</span>
       </div>
 
-      <h3 className="text-lg font-heading font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
+      <h3 className="text-lg font-heading font-bold mb-3 text-red-800 group-hover:text-primary transition-colors duration-300">
         {title}
       </h3>
 
       <div className="flex flex-wrap gap-2 mb-3">
-        <span className="bg-pink-50 text-yellow-400 text-xs font-bold px-3 py-1.5 rounded-md border-l-4 border-pink-500">
+        <span className="bg-pink-50 text-red-700 text-xs font-bold px-3 py-1.5 rounded-md border-l-4 border-pink-500">
           {age}
         </span>
         <span className="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-md border-l-4 border-blue-600">

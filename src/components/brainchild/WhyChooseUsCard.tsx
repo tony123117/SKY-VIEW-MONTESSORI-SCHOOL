@@ -5,6 +5,7 @@ export default function WhyChooseUsCard({
   number,
   title,
   description,
+  color,
 }: WhyChooseUsCardProps) {
   return (
     <motion.div
@@ -15,8 +16,12 @@ export default function WhyChooseUsCard({
       <div className="absolute -top-5 right-4 bg-secondary text-secondary-foreground w-12 h-12 rounded-2xl flex items-center justify-center font-heading font-bold text-lg shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
         {number}
       </div>
-      <h3 className="text-lg font-heading font-bold mb-2 max-w-[200px] text-foreground group-hover:text-secondary transition-colors duration-300">{title}</h3>
+      <h3 className={`text-xl font-heading font-bold mb-3 ${color}`}>
+        {title}
+      </h3>
+      
       <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
     </motion.div>
   );
 }
+

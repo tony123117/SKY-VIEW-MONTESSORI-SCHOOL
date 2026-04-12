@@ -17,9 +17,9 @@ const Index = () => {
       <div id="home"><HeroSection /></div>
       <WhyChooseUs />
       <div id="programs"><ProgramsSection /></div>
-      <div id="admissions"><CoreValuesSection /></div>
+      
       <FacilitiesSection />
-      <CurriculumSection />
+      
       <div id="blog"><BlogSection /></div>
       <ParentSection />
       <ContactSection />

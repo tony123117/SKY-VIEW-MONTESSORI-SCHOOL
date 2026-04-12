@@ -56,11 +56,24 @@ export function HeroSection() {
           transition={{ duration: 0.7, delay: 0.4 }}
           className="flex gap-3"
         >
-          <BrainButton variant="primary" className="bg-foreground text-white border-none shadow-lg">
-            <span className="flex items-center gap-2">
-              Enroll my child <MdOutlineArrowUpward />
-            </span>
-          </BrainButton>
+          <div className="relative inline-block">
+            <BrainButton variant="primary" className="bg-foreground text-white border-none shadow-lg">
+              <span className="flex items-center gap-2">
+                Enroll my child <MdOutlineArrowUpward />
+              </span>
+            </BrainButton>
+
+            {/* Invisible Link Overlay */}
+            <a 
+              href="https://portal.brainchildintschools.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="absolute inset-0 z-10 cursor-pointer"
+              aria-label="Enroll my child"
+            >
+              <span className="sr-only">Enroll my child</span>
+            </a>
+          </div>
 
           <BrainButton variant="abstract" className="bg-white border-white/80 shadow-lg">
             <span className="text-accent flex items-center gap-2 font-bold">

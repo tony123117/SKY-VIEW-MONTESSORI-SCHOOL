@@ -13,7 +13,7 @@ export function BlogSection() {
     {
       id: "1",
       title: "EXTRA-CURRICULAR ACTIVITIES",
-      excerpt: "Music, Culinary, Igbo Club, Dance, Science and Computer, Public Speaking, Arts and Calligraphy, Swimming. Each child chooses two clubs in addition to compulsory swimming.",
+      excerpt: "Culinary, Public Speaking, Science and Mathematics, Arts and Crafts, Theatre/Drama , Dance, swimming. Each child chooses two clubs ",
       coverImage: blog1,
       author: "Admin",
       publishedAt: "2026-02-01",
