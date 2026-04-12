@@ -36,7 +36,7 @@ export default function ProgramsSection() {
   ];
 
   return (
-    <section className="relative section-blue px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body overflow-hidden">
+    <section className="relative section-white px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body overflow-hidden">
       {/* Decorations */}
       <div className="absolute top-8 right-12 text-3xl animate-float opacity-25 pointer-events-none">📐</div>
       <div className="absolute bottom-16 left-8 text-4xl animate-bounce-gentle opacity-20 pointer-events-none">🎯</div>

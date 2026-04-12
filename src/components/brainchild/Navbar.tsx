@@ -97,10 +97,17 @@ export function Navbar() {
               </a>
             ))}
             <div className="flex gap-3 mt-2">
-              <BrainButton variant="secondary">
-                Portal <FiUser />
-              </BrainButton>
-              <BrainButton variant="primary">Enroll my child</BrainButton>
+              <a href="/portal">
+                <BrainButton variant="secondary">
+                  Portal <FiUser />
+                </BrainButton>
+              </a>
+
+              <a href="/enroll">
+                <BrainButton variant="primary">
+                  Enroll my child
+                </BrainButton>
+              </a>
             </div>
           </motion.div>
         )}
