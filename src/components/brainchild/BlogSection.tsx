@@ -19,6 +19,7 @@ export function BlogSection() {
       publishedAt: "2026-02-01",
       slug: "extra-curricular-activities",
       link: "/blog/extra-curricular-activities",
+      color: "text-pink-500"
     },
     {
       id: "2",
@@ -29,6 +30,7 @@ export function BlogSection() {
       publishedAt: "2026-02-01",
       slug: "punctuality-attendance",
       link: "/blog/punctuality-attendance",
+      color: "text-pink-500"
     },
     {
       id: "3",
@@ -39,6 +41,7 @@ export function BlogSection() {
       publishedAt: "2026-02-01",
       slug: "home-lessons-policy",
       link: "/blog/home-lessons-policy",
+      color: "text-pink-500"
     },
   ];
 
