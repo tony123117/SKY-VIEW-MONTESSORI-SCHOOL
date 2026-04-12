@@ -29,6 +29,9 @@ export default function ProgramsSection() {
 
   return (
     <section className="relative section-blue px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body overflow-hidden">
+      {/* Childish decorations */}
+      <div className="absolute top-16 right-12 text-3xl animate-float opacity-20 pointer-events-none">🎯</div>
+      <div className="absolute bottom-20 left-8 text-4xl animate-wiggle opacity-15 pointer-events-none">🧩</div>
       <div className="max-w-[1440px] mx-auto">
         <img src={rock} alt="" className="absolute left-10 md:left-20 top-10 w-[100px] md:w-[156px] hidden md:block opacity-40" />
 
