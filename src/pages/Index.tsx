@@ -9,20 +9,22 @@ import { BlogSection } from "@/components/brainchild/BlogSection";
 import { ParentSection } from "@/components/brainchild/ParentSection";
 import { ContactSection } from "@/components/brainchild/ContactSection";
 import { Footer } from "@/components/brainchild/Footer";
+import { StatsSection } from "@/components/brainchild/StatsSection";
 
 const Index = () => {
   return (
     <>
       <Navbar />
       <div id="home"><HeroSection /></div>
-      <WhyChooseUs />
+      <div id="about"><WhyChooseUs /></div>
       <div id="programs"><ProgramsSection /></div>
-      
-      <FacilitiesSection />
-      
+      <StatsSection />
+      <div id="admissions"><FacilitiesSection /></div>
+      <CoreValuesSection />
+      <CurriculumSection />
       <div id="blog"><BlogSection /></div>
       <ParentSection />
-      <ContactSection />
+      <div id="contact"><ContactSection /></div>
       <Footer />
     </>
   );
