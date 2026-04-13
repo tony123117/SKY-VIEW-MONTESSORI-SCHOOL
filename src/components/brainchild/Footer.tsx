@@ -3,46 +3,34 @@ import x from "@/assets/icons/x.png";
 import insta from "@/assets/icons/insta.png";
 import facebook from "@/assets/icons/facebook.png";
 import github from "@/assets/icons/github.png";
-import visa from "@/assets/icons/visa.png";
-import mastercard from "@/assets/icons/mastercard.png";
-import paypal from "@/assets/icons/paypal.png";
-import applepay from "@/assets/icons/applepay.png";
-import gpay from "@/assets/icons/gpay.png";
 import footerImage from "@/assets/image.png"; 
 import { AnimatedSection } from "./AnimatedSection";
 import BrainChildLogo from "./BrainChildLogo";
+import { Link } from "react-router-dom";
 
 export function Footer() {
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
     <footer className="section-blue-dark font-heading text-white/90">
-      
-      {/* Top Image */}
       {/* Floating Image ABOVE footer */}
-        <div className="px-4 md:px-12 lg:px-24 flex justify-center relative z-20 -mt-20 md:-mt-20">
+      <div className="px-4 md:px-12 lg:px-24 flex justify-center relative z-20 -mt-20 md:-mt-20">
         <div className="w-full max-w-4xl shadow-2xl rounded-[28px] overflow-hidden"> 
-          <img
-            src={footerImage}
-            alt="Build a better future"
-            className="w-full h-auto object-cover block"
-          />
+          <img src={footerImage} alt="Build a better future" className="w-full h-auto object-cover block" />
         </div>
       </div>
 
       <AnimatedSection>
         <div className="px-4 md:px-12 lg:px-24 pt-12 md:pt-20">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-10">
-            
             {/* Brand */}
             <div className="flex flex-col gap-4 text-white/60 col-span-2 md:col-span-1">
-              <div className="flex items-start gap-3">
+              <Link to="/" className="flex items-start gap-3">
                 <img src={logo} alt="Brainchild Logo" className="w-[48px] h-[48px] flex-shrink-0" />
                 <div>
-                  <h3 className="text-lg text-primary font-bold leading-tight">
-                    {BrainChildLogo()}
-                  </h3>
-                  
+                  <h3 className="text-lg text-primary font-bold leading-tight">{BrainChildLogo()}</h3>
                 </div>
-              </div>
+              </Link>
               <p className="text-sm leading-relaxed">
                 At Brainchild Int&apos;l, we focus on more than academics. We create a supportive space where children feel safe.
               </p>
@@ -59,9 +47,16 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-bold text-white uppercase tracking-wider">Quick Links</h4>
               <ul className="flex flex-col gap-2.5 text-white/50 text-sm">
-                {["Back to top", "About us", "Enrollment", "Careers"].map((item) => (
-                  <li key={item} className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">{item}</li>
-                ))}
+                <li onClick={scrollToTop} className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">Back to top</li>
+                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <Link to="/about">About us</Link>
+                </li>
+                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <a href="https://portal.brainchildintschools.com/enroll" target="_blank" rel="noopener noreferrer">Enrollment</a>
+                </li>
+                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <Link to="/admissions">Careers</Link>
+                </li>
               </ul>
             </div>
 
@@ -69,9 +64,18 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-bold text-white uppercase tracking-wider">Help</h4>
               <ul className="flex flex-col gap-2.5 text-white/50 text-sm">
-                {["Customer Support", "Admission Requirements", "Terms & Conditions", "Privacy Policy"].map((item) => (
-                  <li key={item} className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">{item}</li>
-                ))}
+                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <Link to="/admissions">Customer Support</Link>
+                </li>
+                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <Link to="/admissions">Admission Requirements</Link>
+                </li>
+                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <Link to="/about">Terms & Conditions</Link>
+                </li>
+                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <Link to="/about">Privacy Policy</Link>
+                </li>
               </ul>
             </div>
 
@@ -79,9 +83,18 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-bold text-white uppercase tracking-wider">Resources</h4>
               <ul className="flex flex-col gap-2.5 text-white/50 text-sm">
-                {["E-brochure / Curriculum", "Staff Portal Tutorial", "Read our Blog", "Meet our Admin"].map((item) => (
-                  <li key={item} className="hover:text-secondary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">{item}</li>
-                ))}
+                <li className="hover:text-secondary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <Link to="/admissions">E-brochure / Curriculum</Link>
+                </li>
+                <li className="hover:text-secondary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <a href="https://portal.brainchildintschools.com" target="_blank" rel="noopener noreferrer">Staff Portal Tutorial</a>
+                </li>
+                <li className="hover:text-secondary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <Link to="/blog">Read our Blog</Link>
+                </li>
+                <li className="hover:text-secondary cursor-pointer transition-colors hover:translate-x-1 transform duration-200">
+                  <Link to="/about">Meet our Admin</Link>
+                </li>
               </ul>
             </div>
 
@@ -89,9 +102,15 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-bold text-white uppercase tracking-wider">Contact Us</h4>
               <ul className="flex flex-col gap-2.5 text-white/50 text-sm">
-                <li className="hover:text-primary cursor-pointer transition-colors">+234 706 117 5897</li>
-                <li className="hover:text-primary cursor-pointer transition-colors">+234 705 449 8469</li>
-                <li className="hover:text-secondary cursor-pointer transition-colors break-all"> info@brainchildintschools.com</li>
+                <li className="hover:text-primary cursor-pointer transition-colors">
+                  <a href="tel:+2347061175897">+234 706 117 5897</a>
+                </li>
+                <li className="hover:text-primary cursor-pointer transition-colors">
+                  <a href="tel:+2347054498469">+234 705 449 8469</a>
+                </li>
+                <li className="hover:text-secondary cursor-pointer transition-colors break-all">
+                  <a href="mailto:info@brainchildintschools.com">info@brainchildintschools.com</a>
+                </li>
                 <li className="hover:text-primary cursor-pointer transition-colors leading-relaxed">
                   No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu
                 </li>
@@ -104,9 +123,6 @@ export function Footer() {
             <p className="text-white text-sm">
               Bravotechmedia © 2026, All Rights Reserved
             </p>
-            <div className="flex gap-2">
-             
-            </div>
           </div>
         </div>
       </AnimatedSection>
