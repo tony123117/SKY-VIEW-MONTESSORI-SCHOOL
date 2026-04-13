@@ -2,7 +2,7 @@ import { Navbar } from "@/components/brainchild/Navbar";
 import { Footer } from "@/components/brainchild/Footer";
 import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import { ContactSection } from "@/components/brainchild/ContactSection";
-import { Link } from "react-router-dom";
+// No longer need Link from react-router-dom if we are staying on one page for contact
 
 export default function AdmissionsPage() {
   const steps = [
@@ -25,9 +25,9 @@ export default function AdmissionsPage() {
 
   const fees = [
     { level: "Pre-School", age: "Ages 1½ – 2", term: "Contact us" },
-    { level: "Nursery 1–3", age: "Ages 2½ – 5", term: "Contact us" },
-    { level: "Lower Grade (1–3)", age: "Ages 5½ – 8", term: "Contact us" },
-    { level: "Higher Grade (4–6)", age: "Ages 8½ – 11", term: "Contact us" },
+    { level: "Nursery 1–3", age: "Ages 2–5", term: "Contact us" },
+    { level: "Lower Grade (1–3)", age: "Ages 5–8", term: "Contact us" },
+    { level: "Higher Grade (4–6)", age: "Ages 8–11", term: "Contact us" },
   ];
 
   return (
@@ -45,9 +45,16 @@ export default function AdmissionsPage() {
             <h1 className="text-3xl md:text-5xl font-heading font-bold text-white drop-shadow-md">
               Join the Brainchild Family
             </h1>
-            <p className="mt-4 text-white/85 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+            <p className="mt-4 text-white/85 max-w-2xl mx-auto text-sm md:text-base leading-relaxed mb-8">
               We welcome new families every term. Our admissions process is simple, transparent, and designed to make you feel right at home.
             </p>
+            
+            {/* Added CTA Button to Hero */}
+            <a href="#contact">
+              <button className="bg-white text-pink-600 px-8 py-3 rounded-full font-bold shadow-lg hover:bg-pink-50 transition-all active:scale-95">
+                Enquire Now
+              </button>
+            </a>
           </AnimatedSection>
         </div>
 
@@ -105,14 +112,23 @@ export default function AdmissionsPage() {
                         <p className="text-sm font-semibold text-foreground">{f.level}</p>
                         <p className="text-xs text-muted-foreground">{f.age}</p>
                       </div>
-                      <span className="text-sm font-bold text-primary">{f.term}</span>
+                      <a href="#contact" className="text-sm font-bold text-primary hover:underline transition-all">
+                        {f.term}
+                      </a>
                     </div>
                   ))}
                 </div>
-                <div className="mt-6">
+                <div className="mt-6 flex flex-col gap-3">
+                  {/* Primary Link to External Portal */}
                   <a href="https://portal.brainchildintschools.com/enroll" target="_blank" rel="noopener noreferrer">
-                    <button className="w-full bg-primary text-primary-foreground py-3 rounded-full font-heading font-semibold text-sm hover:shadow-lg hover:scale-105 active:scale-95 transition-all">
-                      Apply Now →
+                    <button className="w-full bg-primary text-primary-foreground py-3 rounded-full font-heading font-semibold text-sm hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all">
+                      Online Application Portal →
+                    </button>
+                  </a>
+                  {/* Secondary Link to Contact Form */}
+                  <a href="#contact">
+                    <button className="w-full bg-white border-2 border-primary/20 text-primary py-3 rounded-full font-heading font-semibold text-sm hover:bg-primary/5 transition-all">
+                      Request Fee Details
                     </button>
                   </a>
                 </div>
