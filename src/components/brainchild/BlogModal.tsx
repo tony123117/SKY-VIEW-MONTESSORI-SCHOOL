@@ -75,8 +75,8 @@ export default function BlogModal({ post, onClose }: BlogModalProps) {
                 {/* Footer Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                   <a
-                    href={post.link}
-                    className="flex-1 bg-pink-500 hover:bg-pink-600 text-white text-sm font-bold py-4 rounded-xl text-center transition-all shadow-lg shadow-pink-200 active:scale-95"
+                    href="/blog"
+                    className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold py-4 rounded-xl text-center transition-all shadow-lg shadow-primary/20 active:scale-95"
                   >
                     Read Full Post
                   </a>
