@@ -1,5 +1,5 @@
 import { BlogPost } from "@/types/blogs";
-import { color, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -31,7 +31,7 @@ export default function BlogCard({ post, onPostClick }: BlogCardProps) {
             {new Date(post.publishedAt).toLocaleDateString()}
           </span>
         </div>
-        <h3 className={`text-lg md:text-2xl font-heading font-bold ${post.color || "text-foreground"} group-hover:text-primary transition-colors duration-300 leading-tight ${color}`}>
+        <h3 className={`text-lg md:text-2xl font-heading font-bold ${post.color || "text-foreground"} group-hover:text-primary transition-colors duration-300 leading-tight`}>
           {post.title}
         </h3>
         <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
