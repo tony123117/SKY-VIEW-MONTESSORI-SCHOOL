@@ -27,7 +27,7 @@ export default function ProgramCard({ title, age, Grade, description, cta }: Pro
 
       <p className="text-sm text-black leading-relaxed mb-4 ">{description}</p>
 
-      <a href="#" className="text-sm text-primary font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
+      <a href="https://portal.brainchildintschools.com/enroll" target="_blank" rel="noopener noreferrer" className="text-sm text-primary font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
         {cta}
         <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
       </a>
