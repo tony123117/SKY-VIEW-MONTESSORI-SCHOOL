@@ -83,7 +83,7 @@ export function HeroSection() {
               <div className="flex flex-wrap justify-center gap-4">
                 {/* Enroll Button - Wrapped in relative div to ensure the ghost link works */}
                 <div className="relative group">
-                  <BrainButton variant="primary" className="bg-white text-black border-none px-8 py-4 font-bold hover:bg-blue-500 hover:text-white transition-colors duration-300">
+                  <BrainButton variant="outline" className="bg-white text-pink-500 border-none px-8 py-4 font-bold hover:bg-blue-500 hover:text-black transition-colors duration-300">
                     <span className="flex items-center gap-2">
                       Enroll my child <MdOutlineArrowUpward />
                     </span>
