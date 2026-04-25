@@ -12,28 +12,30 @@ export default function ContactSection() {
 
     const formData = new FormData(e.currentTarget);
     const body = {
-      user_name: formData.get('user_name'),
-      user_email: formData.get('user_email'),
-      child_name: formData.get('child_name'),
-      user_phone: formData.get('user_phone'),
-      message: formData.get('message'),
+      user_name: String(formData.get('user_name') || ''),
+      user_email: String(formData.get('user_email') || ''),
+      child_name: String(formData.get('child_name') || ''),
+      user_phone: String(formData.get('user_phone') || ''),
+      message: String(formData.get('message') || ''),
     };
 
     try {
-      const response = await fetch('http://localhost:8000/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
+          const response = await fetch(import.meta.env.VITE_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
 
-      if (response.ok) {
-        setStatus('success');
-        (e.target as HTMLFormElement).reset();
-        // Reset button after 5 seconds
-        setTimeout(() => setStatus('idle'), 5000);
-      } else {
-        setStatus('error');
-      }
+      const data = await response.json();
+
+        if (response.ok) {
+          setStatus('success');
+          (e.target as HTMLFormElement).reset();
+          setTimeout(() => setStatus('idle'), 5000);
+        } else {
+          console.error(data);
+          setStatus('error');
+        }
     } catch (error) {
       console.error("Submission error:", error);
       setStatus('error');
