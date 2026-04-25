@@ -1,15 +1,13 @@
-import BrainButton from "./BrainButton";
 import WhyChooseUsCard from "./WhyChooseUsCard";
-import doodles from "@/assets/choosedoodles.png";
-import seconddoodles from "@/assets/secondchoosedoodles.png";
 import { AnimatedSection } from "./AnimatedSection";
+import BrainButton from "./BrainButton";
+import doodles from "@/assets/choosedoodles.png";
 
-// 1. IMPORT ALL IMAGES HERE
+// Import your images
 import creativeImg from "@/assets/creative.jpeg"; 
 import teachersImg from "@/assets/teachers.jpg";
 import enterImg from "@/assets/enter.jpg";
 import outsideImg from "@/assets/outside.jpg";
-// Note: Make sure these filenames match your folder exactly (case-sensitive!)
 
 const reasons = [
   { 
@@ -17,7 +15,7 @@ const reasons = [
     title: "Home-Centred Approach", 
     description: "Children are comfortable and confident in our classrooms, feeling safe and secure to explore and learn.", 
     color: "text-amber-500", 
-    image: creativeImg // 2. USE THE IMPORTED VARIABLE
+    image: creativeImg 
   },
   { 
     number: "02", 
@@ -56,63 +54,48 @@ const reasons = [
   },
 ];
 
-
-
 export function WhyChooseUs() {
   return (
-    <section className="section-pink-soft p-6 md:p-12 lg:p-24 font-body relative overflow-hidden">
-      <div className="absolute top-6 left-8 text-3xl animate-float opacity-20 pointer-events-none">🌈</div>
-      <div className="absolute bottom-10 right-12 text-2xl animate-wiggle opacity-20 pointer-events-none">🎯</div>
+    <section className="bg-[#FCF8F9] py-24 px-6 md:px-12 lg:px-24 font-body relative overflow-hidden">
+      {/* Background Decor - Subtle & Premium */}
       <img
         src={doodles}
         alt=""
-        className="absolute right-0 top-0 w-[300px] md:w-[641px] hidden md:block opacity-15"
+        className="absolute right-0 top-0 w-[450px] opacity-10 pointer-events-none"
       />
-      <img
-        src={seconddoodles}
-        alt=""
-        className="absolute right-0 bottom-0 w-[300px] md:w-[641px] hidden md:block opacity-15"
-      />
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-pink-100/40 rounded-full blur-[100px]" />
 
       <div className="relative max-w-[1400px] mx-auto">
-        <AnimatedSection>
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-              <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full inline-block mb-3">✨ Why Us</span>
-              <h2 className="text-2xl md:text-[40px] text-foreground font-heading font-bold text-blue-500">Why Choose Us?</h2>
+        <header className="text-center mb-24 flex flex-col items-center">
+          <AnimatedSection>
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-100 mb-6">
+               <span className="w-2 h-2 rounded-full bg-pink-400 animate-pulse" />
+               <span className="text-pink-600 text-xs font-black uppercase tracking-widest">Why Brainchild?</span>
             </div>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-heading font-black text-slate-900 leading-[1.1] tracking-tight mb-8">
+              Why Parents <span className="text-pink-500">Choose</span> Us.
+            </h2>
+            <p className="max-w-3xl mx-auto text-slate-500 text-lg md:text-xl font-medium leading-relaxed">
+              At Brainchild Int&apos;l, we focus on more than academics. We create a
+              supportive space where children feel safe, curious, and confident to
+              learn.
+            </p>
+          </AnimatedSection>
 
-            {/* --- FIXED ENROLL BUTTON WRAPPER --- */}
-            <div className="relative w-full md:w-auto">
-              <BrainButton variant="primary" className="w-full md:w-auto">
-                Enroll today
+          <AnimatedSection delay={0.2} className="mt-10">
+            <div className="relative inline-block">
+              <BrainButton className="bg-pink-500 hover:bg-pink-600 text-white rounded-full px-12 py-5 font-bold shadow-2xl shadow-pink-200 transition-all active:scale-95">
+                Enroll my child
               </BrainButton>
-              <a 
-                href="https://portal.brainchildintschools.com/enroll" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="absolute inset-0 z-10 cursor-pointer"
-              >
-                <span className="sr-only">Enroll today</span>
-              </a>
+              <a href="https://portal.brainchildintschools.com/enroll" target="_blank" className="absolute inset-0 z-10" />
             </div>
-            {/* ---------------------------------- */}
-            
-          </div>
-        </AnimatedSection>
-        
-        <AnimatedSection delay={0.1}>
-          <p className="mt-6 md:mt-10 text-foreground/70 font-body max-w-4xl text-sm md:text-base leading-relaxed">
-            At Brainchild Int&apos;l, we focus on more than academics. We create a
-            supportive space where children feel safe, curious, and confident to
-            learn. Every decision we make is guided by care, clarity, and your
-            child&apos;s long-term growth.
-          </p>
-        </AnimatedSection>
+          </AnimatedSection>
+        </header>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-8 md:mt-12">
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {reasons.map((item, i) => (
-            <AnimatedSection key={item.number} delay={0.08 * i}>
+            <AnimatedSection key={item.number} delay={0.1 * i}>
               <WhyChooseUsCard {...item} />
             </AnimatedSection>
           ))}

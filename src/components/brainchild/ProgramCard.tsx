@@ -1,36 +1,43 @@
 import { Program } from "@/types/programcard";
 import { motion } from "framer-motion";
+import { MdOutlineArrowForward } from "react-icons/md";
 
-export default function ProgramCard({ title, age, Grade, description, cta }: Program) {
+export default function ProgramCard({ title, age, Grade, description, cta, index }: Program & { index: number }) {
+  const isRed = index % 2 === 0;
+  const accentColor = isRed ? "text-red-600" : "text-blue-600";
+  const badgeBg = isRed ? "bg-red-50" : "bg-blue-50";
+  const badgeBorder = isRed ? "border-red-100" : "border-blue-100";
+
   return (
     <motion.div
-      whileHover={{ y: -8, scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="bg-blue-200 backdrop-blur-sm border border-white/60 rounded-2xl p-6 w-full max-w-[422px] shadow-md min-h-[266px] group cursor-pointer hover:shadow-xl hover:shadow-secondary/15 transition-all duration-300"
+      whileHover={{ y: -10 }}
+      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+      // FIXED: w-[80vw] on mobile (70-80% of screen) and max-w-[420px] on desktop
+      className="bg-white rounded-none p-8 w-[80vw] sm:w-full max-w-[420px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-b-4 border-slate-100 hover:border-pink-500 transition-all duration-500 group cursor-pointer mx-auto lg:mx-0"
     >
-      <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center mb-3 group-hover:bg-secondary/20 transition-colors">
-        <span className="text-secondary text-lg">📖</span>
-      </div>
-
-      <h3 className="text-lg font-heading font-bold mb-3 text-red-800 group-hover:text-primary transition-colors duration-300">
-        {title}
-      </h3>
-
-      <div className="flex flex-wrap gap-2 mb-3">
-        <span className="bg-pink-50 text-red-700 text-xs font-bold px-3 py-1.5 rounded-md border-l-4 border-pink-500">
-          {age}
-        </span>
-        <span className="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-md border-l-4 border-blue-600">
+      <div className={`inline-block px-4 py-1 rounded-full ${badgeBg} border ${badgeBorder} mb-6`}>
+        <span className={`text-[10px] font-black uppercase tracking-widest ${accentColor}`}>
           {Grade}
         </span>
       </div>
 
-      <p className="text-sm text-black leading-relaxed mb-4 ">{description}</p>
+      <h3 className={`text-2xl md:text-3xl font-heading font-black mb-4 tracking-tight leading-tight ${accentColor}`}>
+        {title}
+      </h3>
 
-      <a href="https://portal.brainchildintschools.com/enroll" target="_blank" rel="noopener noreferrer" className="text-sm text-primary font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-slate-400 text-xs font-bold uppercase tracking-tighter">Target Group:</span>
+        <span className="text-slate-900 text-xs font-black">{age}</span>
+      </div>
+
+      <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-8 font-medium italic">
+        "{description}"
+      </p>
+
+      <div className={`text-sm font-bold inline-flex items-center gap-2 group-hover:gap-4 transition-all duration-300 ${accentColor}`}>
         {cta}
-        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
-      </a>
+        <MdOutlineArrowForward className="text-lg" />
+      </div>
     </motion.div>
   );
 }

@@ -1,157 +1,167 @@
-import { useState } from "react";
-import { AnimatedSection } from "./AnimatedSection";
-import BrainButton from "./BrainButton";
-import { motion } from "framer-motion";
-import { FiPhone, FiMail, FiMapPin, FiSend, FiCheckCircle } from "react-icons/fi";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
-export function ContactSection() {
-  const [status, setStatus] = useState<"IDLE" | "SENDING" | "SUCCESS" | "ERROR">("IDLE");
-  const [formData, setFormData] = useState({
-    parentName: "",
-    childName: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
+export default function ContactSection() {
+  // Status states: idle, sending, success, error
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus("SENDING");
+    setStatus('sending');
+
+    const formData = new FormData(e.currentTarget);
+    const body = {
+      user_name: formData.get('user_name'),
+      user_email: formData.get('user_email'),
+      child_name: formData.get('child_name'),
+      user_phone: formData.get('user_phone'),
+      message: formData.get('message'),
+    };
 
     try {
-      // Sending to Formspree (or your preferred endpoint)
-      const response = await fetch("https://formspree.io/f/info@brainchildintschools.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      const response = await fetch('http://localhost:8000/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
       });
 
       if (response.ok) {
-        setStatus("SUCCESS");
-        setFormData({ parentName: "", childName: "", email: "", phone: "", message: "" });
-        // Reset success message after 5 seconds
-        setTimeout(() => setStatus("IDLE"), 5000);
+        setStatus('success');
+        (e.target as HTMLFormElement).reset();
+        // Reset button after 5 seconds
+        setTimeout(() => setStatus('idle'), 5000);
       } else {
-        setStatus("ERROR");
+        setStatus('error');
       }
     } catch (error) {
-      setStatus("ERROR");
+      console.error("Submission error:", error);
+      setStatus('error');
     }
   };
 
   return (
-    <section 
-      id="contact" 
-      className="section-pink-soft px-4 md:px-12 lg:px-24 pt-12 md:pt-24 pb-32 md:pb-56 font-body relative"
-    >
-      <div className="absolute top-8 left-12 text-3xl animate-float opacity-20 pointer-events-none">✉️</div>
-      <div className="absolute bottom-16 right-8 text-4xl animate-bounce-gentle opacity-15 pointer-events-none">🏫</div>
+    <section className="bg-[#FFF5F7] py-24 px-6 md:px-12 lg:px-24 overflow-hidden relative">
+      <div className="max-w-[1400px] mx-auto relative z-10">
+        
+        {/* Header Section */}
+        <div className="text-center mb-20">
+          <motion.span 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-[11px] font-black tracking-[0.4em] uppercase text-primary mb-6 block"
+          >
+            Get In Touch
+          </motion.span>
+          <h2 className="text-5xl md:text-8xl font-heading font-black text-slate-900 leading-[0.85] tracking-tighter">
+            Contact <span className="text-primary italic font-light">Us.</span>
+          </h2>
+        </div>
 
-      <div className="max-w-[1400px] mx-auto">
-        <AnimatedSection>
-          <div className="text-center mb-12">
-            <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full inline-block mb-3">📞 Get In Touch</span>
-            <h2 className="text-2xl md:text-[40px] font-heading font-bold text-foreground">Contact Us</h2>
-            <p className="mt-4 text-foreground/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-              Have questions about enrollment or our programs? We'd love to hear from you!
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8">
-          <AnimatedSection delay={0.1} className="lg:col-span-2">
-            <div className="bg-white/95 backdrop-blur-sm border border-white/60 rounded-2xl p-6 md:p-8 shadow-md h-full flex flex-col gap-6">
-              <h3 className="text-xl font-heading font-bold text-foreground">Reach Us Directly</h3>
-              {[
-                { icon: <FiPhone />, label: "Phone", values: ["+234 706 117 5897", "+234 705 449 8469"], color: "bg-secondary/10 text-secondary" },
-                { icon: <FiMail />, label: "Email", values: ["info@brainchildintschools.com"], color: "bg-primary/10 text-primary" },
-                { icon: <FiMapPin />, label: "Address", values: ["No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu"], color: "bg-accent/15 text-accent" },
-              ].map((item) => (
-                <div key={item.label} className="flex gap-4">
-                  <div className={`w-10 h-10 rounded-xl ${item.color} flex items-center justify-center flex-shrink-0`}>
-                    {item.icon}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{item.label}</p>
-                    {item.values.map((v) => (
-                      <p key={v} className="text-sm text-muted-foreground">{v}</p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-              
-              <div className="mt-auto pt-4 border-t border-border/30">
-                <p className="text-xs text-muted-foreground">
-                  <strong>School Hours:</strong><br />
-                  Pre-school & KG: 7:30am – 1:00pm daily<br />
-                  Elementary 1–6: 7:30am – 3:00pm (Mon–Thu), 7:30am – 1:00pm (Fri)
-                </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
+          {/* Info Column */}
+          <div className="lg:col-span-5 space-y-12">
+            <div>
+              <h3 className="text-3xl font-black text-slate-900 mb-8 tracking-tight">Reach Us Directly</h3>
+              <div className="space-y-8">
+                <ContactDetail 
+                  icon={<Phone className="w-5 h-5 text-blue-500" />} 
+                  label="Phone" 
+                  lines={["+234 706 117 5897", "+234 705 449 8469"]} 
+                />
+                <ContactDetail 
+                  icon={<Mail className="w-5 h-5 text-rose-500" />} 
+                  label="Email" 
+                  lines={["info@brainchildintschools.com"]} 
+                />
+                <ContactDetail 
+                  icon={<MapPin className="w-5 h-5 text-emerald-500" />} 
+                  label="Address" 
+                  lines={["No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu"]} 
+                />
               </div>
             </div>
-          </AnimatedSection>
 
-          <AnimatedSection delay={0.2} className="lg:col-span-3">
-            <motion.form
-              onSubmit={handleSubmit}
-              className="bg-white/95 backdrop-blur-sm border border-white/60 rounded-2xl p-6 md:p-8 shadow-md"
-            >
-              <h3 className="text-xl font-heading font-bold text-foreground mb-6">Send Us a Message</h3>
-              
-              {status === "SUCCESS" ? (
-                <div className="py-12 text-center">
-                  <FiCheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4 animate-bounce" />
-                  <h4 className="text-lg font-bold text-foreground">Message Sent Successfully!</h4>
-                  <p className="text-sm text-muted-foreground">Thank you for reaching out. We will get back to you shortly.</p>
+            <div className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-xl shadow-primary/5">
+              <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">School Hours</h4>
+              <p className="text-slate-600 font-medium leading-relaxed">
+                <span className="text-slate-900 font-black">Pre-school & KG:</span> 7:30am – 1:00pm daily<br/>
+                <span className="text-slate-900 font-black">Elementary 1-6:</span> 7:30am – 3:00pm (Mon-Thu)
+              </p>
+            </div>
+          </div>
+
+          {/* Form Column */}
+          <div className="lg:col-span-7">
+            <div className="bg-white rounded-[3.5rem] p-8 md:p-14 shadow-2xl shadow-primary/5 border border-white">
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <InputField label="Parent's Name" name="user_name" placeholder="e.g. Mrs. Okonkwo" required />
+                <InputField label="Child's Name" name="child_name" placeholder="e.g. Chioma" />
+                <InputField label="Email Address" name="user_email" type="email" placeholder="parent@email.com" required />
+                <InputField label="Phone Number" name="user_phone" placeholder="+234 xxx xxx xxxx" required />
+                
+                <div className="md:col-span-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 block ml-2">Message</label>
+                  <textarea 
+                    name="message"
+                    required
+                    rows={5}
+                    placeholder="Tell us about your child's age, interests, or any questions you have..."
+                    className="w-full bg-slate-50 border border-slate-100 rounded-3xl p-6 text-slate-900 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:bg-white transition-all resize-none"
+                  />
                 </div>
-              ) : (
-                <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label className="text-sm font-semibold text-foreground mb-1 block">Parent's Name *</label>
-                      <input type="text" name="parentName" required value={formData.parentName} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="e.g. Mrs. Okonkwo" />
-                    </div>
-                    <div>
-                      <label className="text-sm font-semibold text-foreground mb-1 block">Child's Name *</label>
-                      <input type="text" name="childName" required value={formData.childName} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="e.g. Chioma" />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label className="text-sm font-semibold text-foreground mb-1 block">Email Address *</label>
-                      <input type="email" name="email" required value={formData.email} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="parent@email.com" />
-                    </div>
-                    <div>
-                      <label className="text-sm font-semibold text-foreground mb-1 block">Phone Number *</label>
-                      <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="+234 xxx xxx xxxx" />
-                    </div>
-                  </div>
-                  <div className="mb-6">
-                    <label className="text-sm font-semibold text-foreground mb-1 block">Message</label>
-                    <textarea name="message" rows={4} value={formData.message} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-border/50 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none" placeholder="Tell us about your child's age, interests, or any questions you have..." />
-                  </div>
-                  
-                  <BrainButton 
-                    variant="primary" 
-                    type="submit" 
-                    className="w-full sm:w-auto"
-                    disabled={status === "SENDING"}
-                  >
-                    {status === "SENDING" ? "Sending..." : "Send Message"} <FiSend />
-                  </BrainButton>
 
-                  {status === "ERROR" && (
-                    <p className="text-red-500 text-xs mt-3">Something went wrong. Please try again or call us directly.</p>
-                  )}
-                </>
-              )}
-            </motion.form>
-          </AnimatedSection>
+                <div className="md:col-span-2">
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className={`w-full py-7 rounded-[2rem] font-black uppercase text-[11px] tracking-[0.3em] transition-all flex items-center justify-center gap-3 shadow-xl ${
+                      status === 'success' ? 'bg-emerald-500 text-white' : 
+                      status === 'error' ? 'bg-rose-500 text-white' : 
+                      'bg-slate-900 text-white hover:bg-primary hover:-translate-y-1 shadow-slate-900/10 hover:shadow-primary/20'
+                    }`}
+                  >
+                    {status === 'idle' && <><Send size={16} /> Send Message</>}
+                    {status === 'sending' && "Processing..."}
+                    {status === 'success' && <><CheckCircle2 size={16} /> Message Sent!</>}
+                    {status === 'error' && <><AlertCircle size={16} /> Failed to Send</>}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+// Sub-components for cleaner code
+function ContactDetail({ icon, label, lines }: { icon: React.ReactNode, label: string, lines: string[] }) {
+  return (
+    <div className="flex gap-6 group">
+      <div className="w-14 h-14 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500">
+        {icon}
+      </div>
+      <div>
+        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">{label}</span>
+        {lines.map((line, i) => (
+          <p key={i} className="text-slate-900 font-bold text-base leading-tight">{line}</p>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function InputField({ label, ...props }: React.ComponentProps<'input'> & { label: string }) {
+  return (
+    <div>
+      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 block ml-2">{label}</label>
+      <input 
+        {...props}
+        className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-6 text-slate-900 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:bg-white transition-all"
+      />
+    </div>
   );
 }

@@ -9,38 +9,40 @@ interface BlogCardProps {
 export default function BlogCard({ post, onPostClick }: BlogCardProps) {
   return (
     <motion.div
-      whileHover={{ y: -6 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      whileHover={{ y: -10 }}
       onClick={() => onPostClick(post)}
-      className="bg-white/95 backdrop-blur-sm rounded-2xl overflow-hidden group cursor-pointer border border-white/60 hover:shadow-xl hover:shadow-primary/15 transition-all duration-300"
+      className="group cursor-pointer flex flex-col h-full bg-white rounded-[2.5rem] p-4 hover:shadow-2xl transition-all duration-500"
     >
-      <div className="relative w-full h-[250px] md:h-[320px] overflow-hidden">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] mb-6">
         <img
           src={post.coverImage}
           alt={post.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
-      </div>
-      <div className="p-5 flex flex-col gap-2 font-body">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">
-            {post.author}
+        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl flex flex-col items-center">
+          <span className="text-sm font-black text-slate-900 leading-none">
+            {new Date(post.publishedAt).getDate()}
           </span>
-          <span className="text-xs text-muted-foreground">
-            {new Date(post.publishedAt).toLocaleDateString()}
+          <span className="text-[9px] font-bold uppercase tracking-widest text-primary">
+            {new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short' })}
           </span>
         </div>
-        <h3 className={`text-lg md:text-2xl font-heading font-bold ${post.color || "text-foreground"} group-hover:text-primary transition-colors duration-300 leading-tight`}>
+      </div>
+
+      <div className="flex flex-col flex-grow px-2">
+        <span className="text-[10px] font-black uppercase tracking-widest text-primary/60 mb-2">
+          {post.author}
+        </span>
+        <h3 className="text-xl font-heading font-black text-slate-900 leading-tight mb-3 group-hover:text-primary transition-colors">
           {post.title}
         </h3>
-        <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+        <p className="text-sm text-slate-500 font-body line-clamp-2 mb-6">
           {post.excerpt}
         </p>
-        <button className="text-primary font-semibold text-sm hover:opacity-80 transition inline-flex items-center gap-1 group-hover:gap-2 duration-300 mt-1 w-fit">
-          <span>Read Article</span>
-          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
-        </button>
+        <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
+          <span className="text-[11px] font-black uppercase tracking-widest text-slate-900">Read Entry</span>
+          <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
+        </div>
       </div>
     </motion.div>
   );

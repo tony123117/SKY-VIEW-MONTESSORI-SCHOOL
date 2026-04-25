@@ -1,96 +1,64 @@
 import ProgramCard from "./ProgramCard";
 import programbg from "@/assets/programbg.png";
-import rock from "@/assets/rock.png";
 import { AnimatedSection } from "./AnimatedSection";
 
 export default function ProgramsSection() {
   const programs = [
-    {
-      title: "Pre-School",
-      age: "Ages 1½ – 2",
-      Grade: "Pre-School",
-      description: "Here, curiosity is encouraged and learning feels like play. Children are introduced to early learning concepts through fun exploration, guided activities, and sensory discovery.",
-      cta: "Enroll now",
-    },
-    {
-      title: "Nursery 1–3",
-      age: "Ages 2½ – 5",
-      Grade: "Nursery 1–3",
-      description: "Our nursery programme blends structure with creativity. Pupils are introduced to key subjects and hands-on activities designed to develop thinking skills and independence.",
-      cta: "Enroll now",
-    },
-    {
-      title: "Lower Grade",
-      age: "Ages 5½ – 8",
-      Grade: "Grade 1–3",
-      description: "At this stage, foundational academics take shape. Pupils develop literacy, numeracy, and critical thinking through structured lessons that make learning engaging and exciting.",
-      cta: "Enroll now",
-    },
-    {
-      title: "Higher Grade",
-      age: "Ages 8½ – 11",
-      Grade: "Grade 4–6",
-      description: "Learning deepens and character grows. Higher grade pupils are equipped with advanced skills, broader subject knowledge, and the confidence to excel beyond the classroom.",
-      cta: "Enroll now",
-    },
+    { title: "Pre-School", age: "Ages 1½ – 2", Grade: "Early Years", description: "Where curiosity is encouraged and learning feels like play. Children explore early concepts through sensory discovery.", cta: "Enroll now" },
+    { title: "Nursery 1–3", age: "Ages 2½ – 5", Grade: "Foundational", description: "Blending structure with creativity. Pupils develop key thinking skills and independence through hands-on activities.", cta: "Enroll now" },
+    { title: "Lower Grade", age: "Ages 5½ – 8", Grade: "Elementary", description: "Foundational academics take shape. Pupils develop literacy and numeracy through engaging, structured lessons.", cta: "Enroll now" },
+    { title: "Higher Grade", age: "Ages 8½ – 11", Grade: "Advanced", description: "Learning deepens and character grows. Pupils are equipped with advanced skills and the confidence to excel.", cta: "Enroll now" },
   ];
 
   return (
-    /* FIXED: Removed fixed h-[1150px]. Added h-auto and md:h-[1150px] for desktop only. 
-       Added pb-12 to ensure spacing at the bottom on mobile. */
-    <section className="relative section-white px-4 md:px-12 lg:px-24 pt-12 md:pt-24 pb-12 md:pb-0 font-body overflow-hidden h-auto lg:h-[1150px]">
-      {/* Decorations */}
-      <div className="absolute top-8 right-12 text-3xl animate-float opacity-25 pointer-events-none">📐</div>
-      <div className="absolute bottom-16 left-8 text-4xl animate-bounce-gentle opacity-20 pointer-events-none">🎯</div>
-
-      <div className="max-w-[1440px] mx-auto">
-        <img src={rock} alt="" className="absolute left-10 md:left-20 top-10 w-[100px] md:w-[156px] hidden md:block opacity-40" />
-
-        <AnimatedSection>
-          <div className="mb-10 md:mb-16 text-center">
-            <span className="text-xs font-semibold text-secondary bg-white/70 px-3 py-1 rounded-full inline-block mb-3">📚 Our Programs</span>
-            <h2 className="text-2xl md:text-4xl font-heading font-bold">
-              <span className="text-primary">Teaching Programs,</span>
-              <br />
-              <span className="text-foreground">Designed For Every Age.</span>
-            </h2>
-          </div>
+    <section className="bg-[#FFF0F3] py-24 px-4 md:px-12 lg:px-24 relative overflow-hidden h-auto">
+      <div className="max-w-[1600px] mx-auto relative z-10">
+        
+        <AnimatedSection className="text-center mb-24">
+          <span className="text-pink-600 font-black tracking-[0.3em] text-[10px] uppercase mb-4 block">
+            Academic Excellence
+          </span>
+          <h2 className="text-5xl md:text-7xl font-heading font-black text-slate-900 leading-tight tracking-tighter">
+            Teaching Programs, <br />
+            <span className="text-pink-500 italic font-light">Designed for Every Age.</span>
+          </h2>
         </AnimatedSection>
 
-        {/* Mobile/Tablet: proper grid layout - FIXED: Removed gap-5 and added better stacking behavior */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-6 lg:hidden">
-          {programs.map((prog, i) => (
-            <AnimatedSection key={prog.title} delay={0.1 * i}>
-              <ProgramCard {...prog} />
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 xl:gap-16">
+          
+          {/* Left Column */}
+          <div className="flex flex-col gap-10 w-full lg:w-[30%] items-center lg:items-start">
+            <AnimatedSection delay={0.1}>
+              <ProgramCard {...programs[0]} index={0} />
             </AnimatedSection>
-          ))}
-        </div>
-
-        {/* Desktop: absolute positioned layout with center image */}
-        <div className="relative h-[700px] hidden lg:block">
-          <AnimatedSection className="absolute left-40 -top-[60px]" delay={0.1}>
-            <ProgramCard {...programs[0]} />
-          </AnimatedSection>
-
-          <AnimatedSection className="absolute right-0 top-20 text-right" delay={0.2}>
-            <ProgramCard {...programs[1]} />
-          </AnimatedSection>
-
-          <AnimatedSection className="absolute left-2 bottom-[108px]" delay={0.3}>
-            <ProgramCard {...programs[2]} />
-          </AnimatedSection>
-
-          <AnimatedSection className="absolute right-40 -bottom-[120px] z-10" delay={0.4}>
-            <ProgramCard {...programs[3]} />
-          </AnimatedSection>
-
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <img
-              src={programbg}
-              alt="Happy students learning"
-              className="rounded-full object-cover w-[648px] h-[630px] shadow-2xl ring-4 ring-white/30"
-            />
+            <AnimatedSection delay={0.3}>
+              <ProgramCard {...programs[2]} index={2} />
+            </AnimatedSection>
           </div>
+
+          {/* MASSIVE WIDER CENTER IMAGE */}
+          <div className="w-full lg:w-[40%] flex justify-center order-first lg:order-none">
+            <div className="relative group w-full flex justify-center">
+              <div className="absolute inset-0 bg-white rounded-full blur-[100px] opacity-40" />
+              <img
+                src={programbg}
+                alt="Students"
+                // FIXED: Increased width to 800px-900px range for laptop
+                className="relative rounded-full object-cover w-[320px] h-[320px] md:w-[550px] md:h-[550px] lg:w-[650px] lg:h-[650px] xl:w-[850px] xl:h-[800px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] border-[12px] md:border-[20px] border-white transition-all duration-1000 group-hover:scale-105"
+              />
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div className="flex flex-col gap-10 w-full lg:w-[30%] items-center lg:items-end">
+            <AnimatedSection delay={0.2}>
+              <ProgramCard {...programs[1]} index={1} />
+            </AnimatedSection>
+            <AnimatedSection delay={0.4}>
+              <ProgramCard {...programs[3]} index={3} />
+            </AnimatedSection>
+          </div>
+
         </div>
       </div>
     </section>

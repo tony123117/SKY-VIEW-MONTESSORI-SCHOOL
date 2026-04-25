@@ -3,48 +3,71 @@ import { motion } from "framer-motion";
 import { FiStar, FiHeart, FiAward, FiShield, FiZap, FiSun } from "react-icons/fi";
 
 const values = [
-  { letter: "B", word: "Bravery", icon: <FiShield className="w-5 h-5" />, description: "Courage to try new things and stand up for what is right.", color: "bg-primary" },
-  { letter: "C", word: "Creativity", icon: <FiZap className="w-5 h-5" />, description: "Thinking outside the box and expressing ideas freely.", color: "bg-secondary" },
-  { letter: "H", word: "Honour", icon: <FiAward className="w-5 h-5" />, description: "Respect for self, others, and the learning community.", color: "bg-accent" },
-  { letter: "I", word: "Ingenuity", icon: <FiStar className="w-5 h-5" />, description: "Resourcefulness and clever problem-solving skills.", color: "bg-primary" },
-  { letter: "L", word: "Love", icon: <FiHeart className="w-5 h-5" />, description: "Compassion, kindness, and care for one another.", color: "bg-secondary" },
-  { letter: "D", word: "Discipline", icon: <FiSun className="w-5 h-5" />, description: "Self-control, focus, and commitment to excellence.", color: "bg-accent" },
+  { letter: "B", word: "Bravery", icon: <FiShield />, description: "Courage to try new things and stand up for what is right.", color: "text-rose-600", bg: "bg-rose-50/30", size: "lg:col-span-2" },
+  { letter: "C", word: "Creativity", icon: <FiZap />, description: "Thinking outside the box and expressing ideas freely.", color: "text-blue-600", bg: "bg-blue-50/30", size: "lg:col-span-1" },
+  { letter: "H", word: "Honour", icon: <FiAward />, description: "Respect for self, others, and the learning community.", color: "text-amber-600", bg: "bg-amber-50/30", size: "lg:col-span-1" },
+  { letter: "I", word: "Ingenuity", icon: <FiStar />, description: "Resourcefulness and clever problem-solving skills.", color: "text-cyan-600", bg: "bg-cyan-50/30", size: "lg:col-span-2" },
+  { letter: "L", word: "Love", icon: <FiHeart />, description: "Compassion, kindness, and care for one another.", color: "text-pink-600", bg: "bg-pink-50/30", size: "lg:col-span-1" },
+  { letter: "D", word: "Discipline", icon: <FiSun />, description: "Self-control, focus, and commitment to excellence.", color: "text-indigo-600", bg: "bg-indigo-50/30", size: "lg:col-span-2" },
 ];
 
 export function CoreValuesSection() {
   return (
-    <section id="about" className="section-blue-soft px-4 md:px-12 lg:px-24 py-12 md:py-24 font-body relative overflow-hidden">
-      <div className="absolute top-10 right-10 text-4xl animate-float opacity-25 pointer-events-none">⭐</div>
-      <div className="absolute bottom-20 left-10 text-3xl animate-float-slow opacity-25 pointer-events-none">🌈</div>
-      <div className="absolute top-1/2 right-20 text-2xl animate-bounce-gentle opacity-15 pointer-events-none">✏️</div>
+    <section className="bg-[#FFF5F7] py-24 md:py-32 px-6 lg:px-24 relative overflow-hidden">
+      {/* Background Micro-Detailing */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-white rounded-full blur-[120px] opacity-60" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-pink-100/40 rounded-full blur-[120px] opacity-60" />
+      </div>
 
-      <div className="max-w-[1400px] mx-auto">
-        <AnimatedSection>
-          <div className="text-center mb-12">
-            <span className="text-xs font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full inline-block mb-3">🏅 BCHILD Values</span>
-            <h2 className="text-2xl md:text-[40px] font-heading font-bold text-foreground">Our Core Values</h2>
-            <p className="mt-4 text-foreground/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-              Our core values distinguish our students. They form the acronym <strong className="text-primary">BCHILD</strong> — the qualities we nurture in every Brain Child pupil.
+      <div className="max-w-[1400px] mx-auto relative z-10">
+        <AnimatedSection className="mb-24">
+          <div className="flex flex-col items-center text-center">
+            <span className="text-pink-600 font-black tracking-[0.5em] text-[10px] uppercase mb-6 bg-white px-4 py-1.5 rounded-full shadow-sm border border-pink-50">
+              The BCHILD Creed
+            </span>
+            <h2 className="text-5xl md:text-8xl font-heading font-black text-slate-900 leading-none tracking-tighter mb-8">
+              Core <span className="text-pink-500 italic font-light">Values.</span>
+            </h2>
+            <p className="max-w-2xl text-slate-500 text-lg md:text-xl font-medium leading-relaxed">
+              We define our identity through six pillars that prepare every Brain Child pupil for a life of purpose.
             </p>
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Premium Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[320px]">
           {values.map((v, i) => (
-            <AnimatedSection key={v.letter} delay={0.08 * i}>
+            <AnimatedSection key={v.letter} delay={0.1 * i} className={`${v.size}`}>
               <motion.div
-                whileHover={{ y: -6, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-white/95 backdrop-blur-sm border border-white/60 rounded-2xl p-6 shadow-md group cursor-pointer hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 relative"
+                whileHover={{ y: -8 }}
+                className="group relative h-full w-full bg-white/70 backdrop-blur-xl border border-white rounded-none p-10 flex flex-col justify-between transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(255,182,193,0.35)] overflow-hidden"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className={`w-12 h-12 rounded-2xl ${v.color} text-white flex items-center justify-center font-heading font-bold text-xl shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                    {v.letter}
+                {/* Large Background Letter Watermark */}
+                <span className={`absolute -right-4 -bottom-10 text-[180px] font-black opacity-[0.03] group-hover:opacity-[0.07] transition-all duration-700 pointer-events-none ${v.color}`}>
+                  {v.letter}
+                </span>
+
+                <div className="relative z-10">
+                  <div className={`w-14 h-14 ${v.bg} flex items-center justify-center rounded-none mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                    <div className={`${v.color} text-2xl`}>{v.icon}</div>
                   </div>
-                  <div className="text-accent group-hover:scale-110 transition-transform">{v.icon}</div>
+                  
+                  <h3 className="text-3xl font-heading font-black text-slate-900 tracking-tighter mb-4 group-hover:text-pink-600 transition-colors">
+                    {v.word}
+                  </h3>
+                  <p className="text-slate-500 text-base leading-relaxed max-w-[280px] font-medium group-hover:text-slate-900 transition-colors">
+                    {v.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-heading font-bold text-foreground group-hover:text-primary transition-colors duration-300">{v.word}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">{v.description}</p>
+
+                {/* Bottom Detail */}
+                <div className="relative z-10 flex items-center gap-4">
+                  <div className={`h-[2px] w-8 ${v.color.replace('text', 'bg')} group-hover:w-16 transition-all duration-500`} />
+                  <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${v.color}`}>
+                    0{i + 1}
+                  </span>
+                </div>
               </motion.div>
             </AnimatedSection>
           ))}
