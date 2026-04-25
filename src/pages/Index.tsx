@@ -7,7 +7,7 @@ import { FacilitiesSection } from "@/components/brainchild/FacilitiesSection";
 import { CurriculumSection } from "@/components/brainchild/CurriculumSection";
 import { BlogSection } from "@/components/brainchild/BlogSection";
 import { ParentSection } from "@/components/brainchild/ParentSection";
-import { ContactSection } from "@/components/brainchild/ContactSection";
+import ContactSection from "@/components/brainchild/ContactSection";
 import { Footer } from "@/components/brainchild/Footer";
 import { StatsSection } from "@/components/brainchild/StatsSection";
 

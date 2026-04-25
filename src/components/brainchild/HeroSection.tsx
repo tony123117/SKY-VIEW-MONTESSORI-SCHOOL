@@ -1,66 +1,110 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // Added this to fix the Tour button
 import { MdOutlineArrowUpward, MdFormatQuote } from "react-icons/md";
 import BrainButton from "./BrainButton";
 import { HeroCarousel } from "./HeroCarousel";
 import { FloatingIcons } from "./FloatingIcons";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import principalImg from "@/assets/ijeoma.jpeg";
 
+// 1. Define the content for each slide
+const slideContent = [
+  {
+    title: "Unlock a More",
+    highlight: "Thoughtful Way to Learn.",
+    description: "We focus on more than academics. Our approach blends discipline, curiosity, and care to prepare students for lifelong learning.",
+  },
+  {
+    title: "Nurturing Every",
+    highlight: "Child's Unique Potential.",
+    description: "Our world-class curriculum is designed to spark curiosity and build character in a safe, loving environment.",
+  },
+  {
+    title: "Building Leaders",
+    highlight: "For a Global Future.",
+    description: "Empowering students with the critical thinking skills and moral integrity needed to excel anywhere in the world.",
+  },
+];
+
 export function HeroSection() {
+  const [index, setIndex] = useState(0);
+
+  // 2. Synchronize text change with the carousel timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % slideContent.length);
+    }, 5000); // 5000ms = 5 seconds
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="relative font-heading">
       
       {/* 1. FULL SCREEN CINEMATIC HERO */}
       <section className="relative h-[90vh] md:h-screen w-full flex items-center justify-center overflow-hidden">
         
-        {/* CAROUSEL AS FIXED BACKGROUND */}
+        {/* CAROUSEL BACKGROUND */}
         <div className="absolute inset-0 z-0">
           <HeroCarousel />
-          {/* THE DARK OVERLAY - Makes the carousel darker so white text pops */}
           <div className="absolute inset-0 bg-black/50 z-10" />
         </div>
 
-        {/* FLOATING DECORATIONS */}
+        {/* FLOATING DECORATIONS - pointer-events-none prevents blocking button clicks */}
         <div className="absolute inset-0 z-20 pointer-events-none">
           <FloatingIcons />
         </div>
 
-        {/* TEXT CONTENT CENTERED */}
+        {/* TEXT CONTENT */}
         <div className="relative z-30 text-center px-4 max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block bg-white/10 backdrop-blur-md text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-full mb-6 border border-white/20 uppercase">
-              🎓 Enrolment Open for 2026/2027 Session
-            </span>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={index} 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+            >
+              <span className="inline-block bg-white/10 backdrop-blur-md text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-full mb-6 border border-white/20 uppercase tracking-widest">
+                🎓 Enrolment Open for 2026/2027 Session
+              </span>
 
-            <h1 className="text-white text-4xl md:text-6xl lg:text-8xl font-bold leading-tight mb-6">
-              Unlock a More <br />
-              <span className="text-white/80 font-light">Thoughtful Way to Learn.</span>
-            </h1>
+              <h1 className="text-white text-4xl md:text-6xl lg:text-8xl font-bold leading-tight mb-6">
+                {slideContent[index].title} <br />
+                <span className="text-white/80 font-light italic">
+                  {slideContent[index].highlight}
+                </span>
+              </h1>
 
-            <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10">
-              We focus on more than academics. Our approach blends discipline,
-              curiosity, and care to prepare students for lifelong learning.
-            </p>
+              <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                {slideContent[index].description}
+              </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
-              <div className="relative group">
-                <BrainButton variant="primary" className="bg-white text-black border-none px-8 py-4 font-bold">
-                  <span className="flex items-center gap-2">
-                    Enroll my child <MdOutlineArrowUpward />
-                  </span>
-                </BrainButton>
-                <a href="https://portal.brainchildintschools.com" target="_blank" className="absolute inset-0 z-10" />
+              <div className="flex flex-wrap justify-center gap-4">
+                {/* Enroll Button - Wrapped in relative div to ensure the ghost link works */}
+                <div className="relative group">
+                  <BrainButton variant="primary" className="bg-white text-black border-none px-8 py-4 font-bold hover:bg-blue-500 hover:text-white transition-colors duration-300">
+                    <span className="flex items-center gap-2">
+                      Enroll my child <MdOutlineArrowUpward />
+                    </span>
+                  </BrainButton>
+                  <a 
+                    href="https://portal.brainchildintschools.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 z-10 cursor-pointer" 
+                  />
+                </div>
+                
+                {/* Tour Button - Now correctly using Link */}
+                <Link to="/contact">
+                  <BrainButton variant="outline" className="border-white text-white px-8 py-4 backdrop-blur-sm hover:bg-white/10 transition-colors">
+                    Tour Our Campus ✨
+                  </BrainButton>
+                </Link>
               </div>
-              
-              <BrainButton variant="outline" className="border-white text-white px-8 py-4 backdrop-blur-sm">
-                Tour Our Campus ✨
-              </BrainButton>
-            </div>
-          </motion.div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
 
@@ -76,7 +120,6 @@ export function HeroSection() {
           >
             {/* Principal Photo */}
             <div className="relative shrink-0">
-               {/* Playful background frame */}
                <div className="absolute inset-0 bg-blue-600/10 rounded-[3rem] rotate-3 scale-105" />
                <div className="relative w-64 h-80 md:w-80 md:h-[480px] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
                  <img 
@@ -85,7 +128,6 @@ export function HeroSection() {
                    className="w-full h-full object-cover" 
                  />
                </div>
-               {/* Decoration Seal */}
                <div className="absolute -bottom-4 -right-4 bg-yellow-400 text-white p-4 rounded-full shadow-lg">
                  ✨
                </div>
@@ -94,7 +136,7 @@ export function HeroSection() {
             {/* Speech Text */}
             <div className="flex-1">
               <div className="relative">
-                <MdFormatQuote className="text-7xl text-primary/10 absolute -top-10 -left-8" />
+                <MdFormatQuote className="text-7xl text-blue-500/10 absolute -top-10 -left-8" />
                 <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-8">
                   Welcome to a Place Where <span className="text-blue-600">Curiosity</span> Meets <span className="text-pink-500">Character</span>.
                 </h2>

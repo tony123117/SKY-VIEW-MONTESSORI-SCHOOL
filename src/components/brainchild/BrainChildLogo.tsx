@@ -34,7 +34,7 @@ const NavLogo = () => {
         ))}
       </div>
 
-      {/* Int'l School, Enugu - Micro Version */}
+      {/* International School, Enugu - Micro Version */}
       <p 
         className="text-[8px] uppercase font-black tracking-[0.1em] text-[#1E3A8A] mt-[-2px]"
         style={{ 

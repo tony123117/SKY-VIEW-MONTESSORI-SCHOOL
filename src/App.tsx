@@ -8,6 +8,9 @@ import NotFound from "./pages/NotFound.tsx";
 import BlogPage from "./pages/BlogPage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import AdmissionsPage from "./pages/AdmissionsPage.tsx";
+import ProgramsPage from "./pages/ProgramsPage.tsx";
+import ContactPage from "./pages/ContactPage.tsx";
+import PortalPage from "./pages/PortalPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,9 +22,12 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/blog" element={<BlogPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/programs" element={<ProgramsPage />} />
           <Route path="/admissions" element={<AdmissionsPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/portal" element={<PortalPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

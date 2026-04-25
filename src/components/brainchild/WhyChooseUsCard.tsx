@@ -20,7 +20,7 @@ export default function WhyChooseUsCard({
         <img 
           src={image} 
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-110"
         />
         {/* Floating Number Badge - Apple Style */}
         <div className="absolute top-6 left-6 z-10">

@@ -41,7 +41,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="bg-[#FFF5F7] py-24 px-6 md:px-12 lg:px-24 overflow-hidden relative">
+    <section id="contact" className="bg-[#FFF5F7] py-24 px-6 md:px-12 lg:px-24 overflow-hidden relative">
       <div className="max-w-[1400px] mx-auto relative z-10">
         
         {/* Header Section */}

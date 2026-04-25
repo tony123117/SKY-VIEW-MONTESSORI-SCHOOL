@@ -36,7 +36,7 @@ export function Footer() {
                 </div>
               </Link>
               <p className="text-sm leading-relaxed max-w-xs">
-                At Brainchild Int&apos;l, we focus on more than academics. We create a supportive space where children feel safe.
+                At Brainchild International Schools, we focus on more than academics. We create a supportive space where children feel safe and inspired to learn.
               </p>
               <div className="flex gap-3">
                 {[{ src: x, alt: "Twitter" }, { src: insta, alt: "Instagram" }, { src: facebook, alt: "Facebook" }, { src: github, alt: "GitHub" }].map((icon) => (
@@ -51,15 +51,15 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2 w-fit">Quick Links</h4>
               <ul className="flex flex-col gap-2.5 text-white/50 text-sm">
-                <li onClick={scrollToTop} className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">Back to top</li>
-                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
+                <li onClick={scrollToTop} className="hover:text-[#4f78ed] cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">Back to top</li>
+                <li className="hover:text-[#4f78ed] cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
                   <Link to="/about">About us</Link>
                 </li>
-                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
-                  <a href="https://portal.brainchildintschools.com/enroll" target="_blank" rel="noopener noreferrer">Enrollment</a>
+                <li className="hover:text-[#4f78ed] cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
+                  <Link to="/programs">Programs</Link>
                 </li>
-                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
-                  <Link to="/admissions">Careers</Link>
+                <li className="hover:text-[#4f78ed] cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
+                  <Link to="/admissions">Admissions</Link>
                 </li>
               </ul>
             </div>
@@ -68,14 +68,14 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2 w-fit">Help</h4>
               <ul className="flex flex-col gap-2.5 text-white/50 text-sm">
-                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
-                  <Link to="/admissions">Support</Link>
+                <li className="hover:text-[#4f78ed] cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
+                  <Link to="/contact">Support</Link>
                 </li>
-                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
+                <li className="hover:text-[#4f78ed] cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
                   <Link to="/admissions">Admission Req.</Link>
                 </li>
-                <li className="hover:text-primary cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
-                  <Link to="/about">Terms</Link>
+                <li className="hover:text-[#4f78ed] cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
+                  <Link to="/contact">Contact</Link>
                 </li>
               </ul>
             </div>
@@ -84,14 +84,14 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2 w-fit">Resources</h4>
               <ul className="flex flex-col gap-2.5 text-white/50 text-sm">
-                <li className="hover:text-secondary cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
+                <li className="hover:text-[#4f78ed] cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
                   <Link to="/blog">Blog</Link>
                 </li>
-                <li className="hover:text-secondary cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
-                  <a href="https://portal.brainchildintschools.com" target="_blank" rel="noopener noreferrer">Staff Portal</a>
+                <li className="hover:text-[#4f78ed] cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
+                  <Link to="/portal">Student Portal</Link>
                 </li>
-                <li className="hover:text-secondary cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
-                  <Link to="/about">Meet Admin</Link>
+                <li className="hover:text-[#4f78ed] cursor-pointer transition-colors hover:translate-x-1 transform duration-200 w-fit">
+                  <Link to="/about">Our Story</Link>
                 </li>
               </ul>
             </div>
@@ -103,8 +103,8 @@ export function Footer() {
                 <li className="hover:text-primary transition-colors">
                   <a href="tel:+2347061175897" className="flex items-center gap-2">📞 +234 706 117 5897</a>
                 </li>
-                <li className="hover:text-secondary transition-colors break-all">
-                  <a href="mailto:info@brainchildintschools.com" className="flex items-center gap-2">✉️ info@brainchildintschools.com</a>
+                <li className="hover:text-[#4f78ed] transition-colors break-all">
+                  <a href="mailto:info@kaylaschool.com" className="flex items-center gap-2">✉️ info@kaylaschool.com</a>
                 </li>
                 <li className="text-xs leading-relaxed opacity-80 pt-2 border-t border-white/5">
                   📍 No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu
@@ -115,7 +115,7 @@ export function Footer() {
 
           {/* Bottom */}
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 pb-10 gap-4 border-t border-white/10 mt-16 text-xs opacity-60">
-            <p>Bravotechmedia © 2026, All Rights Reserved</p>
+            <p>Kayla School © 2026, All Rights Reserved</p>
             <div className="flex gap-6">
                <Link to="/about" className="hover:text-white transition-colors">Privacy</Link>
                <Link to="/about" className="hover:text-white transition-colors">Terms</Link>
