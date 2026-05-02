@@ -10,11 +10,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import creativeImg from "@/assets/creative.jpeg";
-import teachersImg from "@/assets/teachers.jpg";
-import enterImg from "@/assets/enter.jpg";
-import outsideImg from "@/assets/outside.jpg";
-import danceImg from "@/assets/dance.jpeg";
+import creativeImg from "@/assets/images/creative.jpeg";
+import teachersImg from "@/assets/images/teachers.jpeg";
+import enterImg from "@/assets/images/enter.jpg";
+import outsideImg from "@/assets/images/outside.jpg";
+import danceImg from "@/assets/images/dance.jpeg";
+
 
 const featuredTopics = [
   {
@@ -68,7 +69,7 @@ const posts = [
     id: "1",
     title: "Extra-Curricular Activities",
     excerpt: "Culinary, Public Speaking, Science and Mathematics, Arts and Crafts, Theatre/Drama, Dance, Swimming. Each child chooses two clubs to participate in every term, building diverse skills beyond the classroom.",
-    content: "At Brainchild International Schools, we believe education extends far beyond the classroom. Our extra-curricular programme offers a rich variety of clubs including Culinary Arts, Public Speaking, Science & Mathematics Club, Arts and Crafts, Theatre/Drama, Dance, and Swimming.\n\nEach child is encouraged to choose two clubs per term, allowing them to explore different interests and develop new talents. These activities build confidence, teamwork, and creativity — skills that serve children throughout their lives.\n\nOur trained instructors ensure every activity is age-appropriate, safe, and fun. Whether your child dreams of being on stage or loves experimenting in the kitchen, there's something for everyone at Brainchild.",
+    content: "At Brain Child International Schools, we believe education extends far beyond the classroom. Our extra-curricular programme offers a rich variety of clubs including Culinary Arts, Public Speaking, Science & Mathematics Club, Arts and Crafts, Theatre/Drama, Dance, and Swimming.\n\nEach child is encouraged to choose two clubs per term, allowing them to explore different interests and develop new talents. These activities build confidence, teamwork, and creativity — skills that serve children throughout their lives.\n\nOur trained instructors ensure every activity is age-appropriate, safe, and fun. Whether your child dreams of being on stage or loves experimenting in the kitchen, there's something for everyone at Brain Child.",
     image: enterImg,
     author: "Admin",
     date: "February 1, 2026",
@@ -78,7 +79,7 @@ const posts = [
     id: "2",
     title: "Punctuality & Attendance",
     excerpt: "School opens at 7:30am daily. The gate closes at 8:00am. Parents should call early for unavoidable delays.",
-    content: "Punctuality is a core value at Brainchild International Schools. We believe that arriving on time sets the tone for a productive and focused school day.\n\nSchool gates open at 7:30am and close promptly at 8:00am. Morning assembly begins immediately after, and late arrivals miss important announcements and bonding time with classmates.\n\nWe understand that occasional delays are unavoidable. In such cases, parents are kindly requested to call the school office before 7:45am to inform us. This helps us plan accordingly and avoids any embarrassment for the child at the gate.\n\nConsistent attendance is equally important. Regular attendance ensures children don't miss key lessons and stay connected with their peers. We track attendance carefully and work with parents to address any patterns of absence.",
+    content: "Punctuality is a core value at Brain Child Nursery and Primary School. We believe that arriving on time sets the tone for a productive and focused school day.\n\nSchool gates open at 7:30am and close promptly at 8:00am. Morning assembly begins immediately after, and late arrivals miss important announcements and bonding time with classmates.\n\nWe understand that occasional delays are unavoidable. In such cases, parents are kindly requested to call the school office before 7:45am to inform us. This helps us plan accordingly and avoids any embarrassment for the child at the gate.\n\nConsistent attendance is equally important. Regular attendance ensures children don't miss key lessons and stay connected with their peers. We track attendance carefully and work with parents to address any patterns of absence.",
     image: outsideImg,
     author: "Admin",
     date: "February 1, 2026",
@@ -88,7 +89,7 @@ const posts = [
     id: "3",
     title: "Home Lessons Policy",
     excerpt: "Teachers maintain professional relationships with parents. Private lessons require clearance from school management.",
-    content: "At Brainchild International Schools, we maintain strict professional boundaries between our teaching staff and parents to protect the integrity of our educational programme.\n\nWhile we understand that some parents may desire additional tutoring for their children, any private lessons involving our staff must receive prior clearance from school management. This policy exists to:\n\n• Prevent conflicts of interest in assessment and grading\n• Ensure teachers maintain their energy and focus for school hours\n• Protect both parents and teachers from misunderstandings\n• Maintain the quality and consistency of our curriculum delivery\n\nIf your child needs additional academic support, please speak with their class teacher or the academic coordinator. We offer in-school support programmes designed to help every child succeed.",
+    content: "At Brain Child Nursery and Primary School, we maintain strict professional boundaries between our teaching staff and parents to protect the integrity of our educational programme.\n\nWhile we understand that some parents may desire additional tutoring for their children, any private lessons involving our staff must receive prior clearance from school management. This policy exists to:\n\n• Prevent conflicts of interest in assessment and grading\n• Ensure teachers maintain their energy and focus for school hours\n• Protect both parents and teachers from misunderstandings\n• Maintain the quality and consistency of our curriculum delivery\n\nIf your child needs additional academic support, please speak with their class teacher or the academic coordinator. We offer in-school support programmes designed to help every child succeed.",
     image: creativeImg,
     author: "Admin",
     date: "February 1, 2026",
@@ -98,7 +99,7 @@ const posts = [
     id: "4",
     title: "Digital Literacy in Early Years",
     excerpt: "Equipping students with 21st-century skills through safe technology integration.",
-    content: "In today's rapidly evolving world, digital literacy is no longer optional — it's essential. At Brainchild International Schools, we integrate age-appropriate technology into our curriculum starting from the early years.\n\nOur approach to digital literacy includes:\n\n• Interactive learning apps that reinforce numeracy and literacy skills\n• Basic coding concepts introduced through fun, game-based platforms\n• Digital safety awareness — teaching children about responsible online behaviour\n• Creative projects using tablets and computers to express ideas\n\nOur computer lab is equipped with modern systems and internet access, allowing students to explore, create, and learn in a safe digital environment. Teachers are trained to guide children through technology use that enhances rather than replaces traditional learning methods.\n\nWe believe that when introduced thoughtfully, technology can be a powerful tool for fostering innovation and preparing children for the future.",
+    content: "In today's rapidly evolving world, digital literacy is no longer optional — it's essential. At Brain Child International Schools, we integrate age-appropriate technology into our curriculum starting from the early years.\n\nOur approach to digital literacy includes:\n\n• Interactive learning apps that reinforce numeracy and literacy skills\n• Basic coding concepts introduced through fun, game-based platforms\n• Digital safety awareness — teaching children about responsible online behaviour\n• Creative projects using tablets and computers to express ideas\n\nOur computer lab is equipped with modern systems and internet access, allowing students to explore, create, and learn in a safe digital environment. Teachers are trained to guide children through technology use that enhances rather than replaces traditional learning methods.\n\nWe believe that when introduced thoughtfully, technology can be a powerful tool for fostering innovation and preparing children for the future.",
     image: enterImg,
     author: "Admin",
     date: "February 15, 2026",
@@ -108,7 +109,7 @@ const posts = [
     id: "5",
     title: "Nutrition & Brain Development",
     excerpt: "A healthy body fuels a sharp mind. Our guidelines on balanced school meals and concentration.",
-    content: "Research consistently shows that good nutrition directly impacts a child's ability to learn, concentrate, and retain information. At Brainchild International Schools, we take nutrition seriously.\n\nOur school meal programme is designed with input from nutrition experts to ensure every meal is:\n\n• Balanced with proteins, carbohydrates, vitamins, and minerals\n• Fresh and locally sourced where possible\n• Free from excessive sugar and processed ingredients\n• Portioned appropriately for different age groups\n\nWe also educate parents on the importance of a healthy breakfast before school. Children who eat a nutritious breakfast show improved concentration, better problem-solving abilities, and more positive social interactions.\n\nOur school nurse monitors children's health and works with parents to address any dietary concerns or allergies. Together, we ensure every child has the fuel they need to thrive academically and physically.",
+    content: "Research consistently shows that good nutrition directly impacts a child's ability to learn, concentrate, and retain information. At Brain Child International Schools, we take nutrition seriously.\n\nOur school meal programme is designed with input from nutrition experts to ensure every meal is:\n\n• Balanced with proteins, carbohydrates, vitamins, and minerals\n• Fresh and locally sourced where possible\n• Free from excessive sugar and processed ingredients\n• Portioned appropriately for different age groups\n\nWe also educate parents on the importance of a healthy breakfast before school. Children who eat a nutritious breakfast show improved concentration, better problem-solving abilities, and more positive social interactions.\n\nOur school nurse monitors children's health and works with parents to address any dietary concerns or allergies. Together, we ensure every child has the fuel they need to thrive academically and physically.",
     image: teachersImg,
     author: "School Nurse",
     date: "March 5, 2026",
@@ -118,7 +119,7 @@ const posts = [
     id: "6",
     title: "The Power of Creative Play",
     excerpt: "Why we prioritize playground time and how it builds character and leadership.",
-    content: "At Brainchild International Schools, playtime isn't just a break from learning — it IS learning. Creative play is a fundamental part of our educational philosophy.\n\nThrough structured and free play, children develop:\n\n• Social skills — learning to share, negotiate, and cooperate\n• Physical development — building strength, coordination, and motor skills\n• Emotional intelligence — understanding feelings and developing empathy\n• Problem-solving abilities — figuring out challenges in real-time\n• Leadership qualities — taking initiative and guiding peers\n\nOur playground is designed with age-appropriate equipment that encourages exploration and physical activity. We also incorporate guided play sessions where teachers introduce games that reinforce classroom concepts.\n\nFrom building sandcastles that teach about shapes and structures to team sports that build resilience, every moment of play at Brainchild is an opportunity for growth.",
+    content: "At Brain Child International Schools, playtime isn't just a break from learning — it IS learning. Creative play is a fundamental part of our educational philosophy.\n\nThrough structured and free play, children develop:\n\n• Social skills — learning to share, negotiate, and cooperate\n• Physical development — building strength, coordination, and motor skills\n• Emotional intelligence — understanding feelings and developing empathy\n• Problem-solving abilities — figuring out challenges in real-time\n• Leadership qualities — taking initiative and guiding peers\n\nOur playground is designed with age-appropriate equipment that encourages exploration and physical activity. We also incorporate guided play sessions where teachers introduce games that reinforce classroom concepts.\n\nFrom building sandcastles that teach about shapes and structures to team sports that build resilience, every moment of play at Brain Child is an opportunity for growth.",
     image: danceImg,
     author: "Teacher",
     date: "March 20, 2026",
@@ -145,39 +146,11 @@ export default function BlogPage() {
             </h1>
             <p className="mt-4 text-white/85 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
               Thoughts, insights, and updates from our school community — shared to support parents,
-              inspire learning, and offer a closer look into life at Brainchild.
+              inspire learning, and offer a closer look into life at Brain Child.
             </p>
           </AnimatedSection>
         </div>
 
-        <section id="gallery" className="px-4 md:px-12 lg:px-24 py-10 md:py-16 bg-gradient-to-br from-[#ffe1ec] via-[#4f78ed]/10 to-[#303778]/20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-          <div className="max-w-[1400px] mx-auto relative z-10">
-            <div className="flex flex-col md:flex-row items-start justify-between gap-6 mb-10">
-              <div>
-                <span className="text-xs uppercase tracking-[0.35em] font-black text-[#303778] bg-[#303778]/10 px-3 py-1 rounded-full backdrop-blur-sm">
-                  #BCIS Gallery
-                </span>
-                <h2 className="mt-4 text-3xl md:text-4xl font-heading font-bold text-[#303778] drop-shadow-lg">
-                  Bright school moments from our learning family.
-                </h2>
-                <p className="mt-4 text-[#303778]/80 leading-relaxed text-sm md:text-base">
-                  Snapshots of joyful learning, teamwork, and adventure from Brainchild International Schools.
-                </p>
-              </div>
-              <Link to="/admissions" className="text-sm font-semibold text-[#4f78ed] hover:underline hover:text-[#303778] transition-colors">
-                Apply to join our community
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[creativeImg, teachersImg, enterImg, outsideImg, danceImg].map((image, index) => (
-                <div key={index} className="overflow-hidden rounded-[2rem] shadow-2xl border border-white/10 hover:scale-105 transition-all duration-300">
-                  <img src={image} alt={`Gallery ${index + 1}`} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         <section className="px-4 md:px-12 lg:px-24 py-10 md:py-16 bg-gradient-to-br from-[#4f78ed] via-[#303778] to-[#4f78ed] relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
@@ -243,7 +216,7 @@ export default function BlogPage() {
                     Discover the premium learning culture behind every post.
                   </h2>
                   <p className="mt-4 text-white/80 leading-relaxed text-sm md:text-base">
-                    Curated stories, thoughtful insights, and practical updates that show why Brainchild is more than a school — it's a distinguished learning community.
+                    Curated stories, thoughtful insights, and practical updates that show why Brain Child is more than a school — it's a distinguished learning community.
                   </p>
                 </div>
                 <Link to="/admissions" className="mt-4 md:mt-0">

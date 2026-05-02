@@ -11,6 +11,9 @@ import AdmissionsPage from "./pages/AdmissionsPage.tsx";
 import ProgramsPage from "./pages/ProgramsPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import PortalPage from "./pages/PortalPage.tsx";
+import GalleryPage from "./pages/GalleryPage.tsx";
+import { ScrollToTop } from "./components/ScrollToTop.tsx";
+import { WhatsAppWidget } from "./components/brainchild/WhatsAppWidget.tsx";
 
 const queryClient = new QueryClient();
 
@@ -20,11 +23,14 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
+        <WhatsAppWidget />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/programs" element={<ProgramsPage />} />
           <Route path="/admissions" element={<AdmissionsPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/portal" element={<PortalPage />} />

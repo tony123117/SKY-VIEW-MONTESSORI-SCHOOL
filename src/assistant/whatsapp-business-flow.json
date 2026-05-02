@@ -1,0 +1,82 @@
+{
+    "name": "whatsapp_business_flow_examples",
+    "description": "Example interactive messages and templates for WhatsApp Business API integration",
+    "templates": {
+        "main_menu": {
+            "type": "interactive_list",
+            "header": "Welcome to [SCHOOL_NAME]",
+            "body": "How can I help you today?",
+            "footer": "Reply with the number or tap an option.",
+            "sections": [
+                {
+                    "title": "Quick Actions",
+                    "rows": [
+                        {
+                            "id": "admissions",
+                            "title": "1. Admissions"
+                        },
+                        {
+                            "id": "fees",
+                            "title": "2. School Fees"
+                        },
+                        {
+                            "id": "calendar",
+                            "title": "3. Academic Calendar"
+                        }
+                    ]
+                },
+                {
+                    "title": "Support",
+                    "rows": [
+                        {
+                            "id": "contact",
+                            "title": "4. Contact School"
+                        },
+                        {
+                            "id": "speak",
+                            "title": "5. Speak to Admin"
+                        }
+                    ]
+                }
+            ]
+        },
+        "admissions_buttons": {
+            "type": "interactive_buttons",
+            "header": "Admissions",
+            "body": "Choose an action:",
+            "buttons": [
+                {
+                    "id": "apply",
+                    "title": "Apply Online"
+                },
+                {
+                    "id": "requirements",
+                    "title": "Requirements"
+                },
+                {
+                    "id": "tour",
+                    "title": "Book Campus Tour"
+                }
+            ]
+        },
+        "handoff_message": {
+            "type": "template",
+            "body": "I will connect you to a school admin. Please share your name and a short summary of the issue."
+        }
+    },
+    "mappings": {
+        "menu_choice_to_action": {
+            "admissions": "NAV:/admissions",
+            "fees": "NAV:/fees",
+            "calendar": "NAV:/calendar",
+            "contact": "NAV:/contact",
+            "speak": "HUMAN_HANDOFF"
+        },
+        "button_actions": {
+            "apply": "NAV:/admissions/apply",
+            "requirements": "NAV:/admissions/requirements",
+            "tour": "FLOW_TOUR_BOOKING"
+        }
+    },
+    "notes": "Replace [SCHOOL_NAME] and NAV:/ tokens with your frontend hooks or real URLs. Use the templates to construct WhatsApp Business API payloads (interactive messages)."
+}

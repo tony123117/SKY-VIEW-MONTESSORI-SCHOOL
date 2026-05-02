@@ -2,7 +2,7 @@ import icon1 from "@/assets/icons/icon1.png";
 import icon2 from "@/assets/icons/icon2.png";
 import icon3 from "@/assets/icons/icon3.png";
 import icon4 from "@/assets/icons/icon4.png";
-import arrow from "@/assets/arrow.svg";
+import arrow from "@/assets/images/arrow.svg";
 
 export function FloatingIcons() {
   return (

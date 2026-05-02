@@ -1,9 +1,10 @@
 import { AnimatedSection } from "./AnimatedSection";
 import { motion } from "framer-motion";
 // Import local images
-import computer from "@/assets/computer.jpeg";
-import classRoomImg from "@/assets/classImg.jpeg";
-import playgroundImg from "@/assets/outside.jpg";
+import computer from "@/assets/images/computer.jpeg";
+import classRoomImg from "@/assets/images/classImg.jpeg";
+import playgroundImg from "@/assets/images/outside.jpg";
+import  Music  from "@/assets/images/music.jpg";
 
 const facilities = [
   { 
@@ -39,7 +40,7 @@ const facilities = [
     description: "Inspiring performing and creative arts for budding artists. A variety of musical instruments for children to learn.", 
     emoji: "🎵", 
     color: "text-blue-500",
-    image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=800&auto=format&fit=crop" 
+    image: Music
   },
   { 
     title: "Playground", 

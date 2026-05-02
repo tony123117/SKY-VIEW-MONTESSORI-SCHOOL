@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Testimonial } from "@/types/testimonialcard";
 import { TestimonialCard } from "./TestimonialCard";
-import profile from "@/assets/images/profile.png";
-import line from "@/assets/line.svg";
+import parents1 from '@/assets/images/parents1.jpg'
+import parents2 from '@/assets/images/parents2.jpg'
+import parents3 from '@/assets/images/parents3.jpg'
+import parents4 from '@/assets/images/parents4.jpg'
+import line from "@/assets/images/line.svg";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { AnimatedSection } from "./AnimatedSection";
 
@@ -11,26 +14,26 @@ export function ParentSection() {
 
   const testimonials: Testimonial[] = [
     {
-      testimonial: "Brainchild has been a blessing for our family. My daughter looks forward to school every single day. The teachers truly care about each child's growth.",
-      profileImage: profile,
+      testimonial: "Brain Child Nursery and Primary School has been a blessing for our family. My daughter looks forward to school every single day. The teachers truly care about each child's growth.",
+      profileImage: parents1,
       name: "Mrs. Okonkwo",
       description: "Parent of a Primary 3 student",
     },
     {
-      testimonial: "The transformation in my son's confidence and reading skills has been remarkable. I'm so grateful we chose Brainchild International.",
-      profileImage: profile,
+      testimonial: "The transformation in my son's confidence and reading skills has been remarkable. I'm so grateful we chose Brain Child Nursery and Primary School International.",
+      profileImage: parents2,
       name: "Mr. Eze",
       description: "Parent of a Nursery 2 student",
     },
     {
-      testimonial: "Safe, nurturing, and academically excellent. Brainchild checks all the boxes for us. Our children are thriving here.",
-      profileImage: profile,
+      testimonial: "Safe, nurturing, and academically excellent. Brain Child Nursery and Primary School checks all the boxes for us. Our children are thriving here.",
+      profileImage: parents3,
       name: "Mrs. Adeyemi",
       description: "Parent of two students",
     },
     {
       testimonial: "The school's approach to character building alongside academics is exactly what we wanted. They genuinely prepare children for life.",
-      profileImage: profile,
+      profileImage: parents4,
       name: "Dr. Nnamdi",
       description: "Parent of a Primary 5 student",
     },

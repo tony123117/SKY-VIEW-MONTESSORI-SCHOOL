@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 30% 15%;
 
-    --primary: 338 82% 55%;
+    --primary: 205 85% 50%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 205 85% 50%;
@@ -38,7 +38,7 @@
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 330 85% 55%;
+    --sidebar-primary: 205 85% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 205 85% 50%;
     --sidebar-accent-foreground: 0 0% 100%;
@@ -83,7 +83,12 @@
     font-family: var(--font-body);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-heading);
   }
 
@@ -120,33 +125,58 @@
     background: linear-gradient(135deg, hsl(215 60% 14%) 0%, hsl(220 55% 10%) 100%);
   }
 
-  /* Hero gradient — vibrant but readable */
+  /* Hero gradient — blue variant for the site */
   .section-hero-pink {
-    background: linear-gradient(160deg, #FF7EB3 0%, #FF5BA1 40%, #FF8EC4 70%, #FFB3D9 100%);
+    background: linear-gradient(160deg, #60A5FA 0%, #3B82F6 40%, #2563EB 70%, #93C5FD 100%);
   }
 
-  /* School-themed decorative elements */
+  /* School-themed decorative elements (tuned to blue theme) */
   .school-pattern {
-    background-image: radial-gradient(circle at 20% 80%, rgba(255,182,217,0.15) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, rgba(137,212,255,0.15) 0%, transparent 50%);
+    background-image: radial-gradient(circle at 20% 80%, rgba(99, 179, 237, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
   }
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 @keyframes bounce-gentle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-3deg); }
-  75% { transform: rotate(3deg); }
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-3deg);
+  }
+
+  75% {
+    transform: rotate(3deg);
+  }
 }
 
 .animate-float {

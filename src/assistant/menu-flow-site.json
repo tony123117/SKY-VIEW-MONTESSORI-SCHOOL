@@ -1,0 +1,214 @@
+{
+    "assistantName": "Brain Child Assistant",
+    "phone": "+234 706 117 5897",
+    "routes": {
+        "home": "/",
+        "about": "/about",
+        "admissions": "/admissions",
+        "programs": "/programs",
+        "fees": "/admissions#fees",
+        "calendar": "/calendar",
+        "contact": "/contact",
+        "gallery": "/gallery",
+        "blog": "/blog",
+        "portal": "/portal"
+    },
+    "menu": [
+        {
+            "id": "admissions",
+            "title": "Admissions",
+            "nav": "/admissions"
+        },
+        {
+            "id": "fees",
+            "title": "School Fees",
+            "nav": "/admissions#fees"
+        },
+        {
+            "id": "calendar",
+            "title": "Academic Calendar",
+            "nav": "/calendar"
+        },
+        {
+            "id": "contact",
+            "title": "Contact School",
+            "nav": "/contact"
+        },
+        {
+            "id": "speak",
+            "title": "Speak to Admin",
+            "nav": "HUMAN_HANDOFF"
+        }
+    ],
+    "quickReplies": [
+        "Admissions",
+        "School Fees",
+        "Academic Calendar",
+        "Contact School"
+    ],
+    "intents": [
+        {
+            "id": "greeting",
+            "patterns": [
+                "^hi$",
+                "^hello$",
+                "^hey$",
+                "^info$",
+                "^help$"
+            ],
+            "action": "SHOW_MENU"
+        },
+        {
+            "id": "admissions",
+            "patterns": [
+                "apply",
+                "admiss",
+                "enrol",
+                "enroll",
+                "how to apply",
+                "how do i apply"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "/admissions"
+        },
+        {
+            "id": "programs",
+            "patterns": [
+                "program",
+                "curriculum",
+                "what do you offer",
+                "classes"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "/programs"
+        },
+        {
+            "id": "fees",
+            "patterns": [
+                "fee",
+                "fees",
+                "how much",
+                "cost",
+                "tuition",
+                "price"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "/admissions#fees"
+        },
+        {
+            "id": "calendar",
+            "patterns": [
+                "resump",
+                "resumption",
+                "calendar",
+                "term",
+                "when start",
+                "when does term start"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "/calendar"
+        },
+        {
+            "id": "contact",
+            "patterns": [
+                "contact",
+                "phone",
+                "email",
+                "address",
+                "where are you",
+                "location"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "/contact"
+        },
+        {
+            "id": "gallery",
+            "patterns": [
+                "gallery",
+                "photos",
+                "images",
+                "see campus"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "/gallery"
+        },
+        {
+            "id": "blog",
+            "patterns": [
+                "blog",
+                "news",
+                "article",
+                "update"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "/blog"
+        },
+        {
+            "id": "tour",
+            "patterns": [
+                "visit",
+                "tour",
+                "book visit",
+                "book a tour",
+                "see campus"
+            ],
+            "action": "FLOW_TOUR_BOOKING"
+        },
+        {
+            "id": "complaint",
+            "patterns": [
+                "complain",
+                "complaint",
+                "feedback",
+                "issue",
+                "problem"
+            ],
+            "action": "COLLECT_FEEDBACK"
+        },
+        {
+            "id": "handoff",
+            "patterns": [
+                "talk to admin",
+                "human",
+                "speak to admin",
+                "agent",
+                "representative"
+            ],
+            "action": "HUMAN_HANDOFF"
+        }
+    ],
+    "examples": {
+        "admissions": {
+            "directAnswer": "You can apply online.",
+            "details": [
+                "Fill the online application form",
+                "Upload birth certificate and previous results",
+                "Pay the application fee"
+            ],
+            "nextStepLabel": "Apply now",
+            "nextStepLink": "/admissions"
+        },
+        "fees": {
+            "directAnswer": "Fees vary by program and age group.",
+            "details": [
+                "Different rates for Nursery and Primary",
+                "Payment: online or at school office",
+                "Contact admissions for exact breakdown"
+            ],
+            "nextStepLabel": "View fee structure",
+            "nextStepLink": "/admissions#fees"
+        }
+    },
+    "responseTemplate": {
+        "format": "1) {{directAnswer}}\n\n2) Key Details:\n{{#each details}}• {{this}}\n{{/each}}\n3) Next Step: {{nextStepLabel}} {{nextStepLink}}",
+        "navTokenNote": "Replace NAV:/ tokens with client routing hooks if needed"
+    },
+    "humanHandoff": {
+        "template": "I’ll connect you to the school admin. Please share your name and a short summary of the issue.",
+        "notifyStaffEvent": "HANDOFF_REQUESTED"
+    },
+    "metadata": {
+        "createdBy": "assistant",
+        "createdAt": "2026-05-02T00:00:00Z"
+    }
+}

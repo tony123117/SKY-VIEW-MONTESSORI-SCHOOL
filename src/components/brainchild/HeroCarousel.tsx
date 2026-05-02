@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import heroImg from "@/assets/heroimage.png";
-import teachersImg from "@/assets/teachers.jpg";
-import studentsImg from "@/assets/students.jpg";
-import gradImg from "@/assets/grad.jpg";
 
-const images = [heroImg, teachersImg, studentsImg, gradImg];
+import AssemblyImg from '@/assets/images/assembly2.jpg'
+import teachersImg from "@/assets/images/teachers.jpeg";
+import studentsImg from "@/assets/images/assembly.jpg";
+import gradImg from "@/assets/images/grad.jpg";
+import kidsImg from "@/assets/images/kids.jpg";
+import outsideImg from "@/assets/images/outside.jpg";
+
+const images = [gradImg, AssemblyImg, teachersImg, studentsImg, kidsImg, outsideImg];
 
 export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
@@ -40,9 +43,8 @@ export function HeroCarousel() {
           <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              current === index ? "w-8 bg-white" : "w-2 bg-white/40"
-            }`}
+            className={`h-2 rounded-full transition-all duration-300 ${current === index ? "w-8 bg-white" : "w-2 bg-white/40"
+              }`}
           />
         ))}
       </div>

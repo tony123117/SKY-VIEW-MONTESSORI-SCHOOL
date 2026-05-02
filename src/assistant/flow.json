@@ -1,0 +1,170 @@
+{
+    "assistantName": "School Assistant",
+    "placeholders": {
+        "admissions": "[ADMISSIONS_URL]",
+        "fees": "[FEES_URL]",
+        "calendar": "[CALENDAR_URL]",
+        "contact": "[CONTACT_URL]",
+        "applyForm": "[ADMISSIONS_URL]/apply"
+    },
+    "menu": [
+        {
+            "id": "admissions",
+            "title": "Admissions",
+            "nav": "NAV:/admissions"
+        },
+        {
+            "id": "fees",
+            "title": "School Fees",
+            "nav": "NAV:/fees"
+        },
+        {
+            "id": "calendar",
+            "title": "Academic Calendar",
+            "nav": "NAV:/calendar"
+        },
+        {
+            "id": "contact",
+            "title": "Contact School",
+            "nav": "NAV:/contact"
+        },
+        {
+            "id": "speak",
+            "title": "Speak to Admin",
+            "nav": "HUMAN_HANDOFF"
+        }
+    ],
+    "intents": [
+        {
+            "id": "greeting",
+            "patterns": [
+                "^hi$",
+                "^hello$",
+                "^hey$",
+                "^info$",
+                "^help$"
+            ],
+            "action": "SHOW_MENU"
+        },
+        {
+            "id": "admissions",
+            "patterns": [
+                "apply",
+                "admiss",
+                "enrol",
+                "enroll",
+                "how to apply",
+                "how do i apply"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "admissions"
+        },
+        {
+            "id": "fees",
+            "patterns": [
+                "fee",
+                "fees",
+                "how much",
+                "cost",
+                "price",
+                "tuition"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "fees"
+        },
+        {
+            "id": "calendar",
+            "patterns": [
+                "resump",
+                "resumption",
+                "calendar",
+                "term",
+                "when start",
+                "when does term start",
+                "when resump"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "calendar"
+        },
+        {
+            "id": "contact",
+            "patterns": [
+                "contact",
+                "phone",
+                "email",
+                "address",
+                "where are you",
+                "location"
+            ],
+            "action": "SHOW_PAGE",
+            "target": "contact"
+        },
+        {
+            "id": "tour",
+            "patterns": [
+                "visit",
+                "tour",
+                "see campus",
+                "book visit"
+            ],
+            "action": "FLOW_TOUR_BOOKING"
+        },
+        {
+            "id": "complaint",
+            "patterns": [
+                "complain",
+                "complaint",
+                "feedback",
+                "issue",
+                "problem"
+            ],
+            "action": "COLLECT_FEEDBACK"
+        },
+        {
+            "id": "handoff",
+            "patterns": [
+                "talk to admin",
+                "human",
+                "speak to admin",
+                "agent",
+                "representative"
+            ],
+            "action": "HUMAN_HANDOFF"
+        }
+    ],
+    "examples": {
+        "admissions": {
+            "directAnswer": "You can apply online.",
+            "details": [
+                "Fill the online application form",
+                "Upload birth certificate and previous results",
+                "Pay the application fee"
+            ],
+            "nextStepLabel": "Apply now",
+            "nextStepLink": "[ADMISSIONS_URL]"
+        },
+        "fees": {
+            "directAnswer": "Fees vary by program and age group.",
+            "details": [
+                "Separate fees for Nursery, Lower Grade, Upper Grade",
+                "Payment options: online or at school office",
+                "Contact admissions for the exact breakdown"
+            ],
+            "nextStepLabel": "View fee structure",
+            "nextStepLink": "[FEES_URL]"
+        }
+    },
+    "responseTemplate": "{{directAnswer}}\n\nKey Details:\n{{#each details}}• {{this}}\n{{/each}}\n\nNext Step:\n👉 {{nextStepLabel}} {{nextStepLink}}\n\nYou might also want: {{suggestions}}",
+    "humanHandoffTriggers": [
+        "user_requests_human",
+        "escalation",
+        "sensitive_personal_data",
+        "repeated_unresolved_requests"
+    ],
+    "quickReplies": [
+        "Admissions",
+        "School Fees",
+        "Academic Calendar",
+        "Contact School"
+    ]
+}

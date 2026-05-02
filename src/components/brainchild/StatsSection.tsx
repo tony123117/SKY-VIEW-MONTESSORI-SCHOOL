@@ -85,7 +85,7 @@ export function StatsSection() {
           <div className="text-center mb-10">
             <span className="text-xs font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full inline-block mb-3">📊 Our Impact</span>
             <h2 className="text-2xl md:text-[40px] font-heading font-bold text-foreground">
-              Brainchild in Numbers
+              Brain Child Nursery and Primary School in Numbers
             </h2>
           </div>
         </AnimatedSection>

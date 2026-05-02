@@ -2,11 +2,11 @@ import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import BrainButton from "@/components/brainchild/BrainButton";
-import creativeImg from "@/assets/creative.jpeg";
-import teachersImg from "@/assets/teachers.jpg";
-import enterImg from "@/assets/enter.jpg";
-import outsideImg from "@/assets/outside.jpg";
-import danceImg from "@/assets/dance.jpeg";
+import creativeImg from "@/assets/images/creative.jpeg";
+import teachersImg from "@/assets/images/teachers.jpg";
+import enterImg from "@/assets/images/enter.jpg";
+import outsideImg from "@/assets/images/outside.jpg";
+import danceImg from "@/assets/images/dance.jpeg";
 import {
   Carousel,
   CarouselContent,

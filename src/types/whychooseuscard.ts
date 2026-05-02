@@ -4,4 +4,6 @@ export interface WhyChooseUsCardProps {
   description: string;
   color: string;
   image: string; // Add this line
+  category?: string;
+  onReadMore?: () => void;
 }

@@ -3,10 +3,10 @@ import { Navbar } from "@/components/brainchild/Navbar";
 import { Footer } from "@/components/brainchild/Footer";
 import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import ContactSection from "@/components/brainchild/ContactSection";
-import parentsImg from "@/assets/parents.jpg";
-import studentsImg from "@/assets/students.jpg";
-import classImg from "@/assets/class.jpg";
-import gradImg from "@/assets/grad.jpg";
+
+import img1 from "@/assets/images/544A7290.jpg.jpg";
+import img2 from "@/assets/images/544A7328.jpg.jpg";
+import img3 from "@/assets/images/544A7241.jpg.jpg";
 import {
   Carousel,
   CarouselContent,
@@ -17,17 +17,17 @@ import {
 
 const heroSlides = [
   {
-    image: parentsImg,
+    image: img1,
     title: "Join Our Family",
     subtitle: "Where every child belongs"
   },
   {
-    image: studentsImg,
+    image: img2,
     title: "Your Child's Future Starts Here",
     subtitle: "Excellence in early education"
   },
   {
-    image: classImg,
+    image: img3,
     title: "Personalized Learning Journey",
     subtitle: "Tailored to every child's needs"
   }
@@ -35,7 +35,7 @@ const heroSlides = [
 
 export default function AdmissionsPage() {
   const steps = [
-    { step: "01", title: "Enquiry & Tour", description: "Visit our campus or call us to learn more about Brainchild. Schedule a guided tour to see our facilities firsthand.", icon: "🏫" },
+    { step: "01", title: "Enquiry & Tour", description: "Visit our campus or call us to learn more about Brain Child. Schedule a guided tour to see our facilities firsthand.", icon: "🏫" },
     { step: "02", title: "Application Form", description: "Complete and submit the enrollment application form online via our parent portal or at the school office.", icon: "📝" },
     { step: "03", title: "Assessment", description: "Your child will participate in a brief, age-appropriate assessment to help us understand their learning level.", icon: "📋" },
     { step: "04", title: "Interview", description: "A brief meeting with the parents to discuss expectations, school policies, and your child's needs.", icon: "🤝" },
@@ -109,7 +109,7 @@ export default function AdmissionsPage() {
                   📋 Simple Process
                 </span>
                 <h2 className="text-3xl md:text-4xl font-heading font-bold text-[#303778]">
-                  Your Path to Joining Brainchild
+                  Your Path to Joining Brain Child
                 </h2>
                 <p className="mt-4 text-[#303778]/80 max-w-2xl mx-auto">
                   We've designed a straightforward admissions process to make joining our community as smooth as possible.

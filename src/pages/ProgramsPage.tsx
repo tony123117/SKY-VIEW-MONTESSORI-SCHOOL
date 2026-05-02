@@ -9,9 +9,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import kidsStudyingImg from "@/assets/students.jpg";
-import activitiesImg from "@/assets/class.jpg";
-import creativeImg from "@/assets/creative.jpeg";
+import kidsStudyingImg from "@/assets/images/students.jpg";
+import activitiesImg from "@/assets/images/class.jpg";
+import creativeImg from "@/assets/images/creative.jpeg";
 
 const programsImages = [kidsStudyingImg, activitiesImg, creativeImg];
 

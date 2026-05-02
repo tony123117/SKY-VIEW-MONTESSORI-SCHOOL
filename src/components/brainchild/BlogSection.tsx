@@ -5,22 +5,65 @@ import BlogGrid from "./BlogGrid";
 import { AnimatedSection } from "./AnimatedSection";
 import { BlogPost } from "@/types/blogs";
 
-import creativeImg from "@/assets/creative.jpeg"; 
-import teachersImg from "@/assets/teachers.jpg";
-import enterImg from "@/assets/enter.jpg";
-import outsideImg from "@/assets/outside.jpg";
-import danceImg from "@/assets/dance.jpeg";
+import teachersImg from "@/assets/images/teachers.jpeg";
+import enterImg from "@/assets/images/classImg.jpeg";
+import outsideImg from "@/assets/images/assembly.jpg";
+import curriculumImg from "@/assets/images/curiculum.jpg";
 
 export function BlogSection() {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
   const posts: BlogPost[] = [
-    { id: "1", title: "EXTRA-CURRICULAR ACTIVITIES", excerpt: "Culinary, Public Speaking, Science and Mathematics, Arts and Crafts, Theatre/Drama, Dance, swimming.", coverImage: enterImg, author: "Admins", publishedAt: "2026-02-01", slug: "extra-curricular-activities", link: "/blog" },
-    { id: "2", title: "PUNCTUALITY & ATTENDANCE", excerpt: "School opens at 7:30am daily. The gate closes at 8:00am.", coverImage: outsideImg, author: "Admin", publishedAt: "2026-02-01", slug: "punctuality-attendance", link: "/blog" },
-    { id: "3", title: "HOME LESSONS POLICY", excerpt: "Teachers maintain professional relationships with parents.", coverImage: creativeImg, author: "Admin", publishedAt: "2026-02-01", slug: "home-lessons-policy", link: "/blog" },
-    { id: "4", title: "DIGITAL LITERACY", excerpt: "Equipping students with 21st-century skills.", coverImage: enterImg, author: "Admin", publishedAt: "2026-02-15", slug: "digital-literacy", link: "/blog" },
-    { id: "5", title: "NUTRITION", excerpt: "A healthy body fuels a sharp mind.", coverImage: teachersImg, author: "Nurse", publishedAt: "2026-03-05", slug: "nutrition", link: "/blog" },
-    { id: "6", title: "CREATIVE PLAY", excerpt: "Learn how social interaction builds character.", coverImage: danceImg, author: "Teacher", publishedAt: "2026-03-20", slug: "creative-play", link: "/blog" },
+    {
+      id: "1",
+      title: "Extra-Curricular Activities",
+      excerpt: "From culinary arts to drama and swimming, our programs help children explore talents beyond the classroom.",
+      coverImage: enterImg,
+      author: "School Admin",
+      publishedAt: "2026-02-01",
+      slug: "extra-curricular-activities",
+      link: "/blog",
+    },
+    {
+      id: "2",
+      title: "Punctuality & Attendance",
+      excerpt: "Our school day begins at 7:30am, with gates closing at 8:00am to encourage discipline and structure.",
+      coverImage: outsideImg,
+      author: "School Admin",
+      publishedAt: "2026-02-01",
+      slug: "punctuality-attendance",
+      link: "/blog",
+    },
+    {
+      id: "3",
+      title: "Academic Excellence",
+      excerpt: "We combine strong academic foundations with modern teaching methods to help every child thrive.",
+      coverImage: curriculumImg,
+      author: "Academic Team",
+      publishedAt: "2026-02-10",
+      slug: "academic-excellence",
+      link: "/blog",
+    },
+    {
+      id: "4",
+      title: "Digital Literacy",
+      excerpt: "Preparing students with essential 21st-century technology skills in a guided learning environment.",
+      coverImage: enterImg,
+      author: "ICT Department",
+      publishedAt: "2026-02-15",
+      slug: "digital-literacy",
+      link: "/blog",
+    },
+    {
+      id: "5",
+      title: "Nutrition & Wellbeing",
+      excerpt: "A balanced diet supports focus, growth, and overall student wellbeing in and out of school.",
+      coverImage: teachersImg,
+      author: "School Nurse",
+      publishedAt: "2026-03-05",
+      slug: "nutrition",
+      link: "/blog",
+    },
   ];
 
   return (

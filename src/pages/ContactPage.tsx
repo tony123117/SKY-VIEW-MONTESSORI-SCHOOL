@@ -9,11 +9,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import schoolBuildingImg from "@/assets/outside.jpg";
-import receptionImg from "@/assets/class.jpg";
-import teachersImg from "@/assets/teachers.jpg";
 
-const contactImages = [schoolBuildingImg, receptionImg, teachersImg];
+import img1 from "@/assets/images/544A7353.jpg.jpg";
+import img2 from "@/assets/images/544A7364.jpg.jpg";
+import img3 from "@/assets/images/544A7290.jpg.jpg";
+
+const contactImages = [img1, img2, img3];
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -52,7 +53,7 @@ export default function ContactPage() {
                 Contact Us
               </span>
               <h1 className="text-3xl md:text-5xl font-heading font-bold text-[#303778] drop-shadow-lg mb-4">
-                Get in Touch with Kayla School
+                Get in Touch with Brain Child
               </h1>
               <p className="text-[#303778]/80 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
                 We're here to answer your questions and help you connect with our community.

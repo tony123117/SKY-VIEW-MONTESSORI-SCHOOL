@@ -19,7 +19,7 @@ const Index = () => {
       <div id="about"><WhyChooseUs /></div>
       <div id="programs"><ProgramsSection /></div>
       <StatsSection />
-      <div id="admissions"><FacilitiesSection /></div>
+      <div id="facilities"><FacilitiesSection /></div>
     
       <div id="blog"><BlogSection /></div>
       <ParentSection />
