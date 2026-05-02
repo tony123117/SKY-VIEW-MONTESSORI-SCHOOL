@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import ToniaImg from "@/assets/images/mrs tonia.jpeg";
-import OgechiImg from "@/assets/images/Ogechis.jpg";
+import OgechiImg from "@/assets/images/ogechis.jpg";
 import principalImg from "@/assets/images/BrainChildDirector.jpeg";
 import francisImg from '@/assets/images/Francis.jpeg'
 
