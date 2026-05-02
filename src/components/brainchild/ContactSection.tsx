@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function ContactSection() {
   // Status states: idle, sending, success, error
@@ -11,6 +12,7 @@ export default function ContactSection() {
     setStatus('sending');
 
     const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
     const body = {
       user_name: String(formData.get('user_name') || ''),
       user_email: String(formData.get('user_email') || ''),
@@ -20,25 +22,24 @@ export default function ContactSection() {
     };
 
     try {
-      const response = await fetch(import.meta.env.VITE_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body,
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus('success');
-        (e.target as HTMLFormElement).reset();
-        setTimeout(() => setStatus('idle'), 5000);
-      } else {
-        console.error(data);
+      if (error || (data as any)?.error) {
+        console.error('Contact form error:', error || data);
         setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+        return;
       }
+
+      setStatus('success');
+      form.reset();
+      setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
       console.error("Submission error:", error);
       setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
     }
   };
 
