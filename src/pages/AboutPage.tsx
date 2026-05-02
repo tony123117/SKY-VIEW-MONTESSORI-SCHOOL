@@ -3,7 +3,7 @@ import { Footer } from "@/components/brainchild/Footer";
 import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import francis from "@/assets/images/francis.jpeg";
+import francis from "@/assets/images/Francis.jpeg";
 import tonia from "@/assets/images/mrs tonia.jpeg";
 import ogechi from "@/assets/images/ogechis.jpg";
 import director from '@/assets/images/BrainChildDirector.jpeg';
