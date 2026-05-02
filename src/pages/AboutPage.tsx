@@ -13,6 +13,7 @@ import creativeImg from "@/assets/images/creative.jpeg";
 import teachersImg from "@/assets/images/teachers.jpeg";
 import enterImg from "@/assets/images/enter.jpg";
 import outsideImg from "@/assets/images/outside.jpg";
+import curiculum from '@/assets/images/curiculum.jpg'
 
 import img1 from "@/assets/images/544A7170.jpg.jpg";
 import img2 from "@/assets/images/544A7178.jpg.jpg";
@@ -40,6 +41,11 @@ const heroSlides = [
   },
   {
     image: enterImg,
+    title: "Community & Growth",
+    subtitle: "Where learning meets character"
+  },
+  {
+    image: curiculum,
     title: "Community & Growth",
     subtitle: "Where learning meets character"
   }
