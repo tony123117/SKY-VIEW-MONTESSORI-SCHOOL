@@ -15,7 +15,7 @@ import enterImg from "@/assets/images/enter.jpg";
 import outsideImg from "@/assets/images/outside.jpg";
 import curiculum from '@/assets/images/curiculum.jpg'
 
-import img1 from "@/assets/images/544A7170.jpg.jpg";
+import img1 from "@/assets/images/activities.jpg";
 import img2 from "@/assets/images/544A7178.jpg.jpg";
 import img3 from "@/assets/images/544A7188.jpg.jpg";
 import img4 from "@/assets/images/544A7218.jpg.jpg";

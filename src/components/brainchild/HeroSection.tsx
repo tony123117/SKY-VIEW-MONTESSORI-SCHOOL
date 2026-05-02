@@ -1,118 +1,153 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Added this to fix the Tour button
-import { MdOutlineArrowUpward, MdFormatQuote } from "react-icons/md";
+import { MdOutlineArrowUpward } from "react-icons/md";
 import BrainButton from "./BrainButton";
 import { HeroCarousel } from "./HeroCarousel";
 import { FloatingIcons } from "./FloatingIcons";
 import { motion, AnimatePresence } from "framer-motion";
-import TeamSection from './TeamSection'
+import TeamSection from "./TeamSection";
 
-
-
-// 1. Define the content for each slide
 const slideContent = [
   {
-    title: "BRAINCHILD NURSERY AND PRIMARY SCHOOL",
+    title: "BRAIN CHILD",
     highlight: "Thoughtful Way to Learn.",
-    description: "We focus on more than academics. Our approach blends discipline, curiosity, and care to prepare students for lifelong learning.",
   },
   {
-    title: "BRAINCHILD NURSERY AND PRIMARY SCHOOL",
+    title: "BRAIN CHILD",
     highlight: "Child's Unique Potential.",
-    description: "Our world-class curriculum is designed to spark curiosity and build character in a safe, loving environment.",
   },
   {
-    title:  "BRAINCHILD NURSERY AND PRIMARY SCHOOL",
+    title: "BRAIN CHILD",
     highlight: "For a Global Future.",
-    description: "Empowering students with the critical thinking skills and moral integrity needed to excel anywhere in the world.",
   },
+];
+
+// Rainbow palette like your logo
+const colors = [
+  "#e53935", // red
+  "#1e88e5", // blue
+  "#fdd835", // yellow
+  "#43a047", // green
+  "#8e24aa", // purple
+  "#fb8c00", // orange
 ];
 
 export function HeroSection() {
   const [index, setIndex] = useState(0);
 
-  // 2. Synchronize text change with the carousel timer
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % slideContent.length);
-    }, 5000); // 5000ms = 5 seconds
+      setIndex((prev) => (prev + 1) % slideContent.length);
+    }, 5000);
+
     return () => clearInterval(timer);
   }, []);
 
+  const letters = slideContent[index].title.split("");
+
   return (
     <div className="relative font-heading">
-      
-      {/* 1. FULL SCREEN CINEMATIC HERO */}
       <section className="relative h-[90vh] md:h-screen w-full flex items-center justify-center overflow-hidden">
-        
-        {/* CAROUSEL BACKGROUND */}
+
+        {/* Background */}
         <div className="absolute inset-0 z-0">
           <HeroCarousel />
-          <div className="absolute inset-0 bg-black/50 z-10" />
+          <div className="absolute inset-0 bg-black/55 z-10" />
         </div>
 
-        {/* FLOATING DECORATIONS - pointer-events-none prevents blocking button clicks */}
+        {/* Floating icons */}
         <div className="absolute inset-0 z-20 pointer-events-none">
           <FloatingIcons />
         </div>
 
-        {/* TEXT CONTENT */}
-        <div className="relative z-30 text-center px-4 max-w-5xl">
+        {/* Content */}
+        <div className="relative z-30 text-center px-4 max-w-5xl space-y-6">
+
           <AnimatePresence mode="wait">
             <motion.div
-              key={index} 
+              key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
+              transition={{ duration: 0.8 }}
             >
-              <span className="inline-block bg-white/10 backdrop-blur-md text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-full mb-6 border border-white/20 uppercase tracking-widest">
+
+              {/* Badge */}
+              <span className="inline-block bg-white/10 backdrop-blur-md text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-full border border-white/20 uppercase tracking-widest mb-6">
                 🎓 Enrolment Open for 2026/2027 Session
               </span>
 
-              <h1 className="text-white text-4xl md:text-7xl lg:text-10xl font-bold leading-tight mb-6">
-                {slideContent[index].title} <br />
-                <span className="text-white/80 font-light italic">
+              {/* LOGO STYLE TITLE */}
+              <h1 className="flex flex-col items-center justify-center">
+
+                {/* BRAIN CHILD rainbow letters */}
+                <div className="flex flex-wrap justify-center font-heading font-extrabold text-5xl md:text-8xl tracking-[0.25em]">
+                  {letters.map((char, i) =>
+                    char === " " ? (
+                      <span key={i} className="w-6 md:w-10" />
+                    ) : (
+                      <span
+                        key={i}
+                        style={{ color: colors[i % colors.length] }}
+                        className="drop-shadow-sm"
+                      >
+                        {char}
+                      </span>
+                    )
+                  )}
+                </div>
+
+                {/* Subtitle with lines */}
+                <div className="flex items-center gap-4 mt-4">
+                  <span className="h-[2px] w-10 bg-blue-500" />
+                  <p className="text-blue-200 font-semibold tracking-widest text-sm md:text-lg uppercase">
+                    Nursery & Primary School
+                  </p>
+                  <span className="h-[2px] w-10 bg-blue-500" />
+                </div>
+
+                {/* Highlight text */}
+                <p className="text-yellow-200/90 font-light italic mt-4">
                   {slideContent[index].highlight}
-                </span>
+                </p>
               </h1>
 
-              <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-                {slideContent[index].description}
-              </p>
+              {/* Buttons */}
+              <div className="flex flex-wrap justify-center gap-4 mt-8">
 
-              <div className="flex flex-wrap justify-center gap-4">
-                {/* Enroll Button - Wrapped in relative div to ensure the ghost link works */}
                 <div className="relative group">
-                  <BrainButton variant="outline" className="bg-white text-pink-500 border-none px-8 py-4 font-bold hover:bg-blue-500 hover:text-black transition-colors duration-300">
+                  <BrainButton
+                    variant="outline"
+                    className="bg-white text-pink-600 border-none px-8 py-4 font-bold hover:bg-blue-500 hover:text-white transition-all duration-300"
+                  >
                     <span className="flex items-center gap-2">
                       Enroll my child <MdOutlineArrowUpward />
                     </span>
                   </BrainButton>
-                  <a 
-                    href="https://portal.brainchildintschools.com" 
-                    target="_blank" 
+
+                  <a
+                    href="https://portal.brainchildintschools.com"
+                    target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute inset-0 z-10 cursor-pointer" 
+                    className="absolute inset-0 z-10 cursor-pointer"
                   />
                 </div>
-                
-                {/* Tour Button - Now correctly using Link */}
+
                 <a href="#facilities">
-                      <BrainButton
-                        variant="outline"
-                        className="border-white text-white px-8 py-4 backdrop-blur-sm hover:bg-white/10 transition-colors"
-                      >
-                        Tour Our Campus ✨
-                      </BrainButton>
-                    </a>
+                  <BrainButton
+                    variant="outline"
+                    className="border-white text-white px-8 py-4 backdrop-blur-sm hover:bg-white/10"
+                  >
+                    Tour Our Campus ✨
+                  </BrainButton>
+                </a>
+
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
 
-     <TeamSection />
+      <TeamSection />
     </div>
   );
 }

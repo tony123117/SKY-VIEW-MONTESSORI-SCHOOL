@@ -4,9 +4,10 @@ import BrainButton from "./BrainButton";
 import BlogGrid from "./BlogGrid";
 import { AnimatedSection } from "./AnimatedSection";
 import { BlogPost } from "@/types/blogs";
+import activitiesImg from '@/assets/images/activities.jpg'
+import fruitsImg from '@/assets/images/students.jpg'
+import computerImg from "@/assets/images/computer.jpeg";
 
-import teachersImg from "@/assets/images/teachers.jpeg";
-import enterImg from "@/assets/images/classImg.jpeg";
 import outsideImg from "@/assets/images/assembly.jpg";
 import curriculumImg from "@/assets/images/curiculum.jpg";
 
@@ -18,7 +19,7 @@ export function BlogSection() {
       id: "1",
       title: "Extra-Curricular Activities",
       excerpt: "From culinary arts to drama and swimming, our programs help children explore talents beyond the classroom.",
-      coverImage: enterImg,
+      coverImage: activitiesImg,
       author: "School Admin",
       publishedAt: "2026-02-01",
       slug: "extra-curricular-activities",
@@ -48,7 +49,7 @@ export function BlogSection() {
       id: "4",
       title: "Digital Literacy",
       excerpt: "Preparing students with essential 21st-century technology skills in a guided learning environment.",
-      coverImage: enterImg,
+      coverImage: computerImg,
       author: "ICT Department",
       publishedAt: "2026-02-15",
       slug: "digital-literacy",
@@ -58,7 +59,7 @@ export function BlogSection() {
       id: "5",
       title: "Nutrition & Wellbeing",
       excerpt: "A balanced diet supports focus, growth, and overall student wellbeing in and out of school.",
-      coverImage: teachersImg,
+      coverImage: fruitsImg,
       author: "School Nurse",
       publishedAt: "2026-03-05",
       slug: "nutrition",

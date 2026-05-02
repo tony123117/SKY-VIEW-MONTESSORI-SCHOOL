@@ -2,9 +2,10 @@ import { AnimatedSection } from "./AnimatedSection";
 import { motion } from "framer-motion";
 // Import local images
 import computer from "@/assets/images/computer.jpeg";
-import classRoomImg from "@/assets/images/classImg.jpeg";
+import classRoomImg from "@/assets/images/curiculum.jpg";
 import playgroundImg from "@/assets/images/outside.jpg";
 import  Music  from "@/assets/images/music.jpg";
+
 
 const facilities = [
   { 

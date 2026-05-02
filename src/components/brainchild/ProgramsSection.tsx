@@ -51,16 +51,40 @@ export default function ProgramsSection() {
         </h2>
       </AnimatedSection>
 
-      {/* MOBILE / TABLET */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6">
-        {programs.map((p, i) => (
-          <AnimatedSection key={p.title} delay={i * 0.1}>
-            <ProgramCard {...p} index={i} />
-          </AnimatedSection>
-        ))}
+      {/* MOBILE / TABLET (Now includes the top circle image) */}
+      <div className="lg:hidden flex flex-col items-center gap-12">
+        
+        {/* TOP CIRCLE IMAGE (MOBILE) - ADDED THIS */}
+        <AnimatedSection className="relative flex items-center justify-center">
+          {/* Subtle Mobile Glow */}
+          <div className="absolute w-[350px] h-[350px] bg-rose-200 blur-[80px] opacity-20 rounded-full" />
+          
+          <img
+            src={programbg}
+            alt="Students"
+            className="
+              relative
+              w-[280px] h-[280px]
+              sm:w-[400px] sm:h-[400px]
+              object-cover
+              rounded-full
+              border-[12px] border-white
+              shadow-xl
+            "
+          />
+        </AnimatedSection>
+
+        {/* MOBILE CARDS GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+          {programs.map((p, i) => (
+            <AnimatedSection key={p.title} delay={i * 0.1}>
+              <ProgramCard {...p} index={i} />
+            </AnimatedSection>
+          ))}
+        </div>
       </div>
 
-      {/* DESKTOP (RESTORED FIRST DESIGN STYLE) */}
+      {/* DESKTOP (UNTOUCHED) */}
       <div className="relative h-[900px] hidden lg:block">
 
         {/* CENTER IMAGE (PERFECT CIRCLE) */}
