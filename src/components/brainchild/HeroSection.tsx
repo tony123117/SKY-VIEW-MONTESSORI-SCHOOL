@@ -125,8 +125,8 @@ export function HeroSection() {
                   </BrainButton>
 
                   <a
-                    href="https://portal.brainchildintschools.com"
-                    target="_blank"
+                    href="#contact"
+                
                     rel="noopener noreferrer"
                     className="absolute inset-0 z-10 cursor-pointer"
                   />
