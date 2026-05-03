@@ -64,6 +64,50 @@ const NAV_ITEMS = [
 const fmt = (n: number) => `₦${n.toLocaleString()}`;
 const API = "https://brainchild-backend-1pud.vercel.app/api/send";
 
+// ─── Responsive styles injected once ──────────────────────────────────────
+const RESPONSIVE_CSS = `
+  .cp-form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cp-news-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .cp-achieve-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .cp-staff-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .cp-section-pad { padding: 80px 0; }
+  .cp-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  .cp-inner-sm { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+  .cp-inner-md { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  .cp-inner-fee { max-width: 560px; margin: 0 auto; padding: 0 20px; }
+  .cp-hero-title { font-size: 52px; }
+  .cp-card-pad { padding: 36px 32px; }
+  .cp-testimonial-pad { padding: 40px 48px; }
+  .cp-newsletter-pad { padding: 56px 48px; }
+  .cp-step-labels { display: flex; justify-content: center; gap: 72px; font-size: 11px; }
+
+  @media (max-width: 768px) {
+    .cp-form-2col { grid-template-columns: 1fr !important; gap: 0 !important; }
+    .cp-news-grid { grid-template-columns: 1fr !important; }
+    .cp-achieve-grid { grid-template-columns: repeat(2,1fr) !important; gap: 12px !important; }
+    .cp-staff-grid { grid-template-columns: repeat(2,1fr) !important; gap: 12px !important; }
+    .cp-section-pad { padding: 56px 0 !important; }
+    .cp-inner { padding: 0 16px !important; }
+    .cp-inner-sm { padding: 0 16px !important; }
+    .cp-inner-md { padding: 0 16px !important; }
+    .cp-inner-fee { padding: 0 16px !important; }
+    .cp-hero-title { font-size: 34px !important; line-height: 1.2 !important; }
+    .cp-card-pad { padding: 24px 18px !important; }
+    .cp-testimonial-pad { padding: 24px 20px !important; }
+    .cp-newsletter-pad { padding: 36px 24px !important; }
+    .cp-step-labels { gap: 28px !important; }
+    .cp-h2 { font-size: 26px !important; }
+    .cp-step-bar { width: 36px !important; }
+    .cp-news-item-mb { margin-bottom: 0; }
+    .cp-fee-price { font-size: 48px !important; }
+  }
+
+  @media (max-width: 420px) {
+    .cp-achieve-grid { grid-template-columns: 1fr !important; }
+    .cp-hero-title { font-size: 28px !important; }
+  }
+`;
+
 // ─── useFade hook ──────────────────────────────────────────────────────────
 function useFade(): [React.RefObject<HTMLDivElement>, boolean] {
   const ref = useRef<HTMLDivElement>(null);
@@ -124,16 +168,13 @@ function AdmissionSection() {
 
   const handleSubmit = async () => {
     setStatus("sending");
-
     const programLabel = selectedProgram ? `${selectedProgram.label} (${selectedProgram.ages})` : form.program;
     const messageBody = [
-      `=== APPLICATION FORM SUBMISSION ===`,
-      ``,
+      `=== APPLICATION FORM SUBMISSION ===`, ``,
       `Program: ${programLabel}`,
       `Child's Date of Birth: ${form.dob || "N/A"}`,
       `Previous School: ${form.prevSchool || "None"}`,
-      `How they heard about us: ${form.howHeard}`,
-      ``,
+      `How they heard about us: ${form.howHeard}`, ``,
       `Additional Notes: ${form.message || "None"}`,
     ].join("\n");
 
@@ -163,27 +204,28 @@ function AdmissionSection() {
   };
 
   return (
-    <section id="admissions" style={{ padding: "80px 0", background: "#fff", position: "relative", overflow: "hidden" }}>
+    <section id="admissions" className="cp-section-pad" style={{ background: "#fff", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: -120, right: -120, width: 350, height: 350, borderRadius: "50%", background: "#f8f6f0", pointerEvents: "none" }} />
-      <div style={{ maxWidth: 680, margin: "0 auto", padding: "0 20px", position: "relative" }}>
+      <div className="cp-inner-sm" style={{ position: "relative" }}>
         <Fade>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <span style={{ display: "inline-block", background: "#fef9ec", color: "#c9a84c", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", padding: "6px 16px", borderRadius: 999, marginBottom: 16 }}>Admissions Open</span>
-            <h2 style={{ fontSize: 36, fontWeight: 900, color: "#0f172a", margin: "0 0 12px", lineHeight: 1.15 }}>Apply Online Today</h2>
+            <h2 className="cp-h2" style={{ fontSize: 36, fontWeight: 900, color: "#0f172a", margin: "0 0 12px", lineHeight: 1.15 }}>Apply Online Today</h2>
             <p style={{ color: "#6b7280", fontSize: 15, margin: 0, maxWidth: 380, marginLeft: "auto", marginRight: "auto" }}>Complete the form below and our admissions team will contact you within 24 hours.</p>
           </div>
         </Fade>
 
         <Fade delay={0.08}>
+          {/* Step indicator */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginBottom: 8 }}>
             {[1, 2, 3].map(s => (
               <div key={s} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <div style={{ width: 36, height: 36, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 700, background: step >= s ? "#c9a84c" : "#f3f4f6", color: step >= s ? "#fff" : "#9ca3af", transition: "all .3s" }}>{s}</div>
-                {s < 3 && <div style={{ width: 64, height: 2, background: step > s ? "#c9a84c" : "#e5e7eb", transition: "all .4s" }} />}
+                <div style={{ width: 36, height: 36, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 700, background: step >= s ? "#c9a84c" : "#f3f4f6", color: step >= s ? "#fff" : "#9ca3af", transition: "all .3s", flexShrink: 0 }}>{s}</div>
+                {s < 3 && <div className="cp-step-bar" style={{ width: 64, height: 2, background: step > s ? "#c9a84c" : "#e5e7eb", transition: "all .4s" }} />}
               </div>
             ))}
           </div>
-          <div style={{ display: "flex", justifyContent: "center", gap: 72, fontSize: 11, color: "#9ca3af", fontWeight: 600, marginBottom: 32, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+          <div className="cp-step-labels" style={{ display: "flex", justifyContent: "center", gap: 72, fontSize: 11, color: "#9ca3af", fontWeight: 600, marginBottom: 32, textTransform: "uppercase", letterSpacing: "0.06em" }}>
             {["Parent Info", "Child Info", "Details"].map((l, i) => (
               <span key={i} style={{ color: step >= i + 1 ? "#1d4ed8" : "#9ca3af", fontWeight: step >= i + 1 ? 700 : 600 }}>{l}</span>
             ))}
@@ -191,7 +233,7 @@ function AdmissionSection() {
         </Fade>
 
         <Fade delay={0.12}>
-          <div style={{ background: "#fff", border: "1.5px solid #eff6ff", borderRadius: 20, boxShadow: "0 8px 40px #c9a84c10", padding: "36px 32px" }}>
+          <div className="cp-card-pad" style={{ background: "#fff", border: "1.5px solid #eff6ff", borderRadius: 20, boxShadow: "0 8px 40px #c9a84c10" }}>
             {status === "success" ? (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
                 <div style={{ fontSize: 56, marginBottom: 16 }}>🎉</div>
@@ -210,12 +252,12 @@ function AdmissionSection() {
                       <label style={LBL}>Full Name *</label>
                       <input style={INP} placeholder="e.g. Mrs. Adaeze Okafor" value={form.parentName} onChange={e => up("parentName", e.target.value)} />
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-                      <div>
+                    <div className="cp-form-2col" style={{ marginBottom: 0 }}>
+                      <div style={{ marginBottom: 16 }}>
                         <label style={LBL}>Email Address *</label>
                         <input type="email" style={INP} placeholder="you@example.com" value={form.email} onChange={e => up("email", e.target.value)} />
                       </div>
-                      <div>
+                      <div style={{ marginBottom: 16 }}>
                         <label style={LBL}>WhatsApp / Phone *</label>
                         <input type="tel" style={INP} placeholder="+234 800 000 0000" value={form.phone} onChange={e => up("phone", e.target.value)} />
                       </div>
@@ -229,12 +271,12 @@ function AdmissionSection() {
                       <label style={LBL}>Child's Full Name *</label>
                       <input style={INP} placeholder="e.g. Chukwuemeka Okafor" value={form.childName} onChange={e => up("childName", e.target.value)} />
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
-                      <div>
+                    <div className="cp-form-2col" style={{ marginBottom: 20 }}>
+                      <div style={{ marginBottom: 16 }}>
                         <label style={LBL}>Date of Birth *</label>
                         <input type="date" style={INP} value={form.dob} onChange={e => up("dob", e.target.value)} />
                       </div>
-                      <div>
+                      <div style={{ marginBottom: 16 }}>
                         <label style={LBL}>Program Applying For *</label>
                         <select style={INP} value={form.program} onChange={e => up("program", e.target.value)}>
                           <option value="">Select program…</option>
@@ -266,7 +308,7 @@ function AdmissionSection() {
                       <textarea style={{ ...INP, resize: "none", height: 100 }} placeholder="Allergies, learning needs, or anything we should know…" value={form.message} onChange={e => up("message", e.target.value)} />
                     </div>
                     <div style={{ display: "flex", alignItems: "flex-start", gap: 10, background: "#f8f6f0", border: "1.5px solid #bfdbfe", borderRadius: 10, padding: 14 }}>
-                      <input type="checkbox" id="consent" style={{ marginTop: 2, accentColor: "#c9a84c" }} />
+                      <input type="checkbox" id="consent" style={{ marginTop: 2, accentColor: "#c9a84c", flexShrink: 0 }} />
                       <label htmlFor="consent" style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.6 }}>I consent to Brain Child Nursery and Primary School contacting me regarding this application and storing my information securely.</label>
                     </div>
                     {status === "error" && (
@@ -277,15 +319,15 @@ function AdmissionSection() {
 
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 32, paddingTop: 24, borderTop: "1.5px solid #f0f7ff" }}>
                   {step > 1
-                    ? <button onClick={() => setStep(s => s - 1)} style={{ fontSize: 13, fontWeight: 600, color: "#6b7280", background: "none", border: "none", cursor: "pointer" }}>← Back</button>
+                    ? <button onClick={() => setStep(s => s - 1)} style={{ fontSize: 13, fontWeight: 600, color: "#6b7280", background: "none", border: "none", cursor: "pointer", padding: "10px 0" }}>← Back</button>
                     : <div />
                   }
                   <button
                     disabled={status === "sending"}
                     onClick={() => { if (step < 3) setStep(s => s + 1); else handleSubmit(); }}
-                    style={{ padding: "12px 28px", background: status === "sending" ? "#94a3b8" : "linear-gradient(135deg,#c9a84c,#a07830)", color: "#fff", fontSize: 13, fontWeight: 700, borderRadius: 12, border: "none", cursor: status === "sending" ? "not-allowed" : "pointer", boxShadow: "0 4px 16px #c9a84c30", transition: "all .2s" }}
+                    style={{ padding: "12px 24px", background: status === "sending" ? "#94a3b8" : "linear-gradient(135deg,#c9a84c,#a07830)", color: "#fff", fontSize: 13, fontWeight: 700, borderRadius: 12, border: "none", cursor: status === "sending" ? "not-allowed" : "pointer", boxShadow: "0 4px 16px #c9a84c30", transition: "all .2s", whiteSpace: "nowrap" }}
                   >
-                    {step < 3 ? "Continue →" : status === "sending" ? "Submitting…" : "Submit Application 🎓"}
+                    {step < 3 ? "Continue →" : status === "sending" ? "Submitting…" : "Submit 🎓"}
                   </button>
                 </div>
               </div>
@@ -300,20 +342,20 @@ function AdmissionSection() {
 // ─── FEES ──────────────────────────────────────────────────────────────────
 function FeeSection() {
   return (
-    <section id="fees" style={{ padding: "80px 0", background: "linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)", position: "relative", overflow: "hidden" }}>
+    <section id="fees" className="cp-section-pad" style={{ background: "linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, opacity: .07, backgroundImage: "radial-gradient(circle at 2px 2px,#fcd34d 1px,transparent 0)", backgroundSize: "40px 40px", pointerEvents: "none" }} />
-      <div style={{ maxWidth: 560, margin: "0 auto", padding: "0 20px", position: "relative" }}>
+      <div className="cp-inner-fee" style={{ position: "relative" }}>
         <Fade>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <span style={{ display: "inline-block", background: "rgba(255,255,255,.1)", color: "#bfdbfe", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", padding: "6px 16px", borderRadius: 999, border: "1px solid rgba(255,255,255,.1)", marginBottom: 16 }}>School Fees</span>
-            <h2 style={{ fontSize: 36, fontWeight: 900, color: "#fff", margin: "0 0 12px" }}>Simple, Flat Fee</h2>
+            <h2 className="cp-h2" style={{ fontSize: 36, fontWeight: 900, color: "#fff", margin: "0 0 12px" }}>Simple, Flat Fee</h2>
             <p style={{ color: "#bfdbfe", fontSize: 14, margin: 0 }}>One straightforward admission fee for all classes — no hidden charges.</p>
           </div>
         </Fade>
         <Fade delay={0.08}>
           <div style={{ background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.14)", borderRadius: 24, padding: "40px 36px", textAlign: "center" }}>
             <p style={{ fontSize: 11, fontWeight: 700, color: "#bfdbfe", textTransform: "uppercase", letterSpacing: "0.12em", margin: "0 0 12px" }}>Annual Admission Fee — All Classes</p>
-            <div style={{ fontSize: 64, fontWeight: 900, color: "#fff", lineHeight: 1, marginBottom: 8 }}>₦200,000</div>
+            <div className="cp-fee-price" style={{ fontSize: 64, fontWeight: 900, color: "#fff", lineHeight: 1, marginBottom: 8 }}>₦20,000</div>
             <p style={{ color: "#fcd34d", fontSize: 13, margin: "0 0 32px" }}>Per child · Per academic year</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 12, textAlign: "left", marginBottom: 32 }}>
               {[
@@ -322,7 +364,7 @@ function FeeSection() {
                 { icon: "✅", text: "Contact us to discuss payment arrangements" },
               ].map((item, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <span style={{ fontSize: 16 }}>{item.icon}</span>
+                  <span style={{ fontSize: 16, flexShrink: 0 }}>{item.icon}</span>
                   <span style={{ color: "#bfdbfe", fontSize: 13 }}>{item.text}</span>
                 </div>
               ))}
@@ -343,27 +385,27 @@ function TestimonialsSection() {
   const t = TESTIMONIALS[active];
 
   return (
-    <section id="testimonials" style={{ padding: "80px 0", background: "#f9fafb" }}>
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 20px" }}>
+    <section id="testimonials" className="cp-section-pad" style={{ background: "#f9fafb" }}>
+      <div className="cp-inner-md">
         <Fade>
           <div style={{ textAlign: "center", marginBottom: 52 }}>
             <span style={{ display: "inline-block", background: "#fef9ec", color: "#c9a84c", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", padding: "6px 16px", borderRadius: 999, marginBottom: 16 }}>Parent Voices</span>
-            <h2 style={{ fontSize: 36, fontWeight: 900, color: "#0f172a", margin: "0 0 12px" }}>What Families Say</h2>
+            <h2 className="cp-h2" style={{ fontSize: 36, fontWeight: 900, color: "#0f172a", margin: "0 0 12px" }}>What Families Say</h2>
             <p style={{ color: "#6b7280", fontSize: 15, margin: 0 }}>Real words from parents who trust us with their most precious ones.</p>
           </div>
         </Fade>
         <Fade delay={0.08}>
-          <div style={{ background: "#fff", border: "1.5px solid #f0f7ff", borderRadius: 24, padding: "40px 48px", position: "relative", boxShadow: "0 8px 48px #c9a84c0d", marginBottom: 28 }}>
-            <div style={{ position: "absolute", top: 24, right: 32, fontSize: 80, color: "#f0f7ff", lineHeight: 1, userSelect: "none", fontFamily: "Georgia,serif" }}>"</div>
-            <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
+          <div className="cp-testimonial-pad" style={{ background: "#fff", border: "1.5px solid #f0f7ff", borderRadius: 24, position: "relative", boxShadow: "0 8px 48px #c9a84c0d", marginBottom: 28 }}>
+            <div style={{ position: "absolute", top: 24, right: 24, fontSize: 60, color: "#f0f7ff", lineHeight: 1, userSelect: "none", fontFamily: "Georgia,serif" }}>"</div>
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 14, marginBottom: 20, flexWrap: "wrap" }}>
               <div style={{ width: 52, height: 52, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 900, fontSize: 15, background: t.color, flexShrink: 0 }}>{t.initials}</div>
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, minWidth: 160 }}>
                 <div style={{ fontWeight: 700, color: "#0f172a", fontSize: 15 }}>{t.name}</div>
                 <div style={{ color: "#c9a84c", fontSize: 13, marginTop: 2 }}>{t.role}</div>
               </div>
-              <div style={{ display: "flex", gap: 1 }}>{[1,2,3,4,5].map(s => <span key={s} style={{ color: "#fbbf24", fontSize: 18 }}>★</span>)}</div>
+              <div style={{ display: "flex", gap: 1, flexShrink: 0 }}>{[1,2,3,4,5].map(s => <span key={s} style={{ color: "#fbbf24", fontSize: 18 }}>★</span>)}</div>
             </div>
-            <p style={{ color: "#374151", fontSize: 16, lineHeight: 1.75, fontStyle: "italic", margin: 0, position: "relative", zIndex: 1 }}>"{t.text}"</p>
+            <p style={{ color: "#374151", fontSize: 15, lineHeight: 1.75, fontStyle: "italic", margin: 0, position: "relative", zIndex: 1 }}>"{t.text}"</p>
           </div>
         </Fade>
         <Fade delay={0.12}>
@@ -385,21 +427,21 @@ function NewsSection() {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section id="news" style={{ padding: "80px 0", background: "#fff" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
+    <section id="news" className="cp-section-pad" style={{ background: "#fff" }}>
+      <div className="cp-inner">
         <Fade>
           <div style={{ textAlign: "center", marginBottom: 52 }}>
             <span style={{ display: "inline-block", background: "#fef9ec", color: "#c9a84c", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", padding: "6px 16px", borderRadius: 999, marginBottom: 16 }}>Latest Updates</span>
-            <h2 style={{ fontSize: 36, fontWeight: 900, color: "#0f172a", margin: "0 0 12px" }}>News & Announcements</h2>
+            <h2 className="cp-h2" style={{ fontSize: 36, fontWeight: 900, color: "#0f172a", margin: "0 0 12px" }}>News & Announcements</h2>
             <p style={{ color: "#6b7280", fontSize: 15, margin: 0 }}>Stay up to date with everything happening at Brain Child.</p>
           </div>
         </Fade>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+        <div className="cp-news-grid">
           {NEWS.map((item, i) => (
             <Fade key={i} delay={i * .06}>
-              <div onClick={() => setExpanded(expanded === i ? null : i)} style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 20, overflow: "hidden", cursor: "pointer", transition: "box-shadow .2s", boxShadow: expanded === i ? "0 12px 48px rgba(0,0,0,.08)" : "0 2px 8px rgba(0,0,0,.04)" }}>
+              <div onClick={() => setExpanded(expanded === i ? null : i)} style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 20, overflow: "hidden", cursor: "pointer", transition: "box-shadow .2s", boxShadow: expanded === i ? "0 12px 48px rgba(0,0,0,.08)" : "0 2px 8px rgba(0,0,0,.04)", height: "100%" }}>
                 <div style={{ height: 4, background: item.accent }} />
-                <div style={{ padding: 24 }}>
+                <div style={{ padding: 20 }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
                     <span style={{ fontSize: 22 }}>{item.icon}</span>
                     <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", padding: "4px 10px", borderRadius: 999, background: item.accent, color: "#fff" }}>{item.category}</span>
@@ -421,17 +463,17 @@ function NewsSection() {
 // ─── ACHIEVEMENTS ──────────────────────────────────────────────────────────
 function AchievementsSection() {
   return (
-    <section id="achievements" style={{ padding: "80px 0", background: "linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)", position: "relative", overflow: "hidden" }}>
+    <section id="achievements" className="cp-section-pad" style={{ background: "linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, opacity: .04, backgroundImage: "repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%)", backgroundSize: "20px 20px", pointerEvents: "none" }} />
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px", position: "relative" }}>
+      <div className="cp-inner" style={{ position: "relative" }}>
         <Fade>
           <div style={{ textAlign: "center", marginBottom: 52 }}>
             <span style={{ display: "inline-block", background: "rgba(251,191,36,.15)", color: "#fbbf24", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", padding: "6px 16px", borderRadius: 999, border: "1px solid rgba(251,191,36,.2)", marginBottom: 16 }}>Hall of Fame</span>
-            <h2 style={{ fontSize: 36, fontWeight: 900, color: "#fff", margin: "0 0 12px" }}>Student Achievements Wall</h2>
+            <h2 className="cp-h2" style={{ fontSize: 36, fontWeight: 900, color: "#fff", margin: "0 0 12px" }}>Student Achievements Wall</h2>
             <p style={{ color: "#bfdbfe", fontSize: 14, margin: 0 }}>Celebrating the wins that make Brain Child proud.</p>
           </div>
         </Fade>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
+        <div className="cp-achieve-grid">
           {ACHIEVEMENTS.map((a, i) => (
             <Fade key={i} delay={i * .05}>
               <div style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 18, padding: "24px 18px", textAlign: "center" }}>
@@ -454,16 +496,16 @@ function StaffSection() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section id="staff" style={{ padding: "80px 0", background: "#f9fafb" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
+    <section id="staff" className="cp-section-pad" style={{ background: "#f9fafb" }}>
+      <div className="cp-inner">
         <Fade>
           <div style={{ textAlign: "center", marginBottom: 52 }}>
             <span style={{ display: "inline-block", background: "#fef9ec", color: "#c9a84c", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", padding: "6px 16px", borderRadius: 999, marginBottom: 16 }}>Our People</span>
-            <h2 style={{ fontSize: 36, fontWeight: 900, color: "#0f172a", margin: "0 0 12px" }}>Meet Our Team</h2>
+            <h2 className="cp-h2" style={{ fontSize: 36, fontWeight: 900, color: "#0f172a", margin: "0 0 12px" }}>Meet Our Team</h2>
             <p style={{ color: "#6b7280", fontSize: 15, margin: 0 }}>Dedicated, experienced educators who make Brain Child the special place it is.</p>
           </div>
         </Fade>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
+        <div className="cp-staff-grid">
           {STAFF.map((s, i) => (
             <Fade key={i} delay={i * .05}>
               <div
@@ -528,14 +570,14 @@ function NewsletterSection() {
   };
 
   return (
-    <section id="newsletter" style={{ padding: "80px 0", background: "#fff" }}>
-      <div style={{ maxWidth: 600, margin: "0 auto", padding: "0 20px" }}>
+    <section id="newsletter" className="cp-section-pad" style={{ background: "#fff" }}>
+      <div style={{ maxWidth: 600, margin: "0 auto", padding: "0 16px" }}>
         <Fade>
-          <div style={{ background: "linear-gradient(135deg,#0f172a,#1e3a5f)", borderRadius: 28, padding: "56px 48px", textAlign: "center", position: "relative", overflow: "hidden", boxShadow: "0 20px 80px #c9a84c20" }}>
+          <div className="cp-newsletter-pad" style={{ background: "linear-gradient(135deg,#0f172a,#1e3a5f)", borderRadius: 28, textAlign: "center", position: "relative", overflow: "hidden", boxShadow: "0 20px 80px #c9a84c20" }}>
             <div style={{ position: "absolute", top: -60, right: -60, width: 200, height: 200, borderRadius: "50%", background: "rgba(255,255,255,.04)", pointerEvents: "none" }} />
             <div style={{ position: "relative" }}>
               <div style={{ fontSize: 40, marginBottom: 16 }}>📬</div>
-              <h2 style={{ fontSize: 30, fontWeight: 900, color: "#fff", margin: "0 0 12px" }}>Stay in the Loop</h2>
+              <h2 className="cp-h2" style={{ fontSize: 30, fontWeight: 900, color: "#fff", margin: "0 0 12px" }}>Stay in the Loop</h2>
               <p style={{ color: "#bfdbfe", fontSize: 14, marginBottom: 28, lineHeight: 1.7 }}>Get school news, event updates, and term reminders delivered straight to your inbox.</p>
 
               {status === "success" ? (
@@ -546,7 +588,7 @@ function NewsletterSection() {
                 </div>
               ) : (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <div style={{ display: "flex", gap: 8, justifyContent: "center", marginBottom: 6 }}>
+                  <div style={{ display: "flex", gap: 8, justifyContent: "center", marginBottom: 6, flexWrap: "wrap" }}>
                     {["parent", "guardian", "alumni"].map(t => (
                       <button key={t} onClick={() => setType(t)} style={{ padding: "6px 16px", borderRadius: 999, fontSize: 12, fontWeight: 700, textTransform: "capitalize", background: type === t ? "#c9a84c" : "rgba(255,255,255,.1)", color: type === t ? "#fff" : "#bfdbfe", border: "none", cursor: "pointer", transition: "all .2s" }}>{t}</button>
                     ))}
@@ -578,14 +620,15 @@ function NewsletterSection() {
 export default function CommunityPage() {
   return (
     <div style={{ fontFamily: "'Segoe UI',system-ui,sans-serif", WebkitFontSmoothing: "antialiased" }}>
+      <style>{RESPONSIVE_CSS}</style>
       <Navbar />
 
       <nav style={{ position: "sticky", top: 0, zIndex: 40, background: "rgba(255,255,255,.97)", backdropFilter: "blur(8px)", borderBottom: "1.5px solid #eff6ff", boxShadow: "0 1px 8px rgba(201,168,76,.06)" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px", overflowX: "auto" }}>
+        <div className="cp-inner" style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 4, padding: "12px 0", minWidth: "max-content" }}>
             {NAV_ITEMS.map(n => (
               <a key={n.href} href={n.href}
-                style={{ padding: "7px 14px", fontSize: 11, fontWeight: 700, color: "#6b7280", textDecoration: "none", borderRadius: 8, textTransform: "uppercase", letterSpacing: "0.07em", whiteSpace: "nowrap", transition: "all .15s" }}
+                style={{ padding: "7px 12px", fontSize: 11, fontWeight: 700, color: "#6b7280", textDecoration: "none", borderRadius: 8, textTransform: "uppercase", letterSpacing: "0.07em", whiteSpace: "nowrap", transition: "all .15s" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "#f0f7ff"; (e.currentTarget as HTMLAnchorElement).style.color = "#c9a84c"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = "#6b7280"; }}>
                 {n.label}
@@ -595,10 +638,11 @@ export default function CommunityPage() {
         </div>
       </nav>
 
-      <div style={{ background: "linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)", padding: "80px 20px 72px", textAlign: "center", position: "relative", overflow: "hidden" }}>
+      {/* Hero */}
+      <div style={{ background: "linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)", padding: "64px 20px 60px", textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, opacity: .08, backgroundImage: "radial-gradient(circle at 2px 2px,#fcd34d 1px,transparent 0)", backgroundSize: "32px 32px", pointerEvents: "none" }} />
         <div style={{ position: "relative" }}>
-          <h1 style={{ fontSize: 52, fontWeight: 900, color: "#fff", lineHeight: 1.15, margin: "0 0 16px" }}>
+          <h1 className="cp-hero-title" style={{ fontWeight: 900, color: "#fff", lineHeight: 1.15, margin: "0 0 16px" }}>
             Join the Brain Child<br /><span style={{ color: "#fcd34d" }}>Family</span>
           </h1>
           <p style={{ color: "#bfdbfe", fontSize: 16, margin: 0, maxWidth: 480, marginLeft: "auto", marginRight: "auto" }}>
