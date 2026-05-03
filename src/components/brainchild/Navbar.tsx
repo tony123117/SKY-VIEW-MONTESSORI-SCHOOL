@@ -13,6 +13,7 @@ const navItems = [
   { label: "Gallery", href: "/gallery", color: "text-yellow-500", bar: "bg-yellow-500" },
   { label: "Blog", href: "/blog", color: "text-green-500", bar: "bg-green-500" },
   { label: "Contact", href: "/contact", color: "text-red-500", bar: "bg-red-500" },
+   { label: "Brain-Child-Community", href: "/community", color: "text-red-500", bar: "bg-red-500" },
 ];
 
 const aboutDropdownItems = [
@@ -132,20 +133,24 @@ export function Navbar() {
                 exit={{ opacity: 0, y: -8 }}
                 className="absolute top-full right-0 mt-2 w-48 bg-white border-t-4 border-primary rounded-lg shadow-xl z-50 overflow-hidden"
               >
-                <Link
-                  to="/student-portal"
+                <a
+                  href="https://portal.brainchildintschools.com/student"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 w-full px-5 py-3 text-sm hover:bg-blue-50 text-blue-600 transition-colors border-b border-gray-100 font-medium"
                 >
                   <FiUser size={14} />
                   Student Portal
-                </Link>
-                <Link
-                  to="/staff-portal"
+                </a>
+                <a
+                  href="https://portal.brainchildintschools.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 w-full px-5 py-3 text-sm hover:bg-purple-50 text-purple-600 transition-colors font-medium"
                 >
                   <FiBriefcase size={14} />
                   Staff Portal
-                </Link>
+                </a>
               </motion.div>
             )}
           </AnimatePresence>
@@ -195,16 +200,16 @@ export function Navbar() {
             ))}
 
             <div className="flex flex-col gap-3 mt-4">
-              <Link to="/student-portal" onClick={() => setMenuOpen(false)}>
+              <a href="https://portal.brainchildintschools.com/student" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
                 <BrainButton variant="secondary" className="w-full">
                   <FiUser className="inline mr-1" /> Student Portal
                 </BrainButton>
-              </Link>
-              <Link to="/staff-portal" onClick={() => setMenuOpen(false)}>
+              </a>
+              <a href="https://portal.brainchildintschools.com/" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
                 <BrainButton variant="secondary" className="w-full">
                   <FiBriefcase className="inline mr-1" /> Staff Portal
                 </BrainButton>
-              </Link>
+              </a>
               <Link to="/contact" onClick={() => setMenuOpen(false)}>
                 <BrainButton variant="primary" className="w-full">Enroll my child</BrainButton>
               </Link>

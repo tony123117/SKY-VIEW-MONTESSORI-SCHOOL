@@ -1,6 +1,7 @@
 import { Program } from "@/types/programcard";
 import { motion } from "framer-motion";
 import { MdOutlineArrowForward } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const cardThemes = [
   {
@@ -127,21 +128,23 @@ export default function ProgramCard({
           {description}
         </p>
 
-        <motion.button
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.97 }}
-          className={`
-            relative inline-flex items-center gap-1.5
-            text-[10px] font-extrabold tracking-[0.12em] uppercase
-            px-4 py-2 rounded-full
-            group-hover:gap-2.5 transition-all duration-200
-            ${theme.ctaBg} ${theme.ctaText}
-          `}
-          style={{ fontFamily: "'Nunito', sans-serif" }}
-        >
-          {cta}
-          <MdOutlineArrowForward size={11} />
-        </motion.button>
+        <Link to="/contact">
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            className={`
+              relative inline-flex items-center gap-1.5
+              text-[10px] font-extrabold tracking-[0.12em] uppercase
+              px-4 py-2 rounded-full
+              group-hover:gap-2.5 transition-all duration-200
+              ${theme.ctaBg} ${theme.ctaText}
+            `}
+            style={{ fontFamily: "'Nunito', sans-serif" }}
+          >
+            {cta}
+            <MdOutlineArrowForward size={11} />
+          </motion.button>
+        </Link>
       </div>
     </motion.div>
   );

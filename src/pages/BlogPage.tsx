@@ -11,9 +11,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import creativeImg from "@/assets/images/creative.jpeg";
-import teachersImg from "@/assets/images/teachers.jpeg";
-import enterImg from "@/assets/images/enter.jpg";
-import outsideImg from "@/assets/images/outside.jpg";
+import teachersImg from "@/assets/images/teachers.jpg";
+import enterImg from "@/assets/images/computer.jpeg";
+import outsideImg from "@/assets/images/assembly.jpg";
 import danceImg from "@/assets/images/dance.jpeg";
 
 const featuredTopics = [
@@ -44,10 +44,10 @@ const posts = [
     image: outsideImg, author: "Admin", date: "Feb 1, 2026", tag: "Policies",
   },
   {
-    id: "3", title: "Home Lessons Policy",
-    excerpt: "Teachers maintain professional relationships with parents. Private lessons require clearance from school management.",
-    content: "At Brain Child, we maintain strict professional boundaries between our teaching staff and parents to protect the integrity of our educational programme.\n\nAny private lessons involving our staff must receive prior clearance from school management. This policy exists to prevent conflicts of interest, ensure teachers maintain energy for school hours, and protect both parents and teachers from misunderstandings.\n\nIf your child needs additional support, please speak with their class teacher or our academic coordinator.",
-    image: creativeImg, author: "Admin", date: "Feb 1, 2026", tag: "Policies",
+    id: "3", title: "Tech-Driven Learning Policy",
+    excerpt: "Our structured, secure approach to integrating technology in learning and teaching.",
+    content: "At Brain Child, we embrace technology as a powerful tool to enhance teaching, learning, and communication. Our classrooms are thoughtfully designed to integrate digital resources, interactive platforms, and modern teaching methods that prepare pupils for a rapidly evolving world.\n\nIn partnership with Bravotech Media, we have developed a structured, secure, and forward-thinking digital learning environment. This ensures that all technology used within our school aligns with best practices in safety, innovation, and educational effectiveness.\n\nTo maintain quality and consistency, all technology-related learning activities, tools, and external digital support must follow the school’s approved systems and guidelines. This helps every child benefit from a safe, engaging, and well-coordinated digital experience.\n\nWe are intentional about how technology is used. It is not just about devices, but about meaningful engagement, creativity, collaboration, and critical thinking. Our educators balance digital tools with traditional teaching methods to ensure a well-rounded education.\n\nIf your child requires additional academic support through digital tools or platforms, we encourage you to speak with their class teacher or our academic coordinator. This allows us to recommend trusted, school-aligned solutions that support your child without disrupting their learning journey.",
+    image: creativeImg, author: "Admin", date: "May 3, 2026", tag: "Technology",
   },
   {
     id: "4", title: "Digital Literacy in Early Years",
@@ -311,7 +311,7 @@ export default function BlogPage() {
               <div className="bl-cal-year">2026</div>
             </div>
             <div className="bl-cal-labels">
-              {["M","T","W","T","F","S","S"].map((d, i) => (
+              {["M", "T", "W", "T", "F", "S", "S"].map((d, i) => (
                 <div key={i} className="bl-cal-label">{d}</div>
               ))}
             </div>

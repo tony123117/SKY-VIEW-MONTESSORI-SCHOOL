@@ -80,7 +80,7 @@ const team: TeamMember[] = [
   {
     id: "francis",
     name: "Mr. Francis",
-    role: "Deputy Head & Academic Coordinator",
+    role: "Head of Grade Session",
     accentColor: "#0369a1",
     tagColor: "bg-sky-100 text-sky-700",
     img: francisImg,
@@ -139,7 +139,7 @@ const team: TeamMember[] = [
   {
     id: "tonia",
     name: "Ms Tonia Edeh",
-    role: "Head Teacher, Kindergarten",
+    role: "Head Teacher of Kindergarten Session",
     accentColor: "#be185d",
     tagColor: "bg-pink-100 text-pink-700",
     img: ToniaImg,

@@ -19,8 +19,8 @@ const features = [
 ];
 
 const stats = [
-  { num: "250+", label: "Students enrolled" },
-  { num: "1:12", label: "Teacher ratio" },
+  { num: "5000+", label: "Students enrolled" },
+  { num: "200+", label: "Teachers" },
   { num: "15+", label: "Years of excellence" },
 ];
 
@@ -129,15 +129,7 @@ export default function BrochurePanel({ open, onClose }: BrochurePanelProps) {
 
               {/* Actions */}
               <div className="flex gap-3 flex-wrap">
-                <a
-                  href="/brochure.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 active:scale-95 transition-all no-underline"
-                >
-                  <Download size={14} />
-                  Download PDF
-                </a>
+                
                 <a
                   href="https://portal.brainchildintschools.com/enroll"
                   target="_blank"

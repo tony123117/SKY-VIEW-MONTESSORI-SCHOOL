@@ -1,5 +1,6 @@
 import ProgramCard from "./ProgramCard";
-import programbg from "@/assets/images/programbg.png";
+
+import programbg from '@/assets/images/program.jpeg'
 import { AnimatedSection } from "./AnimatedSection";
 
 export default function ProgramsSection() {

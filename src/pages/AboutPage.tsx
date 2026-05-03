@@ -50,7 +50,7 @@ const leadership = [
   },
   {
     name: "Mr. Francis",
-    role: "Head of Academics",
+    role: "Head of Grade Session",
     image: francis,
     bio: "Leading our academic excellence with innovative teaching methods and curriculum development.",
     accent: "#4361ee",
@@ -60,7 +60,7 @@ const leadership = [
   },
   {
     name: "Ms. Tonia Edeh",
-    role: "Head of Operations",
+    role: "Head of Kindergaten Session",
     image: tonia,
     bio: "Ensuring smooth operations and creating a safe, nurturing environment for all students.",
     accent: "#e63946",
@@ -109,8 +109,8 @@ const values = [
 
 const teamMembers = [
   { name: "Dr. Ijeoma",     role: "Director",      image: director, color: "border-[#f4831f]" },
-  { name: "Mr. Francis",    role: "Staff",          image: francis,  color: "border-[#4361ee]" },
-  { name: "Ms. Tonia Edeh", role: "Head Teacher",   image: tonia,    color: "border-[#e63946]" },
+  { name: "Mr. Francis",    role: "Head of Grade Session",          image: francis,  color: "border-[#4361ee]" },
+  { name: "Ms. Tonia Edeh", role: "Head of Kindergarten Session",   image: tonia,    color: "border-[#e63946]" },
   { name: "Ezeorah Ogechi", role: "Administrator",  image: ogechi,   color: "border-[#2dc653]" },
 ];
 

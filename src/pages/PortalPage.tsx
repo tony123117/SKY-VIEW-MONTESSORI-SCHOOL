@@ -38,7 +38,7 @@ export default function PortalPage() {
                 Student & Parent Portal
               </span>
               <h1 className="text-3xl md:text-5xl font-heading font-bold text-[#303778] drop-shadow-lg mb-4">
-                Welcome to Kayla School Portal
+                Welcome to Brain Child School Portal
               </h1>
               <p className="text-[#303778]/80 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
                 Access your account to view grades, assignments, announcements, and more.
@@ -190,7 +190,7 @@ export default function PortalPage() {
                           onChange={handleInputChange}
                           required
                           className="w-full px-4 py-3 rounded-xl border border-[#303778]/20 bg-white/50 focus:outline-none focus:ring-2 focus:ring-[#4f78ed] transition-all"
-                          placeholder="admin@kaylaschool.com"
+                          placeholder="admin@BrainChildschool.com"
                         />
                       </div>
 

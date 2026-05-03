@@ -27,7 +27,7 @@ const colors = [
   "#1e88e5", // blue
   "#fdd835", // yellow
   "#43a047", // green
-  "#8e24aa", // purple
+  "#E91E8C", // purple
   "#fb8c00", // orange
 ];
 
@@ -73,17 +73,17 @@ export function HeroSection() {
 
               {/* Badge */}
               <span className="inline-block bg-white/10 backdrop-blur-md text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-full border border-white/20 uppercase tracking-widest mb-6">
-                🎓 Enrolment Open for 2026/2027 Session
+                ✨ Unlock a Brighter Future — Admissions Now Open
               </span>
 
               {/* LOGO STYLE TITLE */}
               <h1 className="flex flex-col items-center justify-center">
 
-                {/* BRAIN CHILD rainbow letters */}
-                <div className="flex flex-wrap justify-center font-heading font-extrabold text-5xl md:text-8xl tracking-[0.25em]">
+                {/* BRAIN CHILD rainbow letters — nowrap on mobile so it stays one line */}
+                <div className="flex flex-nowrap justify-center font-heading font-extrabold text-5xl md:text-8xl tracking-[0.15em] md:tracking-[0.25em]">
                   {letters.map((char, i) =>
                     char === " " ? (
-                      <span key={i} className="w-6 md:w-10" />
+                      <span key={i} className="w-4 md:w-10" />
                     ) : (
                       <span
                         key={i}
@@ -99,7 +99,7 @@ export function HeroSection() {
                 {/* Subtitle with lines */}
                 <div className="flex items-center gap-4 mt-4">
                   <span className="h-[2px] w-10 bg-blue-500" />
-                  <p className="text-blue-200 font-semibold tracking-widest text-sm md:text-lg uppercase">
+                  <p className="text-blue-200 font-semibold tracking-widest text-sm md:text-lg uppercase whitespace-nowrap">
                     Nursery & Primary School
                   </p>
                   <span className="h-[2px] w-10 bg-blue-500" />
@@ -114,23 +114,20 @@ export function HeroSection() {
               {/* Buttons */}
               <div className="flex flex-wrap justify-center gap-4 mt-8">
 
-                <div className="relative group">
+                <a
+                  href="https://portal.brainchildintschools.com/student"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <BrainButton
                     variant="outline"
                     className="bg-white text-pink-600 border-none px-8 py-4 font-bold hover:bg-blue-500 hover:text-white transition-all duration-300"
                   >
                     <span className="flex items-center gap-2">
-                      Enroll my child <MdOutlineArrowUpward />
+                      Student Portal <MdOutlineArrowUpward />
                     </span>
                   </BrainButton>
-
-                  <a
-                    href="#contact"
-                
-                    rel="noopener noreferrer"
-                    className="absolute inset-0 z-10 cursor-pointer"
-                  />
-                </div>
+                </a>
 
                 <a href="#facilities">
                   <BrainButton

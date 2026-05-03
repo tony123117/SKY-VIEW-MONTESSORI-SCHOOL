@@ -12,6 +12,7 @@ import ProgramsPage from "./pages/ProgramsPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import PortalPage from "./pages/PortalPage.tsx";
 import GalleryPage from "./pages/GalleryPage.tsx";
+import CommunityPage from "./pages/BrainChildCommunity.tsx";
 import { ScrollToTop } from "./components/ScrollToTop.tsx";
 import { WhatsAppWidget } from "./components/brainchild/WhatsAppWidget.tsx";
 
@@ -33,7 +34,8 @@ const App = () => (
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/portal" element={<PortalPage />} />
+          <Route path="/community" element={<CommunityPage />} />
+   
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

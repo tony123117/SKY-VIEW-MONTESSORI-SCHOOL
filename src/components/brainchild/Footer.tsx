@@ -2,7 +2,6 @@ import logo from "@/assets/images/brainlogo.png";
 import x from "@/assets/icons/x.png";
 import insta from "@/assets/icons/insta.png";
 import facebook from "@/assets/icons/facebook.png";
-import github from "@/assets/icons/github.png";
 import footerImage from "@/assets/images/image.png";
 import { AnimatedSection } from "./AnimatedSection";
 import BrainChildLogo from "./BrainChildLogo";
@@ -13,10 +12,27 @@ export function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   const socialLinks = [
-    { src: x, alt: "Twitter", href: "#" },
-    { src: insta, alt: "Instagram", href: "#" },
-    { src: facebook, alt: "Facebook", href: "#" },
-    { src: github, alt: "GitHub", href: "#" },
+
+    { src: insta, alt: "Instagram", href: "https://www.instagram.com/brainchildschool?igsh=MWsxYWd0MzV1cmJxeQ==" },
+    { src: facebook, alt: "Facebook", href: "https://www.facebook.com/brain.child.50309" },
+    {
+      alt: "YouTube",
+      href: "https://youtube.com/@bravotechublive?si=hpcgVIBJ9gAAQfOz",
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current opacity-70" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+        </svg>
+      ),
+    },
+    {
+      alt: "TikTok",
+      href: "https://www.tiktok.com/@bravotechmedia0?_r=1&_t=ZS-963EpZ3Zezs",
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current opacity-70" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.74a4.85 4.85 0 0 1-1.01-.05z" />
+        </svg>
+      ),
+    },
   ];
 
   const quickLinks = [
@@ -35,8 +51,8 @@ export function Footer() {
 
   const resourceLinks = [
     { label: "Blog", href: "/blog" },
-    { label: "Student Portal", href: "/student-portal" },
-    { label: "Staff Portal", href: "/staff-portal" },
+    { label: "Student Portal", href: "https://portal.brainchildintschools.com/student" },
+    { label: "Staff Portal", href: "https://portal.brainchildintschools.com/" },
     { label: "Our Story", href: "/about" },
   ];
 
@@ -100,14 +116,17 @@ export function Footer() {
                     key={icon.alt}
                     href={icon.href}
                     aria-label={icon.alt}
-                    className="w-9 h-9 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center hover:bg-primary/30 hover:border-primary/40 transition-all duration-300"
+                    className="w-9 h-9 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center hover:bg-primary/30 hover:border-primary/40 transition-all duration-300 text-white"
                     whileHover={{ scale: 1.15, y: -3 }}
                     whileTap={{ scale: 0.9 }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.08 }}
                   >
-                    <img src={icon.src} alt={icon.alt} className="w-4 h-4 invert opacity-70" />
+                    {icon.svg
+                      ? icon.svg
+                      : <img src={icon.src} alt={icon.alt} className="w-4 h-4 invert opacity-70" />
+                    }
                   </motion.a>
                 ))}
               </div>
@@ -223,11 +242,11 @@ export function Footer() {
                 </motion.li>
                 <motion.li whileHover={{ x: 4 }}>
                   <a
-                    href="mailto:info@kaylaschool.com"
+                    href="mailto:info@brainchildintschools.com"
                     className="flex items-start gap-2 hover:text-primary transition-colors duration-200 break-all"
                   >
                     <span className="mt-0.5">✉️</span>
-                    <span>info@kaylaschool.com</span>
+                    <span>info@brainchildintschools.com</span>
                   </a>
                 </motion.li>
                 <li className="flex items-start gap-2 text-xs leading-relaxed opacity-70 pt-2 border-t border-white/8">
@@ -250,7 +269,7 @@ export function Footer() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <p>© 2026 Brain Child Nursery and Primary School. All Rights Reserved.</p>
+            <p>Bravotechmedia © 2026, All Rights Reserved</p>
             <div className="flex gap-6">
               <Link to="/about" className="hover:text-white/80 transition-colors duration-200">Privacy Policy</Link>
               <Link to="/about" className="hover:text-white/80 transition-colors duration-200">Terms of Use</Link>

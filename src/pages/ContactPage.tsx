@@ -24,7 +24,7 @@ const contactDetails = [
   },
   {
     label: "Email",
-    value: "info@kaylaschool.com",
+    value: "info@brainchildintschools.com",
     icon: "↗",
     accent: "#6C63FF",
   },
@@ -44,24 +44,71 @@ const subjects = [
   { value: "general", label: "General Inquiry" },
 ];
 
+const BACKEND_URL = "https://brainchild-backend-1pud.vercel.app";
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: "", email: "", phone: "", subject: "", message: "",
+    user_name: "",
+    user_email: "",
+    child_name: "",
+    user_phone: "",
+    subject: "",
+    message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (error) setError(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    }, 4000);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/send`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_name: formData.user_name,
+          user_email: formData.user_email,
+          child_name: formData.child_name,
+          user_phone: formData.user_phone,
+          message: formData.subject
+            ? `[${subjects.find((s) => s.value === formData.subject)?.label}]\n\n${formData.message}`
+            : formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.detail || "Something went wrong. Please try again.");
+      }
+
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          user_name: "",
+          user_email: "",
+          child_name: "",
+          user_phone: "",
+          subject: "",
+          message: "",
+        });
+      }, 5000);
+     } catch (err: unknown) {
+  const message = err instanceof Error ? err.message : "Failed to send message. Please try again.";
+  setError(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -264,7 +311,8 @@ export default function ContactPage() {
           transition: all 0.3s;
           width: 100%;
         }
-        .ct-submit:hover { background: #e8734f; transform: translateY(-2px); box-shadow: 0 12px 32px #F4845F33; }
+        .ct-submit:hover:not(:disabled) { background: #e8734f; transform: translateY(-2px); box-shadow: 0 12px 32px #F4845F33; }
+        .ct-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         .ct-submit.success { background: #2DCE89; }
 
         .ct-success-msg {
@@ -278,6 +326,30 @@ export default function ContactPage() {
           font-weight: 500;
           margin-top: 8px;
         }
+
+        .ct-error-msg {
+          text-align: center;
+          padding: 16px 20px;
+          background: #FF6B6B15;
+          border: 1px solid #FF6B6B33;
+          border-radius: 4px;
+          color: #FF6B6B;
+          font-size: 14px;
+          font-weight: 500;
+          margin-top: 8px;
+        }
+
+        .ct-spinner {
+          display: inline-block;
+          width: 14px; height: 14px;
+          border: 2px solid #FAF8F544;
+          border-top-color: #FAF8F5;
+          border-radius: 50%;
+          animation: spin 0.7s linear infinite;
+          margin-right: 8px;
+          vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
       `}</style>
 
       <div className="ct-root">
@@ -340,42 +412,82 @@ export default function ContactPage() {
               <form className="ct-form" onSubmit={handleSubmit}>
                 <div className="ct-form-row">
                   <div>
-                    <label className="ct-field-label">Full Name</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="ct-input" placeholder="Your full name" />
+                    <label className="ct-field-label">Parent / Guardian Name</label>
+                    <input
+                      type="text" name="user_name" value={formData.user_name}
+                      onChange={handleInputChange} required
+                      className="ct-input" placeholder="Your full name"
+                    />
                   </div>
                   <div>
                     <label className="ct-field-label">Email Address</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="ct-input" placeholder="your@email.com" />
+                    <input
+                      type="email" name="user_email" value={formData.user_email}
+                      onChange={handleInputChange} required
+                      className="ct-input" placeholder="your@email.com"
+                    />
                   </div>
                 </div>
 
                 <div className="ct-form-row">
                   <div>
-                    <label className="ct-field-label">Phone Number</label>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="ct-input" placeholder="+234 xxx xxx xxxx" />
+                    <label className="ct-field-label">Child's Name</label>
+                    <input
+                      type="text" name="child_name" value={formData.child_name}
+                      onChange={handleInputChange} required
+                      className="ct-input" placeholder="Child's full name"
+                    />
                   </div>
                   <div>
-                    <label className="ct-field-label">Subject</label>
-                    <select name="subject" value={formData.subject} onChange={handleInputChange} className="ct-input">
-                      {subjects.map((s) => (
-                        <option key={s.value} value={s.value}>{s.label}</option>
-                      ))}
-                    </select>
+                    <label className="ct-field-label">Phone Number</label>
+                    <input
+                      type="tel" name="user_phone" value={formData.user_phone}
+                      onChange={handleInputChange}
+                      className="ct-input" placeholder="+234 xxx xxx xxxx"
+                    />
                   </div>
                 </div>
 
                 <div>
-                  <label className="ct-field-label">Your Message</label>
-                  <textarea name="message" value={formData.message} onChange={handleInputChange} required className="ct-textarea" placeholder="Tell us how we can help you..." />
+                  <label className="ct-field-label">Subject</label>
+                  <select
+                    name="subject" value={formData.subject}
+                    onChange={handleInputChange}
+                    className="ct-input"
+                  >
+                    {subjects.map((s) => (
+                      <option key={s.value} value={s.value}>{s.label}</option>
+                    ))}
+                  </select>
                 </div>
 
-                <button type="submit" className={`ct-submit${submitted ? " success" : ""}`}>
-                  {submitted ? "✓ Message Sent!" : "Send Message →"}
+                <div>
+                  <label className="ct-field-label">Your Message</label>
+                  <textarea
+                    name="message" value={formData.message}
+                    onChange={handleInputChange} required
+                    className="ct-textarea" placeholder="Tell us how we can help you..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className={`ct-submit${submitted ? " success" : ""}`}
+                  disabled={loading || submitted}
+                >
+                  {loading && <span className="ct-spinner" />}
+                  {submitted ? "✓ Message Sent!" : loading ? "Sending…" : "Send Message →"}
                 </button>
 
                 {submitted && (
                   <div className="ct-success-msg">
                     Thank you! We'll get back to you within one business day.
+                  </div>
+                )}
+
+                {error && (
+                  <div className="ct-error-msg">
+                    ⚠ {error}
                   </div>
                 )}
               </form>

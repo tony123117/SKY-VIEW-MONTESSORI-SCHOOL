@@ -171,8 +171,8 @@ export function WhyChooseUs() {
                 Enroll my child
               </BrainButton>
               <a
-                href="https://portal.brainchildintschools.com/enroll"
-                target="_blank"
+                href="/contact"
+              
                 rel="noreferrer"
                 className="absolute inset-0 z-10"
               />

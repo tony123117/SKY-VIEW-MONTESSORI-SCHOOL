@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 
 export default function ContactSection() {
-  // Status states: idle, sending, success, error
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -13,31 +11,29 @@ export default function ContactSection() {
 
     const formData = new FormData(e.currentTarget);
     const form = e.currentTarget;
+
     const body = {
-      user_name: String(formData.get('user_name') || ''),
+      user_name:  String(formData.get('user_name')  || ''),
       user_email: String(formData.get('user_email') || ''),
       child_name: String(formData.get('child_name') || ''),
       user_phone: String(formData.get('user_phone') || ''),
-      message: String(formData.get('message') || ''),
+      message:    String(formData.get('message')    || ''),
     };
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body,
+      const res = await fetch('https://brainchild-backend-1pud.vercel.app/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
       });
 
-      if (error || (data as any)?.error) {
-        console.error('Contact form error:', error || data);
-        setStatus('error');
-        setTimeout(() => setStatus('idle'), 5000);
-        return;
-      }
+      if (!res.ok) throw new Error('Network error');
 
       setStatus('success');
       form.reset();
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
-      console.error("Submission error:", error);
+      console.error('Submission error:', error);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
@@ -71,17 +67,17 @@ export default function ContactSection() {
                 <ContactDetail
                   icon={<Phone className="w-5 h-5 text-blue-500" />}
                   label="Phone"
-                  lines={["+234 706 117 5897", "+234 706 117 5897"]}
+                  lines={['+234 706 117 5897', '+234 706 117 5897']}
                 />
                 <ContactDetail
                   icon={<Mail className="w-5 h-5 text-rose-500" />}
                   label="Email"
-                  lines={["info@brainchildintschools.com"]}
+                  lines={['info@brainchildintschools.com']}
                 />
                 <ContactDetail
                   icon={<MapPin className="w-5 h-5 text-emerald-500" />}
                   label="Address"
-                  lines={["No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu"]}
+                  lines={['No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu']}
                 />
               </div>
             </div>
@@ -99,13 +95,15 @@ export default function ContactSection() {
           <div className="lg:col-span-7">
             <div className="bg-white rounded-[3.5rem] p-8 md:p-14 shadow-2xl shadow-primary/5 border border-white">
               <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <InputField label="Parent's Name" name="user_name" placeholder="e.g. Mrs. Okonkwo" required />
-                <InputField label="Child's Name" name="child_name" placeholder="e.g. Chioma" />
-                <InputField label="Email Address" name="user_email" type="email" placeholder="parent@email.com" required />
-                <InputField label="Phone Number" name="user_phone" placeholder="+234 xxx xxx xxxx" required />
+                <InputField label="Parent's Name"  name="user_name"  placeholder="e.g. Mrs. Okonkwo"    required />
+                <InputField label="Child's Name"   name="child_name" placeholder="e.g. Chioma" />
+                <InputField label="Email Address"  name="user_email" type="email" placeholder="parent@email.com" required />
+                <InputField label="Phone Number"   name="user_phone" placeholder="+234 xxx xxx xxxx"    required />
 
                 <div className="md:col-span-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 block ml-2">Message</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 block ml-2">
+                    Message
+                  </label>
                   <textarea
                     name="message"
                     required
@@ -119,28 +117,30 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className={`w-full py-7 rounded-[2rem] font-black uppercase text-[11px] tracking-[0.3em] transition-all flex items-center justify-center gap-3 shadow-xl ${status === 'success' ? 'bg-emerald-500 text-white' :
-                        status === 'error' ? 'bg-rose-500 text-white' :
-                          'bg-slate-900 text-white hover:bg-primary hover:-translate-y-1 shadow-slate-900/10 hover:shadow-primary/20'
-                      }`}
+                    className={`w-full py-7 rounded-[2rem] font-black uppercase text-[11px] tracking-[0.3em] transition-all flex items-center justify-center gap-3 shadow-xl ${
+                      status === 'success' ? 'bg-emerald-500 text-white' :
+                      status === 'error'   ? 'bg-rose-500 text-white' :
+                      'bg-slate-900 text-white hover:bg-primary hover:-translate-y-1 shadow-slate-900/10 hover:shadow-primary/20'
+                    }`}
                   >
-                    {status === 'idle' && <><Send size={16} /> Send Message</>}
-                    {status === 'sending' && "Processing..."}
+                    {status === 'idle'    && <><Send size={16} /> Send Message</>}
+                    {status === 'sending' && 'Processing...'}
                     {status === 'success' && <><CheckCircle2 size={16} /> Message Sent!</>}
-                    {status === 'error' && <><AlertCircle size={16} /> Failed to Send</>}
+                    {status === 'error'   && <><AlertCircle size={16} /> Failed to Send</>}
                   </button>
                 </div>
               </form>
             </div>
           </div>
+
         </div>
       </div>
     </section>
   );
 }
 
-// Sub-components for cleaner code
-function ContactDetail({ icon, label, lines }: { icon: React.ReactNode, label: string, lines: string[] }) {
+// Sub-components
+function ContactDetail({ icon, label, lines }: { icon: React.ReactNode; label: string; lines: string[] }) {
   return (
     <div className="flex gap-6 group">
       <div className="w-14 h-14 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500">
