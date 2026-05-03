@@ -550,7 +550,7 @@ export function WhatsAppWidget(): JSX.Element {
     if (messages.length === 0) {
       updateAnalytics({ totalChats: analytics.totalChats + 1 });
       setTimeout(() => {
-        addBotMessage(`Hello! 👋 Welcome to **${SCHOOL.name}**.\n\nBefore we chat, may I have your name?`);
+        addBotMessage(`Hello! 👋 Welcome to **${SCHOOL.name}**.\n\nTo get started, could you please tell me your name?`);
         setLeadCaptureActive(true);
         setLeadStep("name");
       }, 350);

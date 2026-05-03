@@ -23,12 +23,12 @@ const slideContent = [
 
 // Rainbow palette like your logo
 const colors = [
-  "#e53935", // red
-  "#1e88e5", // blue
-  "#fdd835", // yellow
-  "#43a047", // green
-  "#E91E8C", // purple
-  "#fb8c00", // orange
+  "#1E3A8A", // red
+  "#EF4444", // blue
+  "#22C55E", // yellow
+  "#EC4899", // green
+  "#FACC15", // purple
+
 ];
 
 export function HeroSection() {
