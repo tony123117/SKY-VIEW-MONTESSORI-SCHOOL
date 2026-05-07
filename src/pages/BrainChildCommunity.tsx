@@ -44,7 +44,7 @@ const ACHIEVEMENTS = [
 
 const STAFF = [
   { name: "Dr. (Mrs.) Ijeoma Darling Onwubuya", role: "Director & Founder",               subject: "Director & Founder",   exp: "18 yrs", initials: "ID" },
-  { name: "Mr. Francis",                         role: "Head of Grade Session",             subject: "Upper Grade Lead",      exp: "12 yrs", initials: "MF" },
+  { name: "Mr. Francis",                         role: "Head of Grade Session",             subject: "Hed of Grade session",      exp: "12 yrs", initials: "MF" },
   { name: "Ms Tonia Edeh",                       role: "Head Teacher of Kindergarten Session", subject: "Kindergarten Lead",  exp: "9 yrs",  initials: "TE" },
   { name: "Ezeorah Ogechi Regina",               role: "School Administrator",              subject: "School Administrator", exp: "7 yrs",  initials: "EO" },
 ];

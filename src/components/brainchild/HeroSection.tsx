@@ -7,28 +7,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import TeamSection from "./TeamSection";
 
 const slideContent = [
-  {
-    title: "BRAIN CHILD",
-    highlight: "Thoughtful Way to Learn.",
-  },
-  {
-    title: "BRAIN CHILD",
-    highlight: "Child's Unique Potential.",
-  },
-  {
-    title: "BRAIN CHILD",
-    highlight: "For a Global Future.",
-  },
+  { title: "BRAIN CHILD", highlight: "Thoughtful Way to Learn." },
+  { title: "BRAIN CHILD", highlight: "Child's Unique Potential." },
+  { title: "BRAIN CHILD", highlight: "For a Global Future." },
 ];
 
-// Rainbow palette like your logo
-const colors = [
-  "#1E3A8A", // red
-  "#EF4444", // blue
-  "#22C55E", // yellow
-  "#EC4899", // green
-  "#FACC15", // purple
+const colors = ["#2563EB", "#EF4444", "#22C55E", "#EC4899", "#FACC15"];
 
+const tickerMessages = [
+  "Admission Ongoing — Secure Your Child's Spot Today",
+  "Unlock a Brighter Future — Admissions Now Open",
+  "Limited Spaces Available — Apply Now",
+  "Nursery and Primary Enrolment Open — Don't Miss Out",
 ];
 
 export function HeroSection() {
@@ -38,7 +28,6 @@ export function HeroSection() {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % slideContent.length);
     }, 5000);
-
     return () => clearInterval(timer);
   }, []);
 
@@ -54,14 +43,50 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-black/55 z-10" />
         </div>
 
-        {/* Floating icons */}
+        {/* Floating Icons */}
         <div className="absolute inset-0 z-20 pointer-events-none">
           <FloatingIcons />
         </div>
 
-        {/* Content */}
-        <div className="relative z-30 text-center px-4 max-w-5xl space-y-6">
+        {/* Marquee Ticker — pinned to top of hero */}
+        <div
+          className="absolute top-0 left-0 right-0 z-40 overflow-hidden border-b border-white/20"
+          style={{ backgroundColor: "rgba(0,0,0,0.35)", backdropFilter: "blur(6px)" }}
+        >
+          <style>{`
+            @keyframes ticker {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .ticker-track {
+              display: flex;
+              width: max-content;
+              animation: ticker 30s linear infinite;
+            }
+            .ticker-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
 
+          <div className="ticker-track py-[10px]">
+            {[...tickerMessages, ...tickerMessages, ...tickerMessages, ...tickerMessages].map((msg, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-3 text-white font-semibold uppercase whitespace-nowrap px-10"
+                style={{ fontSize: "0.7rem", letterSpacing: "0.12em" }}
+              >
+                <span
+                  className="inline-block w-[6px] h-[6px] rounded-full flex-shrink-0"
+                  style={{ backgroundColor: colors[i % colors.length] }}
+                />
+                {msg}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="relative z-30 text-center px-4 max-w-5xl space-y-6 mt-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
@@ -70,16 +95,13 @@ export function HeroSection() {
               exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.8 }}
             >
-
               {/* Badge */}
               <span className="inline-block bg-white/10 backdrop-blur-md text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-full border border-white/20 uppercase tracking-widest mb-6">
-                ✨ Unlock a Brighter Future — Admissions Now Open
+                Unlock  A More Thoughtful Way to Learn. — Admissions Now Open
               </span>
 
-              {/* LOGO STYLE TITLE */}
+              {/* Title */}
               <h1 className="flex flex-col items-center justify-center">
-
-                {/* BRAIN CHILD rainbow letters — nowrap on mobile so it stays one line */}
                 <div className="flex flex-nowrap justify-center font-heading font-extrabold text-5xl md:text-8xl tracking-[0.15em] md:tracking-[0.25em]">
                   {letters.map((char, i) =>
                     char === " " ? (
@@ -96,16 +118,14 @@ export function HeroSection() {
                   )}
                 </div>
 
-                {/* Subtitle with lines */}
                 <div className="flex items-center gap-4 mt-4">
                   <span className="h-[2px] w-10 bg-blue-500" />
                   <p className="text-blue-200 font-semibold tracking-widest text-sm md:text-lg uppercase whitespace-nowrap">
-                    Nursery & Primary School
+                    Nursery {"&"} Primary School
                   </p>
                   <span className="h-[2px] w-10 bg-blue-500" />
                 </div>
 
-                {/* Highlight text */}
                 <p className="text-yellow-200/90 font-light italic mt-4">
                   {slideContent[index].highlight}
                 </p>
@@ -113,7 +133,6 @@ export function HeroSection() {
 
               {/* Buttons */}
               <div className="flex flex-wrap justify-center gap-4 mt-8">
-
                 <a
                   href="https://portal.brainchildintschools.com/student"
                   target="_blank"
@@ -129,19 +148,19 @@ export function HeroSection() {
                   </BrainButton>
                 </a>
 
-                <a href="#facilities">
+                <a href="/community">
                   <BrainButton
                     variant="outline"
                     className="border-white text-white px-8 py-4 backdrop-blur-sm hover:bg-white/10"
                   >
-                    Tour Our Campus ✨
+                    Tour Our Campus
                   </BrainButton>
                 </a>
-
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
+
       </section>
 
       <TeamSection />

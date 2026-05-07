@@ -18,7 +18,7 @@ const NavLogo = () => {
     <div className="flex flex-col items-center leading-none select-none group cursor-pointer">
       {/* Brain Child - Upright Version */}
       <div
-        className="flex gap-1 text-xl font-bold tracking-tighter not-italic"
+        className="flex gap-1 text-xl font-extrabold tracking-tighter not-italic"
         style={{
           fontFamily: '"Bubblegum Sans"',
           fontStyle: 'normal', // Forces font to not be italic

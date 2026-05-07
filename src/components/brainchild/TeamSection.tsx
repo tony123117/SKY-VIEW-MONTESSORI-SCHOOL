@@ -518,7 +518,7 @@ export default function TeamPage() {
                 <img src={francis.img} alt={francis.name} className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-xl px-4 py-2 shadow-lg border border-slate-100 whitespace-nowrap">
-                <p className="text-xs font-bold" style={{ color: francis.accentColor }}>Academic Coordinator</p>
+                <p className="text-xs font-bold" style={{ color: francis.accentColor }}>Head of Grade Session</p>
               </div>
             </div>
 
