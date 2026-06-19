@@ -10,11 +10,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import creativeImg from "@/assets/images/creative.jpeg";
-import teachersImg from "@/assets/images/teachers.jpg";
-import enterImg from "@/assets/images/computer.jpeg";
-import outsideImg from "@/assets/images/assembly.jpg";
-import danceImg from "@/assets/images/dance.jpeg";
+
+// ── Images from BlogSection ──────────────────────────────────────────────────
+import judoImg         from "@/assets/skyview-images/judo.png";
+import footballImg     from "@/assets/skyview-images/football.png";
+import computerLabImg  from "@/assets/skyview-images/computer.png";
+import schoolBuildingImg from "@/assets/skyview-images/building.jpeg";
+import scienceCraftImg from "@/assets/skyview-images/science.png";
+
+// ────────────────────────────────────────────────────────────────────────────
 
 const featuredTopics = [
   { title: "Learning Beyond The Classroom", description: "Explore our clubs, events and community stories that make learning rich and memorable.", tag: "Insight" },
@@ -28,57 +32,85 @@ const latestNews = [
   { title: "School Sports Festival", excerpt: "A day of teamwork, friendly competitions, and celebration for every child.", href: "/admissions", tag: "Events" },
 ];
 
-const calendarEvents = { 3: "Orientation Day", 12: "Science Fair", 19: "Parent Day", 27: "Holiday Celebration" };
+const calendarEvents: Record<number, string> = {
+  3: "Orientation Day",
+  12: "Science Fair",
+  19: "Parent Day",
+  27: "Holiday Celebration",
+};
 
+// ── Posts — same stories & images as BlogSection ─────────────────────────────
 const posts = [
   {
-    id: "1", title: "Extra-Curricular Activities",
-    excerpt: "Each child chooses two clubs to participate in every term, building diverse skills beyond the classroom.",
-    content: "At Brain Child International Schools, we believe education extends far beyond the classroom. Our extra-curricular programme offers a rich variety of clubs including Culinary Arts, Public Speaking, Science & Mathematics Club, Arts and Crafts, Theatre/Drama, Dance, and Swimming.\n\nEach child is encouraged to choose two clubs per term, allowing them to explore different interests and develop new talents. These activities build confidence, teamwork, and creativity — skills that serve children throughout their lives.",
-    image: enterImg, author: "Admin", date: "Feb 1, 2026", tag: "Enrichment",
+    id: "1",
+    title: "Judo & Character Development",
+    excerpt: "Our judo program teaches discipline, confidence, respect, and self-control while promoting physical fitness.",
+    content:
+      "At Sky View, we believe physical education goes far beyond fitness. Our judo programme instils the values of discipline, mutual respect, self-control, and confidence in every student who steps onto the mat.\n\nChildren learn to set goals, accept defeat graciously, and celebrate victory humbly. These lessons transfer directly into the classroom and into life. Whether a student becomes a competitive martial artist or simply a more grounded individual, judo at Sky View shapes character from the inside out.",
+    image: judoImg,
+    author: "Sports Department",
+    date: "Feb 1, 2026",
+    tag: "Sports",
   },
   {
-    id: "2", title: "Punctuality & Attendance",
-    excerpt: "School opens at 7:30am daily. The gate closes at 8:00am. Parents should call early for unavoidable delays.",
-    content: "Punctuality is a core value at Brain Child. School gates open at 7:30am and close promptly at 8:00am. Morning assembly begins immediately after, and late arrivals miss important announcements and bonding time with classmates.\n\nWe understand occasional delays are unavoidable. In such cases, parents are kindly requested to call the school office before 7:45am. Consistent attendance ensures children don't miss key lessons and stay connected with their peers.",
-    image: outsideImg, author: "Admin", date: "Feb 1, 2026", tag: "Policies",
+    id: "2",
+    title: "Football Excellence",
+    excerpt: "Through football training, students develop teamwork, leadership, sportsmanship, and healthy competition.",
+    content:
+      "Football is more than a sport at Sky View — it is a classroom without walls. Our football programme nurtures teamwork, communication, and strategic thinking while keeping students physically active and emotionally engaged.\n\nStudents participate in inter-house competitions, inter-school fixtures, and skills training sessions that bring out the best in every player. Whether or not they pursue football professionally, the lessons of persistence and collective effort stay with them forever.",
+    image: footballImg,
+    author: "Sports Department",
+    date: "Feb 5, 2026",
+    tag: "Sports",
   },
   {
-    id: "3", title: "Tech-Driven Learning Policy",
-    excerpt: "Our structured, secure approach to integrating technology in learning and teaching.",
-    content: "At Brain Child, we embrace technology as a powerful tool to enhance teaching, learning, and communication. Our classrooms are thoughtfully designed to integrate digital resources, interactive platforms, and modern teaching methods that prepare pupils for a rapidly evolving world.\n\nIn partnership with Bravotech Media, we have developed a structured, secure, and forward-thinking digital learning environment. This ensures that all technology used within our school aligns with best practices in safety, innovation, and educational effectiveness.\n\nTo maintain quality and consistency, all technology-related learning activities, tools, and external digital support must follow the school’s approved systems and guidelines. This helps every child benefit from a safe, engaging, and well-coordinated digital experience.\n\nWe are intentional about how technology is used. It is not just about devices, but about meaningful engagement, creativity, collaboration, and critical thinking. Our educators balance digital tools with traditional teaching methods to ensure a well-rounded education.\n\nIf your child requires additional academic support through digital tools or platforms, we encourage you to speak with their class teacher or our academic coordinator. This allows us to recommend trusted, school-aligned solutions that support your child without disrupting their learning journey.",
-    image: creativeImg, author: "Admin", date: "May 3, 2026", tag: "Technology",
+    id: "3",
+    title: "Digital Learning & Computer Skills",
+    excerpt: "Our computer laboratory equips students with essential digital literacy and technology skills for the future.",
+    content:
+      "In today's rapidly evolving world, digital literacy is no longer optional — it is essential. Our fully equipped computer laboratory gives every student hands-on experience with modern technology in a structured, supervised environment.\n\nFrom basic computing and typing skills in the early years, to research techniques, creative software, and introductory coding in higher classes, our ICT curriculum grows with each child. We prepare students not just to use technology, but to think critically about how and why they use it.",
+    image: computerLabImg,
+    author: "ICT Department",
+    date: "Feb 10, 2026",
+    tag: "Technology",
   },
   {
-    id: "4", title: "Digital Literacy in Early Years",
-    excerpt: "Equipping students with 21st-century skills through safe, thoughtful technology integration.",
-    content: "In today's rapidly evolving world, digital literacy is essential. At Brain Child, we integrate age-appropriate technology into our curriculum starting from the early years.\n\nOur approach includes interactive learning apps, basic coding concepts through game-based platforms, digital safety awareness, and creative projects using tablets. Our computer lab is equipped with modern systems, allowing students to explore and create in a safe digital environment.",
-    image: enterImg, author: "Admin", date: "Feb 15, 2026", tag: "Technology",
+    id: "4",
+    title: "A Conducive Learning Environment",
+    excerpt: "Our modern school facilities provide a safe, comfortable, and inspiring atmosphere for academic success.",
+    content:
+      "The environment in which a child learns matters enormously. At Sky View, we have invested thoughtfully in every space — from well-ventilated classrooms and organised library corners, to clean outdoor play areas and calm reading zones.\n\nOur facilities are designed to reduce distraction, encourage focus, and inspire creativity. When children feel safe, comfortable, and proud of their school environment, they show up ready to learn. We continually upgrade and maintain our spaces to ensure Sky View remains a place where excellence feels natural.",
+    image: schoolBuildingImg,
+    author: "School Admin",
+    date: "Feb 15, 2026",
+    tag: "Campus",
   },
   {
-    id: "5", title: "Nutrition & Brain Development",
-    excerpt: "A healthy body fuels a sharp mind. Our guidelines on balanced school meals and concentration.",
-    content: "Good nutrition directly impacts a child's ability to learn, concentrate, and retain information. Our school meal programme is designed with nutrition experts to ensure every meal is balanced, fresh, and age-appropriate.\n\nWe also educate parents on the importance of a healthy breakfast. Children who eat nutritiously show improved concentration, better problem-solving abilities, and more positive social interactions. Our school nurse monitors health and works with parents on any dietary concerns.",
-    image: teachersImg, author: "School Nurse", date: "Mar 5, 2026", tag: "Wellness",
-  },
-  {
-    id: "6", title: "The Power of Creative Play",
-    excerpt: "Why we prioritize playground time and how it builds character and leadership.",
-    content: "At Brain Child, playtime isn't just a break from learning — it IS learning. Through structured and free play, children develop social skills, physical coordination, emotional intelligence, problem-solving abilities, and leadership qualities.\n\nOur playground is designed with age-appropriate equipment that encourages exploration. We incorporate guided play sessions where teachers introduce games that reinforce classroom concepts. Every moment of play at Brain Child is an opportunity for growth.",
-    image: danceImg, author: "Teacher", date: "Mar 20, 2026", tag: "Development",
+    id: "5",
+    title: "Science, Creativity & Discovery",
+    excerpt: "From science experiments to creative crafts and outdoor activities, students learn by exploring and creating.",
+    content:
+      "Curiosity is the engine of learning, and at Sky View we keep that engine running. Our science programme blends structured experiments with open-ended discovery, encouraging students to ask questions, make predictions, and observe results with wonder.\n\nBeyond the lab, creativity is woven into every subject — through art projects, drama, storytelling, and hands-on craft activities. These experiences develop the whole child: curious, expressive, analytical, and confident. Science and creativity are not separate worlds at Sky View — they grow together.",
+    image: scienceCraftImg,
+    author: "Academic Team",
+    date: "Mar 5, 2026",
+    tag: "Academics",
   },
 ];
 
-const tagColors = {
-  Enrichment: "#F4845F",
-  Policies: "#4E9AF1",
+const tagColors: Record<string, string> = {
+  Sports:     "#F4845F",
   Technology: "#6C63FF",
-  Wellness: "#2DCE89",
-  Development: "#F7B731",
-  Community: "#4E9AF1",
-  Insight: "#F4845F",
-  Balance: "#2DCE89",
-  Future: "#6C63FF",
+  Campus:     "#4E9AF1",
+  Academics:  "#2DCE89",
+  Enrichment: "#F4845F",
+  Policies:   "#4E9AF1",
+  Wellness:   "#2DCE89",
+  Development:"#F7B731",
+  Community:  "#4E9AF1",
+  Insight:    "#F4845F",
+  Balance:    "#2DCE89",
+  Future:     "#6C63FF",
 };
 
 export default function BlogPage() {
@@ -243,15 +275,15 @@ export default function BlogPage() {
         .bl-post-card:hover .bl-post-img img { transform: scale(1.04); }
         @media (max-width: 768px) { .bl-post-img { height: 220px; } }
 
-        .bl-post-body { padding: 48px 48px; display: flex; flex-direction: column; justify-content: center; }
-        @media (max-width: 768px) { .bl-post-body { padding: 28px 28px; } }
-        .bl-post-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .bl-post-body { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+        @media (max-width: 768px) { .bl-post-body { padding: 28px; } }
+        .bl-post-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
         .bl-post-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; }
         .bl-post-author { font-size: 12px; color: #1A1A2E66; font-weight: 500; }
         .bl-post-date { font-size: 12px; color: #1A1A2E44; font-weight: 300; }
         .bl-post-title { font-family: 'Fraunces', serif; font-size: 1.5rem; color: #1A1A2E; font-weight: 400; margin-bottom: 16px; line-height: 1.2; }
         .bl-post-excerpt { font-size: 13.5px; color: #1A1A2E77; line-height: 1.7; font-weight: 300; margin-bottom: 12px; }
-        .bl-post-content { font-size: 13.5px; color: #1A1A2E88; line-height: 1.8; font-weight: 300; }
+        .bl-post-content { font-size: 13.5px; color: #1A1A2E88; line-height: 1.8; font-weight: 300; white-space: pre-line; }
 
         /* BACK */
         .bl-back { padding: 60px; text-align: center; background: #FAF8F5; }
@@ -274,14 +306,14 @@ export default function BlogPage() {
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <div className="bl-hero-grid">
               <div>
-                <div className="bl-eyebrow">Brain Child — Learning Journal</div>
+                <div className="bl-eyebrow">Sky View Nursery, Primary &amp; Secondary School — Learning Journal</div>
                 <h1 className="bl-hero-title">
                   Stories from<br />our <em>school</em><br />community
                 </h1>
               </div>
               <div>
                 <p className="bl-hero-sub">
-                  Thoughts, insights, and updates from our educators and staff — shared to support parents, inspire learning, and offer a closer look into life at Brain Child.
+                  Thoughts, insights, and updates from our educators and staff — shared to support parents, inspire learning, and offer a closer look into life at Sky View.
                 </p>
               </div>
             </div>
@@ -289,12 +321,17 @@ export default function BlogPage() {
         </section>
 
         {/* NEWS + CALENDAR */}
-        <section className="bl-news-cal" style={{ maxWidth: "none" }}>
-          <div className="bl-news-section" style={{ maxWidth: 1200, width: "100%" }}>
+        <section className="bl-news-cal">
+          <div className="bl-news-section">
             <div className="bl-news-label">Latest Updates</div>
             {latestNews.map((item) => (
               <div key={item.title} className="bl-news-card">
-                <div className="bl-news-tag" style={{ background: `${tagColors[item.tag]}22`, color: tagColors[item.tag] }}>{item.tag}</div>
+                <div
+                  className="bl-news-tag"
+                  style={{ background: `${tagColors[item.tag] ?? "#F4845F"}22`, color: tagColors[item.tag] ?? "#F4845F" }}
+                >
+                  {item.tag}
+                </div>
                 <div>
                   <div className="bl-news-title">{item.title}</div>
                   <div className="bl-news-excerpt">{item.excerpt}</div>
@@ -335,7 +372,7 @@ export default function BlogPage() {
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <div className="bl-featured-header">
               <h2 className="bl-featured-title">Featured <em>topics</em></h2>
-              <p className="bl-featured-sub">Curated stories and practical insights that define life at Brain Child.</p>
+              <p className="bl-featured-sub">Curated stories and practical insights that define life at Sky View.</p>
             </div>
 
             <Carousel className="w-full">
@@ -346,7 +383,7 @@ export default function BlogPage() {
                       <div>
                         <div
                           className="bl-featured-tag"
-                          style={{ background: `${tagColors[topic.tag]}22`, color: tagColors[topic.tag] }}
+                          style={{ background: `${tagColors[topic.tag] ?? "#F4845F"}22`, color: tagColors[topic.tag] ?? "#F4845F" }}
                         >
                           {topic.tag}
                         </div>
@@ -385,7 +422,10 @@ export default function BlogPage() {
                     <div className="bl-post-meta">
                       <div
                         className="bl-post-tag"
-                        style={{ background: `${tagColors[post.tag] || "#1A1A2E"}18`, color: tagColors[post.tag] || "#1A1A2E" }}
+                        style={{
+                          background: `${tagColors[post.tag] ?? "#1A1A2E"}18`,
+                          color: tagColors[post.tag] ?? "#1A1A2E",
+                        }}
                       >
                         {post.tag}
                       </div>

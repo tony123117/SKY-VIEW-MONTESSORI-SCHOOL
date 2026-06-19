@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import React from "react";
 import { MdOutlineArrowForward } from "react-icons/md";
 
 export type WhyChooseUsCardProps = {
@@ -28,47 +28,51 @@ export default function WhyChooseUsCard({
   onReadMore,
 }: WhyChooseUsCardProps) {
   return (
-    <motion.div
-      whileHover={{ y: -12, scale: 1.015 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-      className="group relative flex flex-col h-[520px] bg-white rounded-[2rem] overflow-hidden border border-slate-100 shadow-[0_2px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_24px_48px_rgba(0,0,0,0.10)] transition-shadow duration-500 cursor-pointer"
+    <div
       onClick={onReadMore}
       tabIndex={0}
       role="button"
       aria-label={`Learn more about ${title}`}
       onKeyDown={(e) => e.key === "Enter" && onReadMore?.()}
+      className="group relative flex flex-col h-full min-h-[520px] bg-white rounded-[2rem] overflow-hidden border border-slate-100 
+                 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.12)] 
+                 transition-all duration-500 cursor-pointer hover:-translate-y-3 active:scale-[0.985]"
+      style={{ willChange: "transform" }}
     >
       {/* IMAGE */}
       <div className="relative h-[52%] w-full overflow-hidden">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-[1100ms] ease-out group-hover:scale-110"
           loading="lazy"
         />
 
         {/* Gradient scrim */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent" />
+
+        {/* Top accent bar (Hero-inspired) */}
+        <div 
+          className="absolute top-0 left-0 right-0 h-1.5" 
+          style={{ background: color }}
+        />
 
         {/* Number badge */}
-        <motion.div
-          className="absolute top-5 left-5 z-10"
-          whileHover={{ rotate: 6, scale: 1.1 }}
-          transition={{ type: "spring", stiffness: 300 }}
+        <div
+          className="absolute top-5 left-5 z-10 transition-transform group-hover:rotate-6 group-hover:scale-110 duration-300"
         >
           <div
-            className="bg-white/85 backdrop-blur-md w-11 h-11 rounded-2xl flex items-center justify-center font-black text-sm shadow-sm border border-white/60"
+            className="bg-white/90 backdrop-blur-md w-12 h-12 rounded-2xl flex items-center justify-center font-black text-base shadow-md border border-white/70"
             style={{ color, fontFamily: "'Playfair Display', serif" }}
           >
             {number}
           </div>
-        </motion.div>
+        </div>
 
         {/* Category badge */}
         {category && (
           <div
-            className={`absolute top-5 right-5 z-10 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+            className={`absolute top-5 right-5 z-10 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm ${
               categoryStyles[category] ?? "bg-slate-100 text-slate-600"
             }`}
           >
@@ -78,41 +82,40 @@ export default function WhyChooseUsCard({
       </div>
 
       {/* BODY */}
-      <div className="flex-1 px-7 pt-6 pb-6 flex flex-col bg-gradient-to-b from-white to-pink-50/20 group-hover:to-pink-100/20 transition-all duration-500">
+      <div className="flex-1 px-7 pt-7 pb-7 flex flex-col bg-gradient-to-b from-white to-slate-50/80 group-hover:to-white transition-colors duration-500">
         <h3
-          className="text-xl font-extrabold mb-3 text-slate-800 tracking-tight leading-snug"
+          className="text-[22px] font-black mb-4 text-slate-900 tracking-[-0.02em] leading-tight"
           style={{ fontFamily: "'Playfair Display', serif" }}
         >
           {title}
         </h3>
 
-        <p className="text-slate-500 text-sm leading-relaxed flex-1 line-clamp-3 group-hover:text-slate-600 transition-colors">
+        <p className="text-slate-600 text-[15px] leading-relaxed flex-1 line-clamp-4 mb-6 group-hover:text-slate-700 transition-colors">
           {description}
         </p>
 
         {/* Footer */}
-        <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-          <motion.span
-            className="flex items-center gap-2 text-sm font-bold transition-all duration-300"
+        <div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
+          <span
+            className="flex items-center gap-2 text-sm font-semibold transition-all group-hover:gap-3"
             style={{ color }}
-            whileHover={{ x: 4 }}
           >
             Learn more
-            <MdOutlineArrowForward className="text-lg" />
-          </motion.span>
+            <MdOutlineArrowForward className="text-xl transition-transform group-hover:translate-x-1" />
+          </span>
 
           <button
             onClick={(e) => {
               e.stopPropagation();
               onReadMore?.();
             }}
-            aria-label={`Read more about ${title}`}
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 active:scale-95 transition-all"
+            className="px-5 py-2.5 rounded-2xl bg-white border border-slate-200 text-xs font-semibold hover:border-slate-300 hover:bg-slate-50 active:scale-95 transition-all shadow-sm"
+            style={{ color: "#1F3A5F" }}
           >
-            Read more
+            Details
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

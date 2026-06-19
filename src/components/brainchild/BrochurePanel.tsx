@@ -86,7 +86,7 @@ export default function BrochurePanel({ open, onClose }: BrochurePanelProps) {
                 <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-white/10" />
                 <div className="absolute -top-6 -left-6 w-20 h-20 rounded-full bg-white/5" />
                 <p className="text-[10px] font-bold uppercase tracking-widest opacity-75 mb-2">
-                  Brain Child Nursery &amp; Primary School
+                  SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL Nursery &amp; Primary School
                 </p>
                 <h3
                   className="text-3xl font-black leading-tight mb-2"
@@ -129,7 +129,7 @@ export default function BrochurePanel({ open, onClose }: BrochurePanelProps) {
 
               {/* Actions */}
               <div className="flex gap-3 flex-wrap">
-                
+
                 <a
                   href="https://portal.brainchildintschools.com/enroll"
                   target="_blank"

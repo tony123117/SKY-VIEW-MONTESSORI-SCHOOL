@@ -1,49 +1,52 @@
 import React from 'react';
 
 const NavLogo = () => {
-  const colors = ['text-[#1E3A8A]', 'text-[#EF4444]', 'text-[#22C55E]', 'text-[#EC4899]', 'text-[#FACC15]'];
-
-  // Slimmer border for small scale
-  const miniStickerFilter = {
-    filter: `
-      drop-shadow(1px 0 0 white) 
-      drop-shadow(-1px 0 0 white) 
-      drop-shadow(0 1px 0 white) 
-      drop-shadow(0 -1px 0 white) 
-      drop-shadow(1px 1px 2px rgba(0,0,0,0.2))
-    `
-  };
-
   return (
     <div className="flex flex-col items-center leading-none select-none group cursor-pointer">
-      {/* Brain Child - Upright Version */}
+
+      {/* Main logo text */}
       <div
-        className="flex gap-1 text-xl font-extrabold tracking-tighter not-italic"
-        style={{
-          fontFamily: '"Bubblegum Sans"',
-          fontStyle: 'normal', // Forces font to not be italic
-          ...miniStickerFilter
-        }}
+        className="flex items-center gap-0 transition-transform duration-300 group-hover:scale-[1.03]"
+        style={{ fontFamily: 'var(--font-heading)' }}
       >
-        {"BRAIN".split("").map((char, i) => (
-          <span key={i} className={colors[i % colors.length]}>{char}</span>
-        ))}
-        <span className="w-1" />
-        {"CHILD".split("").map((char, i) => (
-          <span key={i} className={colors[(i + 1) % colors.length]}>{char}</span>
-        ))}
+        {/* SKY */}
+        <span
+          className="text-2xl md:text-3xl font-extrabold tracking-tight text-blue drop-shadow-sm"
+        >
+          SKY
+        </span>
+
+        {/* Divider pip */}
+        <span
+          className="mx-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 self-center"
+          style={{ background: 'linear-gradient(135deg, #FF6B9D, #9B1C2C)' }}
+        />
+
+        {/* VIEW */}
+        <span
+          className="text-2xl md:text-3xl font-extrabold tracking-tight"
+          style={{ color: '#FF6B9D' }}
+        >
+          VIEW
+        </span>
       </div>
 
-      {/* International School, Enugu - Micro Version */}
+      {/* Animated underline */}
+      <span
+        className="h-[2px] w-0 group-hover:w-full transition-all duration-300 mt-0.5 rounded-full"
+        style={{ background: 'linear-gradient(90deg, #4A9EDB 0%, #FF6B9D 100%)' }}
+      />
+
+      {/* Subtitle */}
       <p
-        className="text-[9px] uppercase font-black tracking-[0.1em] text-[#1E3A8A] mt-[-2px]"
+        className="text-[9px] md:text-[10px] uppercase font-extrabold tracking-[0.55em] mt-1 whitespace-nowrap"
         style={{
-          fontFamily: 'sans-serif',
-          fontStyle: 'normal', // Forces font to not be italic
-          ...miniStickerFilter
+          fontFamily: 'var(--font-body)',
+          color: 'rgba(0, 0, 0, 0.45)',
+          letterSpacing: '0.3em',
         }}
       >
-       Nursery & Primary School
+        Nursery · Primary · Secondary
       </p>
     </div>
   );

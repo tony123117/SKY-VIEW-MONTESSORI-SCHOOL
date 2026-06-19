@@ -4,88 +4,142 @@ import BrainButton from "./BrainButton";
 import BlogGrid from "./BlogGrid";
 import { AnimatedSection } from "./AnimatedSection";
 import { BlogPost } from "@/types/blogs";
-import activitiesImg from '@/assets/images/activities.jpg'
-import fruitsImg from '@/assets/images/students.jpg'
-import computerImg from "@/assets/images/computer.jpeg";
+import judoImg  from '@/assets/skyview-images/judo.png';
+import footballImg     from '@/assets/skyview-images/football.png';
+import computerLabImg    from "@/assets/skyview-images/computer.png";
+import schoolBuildingImg    from "@/assets/skyview-images/building.jpeg";
+import scienceCraftImg  from "@/assets/skyview-images/science.png";
 
-import outsideImg from "@/assets/images/assembly.jpg";
-import curriculumImg from "@/assets/images/curiculum.jpg";
+
 
 export function BlogSection() {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
   const posts: BlogPost[] = [
-    {
-      id: "1",
-      title: "Extra-Curricular Activities",
-      excerpt: "From culinary arts to drama and swimming, our programs help children explore talents beyond the classroom.",
-      coverImage: activitiesImg,
-      author: "School Admin",
-      publishedAt: "2026-02-01",
-      slug: "extra-curricular-activities",
-      link: "/blog",
-    },
-    {
-      id: "2",
-      title: "Punctuality & Attendance",
-      excerpt: "Our school day begins at 7:30am, with gates closing at 8:00am to encourage discipline and structure.",
-      coverImage: outsideImg,
-      author: "School Admin",
-      publishedAt: "2026-02-01",
-      slug: "punctuality-attendance",
-      link: "/blog",
-    },
-    {
-      id: "3",
-      title: "Academic Excellence",
-      excerpt: "We combine strong academic foundations with modern teaching methods to help every child thrive.",
-      coverImage: curriculumImg,
-      author: "Academic Team",
-      publishedAt: "2026-02-10",
-      slug: "academic-excellence",
-      link: "/blog",
-    },
-    {
-      id: "4",
-      title: "Digital Literacy",
-      excerpt: "Preparing students with essential 21st-century technology skills in a guided learning environment.",
-      coverImage: computerImg,
-      author: "ICT Department",
-      publishedAt: "2026-02-15",
-      slug: "digital-literacy",
-      link: "/blog",
-    },
-    {
-      id: "5",
-      title: "Nutrition & Wellbeing",
-      excerpt: "A balanced diet supports focus, growth, and overall student wellbeing in and out of school.",
-      coverImage: fruitsImg,
-      author: "School Nurse",
-      publishedAt: "2026-03-05",
-      slug: "nutrition",
-      link: "/blog",
-    },
-  ];
+  {
+    id: "1",
+    title: "Judo & Character Development",
+    excerpt: "Our judo program teaches discipline, confidence, respect, and self-control while promoting physical fitness.",
+    coverImage: judoImg,
+    author: "Sports Department",
+    publishedAt: "2026-02-01",
+    slug: "judo-character-development",
+    link: "/blog",
+  },
+  {
+    id: "2",
+    title: "Football Excellence",
+    excerpt: "Through football training, students develop teamwork, leadership, sportsmanship, and healthy competition.",
+    coverImage: footballImg,
+    author: "Sports Department",
+    publishedAt: "2026-02-05",
+    slug: "football-excellence",
+    link: "/blog",
+  },
+  {
+    id: "3",
+    title: "Digital Learning & Computer Skills",
+    excerpt: "Our computer laboratory equips students with essential digital literacy and technology skills for the future.",
+    coverImage: computerLabImg,
+    author: "ICT Department",
+    publishedAt: "2026-02-10",
+    slug: "digital-learning",
+    link: "/blog",
+  },
+  {
+    id: "4",
+    title: "A Conducive Learning Environment",
+    excerpt: "Our modern school facilities provide a safe, comfortable, and inspiring atmosphere for academic success.",
+    coverImage: schoolBuildingImg,
+    author: "School Admin",
+    publishedAt: "2026-02-15",
+    slug: "learning-environment",
+    link: "/blog",
+  },
+  {
+    id: "5",
+    title: "Science, Creativity & Discovery",
+    excerpt: "From science experiments to creative crafts and outdoor activities, students learn by exploring and creating.",
+    coverImage: scienceCraftImg,
+    author: "Academic Team",
+    publishedAt: "2026-03-05",
+    slug: "science-creativity-discovery",
+    link: "/blog",
+  },
+];
 
   return (
-    <section className="bg-[#FFF5F7] px-6 md:px-12 lg:px-24 py-24 md:py-32 relative overflow-hidden">
-      <div className="absolute top-10 right-[-5%] text-[20vw] font-black text-primary/5 select-none leading-none pointer-events-none italic">
-        Journal
-      </div>
-      <div className="max-w-[1400px] mx-auto relative z-10">
-        <AnimatedSection>
-          <div className="flex flex-col md:flex-row justify-between items-center mb-20 gap-8">
-            <div className="max-w-2xl text-center md:text-left">
-              <span className="text-[11px] font-black tracking-[0.4em] uppercase text-primary mb-4 block">Insights & Updates</span>
-              <h2 className="text-4xl md:text-7xl font-heading font-black text-slate-900 tracking-tight leading-[0.9]">
-                Inside Our <br /> <span className="text-primary italic font-light">Learning Journal.</span>
+    <section
+      className="relative py-24 md:py-32 px-4 md:px-12 lg:px-24 overflow-hidden"
+      style={{ backgroundColor: '#F8F4F6' }}
+    >
+      {/* Subtle background wash */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 70% 50% at 80% 20%, rgba(74,158,219,0.06) 0%, transparent 60%)',
+        }}
+      />
+
+      {/* Doodle accent — right margin rule */}
+      <div
+        className="absolute right-0 top-0 bottom-0 w-[3px] pointer-events-none opacity-20"
+        style={{
+          background:
+            'repeating-linear-gradient(180deg, #4A9EDB 0px, #4A9EDB 8px, transparent 8px, transparent 18px)',
+        }}
+      />
+      {/* Corner watermark */}
+      <span
+        className="absolute bottom-8 left-8 select-none pointer-events-none opacity-[0.07] text-lg font-bold rotate-[-6deg]"
+        style={{ fontFamily: "'Schoolbell', cursive", color: '#9B1C2C' }}
+      >
+        📖 Read
+      </span>
+
+      <div className="relative max-w-[1400px] mx-auto">
+
+        {/* HEADER */}
+        <AnimatedSection className="mb-14 md:mb-18">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="block w-8 h-[2px] rounded-full" style={{ backgroundColor: '#4A9EDB' }} />
+                <span
+                  className="text-[11px] font-bold tracking-[0.18em] uppercase"
+                  style={{ color: '#2E7EB8', fontFamily: 'var(--font-body)' }}
+                >
+                  Insights & Updates
+                </span>
+              </div>
+              <h2
+                className="text-4xl md:text-5xl font-bold leading-[1.1]"
+                style={{ fontFamily: 'var(--font-heading)', color: '#1F1F1F' }}
+              >
+                Inside our{' '}
+                <span className="italic font-light" style={{ color: '#9B1C2C' }}>
+                  learning journal
+                </span>
               </h2>
             </div>
-            <BrainButton variant="primary" className="rounded-full px-10 py-6 shadow-xl">View All Stories</BrainButton>
+
+            <BrainButton
+              variant="primary"
+              className="self-start md:self-end rounded-xl px-8 py-4 text-[11px] font-bold tracking-widest uppercase shrink-0"
+            >
+              View All Stories
+            </BrainButton>
           </div>
+
+          <div className="mt-8 h-[1px] w-full" style={{ backgroundColor: '#E5DDE0' }} />
         </AnimatedSection>
+
+        {/* BLOG GRID */}
         <BlogGrid posts={posts} onPostClick={setSelectedPost} />
+
       </div>
+
       <BlogModal post={selectedPost} onClose={() => setSelectedPost(null)} />
     </section>
   );

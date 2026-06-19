@@ -1,5 +1,5 @@
 // Edge function: send-contact-email
-// Forwards Brain Child contact-form submissions to info@brainchildintschools.com via Resend.
+// Forwards SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL contact-form submissions to info@skyviewintschools.com via Resend.
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -8,8 +8,8 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-const TO_EMAIL = "info@brainchildintschools.com";
-const FROM_EMAIL = "Brain Child Website <onboarding@resend.dev>";
+const TO_EMAIL = "info@skyviewintschools.com";
+const FROM_EMAIL = "SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL Website <onboarding@resend.dev>";
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/resend";
 
 interface ContactBody {

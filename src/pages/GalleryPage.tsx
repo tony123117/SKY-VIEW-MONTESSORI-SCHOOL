@@ -4,20 +4,17 @@ import { Footer } from "@/components/brainchild/Footer";
 import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
 
-import img1 from "@/assets/images/activities.jpg";
-import img2 from "@/assets/images/544A7178.jpg.jpg";
-import img3 from "@/assets/images/544A7188.jpg.jpg";
-import img4 from "@/assets/images/544A7218.jpg.jpg";
-import img5 from "@/assets/images/544A7241.jpg.jpg";
-import img6 from "@/assets/images/544A7290.jpg.jpg";
-import img7 from "@/assets/images/544A7328.jpg.jpg";
-import img8 from "@/assets/images/544A7353.jpg.jpg";
-import img9 from "@/assets/images/544A7364.jpg.jpg";
-import playImg from "@/assets/images/play.jpg";
-import creativeFun from "@/assets/images/creative.jpeg";
-import studentsImg from "@/assets/images/students.jpg";
-import kidsImg from "@/assets/images/kids.jpg";
-import holdImg from "@/assets/images/hold.jpg";
+import blocksimg from "@/assets/skyview-images/building-blocks.jpeg";
+import bluildingimg from "@/assets/skyview-images/building2.jpeg";
+import computerLabImg from "@/assets/skyview-images/computer.png";
+import craftImg from "@/assets/SKYVIEW-IMAGES/craft.jpeg";
+import directorImg from "@/assets/skyview-images/director.png";
+import footballImg from "@/assets/skyview-images/football.png";
+import judoimg from "@/assets/skyview-images/judo.png";
+import musicImg from "@/assets/skyview-images/music.png";
+import playgroundimg from "@/assets/skyview-images/playground.png";
+import scienceImg from "@/assets/skyview-images/science.png";
+import swimmingImg from "@/assets/skyview-images/swimming.jpeg";
 
 interface GalleryImage {
   id: string;
@@ -29,20 +26,94 @@ interface GalleryImage {
 }
 
 const galleryImages: GalleryImage[] = [
-  { id: "1", src: img1, title: "Classroom Learning", category: "academics", description: "Interactive classroom sessions", tall: true },
-  { id: "2", src: img2, title: "Creative Workshop", category: "activities", description: "Children exploring creativity" },
-  { id: "3", src: img3, title: "Outdoor Play", category: "facilities", description: "Safe and fun outdoor activities" },
-  { id: "4", src: img4, title: "Team Building", category: "activities", description: "Collaborative learning experiences", tall: true },
-  { id: "5", src: img5, title: "Class Activities", category: "academics", description: "Engaging class activities" },
-  { id: "6", src: img6, title: "Student Engagement", category: "academics", description: "Passionate learning moments" },
-  { id: "7", src: img7, title: "Sports & Recreation", category: "facilities", description: "Active playground activities", tall: true },
-  { id: "8", src: img8, title: "Group Experience", category: "activities", description: "Together we grow stronger" },
-  { id: "9", src: img9, title: "Classroom Moments", category: "academics", description: "Daily learning adventures" },
-  { id: "10", src: playImg, title: "Playtime Fun", category: "facilities", description: "Creative outdoor play" },
-  { id: "11", src: creativeFun, title: "Arts & Crafts", category: "activities", description: "Artistic expression", tall: true },
-  { id: "12", src: studentsImg, title: "Student Life", category: "academics", description: "Life at Brain Child" },
-  { id: "13", src: kidsImg, title: "Happy Kids", category: "activities", description: "Smiling at success" },
-  { id: "14", src: holdImg, title: "Care & Support", category: "facilities", description: "Nurturing environment" },
+  {
+    id: "1",
+    src: bluildingimg,
+    title: "School Building",
+    category: "facilities",
+    description: "A conducive environment designed for learning and growth",
+    tall: true,
+  },
+  {
+    id: "2",
+    src: computerLabImg,
+    title: "Computer Laboratory",
+    category: "academics",
+    description: "Equipping students with essential digital skills",
+  },
+  {
+    id: "3",
+    src: scienceImg,
+    title: "Science Discovery",
+    category: "academics",
+    description: "Hands-on experiments that spark curiosity and innovation",
+  },
+  {
+    id: "4",
+    src: footballImg,
+    title: "Football Training",
+    category: "activities",
+    description: "Developing teamwork, fitness, and sportsmanship",
+    tall: true,
+  },
+  {
+    id: "5",
+    src: judoimg,
+    title: "Judo Classes",
+    category: "activities",
+    description: "Building discipline, confidence, and self-control",
+  },
+  {
+    id: "6",
+    src: swimmingImg,
+    title: "Swimming Lessons",
+    category: "activities",
+    description: "Teaching water safety and swimming skills",
+  },
+  {
+    id: "7",
+    src: playgroundimg,
+    title: "Playground Activities",
+    category: "facilities",
+    description: "Safe and engaging outdoor recreation",
+    tall: true,
+  },
+  {
+    id: "8",
+    src: craftImg,
+    title: "Arts & Crafts",
+    category: "activities",
+    description: "Encouraging creativity and self-expression",
+  },
+  {
+    id: "9",
+    src: musicImg,
+    title: "Music Education",
+    category: "activities",
+    description: "Nurturing talent through music and performance",
+  },
+  {
+    id: "10",
+    src: blocksimg,
+    title: "Building Blocks Learning",
+    category: "academics",
+    description: "Developing problem-solving and motor skills through play",
+  },
+  {
+    id: "11",
+    src: directorImg,
+    title: "School Leadership",
+    category: "facilities",
+    description: "Dedicated leadership committed to academic excellence",
+    tall: true,
+  },
+  {
+    id: "12",
+    src: bluildingimg,
+    title: "Campus View",
+    category: "facilities",
+    description: "A welcoming campus that inspires learning",
+  },
 ];
 
 const categories = [
@@ -53,9 +124,9 @@ const categories = [
 ];
 
 const catAccents: Record<string, string> = {
-  academics: "#4E9AF1",
-  activities: "#F4845F",
-  facilities: "#2DCE89",
+  academics: "#4A9EDB",
+  activities: "#9B1C2C",
+  facilities: "#FF6B9D",
 };
 
 export default function GalleryPage() {
@@ -77,11 +148,11 @@ export default function GalleryPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-        .gl-root { font-family: 'DM Sans', sans-serif; background: #FAF8F5; color: #1A1A2E; }
+        .gl-root { font-family: 'DM Sans', sans-serif; background: #FFF6F8; color: #5A1018; }
 
         /* HERO */
         .gl-hero {
-          background: #1A1A2E;
+          background: #3D0B11;
           padding: 100px 60px 72px;
           position: relative; overflow: hidden;
         }
@@ -91,7 +162,7 @@ export default function GalleryPage() {
           position: absolute;
           font-family: 'Fraunces', serif;
           font-size: 20vw; font-weight: 900;
-          color: #FAF8F504;
+          color: #FFF6F804;
           bottom: -30px; right: -20px;
           line-height: 1; letter-spacing: -0.05em;
           pointer-events: none; user-select: none;
@@ -103,28 +174,32 @@ export default function GalleryPage() {
         }
         .gl-eyebrow {
           font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
-          color: #F4845F; margin-bottom: 20px;
+          color: #FF6B9D; margin-bottom: 20px;
           display: flex; align-items: center; gap: 12px;
         }
-        .gl-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: #F4845F; }
+        .gl-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: #FF6B9D; }
         .gl-hero-title {
           font-family: 'Fraunces', serif;
           font-size: clamp(3rem, 6vw, 5.5rem);
-          color: #FAF8F5; font-weight: 300; line-height: 1.0;
+          color: #FFF6F8; font-weight: 300; line-height: 1.0;
           margin: 0;
         }
-        .gl-hero-title em { font-style: italic; color: #F4845F; }
-        .gl-hero-sub { font-size: 14px; color: #FAF8F555; font-weight: 300; max-width: 300px; line-height: 1.7; text-align: right; }
+        .gl-hero-title em { font-style: italic; color: #FF6B9D; }
+        .gl-hero-sub { font-size: 14px; color: #FFF6F855; font-weight: 300; max-width: 300px; line-height: 1.7; text-align: right; }
         @media (max-width: 640px) { .gl-hero-sub { text-align: left; } }
 
         /* FILTER BAR */
         .gl-filters {
-          background: #FAF8F5;
-          border-bottom: 1px solid #1A1A2E0c;
-          padding: 24px 60px;
-          position: sticky; top: 64px; z-index: 40;
+          background: #FFFFFF;
+          border: 1px solid #5A10180c;
+          border-radius: 18px;
+          box-shadow: 0 20px 48px rgba(90, 16, 24, 0.1);
+          padding: 22px 32px;
+          max-width: 1200px;
+          margin: -44px auto 0;
+          position: relative; z-index: 40;
         }
-        @media (max-width: 768px) { .gl-filters { padding: 20px 24px; top: 56px; } }
+        @media (max-width: 768px) { .gl-filters { padding: 18px 20px; margin: -32px 16px 0; } }
         .gl-filters-inner {
           max-width: 1200px; margin: 0 auto;
           display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
@@ -132,31 +207,31 @@ export default function GalleryPage() {
 
         .gl-search {
           flex: 1; min-width: 200px;
-          background: #1A1A2E08;
-          border: 1px solid #1A1A2E12;
-          border-radius: 4px;
+          background: #5A101808;
+          border: 1px solid #5A101812;
+          border-radius: 999px;
           padding: 11px 18px;
           font-size: 13px; font-weight: 300;
-          color: #1A1A2E; font-family: 'DM Sans', sans-serif;
+          color: #5A1018; font-family: 'DM Sans', sans-serif;
           outline: none; transition: all 0.2s;
         }
-        .gl-search::placeholder { color: #1A1A2E55; }
-        .gl-search:focus { border-color: #F4845F; background: white; }
+        .gl-search::placeholder { color: #5A101855; }
+        .gl-search:focus { border-color: #2E7EB8; background: white; }
 
         .gl-cat-tabs { display: flex; gap: 4px; }
         .gl-cat-btn {
           padding: 9px 20px; border-radius: 100px;
           font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
-          border: 1px solid #1A1A2E15; background: transparent; color: #1A1A2E77;
+          border: 1px solid #5A101815; background: transparent; color: #5A101877;
           cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
           display: flex; align-items: center; gap: 7px;
         }
-        .gl-cat-btn:hover { border-color: #F4845F; color: #F4845F; }
-        .gl-cat-btn.active { background: #1A1A2E; color: #FAF8F5; border-color: #1A1A2E; }
+        .gl-cat-btn:hover { border-color: #9B1C2C; color: #9B1C2C; }
+        .gl-cat-btn.active { background: #2E7EB8; color: #FFFFFF; border-color: #2E7EB8; }
         .gl-cat-count { font-size: 10px; opacity: 0.55; }
 
-        .gl-results { font-size: 12px; color: #1A1A2E44; font-weight: 300; white-space: nowrap; }
-        .gl-results strong { color: #F4845F; font-weight: 600; }
+        .gl-results { font-size: 12px; color: #5A101844; font-weight: 300; white-space: nowrap; }
+        .gl-results strong { color: #9B1C2C; font-weight: 600; }
 
         /* GRID */
         .gl-grid-section { padding: 48px 60px 80px; }
@@ -186,7 +261,7 @@ export default function GalleryPage() {
 
         .gl-item-overlay {
           position: absolute; inset: 0;
-          background: linear-gradient(to top, #1A1A2Eee 0%, transparent 50%);
+          background: linear-gradient(to top, #5A1018ee 0%, transparent 50%);
           opacity: 0; transition: opacity 0.3s;
           display: flex; flex-direction: column; justify-content: flex-end;
           padding: 24px 20px;
@@ -197,18 +272,18 @@ export default function GalleryPage() {
           padding: 3px 10px; border-radius: 100px; display: inline-block;
           margin-bottom: 8px; width: fit-content;
         }
-        .gl-item-title { font-family: 'Fraunces', serif; font-size: 1rem; color: #FAF8F5; font-weight: 300; margin-bottom: 4px; }
-        .gl-item-desc { font-size: 12px; color: #FAF8F577; font-weight: 300; }
+        .gl-item-title { font-family: 'Fraunces', serif; font-size: 1rem; color: #FFF6F8; font-weight: 300; margin-bottom: 4px; }
+        .gl-item-desc { font-size: 12px; color: #FFF6F877; font-weight: 300; }
 
         .gl-empty { text-align: center; padding: 80px 24px; }
-        .gl-empty-title { font-family: 'Fraunces', serif; font-size: 2rem; color: #1A1A2E; font-weight: 300; margin-bottom: 12px; }
-        .gl-empty-sub { font-size: 14px; color: #1A1A2E55; margin-bottom: 24px; }
-        .gl-clear-btn { font-size: 13px; font-weight: 600; color: #F4845F; background: none; border: none; cursor: pointer; text-decoration: underline; font-family: 'DM Sans', sans-serif; }
+        .gl-empty-title { font-family: 'Fraunces', serif; font-size: 2rem; color: #5A1018; font-weight: 300; margin-bottom: 12px; }
+        .gl-empty-sub { font-size: 14px; color: #5A101855; margin-bottom: 24px; }
+        .gl-clear-btn { font-size: 13px; font-weight: 600; color: #9B1C2C; background: none; border: none; cursor: pointer; text-decoration: underline; font-family: 'DM Sans', sans-serif; }
 
         /* LIGHTBOX */
         .gl-lightbox {
           position: fixed; inset: 0; z-index: 100;
-          background: #1A1A2Ef5;
+          background: #5A1018f5;
           display: flex; align-items: center; justify-content: center;
           padding: 24px;
           backdrop-filter: blur(8px);
@@ -227,22 +302,22 @@ export default function GalleryPage() {
           width: 100%;
         }
         .gl-lightbox-meta {
-          background: #FAF8F5;
+          background: #FFF6F8;
           padding: 20px 28px;
           border-radius: 0 0 6px 6px;
           display: flex; align-items: center; gap: 16px;
         }
-        .gl-lightbox-title { font-family: 'Fraunces', serif; font-size: 1.2rem; color: #1A1A2E; font-weight: 400; }
-        .gl-lightbox-desc { font-size: 13px; color: #1A1A2E66; font-weight: 300; margin-top: 2px; }
+        .gl-lightbox-title { font-family: 'Fraunces', serif; font-size: 1.2rem; color: #5A1018; font-weight: 400; }
+        .gl-lightbox-desc { font-size: 13px; color: #5A101866; font-weight: 300; margin-top: 2px; }
         .gl-lightbox-close {
           position: absolute; top: -48px; right: 0;
-          background: #FAF8F515; border: 1px solid #FAF8F530;
-          color: #FAF8F5; width: 36px; height: 36px;
+          background: #FFF6F815; border: 1px solid #FFF6F830;
+          color: #FFF6F8; width: 36px; height: 36px;
           border-radius: 50%; font-size: 14px;
           display: flex; align-items: center; justify-content: center;
           cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
         }
-        .gl-lightbox-close:hover { background: #FAF8F525; }
+        .gl-lightbox-close:hover { background: #FFF6F825; }
       `}</style>
 
       <div className="gl-root">
@@ -253,7 +328,7 @@ export default function GalleryPage() {
           <div className="gl-hero-inner">
             <div>
               <div className="gl-eyebrow">Visual Stories</div>
-              <h1 className="gl-hero-title">Life at<br /><em>Brain Child</em></h1>
+              <h1 className="gl-hero-title">Life at<br /><em>Brain Child International School</em></h1>
             </div>
             <p className="gl-hero-sub">
               A window into the moments, milestones, and everyday magic that make our school extraordinary.
@@ -314,9 +389,9 @@ export default function GalleryPage() {
                         <div
                           className="gl-item-cat"
                           style={{
-                            background: `${catAccents[img.category] || "#FAF8F5"}22`,
-                            color: catAccents[img.category] || "#FAF8F5",
-                            border: `1px solid ${catAccents[img.category] || "#FAF8F5"}44`,
+                            background: `${catAccents[img.category] || "#FFF6F8"}22`,
+                            color: catAccents[img.category] || "#FFF6F8",
+                            border: `1px solid ${catAccents[img.category] || "#FFF6F8"}44`,
                           }}
                         >
                           {img.category}
@@ -363,7 +438,7 @@ export default function GalleryPage() {
                   <div
                     style={{
                       width: 8, height: 8, borderRadius: "50%",
-                      background: catAccents[lightbox.category] || "#F4845F",
+                      background: catAccents[lightbox.category] || "#9B1C2C",
                       flexShrink: 0,
                     }}
                   />
@@ -375,7 +450,7 @@ export default function GalleryPage() {
                     style={{
                       marginLeft: "auto", fontSize: 11, fontWeight: 600,
                       letterSpacing: "0.15em", textTransform: "uppercase",
-                      color: catAccents[lightbox.category] || "#F4845F",
+                      color: catAccents[lightbox.category] || "#9B1C2C",
                     }}
                   >
                     {lightbox.category}

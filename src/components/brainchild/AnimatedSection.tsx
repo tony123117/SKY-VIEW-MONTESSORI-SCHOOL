@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { fadeIn } from "@/components/ui/motionVariants";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -10,10 +11,11 @@ interface AnimatedSectionProps {
 export function AnimatedSection({ children, className, delay = 0 }: AnimatedSectionProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.5, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ delay }}
       className={className}
     >
       {children}

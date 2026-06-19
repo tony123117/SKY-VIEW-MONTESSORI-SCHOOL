@@ -63,10 +63,10 @@ interface UserProfile {
 
 // ─── School data ──────────────────────────────────────────────────────────────
 const SCHOOL = {
-  name: "Brain Child Nursery and Primary School",
+  name: "SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL",
   phone: "+234 706 117 5897",
-  email: "info@brainchildintschools.com",
-  address: "No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu",
+  email: "info@skyviewintschools.com",
+  address: "Plot 125, off Orji Udenta Street, Eke Layout, Nike Lake Road (after the Building Material Market), Trans-Ekulu, Enugu, Nigeria.",
   brochureUrl: "/brochure.pdf",
   programs: [
     "Pre-School (Ages 1½–2)",
@@ -197,7 +197,7 @@ function getBotReply(text: string, profile: UserProfile): string {
     return `Hello${name}! 👋 Welcome to **${SCHOOL.name}**. How can I help you today? You can ask me about admissions, programs, fees, facilities, or booking a campus tour!`;
 
   if (/(thank|thanks|thank you)/.test(m))
-    return `You're welcome${name}! 😊 Feel free to ask if you have any other questions. We look forward to welcoming your child to Brain Child!`;
+    return `You're welcome${name}! 😊 Feel free to ask if you have any other questions. We look forward to welcoming your child to SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL!`;
 
   return `Thanks for your message${name}! For the best answer, please call us at **${SCHOOL.phone}** or tap **Staff** below to chat with our team directly. We're happy to help! 😊`;
 }
@@ -511,7 +511,7 @@ export function WhatsAppWidget(): JSX.Element {
       if (!isOpen) { setShowNotif(true); bumpBadge(); }
     }, 8000);
     return () => clearTimeout(t);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const bumpBadge = useCallback(() => {
@@ -584,7 +584,7 @@ export function WhatsAppWidget(): JSX.Element {
 
     const prog = SCHOOL.programs.find((p) => p.startsWith(ageGroup)) ?? ageGroup;
     setTimeout(() => addBotMessage(
-      `Perfect! 🎉 The **${prog}** program sounds like a great fit.\n\nI'm Brain Child's AI assistant — ask me anything about our admissions, programs, facilities, or fees!`
+      `Perfect! 🎉 The **${prog}** program sounds like a great fit.\n\nI'm SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL's AI assistant — ask me anything about our admissions, programs, facilities, or fees!`
     ), 600);
   }, [profile, addUserMessage, addBotMessage, addLead]);
 
@@ -744,7 +744,7 @@ export function WhatsAppWidget(): JSX.Element {
                     <span style={{ position: "absolute", bottom: 1, right: 1, width: 10, height: 10, borderRadius: "50%", background: "#4ade80", border: "2px solid #064e3b" }} />
                   </div>
                   <div>
-                    <div style={{ color: "#fff", fontWeight: 700, fontSize: 14 }}>Brain Child Support</div>
+                    <div style={{ color: "#fff", fontWeight: 700, fontSize: 14 }}>SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL Support</div>
                     <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 11, marginTop: 2, display: "flex", alignItems: "center", gap: 5 }}>
                       <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ade80", display: "inline-block" }} />
                       Online · AI-powered

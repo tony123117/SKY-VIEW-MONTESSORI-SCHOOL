@@ -4,21 +4,16 @@ import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-import francis from "@/assets/images/Francis.jpeg";
-import tonia from "@/assets/images/mrs tonia.jpeg";
-import ogechi from "@/assets/images/ogechis.jpg";
-import director from "@/assets/images/BrainChildDirector.jpeg";
+import director from "@/assets/skyview-images/director.png";
 
-import creativeImg from "@/assets/images/creative.jpeg";
-import teachersImg from "@/assets/images/teachers.jpeg";
-import enterImg from "@/assets/images/enter.jpg";
-import outsideImg from "@/assets/images/outside.jpg";
-import curiculum from "@/assets/images/curiculum.jpg";
+import buildingImg from "@/assets/SKYVIEW-IMAGES/building2.jpeg";
+import musicImg from "@/assets/SKYVIEW-IMAGES/music.png";
+import curiculum from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
 
-import img1 from "@/assets/images/activities.jpg";
-import img2 from "@/assets/images/544A7178.jpg.jpg";
-import img3 from "@/assets/images/544A7188.jpg.jpg";
-import img4 from "@/assets/images/544A7218.jpg.jpg";
+import img1 from "@/assets/SKYVIEW-IMAGES/director.png";
+import img2 from "@/assets/SKYVIEW-IMAGES/computer.png";
+import img3 from "@/assets/SKYVIEW-IMAGES/playground.png";
+import img4 from "@/assets/SKYVIEW-IMAGES/craft.jpeg";
 
 import {
   Carousel,
@@ -28,109 +23,49 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+// ─── Brand palette (matches index.css) ─────────────────────────────────────
+const WINE_RED = "#9B1C2C";
+const SKY_BLUE = "#4A9EDB";
+const PINK = "#FF6B9D";
+const NAVY = "#1F3A5F";
+
 // ─── data ────────────────────────────────────────────────────────────────────
 
 const heroSlides = [
-  { image: creativeImg,  title: "Our Story",               subtitle: "Brain Child Nursery and Primary School" },
-  { image: teachersImg,  title: "Excellence in Education", subtitle: "Nurturing young minds with excellence" },
-  { image: enterImg,     title: "Community & Growth",      subtitle: "Where learning meets character" },
-  { image: curiculum,    title: "Holistic Learning",       subtitle: "Growing hearts and minds together" },
-];
-
-const leadership = [
-  {
-    name: "Dr. (Mrs.) Ijeoma Darling Onwubuya",
-    role: "Director & Founder",
-    image: director,
-    bio: "With over 15 years in early childhood education, Dr. Ijeoma brings passion and expertise to every aspect of Brain Child.",
-    accent: "#f4831f",
-    bar: "bg-[#f4831f]",
-    initials: "IJ",
-    bg: "from-[#1a1f5e] to-[#303778]",
-  },
-  {
-    name: "Mr. Francis",
-    role: "Head of Grade Session",
-    image: francis,
-    bio: "Leading our academic excellence with innovative teaching methods and curriculum development.",
-    accent: "#4361ee",
-    bar: "bg-[#4361ee]",
-    initials: "FR",
-    bg: "from-[#0d3b6e] to-[#185fa5]",
-  },
-  {
-    name: "Ms. Tonia Edeh",
-    role: "Head of Kindergaten Session",
-    image: tonia,
-    bio: "Ensuring smooth operations and creating a safe, nurturing environment for all students.",
-    accent: "#e63946",
-    bar: "bg-[#e63946]",
-    initials: "TE",
-    bg: "from-[#5c1a3a] to-[#a0355e]",
-  },
-  {
-    name: "Ezeorah Ogechi Regina",
-    role: "Administrator",
-    image: ogechi,
-    bio: "Dedicated to creating safe and nurturing spaces where every child can thrive and grow.",
-    accent: "#2dc653",
-    bar: "bg-[#2dc653]",
-    initials: "OR",
-    bg: "from-[#1a3a1a] to-[#2d7a2d]",
-  },
-];
-
-const values = [
-  {
-    icon: "❤️",
-    title: "Compassion",
-    desc: "We treat every child with care, empathy, and individual attention — helping them feel seen and valued every day.",
-    bg: "bg-[#fff0f0]",
-    border: "border-[#e63946]/20",
-    pill: "bg-[#e63946]/10 text-[#e63946]",
-  },
-  {
-    icon: "🏆",
-    title: "Excellence",
-    desc: "We pursue the highest standards in teaching, learning, and character formation in everything we do.",
-    bg: "bg-[#fffbea]",
-    border: "border-[#f9c74f]/30",
-    pill: "bg-[#f9c74f]/20 text-[#b8860b]",
-  },
-  {
-    icon: "💡",
-    title: "Innovation",
-    desc: "We embrace modern methods and creative thinking to keep students ready for a rapidly changing world.",
-    bg: "bg-[#f0f4ff]",
-    border: "border-[#4361ee]/20",
-    pill: "bg-[#4361ee]/10 text-[#4361ee]",
-  },
-];
-
-const teamMembers = [
-  { name: "Dr. Ijeoma",     role: "Director",      image: director, color: "border-[#f4831f]" },
-  { name: "Mr. Francis",    role: "Head of Grade Session",          image: francis,  color: "border-[#4361ee]" },
-  { name: "Ms. Tonia Edeh", role: "Head of Kindergarten Session",   image: tonia,    color: "border-[#e63946]" },
-  { name: "Ezeorah Ogechi", role: "Administrator",  image: ogechi,   color: "border-[#2dc653]" },
+  { image: buildingImg, title: "Discover Skyview", subtitle: "Educational excellence since July 4th, 2015" },
+  { image: musicImg, title: "Great Achievers", subtitle: "Creative thinkers, entrepreneurs, researchers, solution providers" },
+  { image: curiculum, title: "Montessori Approach", subtitle: "Hands-on, interactive, and enjoyable learning" },
 ];
 
 const stats = [
-  { num: "15+", label: "Years of Excellence", color: "text-[#f4831f]" },
-  { num: "500+", label: "Alumni",             color: "text-[#e63946]" },
-  { num: "30+", label: "Qualified Staff",     color: "text-[#2dc653]" },
+  { num: "10+", label: "Years of Excellence", color: WINE_RED },
+  { num: "500+", label: "Alumni", color: PINK },
+  { num: "30+", label: "Qualified Staff", color: SKY_BLUE },
 ];
+
+// "Our Commitment to Excellence" — drawn from the school's About Us copy
+const commitments = [
+  { icon: "🎻", title: "Musical Instrument Lessons", desc: "Nurturing creativity through music from an early age." },
+  { icon: "🎤", title: "Leadership & Public Speaking", desc: "Training that builds confidence in every Great Achiever." },
+  { icon: "🏃", title: "Sporting Facilities", desc: "Excellent facilities supporting physical development." },
+  { icon: "🥅", title: "Standard Playing Field", desc: "A dedicated space for recreational activities." },
+  { icon: "🏊", title: "Swimming Lessons", desc: "Promoting a well-rounded education in and out of the classroom." },
+  { icon: "🍳", title: "Catering Practicals", desc: "A hands-on space to explore culinary talents." },
+  { icon: "🎨", title: "Creative Arts Tutoring", desc: "Fostering artistic expression in every child." },
+  { icon: "📚", title: "Library & ICT Lab", desc: "Standard resources for research and technology skills." },
+];
+
+const coreValues = ["Respect", "Integrity", "Self-confidence", "Discipline", "Excellence", "Determination", "Perseverance"];
 
 // ─── colour strip ─────────────────────────────────────────────────────────────
 
 function ColorStrip() {
   return (
     <div className="flex h-[5px] w-full">
-      <div className="flex-1 bg-[#e63946]" />
-      <div className="flex-1 bg-[#4361ee]" />
-      <div className="flex-1 bg-[#2dc653]" />
-      <div className="flex-1 bg-[#f9c74f]" />
-      <div className="flex-1 bg-[#f4831f]" />
-      <div className="flex-1 bg-[#7b2d8b]" />
+      <div className="flex-1" style={{ background: WINE_RED }} />
+      <div className="flex-1" style={{ background: SKY_BLUE }} />
+      <div className="flex-1" style={{ background: PINK }} />
+      <div className="flex-1" style={{ background: NAVY }} />
     </div>
   );
 }
@@ -142,11 +77,7 @@ export default function AboutPage() {
     <>
       <Navbar />
 
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
-      `}</style>
-
-      <div className="min-h-screen" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+      <div className="min-h-screen" style={{ fontFamily: "var(--font-body)" }}>
 
         {/* ── TOP COLOUR STRIP ──────────────────────────────────────────── */}
         <ColorStrip />
@@ -162,43 +93,37 @@ export default function AboutPage() {
                     {/* bg image */}
                     <div className="absolute inset-0">
                       <img src={slide.image} className="w-full h-full object-cover" alt={slide.title} />
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#1a1f5e]/88 via-[#303778]/70 to-[#1a1f5e]/85" />
+                      <div
+                        className="absolute inset-0"
+                        style={{ background: `linear-gradient(135deg, ${NAVY}e0 0%, ${WINE_RED}55 55%, ${NAVY}e0 100%)` }}
+                      />
                     </div>
 
                     {/* floating colour blobs */}
-                    <div className="absolute top-8 right-10 w-32 h-32 rounded-full bg-[#f4831f]/20 blur-2xl pointer-events-none" />
-                    <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full bg-[#2dc653]/15 blur-2xl pointer-events-none" />
+                    <div className="absolute top-8 right-10 w-32 h-32 rounded-full blur-2xl pointer-events-none" style={{ background: `${PINK}30` }} />
+                    <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full blur-2xl pointer-events-none" style={{ background: `${SKY_BLUE}25` }} />
 
                     {/* content */}
                     <div className="relative z-10 text-center text-white px-4 max-w-3xl">
                       <AnimatedSection>
-                        {/* multicolour BRAIN CHILD letters */}
-                        <div className="flex items-center justify-center gap-0 mb-3 select-none" style={{ fontFamily: "'Fraunces', serif" }}>
-                          {["B","R","A","I","N"].map((l, li) => {
-                            const cols = ["#4361ee","#e63946","#2dc653","#f9c74f","#f4831f"];
-                            return <span key={li} className="text-3xl md:text-5xl font-black" style={{ color: cols[li] }}>{l}</span>;
-                          })}
-                          <span className="text-3xl md:text-5xl font-black text-white mx-2"> </span>
-                          {["C","H","I","L","D"].map((l, li) => {
-                            const cols = ["#7b2d8b","#4361ee","#e63946","#2dc653","#f9c74f"];
-                            return <span key={li} className="text-3xl md:text-5xl font-black" style={{ color: cols[li] }}>{l}</span>;
-                          })}
-                        </div>
-                        <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-white/60 mb-6">
-                          Nursery &amp; Primary School
+                        <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-white/60 mb-3">
+                          Skyview Montessori School
                         </p>
 
-                        <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-[11px] font-bold tracking-[0.12em] uppercase px-5 py-2 rounded-full mb-5">
+                        <span
+                          className="inline-flex items-center gap-2 border text-white text-[11px] font-bold tracking-[0.12em] uppercase px-5 py-2 rounded-full mb-5"
+                          style={{ background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)" }}
+                        >
                           🏫 About Us
                         </span>
 
                         <h1
-                          className="text-4xl md:text-6xl leading-tight mb-4 text-white"
-                          style={{ fontFamily: "'Fraunces', serif", fontWeight: 900 }}
+                          className="text-4xl md:text-6xl leading-tight mb-4 text-white font-bold"
+                          style={{ fontFamily: "var(--font-heading)" }}
                         >
                           {slide.title.split(" ").map((word, wi) =>
                             wi === slide.title.split(" ").length - 1 ? (
-                              <span key={wi} className="text-[#f9c74f] italic"> {word}</span>
+                              <span key={wi} className="italic" style={{ color: PINK }}> {word}</span>
                             ) : (
                               <span key={wi}>{word} </span>
                             )
@@ -223,30 +148,42 @@ export default function AboutPage() {
         {/* ── STORY ─────────────────────────────────────────────────────── */}
         <section className="relative py-20 px-6 overflow-hidden bg-white">
           {/* soft tinted bg blobs */}
-          <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#f9c74f]/10 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-[#4361ee]/8 blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none" style={{ background: `${PINK}10` }} />
+          <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl pointer-events-none" style={{ background: `${SKY_BLUE}10` }} />
 
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
 
             <AnimatedSection>
               {/* eyebrow */}
-              <span className="inline-flex items-center gap-2 bg-[#f4831f]/10 text-[#f4831f] text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border border-[#f4831f]/20">
+              <span
+                className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border"
+                style={{ background: `${WINE_RED}10`, color: WINE_RED, borderColor: `${WINE_RED}25` }}
+              >
                 📖 Our Story
               </span>
 
               <h2
-                className="text-3xl md:text-4xl leading-tight text-[#1a1f5e] mb-5"
-                style={{ fontFamily: "'Fraunces', serif", fontWeight: 900 }}
+                className="text-3xl md:text-4xl leading-tight mb-5 font-bold"
+                style={{ fontFamily: "var(--font-heading)", color: NAVY }}
               >
-                Founded on a{" "}
-                <span className="text-[#e63946] italic">Vision of Excellence</span>
+                Educational Excellence{" "}
+                <span className="italic" style={{ color: WINE_RED }}>Since 2015</span>
               </h2>
 
-              <p className="text-[#1a1f5e]/65 text-[15px] leading-relaxed mb-4">
-                Brain Child Nursery and Primary School was established to nurture the whole child — academically, socially, and emotionally — from their very first steps in education.
+              <p className="text-[15px] leading-relaxed mb-4" style={{ color: `${NAVY}aa` }}>
+                Skyview Montessori School began its journey of educational excellence on July 4th, 2015, and we
+                attribute our growth in size, quality of education, and reputation to the grace of God. At Skyview,
+                we are committed to providing a Montessori-style education that sets the standard for excellence.
               </p>
-              <p className="text-[#1a1f5e]/65 text-[15px] leading-relaxed mb-10">
-                We combine traditional values with modern, research-backed teaching to prepare every student confidently for the future.
+              <p className="text-[15px] leading-relaxed mb-4" style={{ color: `${NAVY}aa` }}>
+                Our curriculum is thoughtfully designed, drawing from both British and Nigerian topics to offer a
+                well-rounded education. We believe in active learning, and our approach relies heavily on
+                interactive, hands-on, and enjoyable activities that foster a love for learning.
+              </p>
+              <p className="text-[15px] leading-relaxed mb-10" style={{ color: `${NAVY}aa` }}>
+                We refer to our students as the <strong>"Great Achievers"</strong> — and we aim to shape them into
+                Creative Thinkers, Entrepreneurs, Researchers, and Solution Providers, ready to unlock their potential
+                and turn their passion for learning into a lifelong habit.
               </p>
 
               {/* stats row */}
@@ -254,12 +191,12 @@ export default function AboutPage() {
                 {stats.map((s) => (
                   <div key={s.label} className="text-center">
                     <div
-                      className={`text-4xl font-black ${s.color}`}
-                      style={{ fontFamily: "'Fraunces', serif" }}
+                      className="text-4xl font-black"
+                      style={{ fontFamily: "var(--font-heading)", color: s.color }}
                     >
                       {s.num}
                     </div>
-                    <div className="text-[11px] font-bold tracking-widest text-[#1a1f5e]/50 uppercase mt-1">
+                    <div className="text-[11px] font-bold tracking-widest uppercase mt-1" style={{ color: `${NAVY}80` }}>
                       {s.label}
                     </div>
                   </div>
@@ -292,65 +229,56 @@ export default function AboutPage() {
 
         <ColorStrip />
 
-        {/* ── LEADERSHIP ────────────────────────────────────────────────── */}
-        <section className="relative py-20 px-6 bg-[#f0f4ff] overflow-hidden">
-          <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-[#7b2d8b]/8 blur-3xl pointer-events-none" />
+        {/* ── OUR COMMITMENT TO EXCELLENCE ──────────────────────────────── */}
+        <section className="relative py-20 px-6 overflow-hidden" style={{ background: "#FAF8F5" }}>
+          <div className="absolute inset-0 pointer-events-none opacity-40"
+            style={{
+              backgroundImage: `radial-gradient(circle, ${PINK}22 1px, transparent 1px)`,
+              backgroundSize: "32px 32px",
+            }}
+          />
 
-          <AnimatedSection className="text-center mb-14">
-            <span className="inline-flex items-center gap-2 bg-[#7b2d8b]/10 text-[#7b2d8b] text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border border-[#7b2d8b]/20">
-              👑 Leadership
+          <AnimatedSection className="text-center mb-14 relative z-10">
+            <span
+              className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border"
+              style={{ background: `${SKY_BLUE}15`, color: SKY_BLUE, borderColor: `${SKY_BLUE}30` }}
+            >
+              ⭐ Our Commitment to Excellence
             </span>
             <h2
-              className="text-3xl md:text-4xl leading-tight text-[#1a1f5e]"
-              style={{ fontFamily: "'Fraunces', serif", fontWeight: 900 }}
+              className="text-3xl md:text-4xl leading-tight font-bold"
+              style={{ fontFamily: "var(--font-heading)", color: NAVY }}
             >
-              Meet Our{" "}
-              <span className="text-[#4361ee] italic">Leadership Team</span>
+              World-Class Learning,{" "}
+              <span className="italic" style={{ color: PINK }}>Every Day</span>
             </h2>
-            <p className="text-[#1a1f5e]/55 text-sm max-w-md mx-auto mt-3">
-              Dedicated educators and administrators shaping every child's journey.
+            <p className="text-sm max-w-lg mx-auto mt-3" style={{ color: `${NAVY}90` }}>
+              Your partner in providing the best educational experience for your child.
             </p>
           </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-            {leadership.map((leader, i) => (
-              <AnimatedSection key={leader.name} delay={i * 0.08}>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto relative z-10">
+            {commitments.map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.05}>
                 <motion.div
-                  whileHover={{ y: -8 }}
+                  whileHover={{ y: -6 }}
                   transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  className="bg-white rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#4361ee]/20 shadow-[0_4px_20px_rgba(0,0,0,0.07)] hover:shadow-[0_16px_40px_rgba(67,97,238,0.14)] transition-all duration-300 group"
+                  className="bg-white border-2 rounded-2xl p-6 h-full hover:shadow-xl transition-all duration-300"
+                  style={{ borderColor: `${WINE_RED}15` }}
                 >
-                  {/* photo */}
-                  <div className="relative h-52 overflow-hidden">
-                    <img
-                      src={leader.image}
-                      alt={leader.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <span
-                      className="absolute bottom-3 left-3 text-white text-[9px] font-bold tracking-[0.12em] uppercase px-3 py-1 rounded-full"
-                      style={{ background: leader.accent }}
-                    >
-                      {leader.role}
-                    </span>
-                  </div>
-
-                  {/* colour bar */}
-                  <div className={`h-[4px] w-full ${leader.bar}`} />
-
-                  {/* body */}
-                  <div className="px-5 pt-4 pb-5">
-                    <h3
-                      className="text-[15px] text-[#1a1f5e] leading-snug mb-2 font-bold"
-                      style={{ fontFamily: "'Fraunces', serif" }}
-                    >
-                      {leader.name}
-                    </h3>
-                    <p className="text-[12px] text-[#1a1f5e]/55 leading-relaxed">
-                      {leader.bio}
-                    </p>
-                  </div>
+                  <span
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl text-2xl mb-4"
+                    style={{ background: `${WINE_RED}10` }}
+                  >
+                    {item.icon}
+                  </span>
+                  <h3
+                    className="text-base mb-2 font-bold"
+                    style={{ fontFamily: "var(--font-heading)", color: NAVY }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p className="text-[13px] leading-relaxed" style={{ color: `${NAVY}90` }}>{item.desc}</p>
                 </motion.div>
               </AnimatedSection>
             ))}
@@ -359,75 +287,102 @@ export default function AboutPage() {
 
         <ColorStrip />
 
-        {/* ── TEAM STRIP ────────────────────────────────────────────────── */}
-        <section className="relative py-16 px-6 overflow-hidden bg-[#fffdf7]">
-          <div className="absolute inset-0 pointer-events-none opacity-40"
-            style={{
-              backgroundImage: "radial-gradient(circle, rgba(249,199,79,0.15) 1px, transparent 1px)",
-              backgroundSize: "32px 32px",
-            }}
-          />
+        {/* ── LEADERSHIP (DIRECTOR) ─────────────────────────────────────── */}
+        <section className="relative py-20 px-6 overflow-hidden" style={{ background: `${SKY_BLUE}0c` }}>
+          <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-3xl pointer-events-none" style={{ background: `${WINE_RED}10` }} />
 
-          <AnimatedSection className="text-center mb-10 relative z-10">
-            <span className="inline-flex items-center gap-2 bg-[#2dc653]/10 text-[#1d8a3a] text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border border-[#2dc653]/25">
-              🤝 Our Team
+          <AnimatedSection className="text-center mb-14">
+            <span
+              className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border"
+              style={{ background: `${WINE_RED}10`, color: WINE_RED, borderColor: `${WINE_RED}25` }}
+            >
+              👑 Leadership
             </span>
             <h2
-              className="text-3xl md:text-4xl leading-tight text-[#1a1f5e]"
-              style={{ fontFamily: "'Fraunces', serif", fontWeight: 900 }}
+              className="text-3xl md:text-4xl leading-tight font-bold"
+              style={{ fontFamily: "var(--font-heading)", color: NAVY }}
             >
-              The People{" "}
-              <span className="text-[#e63946] italic">Behind the Magic</span>
+              About Our{" "}
+              <span className="italic" style={{ color: WINE_RED }}>School Director</span>
             </h2>
-            <p className="text-[#1a1f5e]/55 text-sm mt-3">
-              Meet the dedicated people shaping our students' future.
-            </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-4xl mx-auto relative z-10">
-            {teamMembers.map((member, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -6 }}
-                transition={{ delay: i * 0.08, duration: 0.3 }}
-                className="bg-white rounded-2xl p-4 text-center border-2 border-gray-100 hover:border-[#4361ee]/25 shadow-sm hover:shadow-xl transition-all duration-300"
-              >
-                <div className={`w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-4 ${member.color} shadow-md`}>
-                  <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
-                </div>
-                <h3
-                  className="text-[14px] text-[#1a1f5e] leading-tight mb-1 font-bold"
-                  style={{ fontFamily: "'Fraunces', serif" }}
-                >
-                  {member.name}
-                </h3>
-                <p className="text-[10px] font-bold tracking-[0.12em] uppercase text-[#4361ee]">
-                  {member.role}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="text-center mt-10 relative z-10">
-            <Link
-              to="/team"
-              className="inline-flex items-center gap-2 bg-[#1a1f5e] text-white text-[13px] font-bold tracking-[0.06em] px-6 py-3 rounded-full hover:bg-[#303778] transition-colors duration-200"
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 260, damping: 24 }}
+              className="bg-white rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.08)] grid md:grid-cols-[280px_1fr]"
             >
-              View Full Team →
-            </Link>
+              {/* photo */}
+              <div className="relative h-64 md:h-full min-h-[280px] overflow-hidden">
+                <img src={director} alt="Dr. (Mrs.) Ijeoma Darling Onwubuya" className="w-full h-full object-cover" />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: `linear-gradient(to top, ${NAVY}99 0%, transparent 45%)` }}
+                />
+                <span
+                  className="absolute bottom-4 left-4 text-white text-[10px] font-bold tracking-[0.12em] uppercase px-3 py-1.5 rounded-full"
+                  style={{ background: WINE_RED }}
+                >
+                  Director & Founder
+                </span>
+              </div>
+
+              {/* bio */}
+              <div className="px-7 md:px-10 py-8 md:py-10">
+                <h3
+                  className="text-xl md:text-2xl mb-1 font-bold"
+                  style={{ fontFamily: "var(--font-heading)", color: NAVY }}
+                >
+                  THE DIRECTOR
+                </h3>
+                <p className="text-[12px] font-bold tracking-[0.1em] uppercase mb-5" style={{ color: SKY_BLUE }}>
+                  17+ Years in Education
+                </p>
+
+                <p className="text-[14px] leading-relaxed mb-3" style={{ color: `${NAVY}aa` }}>
+                  An independent, diligent, organised, and resourceful achiever with more than 17 years' experience
+                  in the educational sector. She has good communication, organisational, and planning skills, with
+                  administrative experience in the education sector, and has been able to manage the school
+                  effortlessly with creative and innovative skills.
+                </p>
+                <p className="text-[14px] leading-relaxed mb-3" style={{ color: `${NAVY}aa` }}>
+                  A progressive-minded educationist who believes that no child is a dullard — however, they unwrap
+                  their God-given potential at different paces. She works tirelessly to discover the ability of
+                  every child in her care, and is a team player and a leader par excellence, with the urge to lead
+                  her team positively and efficiently for self-development and growth.
+                </p>
+                <p className="text-[14px] leading-relaxed mb-5" style={{ color: `${NAVY}aa` }}>
+                  She is a graduate of English Language from the University of Nigeria, Nsukka, and also holds a
+                  Master's degree in Ed/English from the University of Jos, Plateau State. She has attended various
+                  courses to enhance professionalism and brings this to bear in the growth and quality of learning
+                  at Skyview. She is a Christian, happily married, with children.
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  {["B.A. English (UNN)", "M.Ed/English (UNIJOS)", "17+ Yrs Experience"].map((c) => (
+                    <span
+                      key={c}
+                      className="text-[10px] font-bold tracking-wide uppercase px-3 py-1.5 rounded-full"
+                      style={{ background: `${SKY_BLUE}12`, color: SKY_BLUE }}
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
         <ColorStrip />
 
-        {/* ── VALUES ────────────────────────────────────────────────────── */}
-        <section className="relative py-20 px-6 overflow-hidden bg-[#1a1f5e]">
+        {/* ── VISION / MISSION / VALUES ─────────────────────────────────── */}
+        <section className="relative py-20 px-6 overflow-hidden" style={{ background: NAVY }}>
           {/* background glow blobs */}
-          <div className="absolute top-10 left-1/4 w-80 h-80 rounded-full bg-[#4361ee]/20 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-10 right-1/4 w-64 h-64 rounded-full bg-[#7b2d8b]/20 blur-3xl pointer-events-none" />
-          <div className="absolute top-1/2 left-10 w-40 h-40 rounded-full bg-[#f4831f]/15 blur-2xl pointer-events-none" />
+          <div className="absolute top-10 left-1/4 w-80 h-80 rounded-full blur-3xl pointer-events-none" style={{ background: `${SKY_BLUE}20` }} />
+          <div className="absolute bottom-10 right-1/4 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: `${WINE_RED}20` }} />
+          <div className="absolute top-1/2 left-10 w-40 h-40 rounded-full blur-2xl pointer-events-none" style={{ background: `${PINK}15` }} />
 
           {/* subtle dot grid */}
           <div className="absolute inset-0 pointer-events-none opacity-20"
@@ -438,37 +393,158 @@ export default function AboutPage() {
           />
 
           <AnimatedSection className="relative z-10 text-center mb-14">
-            <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-[11px] font-bold tracking-[0.12em] uppercase px-5 py-2 rounded-full mb-5">
-              ⭐ Our Values
+            <span
+              className="inline-flex items-center gap-2 border text-white text-[11px] font-bold tracking-[0.12em] uppercase px-5 py-2 rounded-full mb-5"
+              style={{ background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)" }}
+            >
+              ⭐ Vision, Mission & Values
             </span>
             <h2
-              className="text-3xl md:text-4xl text-white leading-tight"
-              style={{ fontFamily: "'Fraunces', serif", fontWeight: 900 }}
+              className="text-3xl md:text-4xl text-white leading-tight font-bold"
+              style={{ fontFamily: "var(--font-heading)" }}
             >
               What We{" "}
-              <span className="text-[#f9c74f] italic">Stand For</span>
+              <span className="italic" style={{ color: PINK }}>Stand For</span>
             </h2>
           </AnimatedSection>
 
-          <div className="relative z-10 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {values.map((v, i) => (
-              <AnimatedSection key={v.title} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -8 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  className={`${v.bg} ${v.border} border-2 rounded-2xl p-8 hover:shadow-xl transition-all duration-300`}
+          <div className="relative z-10 grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
+            <AnimatedSection delay={0}>
+              <div
+                className="rounded-2xl p-8 h-full border-2"
+                style={{ background: "rgba(255,255,255,0.06)", borderColor: `${SKY_BLUE}40` }}
+              >
+                <span className="text-3xl mb-4 block select-none">🔭</span>
+                <h3 className="text-xl mb-3 font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
+                  Our Vision
+                </h3>
+                <p className="text-sm leading-relaxed text-white/70">
+                  To harness the potentials of each child towards holistic formation.
+                </p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.1}>
+              <div
+                className="rounded-2xl p-8 h-full border-2"
+                style={{ background: "rgba(255,255,255,0.06)", borderColor: `${PINK}40` }}
+              >
+                <span className="text-3xl mb-4 block select-none">🎯</span>
+                <h3 className="text-xl mb-3 font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
+                  Our Mission
+                </h3>
+                <p className="text-sm leading-relaxed text-white/70">
+                  To promote sound moral and quality education built on Godly principles.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
+
+          <AnimatedSection delay={0.15} className="relative z-10">
+            <h3 className="text-center text-white/80 text-[12px] font-bold tracking-[0.2em] uppercase mb-5">
+              Our Core Values
+            </h3>
+            <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+              {coreValues.map((v) => (
+                <span
+                  key={v}
+                  className="text-sm font-semibold px-5 py-2.5 rounded-full text-white"
+                  style={{ background: "rgba(255,255,255,0.08)", border: `1px solid ${PINK}40` }}
                 >
-                  <span className="text-4xl mb-4 block select-none">{v.icon}</span>
-                  <h3
-                    className="text-2xl text-[#1a1f5e] mb-3 font-bold"
-                    style={{ fontFamily: "'Fraunces', serif" }}
-                  >
-                    {v.title}
-                  </h3>
-                  <p className="text-sm text-[#1a1f5e]/65 leading-relaxed">{v.desc}</p>
-                </motion.div>
-              </AnimatedSection>
-            ))}
+                  {v}
+                </span>
+              ))}
+            </div>
+          </AnimatedSection>
+        </section>
+
+        <ColorStrip />
+
+        {/* ── CONTACT ───────────────────────────────────────────────────── */}
+        <section className="relative py-20 px-6 overflow-hidden bg-white">
+          <div className="absolute top-0 left-0 w-72 h-72 rounded-full blur-3xl pointer-events-none" style={{ background: `${WINE_RED}08` }} />
+          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none" style={{ background: `${SKY_BLUE}08` }} />
+
+          <AnimatedSection className="text-center mb-12 relative z-10">
+            <span
+              className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border"
+              style={{ background: `${WINE_RED}10`, color: WINE_RED, borderColor: `${WINE_RED}25` }}
+            >
+              📍 Visit & Reach Us
+            </span>
+            <h2
+              className="text-3xl md:text-4xl leading-tight font-bold"
+              style={{ fontFamily: "var(--font-heading)", color: NAVY }}
+            >
+              Get In{" "}
+              <span className="italic" style={{ color: SKY_BLUE }}>Touch</span>
+            </h2>
+            <p className="text-sm max-w-md mx-auto mt-3" style={{ color: `${NAVY}90` }}>
+              We'd love to welcome you to the Skyview family. Reach out anytime.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto relative z-10">
+            <AnimatedSection delay={0}>
+              <div className="rounded-2xl p-7 h-full border-2" style={{ background: `${WINE_RED}08`, borderColor: `${WINE_RED}25` }}>
+                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl text-2xl mb-4" style={{ background: `${WINE_RED}12` }}>
+                  📍
+                </span>
+                <h3 className="text-[15px] font-bold mb-2" style={{ fontFamily: "var(--font-heading)", color: NAVY }}>
+                  Our Address
+                </h3>
+                <p className="text-[13px] leading-relaxed" style={{ color: `${NAVY}90` }}>
+                  Plot 125/127 Eke Layout, Off Orji Udenta Street,<br />
+                  Near Timber Market, Nike Lake Road,<br />
+                  Enugu, Nigeria.
+                </p>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.08}>
+              <div className="rounded-2xl p-7 h-full border-2" style={{ background: `${SKY_BLUE}08`, borderColor: `${SKY_BLUE}25` }}>
+                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl text-2xl mb-4" style={{ background: `${SKY_BLUE}12` }}>
+                  ✉️
+                </span>
+                <h3 className="text-[15px] font-bold mb-2" style={{ fontFamily: "var(--font-heading)", color: NAVY }}>
+                  Email Us
+                </h3>
+                <a
+                  href="mailto:skyviewmontessorischoolenugu@gmail.com"
+                  className="text-[13px] font-semibold leading-relaxed break-all hover:underline"
+                  style={{ color: SKY_BLUE }}
+                >
+                  skyviewmontessorischoolenugu@gmail.com
+                </a>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.16}>
+              <div className="rounded-2xl p-7 h-full border-2" style={{ background: `${PINK}08`, borderColor: `${PINK}30` }}>
+                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl text-2xl mb-4" style={{ background: `${PINK}14` }}>
+                  📞
+                </span>
+                <h3 className="text-[15px] font-bold mb-2" style={{ fontFamily: "var(--font-heading)", color: NAVY }}>
+                  Call Us
+                </h3>
+                <p className="text-[13px] leading-relaxed" style={{ color: `${NAVY}90` }}>
+                  <a href="tel:+2348033555262" className="font-semibold hover:underline" style={{ color: WINE_RED }}>+234 803 355 5262</a>
+                  <br />
+                  <a href="tel:+2348140841601" className="font-semibold hover:underline" style={{ color: WINE_RED }}>+234 814 084 1601</a>
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
+
+          <div className="text-center mt-10 relative z-10">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 text-white text-[13px] font-bold tracking-[0.06em] px-6 py-3 rounded-full transition-colors duration-200"
+              style={{ background: NAVY }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = WINE_RED)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = NAVY)}
+            >
+              Contact Admissions →
+            </Link>
           </div>
         </section>
 

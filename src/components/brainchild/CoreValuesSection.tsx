@@ -30,7 +30,7 @@ export function CoreValuesSection() {
               Core <span className="text-pink-500 italic font-light">Values.</span>
             </h2>
             <p className="max-w-2xl text-slate-500 text-lg md:text-xl font-medium leading-relaxed">
-              We define our identity through six pillars that prepare every Brain Child pupil for a life of purpose.
+              We define our identity through six pillars that prepare every SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL pupil for a life of purpose.
             </p>
           </div>
         </AnimatedSection>
@@ -52,7 +52,7 @@ export function CoreValuesSection() {
                   <div className={`w-14 h-14 ${v.bg} flex items-center justify-center rounded-none mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
                     <div className={`${v.color} text-2xl`}>{v.icon}</div>
                   </div>
-                  
+
                   <h3 className="text-3xl font-heading font-black text-slate-900 tracking-tighter mb-4 group-hover:text-pink-600 transition-colors">
                     {v.word}
                   </h3>

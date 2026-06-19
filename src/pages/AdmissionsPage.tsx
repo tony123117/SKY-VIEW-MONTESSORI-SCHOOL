@@ -11,9 +11,11 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import img1 from "@/assets/images/544A7290.jpg.jpg";
-import img2 from "@/assets/images/544A7328.jpg.jpg";
-import img3 from "@/assets/images/544A7241.jpg.jpg";
+
+import img1 from "@/assets/SKYVIEW-IMAGES/music.png";
+import img2 from "@/assets/SKYVIEW-IMAGES/computer.png";
+import img3 from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
+
 
 const heroSlides = [
   { image: img1, label: "A" },
@@ -22,28 +24,29 @@ const heroSlides = [
 ];
 
 const steps = [
-  { step: "01", title: "Enquiry & Tour", description: "Visit our campus or call us to learn more. Schedule a guided tour to see our facilities firsthand.", icon: "🏫" },
-  { step: "02", title: "Application Form", description: "Complete and submit the enrollment form online via our parent portal or at the school office.", icon: "📝" },
-  { step: "03", title: "Assessment", description: "Your child will participate in a brief, age-appropriate assessment to understand their learning level.", icon: "📋" },
-  { step: "04", title: "Interview", description: "A brief meeting with the parents to discuss expectations, school policies, and your child's needs.", icon: "🤝" },
-  { step: "05", title: "Admission Offer", description: "Upon successful assessment, you'll receive an admission letter with fee details and next steps.", icon: "🎉" },
-  { step: "06", title: "Orientation", description: "New families attend an orientation session before term begins to settle in smoothly.", icon: "🌟" },
+  { step: "01", title: "Inquiry", description: "Reach out to us! Contact our admissions team to express your interest and gather initial information.", icon: "📞" },
+  { step: "02", title: "School Tour", description: "We invite you to visit our beautiful citadel of learning to get a firsthand look at our facilities and educational environment.", icon: "🏫" },
+  { step: "03", title: "Application Form", description: "Obtain the official application form from our school office or download it from our website.", icon: "📝" },
+  { step: "04", title: "Complete the Application", description: "Fill out the application form with accurate information, providing all necessary documents and details.", icon: "✍️" },
+  { step: "05", title: "Submit the Application", description: "Return the completed application form, along with the required documents, to our admissions office within the specified deadline.", icon: "📬" },
+  { step: "06", title: "Interview / Assessment", description: "Depending on the grade level, your child may be invited for an interview or assessment to understand their readiness for our Montessori program.", icon: "📋" },
+  { step: "07", title: "Admission Offer", description: "If your child meets our criteria, we will send you an admission offer. Congratulations!", icon: "🎉" },
+  { step: "08", title: "Enrollment", description: "Once you receive the admission offer, complete the enrollment process by submitting the required documents and fees.", icon: "🌟" },
 ];
 
 const requirements = [
-  "Completed application form",
-  "Birth certificate (original + copy)",
-  "4 recent passport photographs",
-  "Previous school report (if applicable)",
-  "Immunization records",
-  "Parent/guardian valid ID",
+  "A completed application form",
+  "Birth certificate or valid proof of age",
+  "Medical records and immunization history",
+  "Previous school records (if applicable)",
+  "Passport-sized photographs of your child",
+  "Copies of parent/guardian identification",
+  "Contact information for emergency purposes",
 ];
 
-const fees = [
-  { level: "Pre-School", age: "Ages 1½ – 2" },
-  { level: "Nursery 1–3", age: "Ages 2 – 5" },
-  { level: "Lower Grade (1–3)", age: "Ages 5 – 8" },
-  { level: "Higher Grade (4–6)", age: "Ages 8 – 11" },
+const applicationForms = [
+  { label: "Download", title: "Get the form from our website", href: "http://www.skyviewmontessorischool.com.ng" },
+  { label: "In Person", title: "Collect from our school office during office hours", href: "/contact" },
 ];
 
 export default function AdmissionsPage() {
@@ -52,7 +55,7 @@ export default function AdmissionsPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-        .ad-root { font-family: 'DM Sans', sans-serif; background: #FAF8F5; color: #1A1A2E; }
+        .ad-root { font-family: 'DM Sans', sans-serif; background: #FFF6F8; color: #5A1018; }
         .ad-heading { font-family: 'Fraunces', serif; }
 
         /* HERO */
@@ -70,20 +73,20 @@ export default function AdmissionsPage() {
         }
         .ad-hero-overlay {
           position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(160deg, #1A1A2Ecc 0%, #1A1A2E88 40%, transparent 100%);
+          background: linear-gradient(160deg, #5A1018cc 0%, #9B1C2C66 40%, transparent 100%);
         }
         .ad-hero-content {
           position: absolute;
-          top: 50%; left: 60px;
-          transform: translateY(-50%);
+          bottom: 60px; right: 60px;
           max-width: 580px;
+          text-align: right;
           z-index: 10;
         }
-        @media (max-width: 768px) { .ad-hero-content { left: 24px; right: 24px; } }
+        @media (max-width: 768px) { .ad-hero-content { left: 24px; right: 24px; text-align: left; } }
 
         /* CAROUSEL STRIP */
         .ad-carousel-strip {
-          background: #1A1A2E;
+          background: #3D0B11;
           padding: 0;
           overflow: hidden;
         }
@@ -96,40 +99,40 @@ export default function AdmissionsPage() {
         }
         .ad-eyebrow {
           font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
-          color: #F4845F; margin-bottom: 20px;
+          color: #FF6B9D; margin-bottom: 20px;
           display: flex; align-items: center; gap: 12px;
         }
-        .ad-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: #F4845F; }
+        .ad-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: #FF6B9D; }
         .ad-hero-title {
           font-family: 'Fraunces', serif;
           font-size: clamp(2.5rem, 5vw, 4.5rem);
-          color: #FAF8F5; line-height: 1.05;
+          color: #FFF6F8; line-height: 1.05;
           font-weight: 300; margin-bottom: 24px;
         }
-        .ad-hero-title em { font-style: italic; color: #F4845F; }
-        .ad-hero-sub { color: #FAF8F5aa; font-size: 15px; line-height: 1.7; font-weight: 300; margin-bottom: 40px; }
+        .ad-hero-title em { font-style: italic; color: #FF6B9D; }
+        .ad-hero-sub { color: #FFF6F8aa; font-size: 15px; line-height: 1.7; font-weight: 300; margin-bottom: 40px; }
         .ad-btn-primary {
           display: inline-flex; align-items: center; gap: 10px;
-          background: #F4845F; color: #FAF8F5; padding: 16px 36px;
-          border-radius: 4px; font-size: 13px; font-weight: 600;
+          background: #9B1C2C; color: #FFF6F8; padding: 16px 36px;
+          border-radius: 999px; font-size: 13px; font-weight: 600;
           letter-spacing: 0.08em; text-transform: uppercase;
           text-decoration: none; border: none; cursor: pointer;
           transition: all 0.3s;
         }
-        .ad-btn-primary:hover { background: #e8734f; transform: translateY(-2px); box-shadow: 0 12px 32px #F4845F44; }
+        .ad-btn-primary:hover { background: #7A1623; transform: translateY(-2px); box-shadow: 0 12px 32px #9B1C2C44; }
         .ad-btn-ghost {
           display: inline-flex; align-items: center; gap: 10px;
-          background: transparent; color: #FAF8F5; padding: 16px 36px;
-          border-radius: 4px; font-size: 13px; font-weight: 600;
+          background: transparent; color: #FFF6F8; padding: 16px 36px;
+          border-radius: 999px; font-size: 13px; font-weight: 600;
           letter-spacing: 0.08em; text-transform: uppercase;
-          text-decoration: none; border: 1px solid #FAF8F540;
+          text-decoration: none; border: 1px solid #FFF6F840;
           cursor: pointer; transition: all 0.3s;
         }
-        .ad-btn-ghost:hover { border-color: #FAF8F5; background: #FAF8F510; }
+        .ad-btn-ghost:hover { border-color: #FFF6F8; background: #FFF6F810; }
         .ad-btn-dark {
           display: inline-flex; align-items: center; gap: 10px;
-          background: #1A1A2E; color: #FAF8F5; padding: 14px 32px;
-          border-radius: 4px; font-size: 13px; font-weight: 600;
+          background: #3D0B11; color: #FFF6F8; padding: 14px 32px;
+          border-radius: 999px; font-size: 13px; font-weight: 600;
           letter-spacing: 0.08em; text-transform: uppercase;
           text-decoration: none; border: none; cursor: pointer; transition: all 0.3s; width: 100%;
           justify-content: center;
@@ -137,60 +140,61 @@ export default function AdmissionsPage() {
         .ad-btn-dark:hover { background: #2a2a4e; transform: translateY(-1px); }
         .ad-btn-outline {
           display: inline-flex; align-items: center; gap: 10px;
-          background: transparent; color: #1A1A2E; padding: 14px 32px;
-          border-radius: 4px; font-size: 13px; font-weight: 600;
+          background: transparent; color: #5A1018; padding: 14px 32px;
+          border-radius: 999px; font-size: 13px; font-weight: 600;
           letter-spacing: 0.08em; text-transform: uppercase;
-          text-decoration: none; border: 1px solid #1A1A2E44;
+          text-decoration: none; border: 1px solid #5A101844;
           cursor: pointer; transition: all 0.3s; width: 100%;
           justify-content: center;
         }
-        .ad-btn-outline:hover { background: #1A1A2E; color: #FAF8F5; }
+        .ad-btn-outline:hover { background: #3D0B11; color: #FFF6F8; }
 
         /* INTRO STRIP */
         .ad-strip {
-          background: #F4845F;
+          background: #2E7EB8;
           padding: 28px 60px;
           display: flex; align-items: center; justify-content: space-between; gap: 24px;
           flex-wrap: wrap;
         }
-        .ad-strip-text { font-family: 'Fraunces', serif; font-size: 1.1rem; color: #FAF8F5; font-weight: 300; font-style: italic; }
-        .ad-strip-link { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #FAF8F5; text-decoration: none; border-bottom: 1px solid #FAF8F566; padding-bottom: 2px; }
+        .ad-strip-text { font-family: 'Fraunces', serif; font-size: 1.1rem; color: #FFF6F8; font-weight: 300; font-style: italic; }
+        .ad-strip-link { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #FFF6F8; text-decoration: none; border-bottom: 1px solid #FFF6F866; padding-bottom: 2px; }
 
         /* STEPS */
-        .ad-steps { padding: 100px 60px; background: #FAF8F5; }
+        .ad-steps { padding: 100px 60px; background: #FFF6F8; }
         @media (max-width: 768px) { .ad-steps { padding: 60px 24px; } }
         .ad-steps-header { margin-bottom: 64px; }
-        .ad-steps-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 3.5vw, 3rem); color: #1A1A2E; font-weight: 300; line-height: 1.15; }
-        .ad-steps-title em { font-style: italic; color: #F4845F; }
+        .ad-steps-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 3.5vw, 3rem); color: #5A1018; font-weight: 300; line-height: 1.15; }
+        .ad-steps-title em { font-style: italic; color: #9B1C2C; }
         .ad-steps-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2px;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 24px;
         }
         @media (max-width: 768px) { .ad-steps-grid { grid-template-columns: 1fr; } }
-        @media (max-width: 1024px) and (min-width: 769px) { .ad-steps-grid { grid-template-columns: repeat(2, 1fr); } }
 
         .ad-step-card {
           padding: 40px 36px;
-          background: #1A1A2E06;
-          border: 1px solid #1A1A2E10;
+          background: #5A101806;
+          border: 1px solid #5A101810;
+          border-radius: 16px;
+          box-shadow: 0 8px 24px rgba(90, 16, 24, 0.04);
           position: relative;
           transition: all 0.3s;
         }
-        .ad-step-card:hover { background: #1A1A2E0c; border-color: #F4845F44; }
+        .ad-step-card:hover { background: #5A10180c; border-color: #9B1C2C44; }
         .ad-step-num {
           font-family: 'Fraunces', serif;
           font-size: 4rem; font-weight: 700;
-          color: #1A1A2E08; line-height: 1;
+          color: #5A101808; line-height: 1;
           position: absolute; top: 24px; right: 28px;
         }
         .ad-step-icon { font-size: 2rem; margin-bottom: 20px; }
-        .ad-step-title { font-family: 'Fraunces', serif; font-size: 1.3rem; color: #1A1A2E; margin-bottom: 12px; font-weight: 400; }
-        .ad-step-desc { font-size: 13.5px; color: #1A1A2E77; line-height: 1.7; font-weight: 300; }
+        .ad-step-title { font-family: 'Fraunces', serif; font-size: 1.3rem; color: #5A1018; margin-bottom: 12px; font-weight: 400; }
+        .ad-step-desc { font-size: 13.5px; color: #5A101877; line-height: 1.7; font-weight: 300; }
 
-        /* REQUIREMENTS + FEES */
+        /* REQUIREMENTS + FORMS */
         .ad-details {
-          background: #1A1A2E;
+          background: #3D0B11;
           display: grid;
           grid-template-columns: 1fr 1fr;
           min-height: 600px;
@@ -199,58 +203,60 @@ export default function AdmissionsPage() {
 
         .ad-details-left {
           padding: 80px 60px;
-          border-right: 1px solid #FAF8F510;
+          border-right: 1px solid #FFF6F810;
         }
-        @media (max-width: 768px) { .ad-details-left { padding: 60px 24px; border-right: none; border-bottom: 1px solid #FAF8F510; } }
+        @media (max-width: 768px) { .ad-details-left { padding: 60px 24px; border-right: none; border-bottom: 1px solid #FFF6F810; } }
 
         .ad-details-right { padding: 80px 60px; }
         @media (max-width: 768px) { .ad-details-right { padding: 60px 24px; } }
 
-        .ad-details-label { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: #F4845F; margin-bottom: 16px; }
-        .ad-details-title { font-family: 'Fraunces', serif; font-size: 1.8rem; color: #FAF8F5; font-weight: 300; margin-bottom: 40px; line-height: 1.2; }
+        .ad-details-label { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: #FF6B9D; margin-bottom: 16px; }
+        .ad-details-title { font-family: 'Fraunces', serif; font-size: 1.8rem; color: #FFF6F8; font-weight: 300; margin-bottom: 40px; line-height: 1.2; }
+        .ad-details-blurb { font-size: 13.5px; color: #FFF6F877; font-weight: 300; line-height: 1.7; margin-bottom: 36px; margin-top: -16px; }
 
         .ad-req-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
         .ad-req-item {
           display: flex; align-items: center; gap: 16px;
-          padding-bottom: 16px; border-bottom: 1px solid #FAF8F510;
+          padding-bottom: 16px; border-bottom: 1px solid #FFF6F810;
         }
         .ad-req-item:last-child { border-bottom: none; }
-        .ad-req-check { width: 24px; height: 24px; border-radius: 50%; background: #F4845F22; border: 1px solid #F4845F44; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .ad-req-check-inner { width: 8px; height: 8px; border-radius: 50%; background: #F4845F; }
-        .ad-req-text { font-size: 14px; color: #FAF8F5bb; font-weight: 300; }
+        .ad-req-check { width: 24px; height: 24px; border-radius: 50%; background: #4A9EDB22; border: 1px solid #4A9EDB44; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .ad-req-check-inner { width: 8px; height: 8px; border-radius: 50%; background: #4A9EDB; }
+        .ad-req-text { font-size: 14px; color: #FFF6F8bb; font-weight: 300; }
 
-        .ad-fee-table { width: 100%; margin-bottom: 32px; }
-        .ad-fee-row {
-          display: flex; justify-content: space-between; align-items: center;
-          padding: 18px 0; border-bottom: 1px solid #FAF8F510;
+        .ad-forms-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 32px; }
+        .ad-forms-card {
+          display: flex; align-items: center; justify-content: space-between;
+          padding: 22px 0; border-bottom: 1px solid #FFF6F810;
+          text-decoration: none; transition: all 0.2s;
         }
-        .ad-fee-row:first-child { padding-top: 0; }
-        .ad-fee-level { font-family: 'Fraunces', serif; font-size: 1rem; color: #FAF8F5; font-weight: 300; }
-        .ad-fee-age { font-size: 12px; color: #FAF8F555; margin-top: 2px; }
-        .ad-fee-cta { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #F4845F; text-decoration: none; transition: color 0.2s; }
-        .ad-fee-cta:hover { color: #FAF8F5; }
+        .ad-forms-card:last-child { border-bottom: none; }
+        .ad-forms-card:hover { padding-left: 8px; }
+        .ad-forms-card-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #FF6B9D; margin-bottom: 4px; }
+        .ad-forms-card-title { font-family: 'Fraunces', serif; font-size: 1rem; color: #FFF6F8; font-weight: 300; }
+        .ad-forms-cta { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #4A9EDB; }
 
         /* SUPPORT */
         .ad-support {
           padding: 100px 60px;
-          background: #FAF8F5;
+          background: #FFF6F8;
           display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
         }
         @media (max-width: 768px) { .ad-support { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; } }
-        .ad-support-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 3.5vw, 3rem); color: #1A1A2E; font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
-        .ad-support-title em { font-style: italic; color: #F4845F; }
-        .ad-support-text { font-size: 15px; color: #1A1A2E77; line-height: 1.8; font-weight: 300; margin-bottom: 36px; }
+        .ad-support-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 3.5vw, 3rem); color: #5A1018; font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
+        .ad-support-title em { font-style: italic; color: #9B1C2C; }
+        .ad-support-text { font-size: 15px; color: #5A101877; line-height: 1.8; font-weight: 300; margin-bottom: 36px; }
         .ad-support-right { display: flex; flex-direction: column; gap: 2px; }
         .ad-support-card {
-          background: #1A1A2E08; border: 1px solid #1A1A2E10;
+          background: #5A101808; border: 1px solid #5A101810;
           padding: 28px 32px; border-radius: 0;
           display: flex; align-items: center; justify-content: space-between;
           cursor: pointer; transition: all 0.2s; text-decoration: none;
         }
-        .ad-support-card:hover { background: #F4845F11; border-color: #F4845F44; }
-        .ad-support-card-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #1A1A2E77; margin-bottom: 4px; }
-        .ad-support-card-title { font-family: 'Fraunces', serif; font-size: 1rem; color: #1A1A2E; font-weight: 400; }
-        .ad-support-card-arrow { font-size: 1.2rem; color: #F4845F; }
+        .ad-support-card:hover { background: #9B1C2C11; border-color: #9B1C2C44; }
+        .ad-support-card-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #5A101877; margin-bottom: 4px; }
+        .ad-support-card-title { font-family: 'Fraunces', serif; font-size: 1rem; color: #5A1018; font-weight: 400; }
+        .ad-support-card-arrow { font-size: 1.2rem; color: #9B1C2C; }
       `}</style>
 
       <div className="ad-root">
@@ -261,15 +267,15 @@ export default function AdmissionsPage() {
           <img src={img1} alt="Admissions hero" className="ad-hero-bg" />
           <div className="ad-hero-overlay" />
           <div className="ad-hero-content">
-            <div className="ad-eyebrow">Brain Child — Admissions 2026</div>
+            <div className="ad-eyebrow" style={{ flexDirection: "row-reverse" }}>Skyview Montessori School — Admissions</div>
             <h1 className="ad-hero-title">
               Your child's<br />journey starts <em>here</em>
             </h1>
             <p className="ad-hero-sub">
-              We welcome families who believe education is more than grades — it's about character, curiosity, and joy.
+              We're committed to providing your child with a top-notch education that sparks a lifelong love for learning.
             </p>
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-              <Link to="/portal"><button className="ad-btn-primary">Apply Online →</button></Link>
+            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "flex-end" }}>
+              <a href="http://www.skyviewmontessorischool.com.ng" target="_blank" rel="noreferrer"><button className="ad-btn-primary">Download Form →</button></a>
               <Link to="/contact"><button className="ad-btn-ghost">Book a Tour</button></Link>
             </div>
           </div>
@@ -292,8 +298,8 @@ export default function AdmissionsPage() {
 
         {/* STRIP */}
         <div className="ad-strip">
-          <span className="ad-heading" style={{ fontFamily: "'Fraunces', serif", fontStyle: "italic", fontSize: "1.1rem", color: "#FAF8F5", fontWeight: 300 }}>
-            "Every great school begins with a family that chooses to believe."
+          <span className="ad-heading" style={{ fontFamily: "'Fraunces', serif", fontStyle: "italic", fontSize: "1.1rem", color: "#FFF6F8", fontWeight: 300 }}>
+            "We're excited to welcome your child to the Skyview Montessori School family."
           </span>
           <Link to="/contact" className="ad-strip-link">Get In Touch →</Link>
         </div>
@@ -302,18 +308,18 @@ export default function AdmissionsPage() {
         <section className="ad-steps">
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <div className="ad-steps-header">
-              <div className="ad-eyebrow" style={{ color: "#1A1A2E88" }}>
-                <span style={{ background: "#1A1A2E88", width: 32, height: 2, display: "inline-block" }} />
-                The Process
+              <div className="ad-eyebrow" style={{ color: "#5A101888" }}>
+                <span style={{ background: "#5A101888", width: 32, height: 2, display: "inline-block" }} />
+                Admission Process Overview
               </div>
               <h2 className="ad-heading ad-steps-title">
-                Six simple steps to<br /><em>joining our family</em>
+                Eight simple steps to<br /><em>joining our family</em>
               </h2>
             </div>
 
             <div className="ad-steps-grid">
               {steps.map((step, i) => (
-                <AnimatedSection key={step.step} delay={0.08 * i}>
+                <AnimatedSection key={step.step} delay={0.06 * i}>
                   <div className="ad-step-card">
                     <div className="ad-step-num">{step.step}</div>
                     <div className="ad-step-icon">{step.icon}</div>
@@ -326,7 +332,7 @@ export default function AdmissionsPage() {
           </div>
         </section>
 
-        {/* REQUIREMENTS + FEES */}
+        {/* REQUIREMENTS + APPLICATION FORMS */}
         <section className="ad-details">
           <div className="ad-details-left">
             <div className="ad-details-label">Documents Needed</div>
@@ -342,22 +348,34 @@ export default function AdmissionsPage() {
           </div>
 
           <div className="ad-details-right">
-            <div className="ad-details-label">Tuition Overview</div>
-            <h3 className="ad-heading ad-details-title">Fee structure by level</h3>
-            <div className="ad-fee-table">
-              {fees.map((fee) => (
-                <div key={fee.level} className="ad-fee-row">
+            <div className="ad-details-label">Get Started</div>
+            <h3 className="ad-heading ad-details-title">Application forms</h3>
+            <p className="ad-details-blurb">
+              You can access our application forms by downloading from our website or
+              collecting a copy at our school office during office hours.
+            </p>
+            <div className="ad-forms-list">
+              {applicationForms.map((form) => (
+                <a
+                  key={form.label}
+                  href={form.href}
+                  target={form.href.startsWith("http") ? "_blank" : undefined}
+                  rel={form.href.startsWith("http") ? "noreferrer" : undefined}
+                  className="ad-forms-card"
+                >
                   <div>
-                    <div className="ad-fee-level">{fee.level}</div>
-                    <div className="ad-fee-age">{fee.age}</div>
+                    <div className="ad-forms-card-label">{form.label}</div>
+                    <div className="ad-forms-card-title">{form.title}</div>
                   </div>
-                  <Link to="/contact" className="ad-fee-cta">Enquire →</Link>
-                </div>
+                  <span className="ad-forms-cta">→</span>
+                </a>
               ))}
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <Link to="/contact"><button className="ad-btn-dark" style={{ background: "#F4845F" }}>Get Full Fee Details</button></Link>
-              <Link to="/portal"><button className="ad-btn-outline" style={{ color: "#FAF8F5", borderColor: "#FAF8F533" }}>Apply Online</button></Link>
+              <a href="http://www.skyviewmontessorischool.com.ng" target="_blank" rel="noreferrer">
+                <button className="ad-btn-dark" style={{ background: "#9B1C2C" }}>Download Application Form</button>
+              </a>
+              <Link to="/contact"><button className="ad-btn-outline" style={{ color: "#FFF6F8", borderColor: "#FFF6F833" }}>Contact Admissions Office</button></Link>
             </div>
           </div>
         </section>
@@ -365,15 +383,17 @@ export default function AdmissionsPage() {
         {/* SUPPORT */}
         <section className="ad-support">
           <div>
-            <div className="ad-eyebrow" style={{ color: "#1A1A2E55" }}>
-              <span style={{ background: "#1A1A2E55", width: 32, height: 2, display: "inline-block" }} />
+            <div className="ad-eyebrow" style={{ color: "#5A101855" }}>
+              <span style={{ background: "#5A101855", width: 32, height: 2, display: "inline-block" }} />
               Need Help?
             </div>
             <h2 className="ad-heading ad-support-title">
               We're here<br />every step of<br />the <em>way</em>
             </h2>
             <p className="ad-support-text">
-              Our admissions team is ready to answer every question, guide you through the process, and ensure your family feels welcome before the first day of school.
+              We're excited to welcome your child to the Skyview Montessori School family.
+              Our admissions team is here to assist you at every step of the way — for any
+              inquiries or to schedule a school tour, reach out to us directly.
             </p>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
               <Link to="/contact"><button className="ad-btn-primary">Contact Admissions →</button></Link>
@@ -383,19 +403,29 @@ export default function AdmissionsPage() {
 
           <div className="ad-support-right">
             {[
-              { label: "Quickest route", title: "Call our admissions office directly", href: "/contact" },
-              { label: "Learn first", title: "Take a virtual tour of our campus", href: "/about" },
-              { label: "Get started", title: "Fill out the online application form", href: "/portal" },
-              { label: "All programs", title: "Explore what we offer at each level", href: "/programs" },
-            ].map((item) => (
-              <Link key={item.title} to={item.href} className="ad-support-card">
-                <div>
-                  <div className="ad-support-card-label">{item.label}</div>
-                  <div className="ad-heading ad-support-card-title">{item.title}</div>
-                </div>
-                <span className="ad-support-card-arrow">→</span>
-              </Link>
-            ))}
+              { label: "Call us", title: "+234 803 355 5262 / +234 804 084 1601", href: "tel:+2348033555262", external: true },
+              { label: "Email us", title: "skyviewmontessorischoolenugu@gmail.com", href: "mailto:skyviewmontessorischoolenugu@gmail.com", external: true },
+              { label: "Visit us", title: "Plot 125/127 Eke Layout, off Orji Udenta Street, near Timber Market, Nike Lake Road, Enugu", href: "/contact", external: false },
+              { label: "Online", title: "Download the application form from our website", href: "http://www.skyviewmontessorischool.com.ng", external: true },
+            ].map((item) =>
+              item.external ? (
+                <a key={item.title} href={item.href} target="_blank" rel="noreferrer" className="ad-support-card">
+                  <div>
+                    <div className="ad-support-card-label">{item.label}</div>
+                    <div className="ad-heading ad-support-card-title">{item.title}</div>
+                  </div>
+                  <span className="ad-support-card-arrow">→</span>
+                </a>
+              ) : (
+                <Link key={item.title} to={item.href} className="ad-support-card">
+                  <div>
+                    <div className="ad-support-card-label">{item.label}</div>
+                    <div className="ad-heading ad-support-card-title">{item.title}</div>
+                  </div>
+                  <span className="ad-support-card-arrow">→</span>
+                </Link>
+              )
+            )}
           </div>
         </section>
 

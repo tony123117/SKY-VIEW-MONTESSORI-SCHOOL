@@ -13,8 +13,8 @@ interface Stat {
 
 const stats: Stat[] = [
   { label: "Happy Students", value: 500, suffix: "+", icon: "🎓", color: "text-blue-600", bg: "bg-blue-50" },
-  { label: "Qualified Teachers", value: 50, suffix: "+", icon: "👩‍🏫", color: "text-purple-600", bg: "bg-purple-50" },
-  { label: "Years of Excellence", value: 10, suffix: "+", icon: "🏆", color: "text-orange-500", bg: "bg-orange-50" },
+  { label: "Qualified Teachers", value: 50, suffix: "+", icon: "👩‍🏫", color: "text-red-600", bg: "bg-purple-50" },
+  { label: "Years of Excellence", value: 10, suffix: "+", icon: "🏆", color: "text-pink-500", bg: "bg-orange-50" },
   { label: "Clubs & Activities", value: 15, suffix: "+", icon: "🎨", color: "text-green-600", bg: "bg-green-50" },
 ];
 
@@ -105,7 +105,7 @@ export function StatsSection() {
               📊 Our Impact
             </span>
             <h2 className="text-2xl md:text-4xl lg:text-[42px] font-heading font-bold text-foreground leading-tight">
-              Brain Child in{" "}
+              SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL in{" "}
               <span className="relative inline-block text-primary">
                 Numbers
                 <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 120 8" fill="none">

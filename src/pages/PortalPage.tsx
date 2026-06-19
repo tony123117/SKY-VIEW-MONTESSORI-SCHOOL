@@ -38,7 +38,7 @@ export default function PortalPage() {
                 Student & Parent Portal
               </span>
               <h1 className="text-3xl md:text-5xl font-heading font-bold text-[#303778] drop-shadow-lg mb-4">
-                Welcome to Brain Child School Portal
+                Welcome to SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL School Portal
               </h1>
               <p className="text-[#303778]/80 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
                 Access your account to view grades, assignments, announcements, and more.

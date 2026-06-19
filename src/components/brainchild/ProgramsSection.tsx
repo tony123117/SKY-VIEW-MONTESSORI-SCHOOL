@@ -1,36 +1,38 @@
 import ProgramCard from "./ProgramCard";
-
+import buildingimg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg"
 import programbg from '@/assets/images/program.jpeg'
 import { AnimatedSection } from "./AnimatedSection";
+import { motion } from 'framer-motion';
+import { staggerContainer, fadeIn } from '@/components/ui/motionVariants';
 
 export default function ProgramsSection() {
   const programs = [
     {
-      title: "Pre-School",
-      age: "Ages 1½ – 2",
+      title: "Kindergarten",
+      age: "Ages 2 – 5",
       Grade: "Early Years",
-      description: "Where curiosity is encouraged and learning feels like play through sensory discovery.",
+      description: "A nurturing environment where young learners develop foundational skills through play, exploration, and guided activities.",
       cta: "Enroll now",
     },
     {
       title: "Nursery 1–3",
-      age: "Ages 2½ – 5",
+      age: "Ages 3 – 5",
       Grade: "Foundation",
-      description: "Structured creativity builds thinking skills, confidence, and independence.",
+      description: "Building confidence, creativity, and early academic skills through engaging and structured learning experiences.",
       cta: "Enroll now",
     },
     {
-      title: "Lower Grade",
-      age: "Ages 5½ – 8",
-      Grade: "Elementary",
-      description: "Literacy, numeracy, and critical thinking through engaging structured learning.",
+      title: "Primary 1–6",
+      age: "Ages 6 – 11",
+      Grade: "Primary School",
+      description: "Developing strong literacy, numeracy, critical thinking, and problem-solving skills for lifelong learning.",
       cta: "Enroll now",
     },
     {
-      title: "Upper Grade",
-      age: "Ages 8½ – 11",
-      Grade: "Advanced",
-      description: "Advanced skills and character development preparing pupils for excellence.",
+      title: "Secondary School (JSS1–SS3)",
+      age: "Ages 12 – 17",
+      Grade: "Secondary Education",
+      description: "Preparing students for academic excellence, leadership, and future success through a comprehensive curriculum.",
       cta: "Enroll now",
     },
   ];
@@ -110,20 +112,20 @@ export default function ProgramsSection() {
         </AnimatedSection>
 
         {/* MOBILE CARDS GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
           {programs.map((p, i) => (
-            <AnimatedSection key={p.title} delay={i * 0.1}>
+            <motion.div key={p.title} variants={fadeIn} transition={{ delay: i * 0.08 }}>
               <ProgramCard {...p} index={i} />
-            </AnimatedSection>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* DESKTOP */}
       <div className="relative h-[900px] hidden lg:block">
 
         {/* CENTER CIRCLE IMAGE */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="relative flex items-center justify-center">
 
             {/* Outer dashed pencil ring */}
@@ -133,49 +135,42 @@ export default function ProgramsSection() {
             <div className="absolute w-[650px] h-[650px] bg-rose-200 blur-[120px] opacity-30 rounded-full" />
 
             <img
-              src={programbg}
+              src={buildingimg}
               alt="Students"
-              className="
-                relative
-                w-[600px] h-[600px]
-                xl:w-[700px] xl:h-[700px]
-                object-cover
-                rounded-full
-                shadow-2xl
-              "
+              className="relative w-[600px] h-[600px] xl:w-[700px] xl:h-[700px] object-cover rounded-full shadow-2xl"
               style={{ border: "18px solid white", outline: "5px solid #f5c518" }}
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* FLOATING CARDS */}
 
         {/* TOP LEFT */}
         <div className="absolute left-[5%] top-[0%]">
-          <AnimatedSection>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} className="animate-float-slow hover:scale-[1.02] transition-transform">
             <ProgramCard {...programs[0]} index={0} />
-          </AnimatedSection>
+          </motion.div>
         </div>
 
         {/* TOP RIGHT */}
         <div className="absolute right-[5%] top-[10%]">
-          <AnimatedSection>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} className="animate-float hover:scale-[1.02] transition-transform">
             <ProgramCard {...programs[1]} index={1} />
-          </AnimatedSection>
+          </motion.div>
         </div>
 
         {/* BOTTOM LEFT */}
         <div className="absolute left-[10%] bottom-[5%]">
-          <AnimatedSection>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} className="animate-float-slow hover:scale-[1.02] transition-transform">
             <ProgramCard {...programs[2]} index={2} />
-          </AnimatedSection>
+          </motion.div>
         </div>
 
         {/* BOTTOM RIGHT */}
         <div className="absolute right-[10%] bottom-[0%]">
-          <AnimatedSection>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} className="animate-float hover:scale-[1.02] transition-transform">
             <ProgramCard {...programs[3]} index={3} />
-          </AnimatedSection>
+          </motion.div>
         </div>
 
       </div>

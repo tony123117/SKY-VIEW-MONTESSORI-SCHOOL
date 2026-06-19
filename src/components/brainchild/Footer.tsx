@@ -106,7 +106,7 @@ export function Footer() {
               </Link>
 
               <p className="text-sm leading-relaxed max-w-xs text-white/50">
-                At Brain Child Nursery and Primary School, we focus on more than academics — we create a safe, inspiring space where every child thrives.
+                At Skyview Montessori School, we focus on more than academics — we create a safe, inspiring space where every child thrives.
               </p>
 
               {/* Social icons */}
@@ -233,25 +233,25 @@ export function Footer() {
               <ul className="flex flex-col gap-3 text-white/45 text-sm">
                 <motion.li whileHover={{ x: 4 }}>
                   <a
-                    href="tel:+2347061175897"
+                    href="tel:+2348033555262"
                     className="flex items-start gap-2 hover:text-primary transition-colors duration-200"
                   >
                     <span className="mt-0.5">📞</span>
-                    <span>+234 706 117 5897</span>
+                    <span>+234 803 355 5262</span>
                   </a>
                 </motion.li>
                 <motion.li whileHover={{ x: 4 }}>
                   <a
-                    href="mailto:info@brainchildintschools.com"
+                    href="mailto:skyviewmontessorischoolenugu@gmail.com"
                     className="flex items-start gap-2 hover:text-primary transition-colors duration-200 break-all"
                   >
                     <span className="mt-0.5">✉️</span>
-                    <span>info@brainchildintschools.com</span>
+                    <span>skyviewmontessorischoolenugu@gmail.com</span>
                   </a>
                 </motion.li>
                 <li className="flex items-start gap-2 text-xs leading-relaxed opacity-70 pt-2 border-t border-white/8">
                   <span className="mt-0.5 shrink-0">📍</span>
-                  <span>No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu</span>
+                  <span>Plot 125/127 Eke Layout, off Orji Udenta Street, near Timber Market, Nike Lake Road, Enugu, Nigeria.</span>
                 </li>
               </ul>
             </motion.div>

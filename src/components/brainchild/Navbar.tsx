@@ -1,19 +1,17 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "@/assets/images/brainlogo.png";
-import BrainButton from "./BrainButton";
 import { FiMenu, FiX, FiChevronDown, FiUser, FiBriefcase } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import BrainChildLogo from "./BrainChildLogo";
 
 const navItems = [
-  { label: "Home", href: "/", color: "text-blue-500", bar: "bg-blue-500" },
-  { label: "Programs", href: "/programs", color: "text-purple-500", bar: "bg-purple-500" },
-  { label: "Admissions", href: "/admissions", color: "text-orange-500", bar: "bg-orange-500" },
-  { label: "Gallery", href: "/gallery", color: "text-yellow-500", bar: "bg-yellow-500" },
-  { label: "Blog", href: "/blog", color: "text-green-500", bar: "bg-green-500" },
-  { label: "Contact", href: "/contact", color: "text-red-500", bar: "bg-red-500" },
-   { label: "Brain-Child-Community", href: "/community", color: "text-red-500", bar: "bg-red-500" },
+  { label: "Home", href: "/" },
+  { label: "Programs", href: "/programs" },
+  { label: "Admissions", href: "/admissions" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const aboutDropdownItems = [
@@ -25,62 +23,185 @@ const aboutDropdownItems = [
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
-  const [portalDropdownOpen, setPortalDropdownOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [portalOpen, setPortalOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
 
-  const handleAboutDropdownClick = (id: string) => {
-    setAboutDropdownOpen(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) { document.body.style.overflow = ""; return; }
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  function handleAboutClick(id: string) {
+    setAboutOpen(false);
     setMenuOpen(false);
     navigate("/about");
-
     setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 300);
-  };
+  }
 
   return (
-    <nav className="flex justify-between items-center px-4 md:px-8 lg:px-12 pt-4 pb-3 sticky top-0 z-50 bg-white/90 backdrop-blur-lg font-heading border-b border-primary/10 shadow-sm">
-      {/* Logo Section */}
-      <Link to="/" className="flex items-center gap-2">
-        <img src={logo} alt="Logo" className="w-[50px] h-[48px] md:w-[58px] md:h-[55px]" />
-        <div className="text-primary font-bold text-sm md:text-base leading-tight tracking-tight">
+    <nav
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "0 2.5rem",
+        height: 72,
+        background: scrolled
+          ? "rgba(255,255,255,0.97)"
+          : "rgba(255,255,255,0.92)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        borderBottom: scrolled
+          ? "1px solid rgba(155,28,44,0.12)"
+          : "1px solid rgba(0,0,0,0.06)",
+        boxShadow: scrolled
+          ? "0 4px 32px rgba(0,0,0,0.08)"
+          : "0 1px 12px rgba(0,0,0,0.04)",
+        transition: "all 0.3s ease",
+        fontFamily: "var(--font-heading, sans-serif)",
+      }}
+    >
+      {/* ── Logo ── */}
+      <Link
+        to="/"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          textDecoration: "none",
+          flexShrink: 0,
+        }}
+      >
+        <img
+          src={logo}
+          alt="Skyview Montessori logo"
+          style={{
+            width: 46,
+            height: 46,
+            borderRadius: "50%",
+            objectFit: "cover",
+            boxShadow: "0 2px 12px rgba(155,28,44,0.18)",
+          }}
+        />
+        <div style={{ color: "#1F2937", fontWeight: 700, fontSize: "0.95rem", lineHeight: 1.25 }}>
           <BrainChildLogo />
         </div>
       </Link>
 
-      {/* Desktop Navigation */}
-      <ul className="hidden lg:flex gap-6 items-center">
-        {/* About Us (Pink Text) */}
+      {/* ── Desktop nav ── */}
+      <ul
+        style={{
+          display: "none",
+          gap: "2rem",
+          alignItems: "center",
+          listStyle: "none",
+          margin: 0,
+          padding: 0,
+        }}
+        className="desktop-nav"
+      >
+        {/* About Us dropdown */}
         <li
-          className="relative"
-          onMouseEnter={() => setAboutDropdownOpen(true)}
-          onMouseLeave={() => setAboutDropdownOpen(false)}
+          style={{ position: "relative" }}
+          onMouseEnter={() => setAboutOpen(true)}
+          onMouseLeave={() => setAboutOpen(false)}
         >
-          <button className={`text-sm font-medium transition-colors flex items-center gap-2 relative hover:opacity-70 text-pink-500`}>
+          <button
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "0.875rem",
+              fontWeight: 600,
+              color: location.pathname === "/about" ? "#9B1C2C" : "#1F2937",
+              padding: "4px 0",
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "#C5305A"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = location.pathname === "/about" ? "#9B1C2C" : "#1F2937"; }}
+          >
             About Us
-            <motion.div animate={{ rotate: aboutDropdownOpen ? 180 : 0 }}>
-              <FiChevronDown size={16} />
-            </motion.div>
-            {/* Animated Underline */}
-            <div className={`absolute bottom-[-4px] left-0 h-[2px] bg-pink-500 transition-all duration-300 ${location.pathname === '/about' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+            <motion.span animate={{ rotate: aboutOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+              <FiChevronDown size={14} />
+            </motion.span>
           </button>
 
+          {/* active underline */}
+          <span style={{
+            position: "absolute",
+            bottom: -2,
+            left: 0,
+            height: 2,
+            borderRadius: 2,
+            background: "#9B1C2C",
+            transition: "width 0.25s ease",
+            width: location.pathname === "/about" || aboutOpen ? "100%" : 0,
+          }} />
+
           <AnimatePresence>
-            {aboutDropdownOpen && (
+            {aboutOpen && (
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="absolute top-full left-0 mt-2 w-56 bg-white border-t-4 border-pink-500 rounded-lg shadow-xl z-50 overflow-hidden"
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.15 }}
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 12px)",
+                  left: 0,
+                  minWidth: 220,
+                  background: "#fff",
+                  borderRadius: 14,
+                  border: "1px solid rgba(0,0,0,0.08)",
+                  boxShadow: "0 16px 48px rgba(0,0,0,0.12)",
+                  overflow: "hidden",
+                  borderTop: "3px solid #9B1C2C",
+                }}
               >
                 {aboutDropdownItems.map((item) => (
                   <button
                     key={item.id}
-                    onClick={() => handleAboutDropdownClick(item.id)}
-                    className="w-full text-left px-5 py-3 text-sm hover:bg-pink-50 text-pink-600 transition-colors border-b border-gray-100 last:border-b-0 font-medium"
+                    onClick={() => handleAboutClick(item.id)}
+                    style={{
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "11px 18px",
+                      fontSize: "0.84rem",
+                      fontWeight: 500,
+                      color: "#374151",
+                      background: "none",
+                      border: "none",
+                      borderBottom: "1px solid rgba(0,0,0,0.05)",
+                      cursor: "pointer",
+                      transition: "background 0.15s, color 0.15s",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.background = "#FFF5F6";
+                      (e.currentTarget as HTMLButtonElement).style.color = "#9B1C2C";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.background = "none";
+                      (e.currentTarget as HTMLButtonElement).style.color = "#374151";
+                    }}
                   >
                     {item.label}
                   </button>
@@ -90,133 +211,332 @@ export function Navbar() {
           </AnimatePresence>
         </li>
 
-        {/* Other Nav Items */}
-        {navItems.map((item) => (
-          <li key={item.label} className="group">
-            <Link
-              to={item.href}
-              className={`text-sm font-medium transition-colors relative hover:opacity-70 ${item.color}`}
-            >
-              {item.label}
-              {/* Dynamic Underline */}
-              <span className={`absolute bottom-[-4px] left-0 h-[2px] transition-all duration-300 ${item.bar} 
-                ${location.pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'}`}
-              />
-            </Link>
-          </li>
-        ))}
+        {/* Regular nav links */}
+        {navItems.map((item) => {
+          const active = location.pathname === item.href;
+          return (
+            <li key={item.label} style={{ position: "relative" }}>
+              <Link
+                to={item.href}
+                style={{
+                  textDecoration: "none",
+                  fontSize: "0.875rem",
+                  fontWeight: 600,
+                  color: active ? "#9B1C2C" : "#1F2937",
+                  padding: "4px 0",
+                  transition: "color 0.2s",
+                  display: "block",
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#C5305A"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = active ? "#9B1C2C" : "#1F2937"; }}
+              >
+                {item.label}
+              </Link>
+              <span style={{
+                position: "absolute",
+                bottom: -2,
+                left: 0,
+                height: 2,
+                borderRadius: 2,
+                background: "#9B1C2C",
+                transition: "width 0.25s ease",
+                width: active ? "100%" : 0,
+              }} />
+            </li>
+          );
+        })}
       </ul>
 
-      {/* Action Buttons */}
-      <div className="hidden lg:flex gap-3 items-center">
-        {/* Portal Dropdown */}
+      {/* ── Desktop action buttons ── */}
+      <div style={{ display: "flex", gap: 10, alignItems: "center" }} className="desktop-actions">
+        {/* Portal dropdown */}
         <div
-          className="relative"
-          onMouseEnter={() => setPortalDropdownOpen(true)}
-          onMouseLeave={() => setPortalDropdownOpen(false)}
+          style={{ position: "relative" }}
+          onMouseEnter={() => setPortalOpen(true)}
+          onMouseLeave={() => setPortalOpen(false)}
         >
-          <BrainButton variant="secondary">
+          <button
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 5,
+              padding: "8px 18px",
+              borderRadius: 999,
+              fontSize: "0.84rem",
+              fontWeight: 600,
+              color: "#374151",
+              background: "#F3F4F6",
+              border: "1px solid rgba(0,0,0,0.1)",
+              cursor: "pointer",
+              transition: "background 0.2s",
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "#E5E7EB"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "#F3F4F6"; }}
+          >
             Portal
-            <motion.span
-              className="inline-block ml-1"
-              animate={{ rotate: portalDropdownOpen ? 180 : 0 }}
-            >
-              <FiChevronDown className="inline" size={14} />
+            <motion.span animate={{ rotate: portalOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+              <FiChevronDown size={13} />
             </motion.span>
-          </BrainButton>
+          </button>
 
           <AnimatePresence>
-            {portalDropdownOpen && (
+            {portalOpen && (
               <motion.div
-                initial={{ opacity: 0, y: -8 }}
+                initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                className="absolute top-full right-0 mt-2 w-48 bg-white border-t-4 border-primary rounded-lg shadow-xl z-50 overflow-hidden"
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.15 }}
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 10px)",
+                  right: 0,
+                  minWidth: 200,
+                  background: "#fff",
+                  borderRadius: 14,
+                  border: "1px solid rgba(0,0,0,0.08)",
+                  boxShadow: "0 16px 48px rgba(0,0,0,0.12)",
+                  overflow: "hidden",
+                  borderTop: "3px solid #4A9EDB",
+                }}
               >
                 <a
                   href="https://portal.brainchildintschools.com/student"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 w-full px-5 py-3 text-sm hover:bg-blue-50 text-blue-600 transition-colors border-b border-gray-100 font-medium"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "11px 18px",
+                    fontSize: "0.84rem",
+                    fontWeight: 500,
+                    color: "#1D6FA4",
+                    textDecoration: "none",
+                    borderBottom: "1px solid rgba(0,0,0,0.05)",
+                    transition: "background 0.15s",
+                  }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "#EFF8FF"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "none"; }}
                 >
-                  <FiUser size={14} />
-                  Student Portal
+                  <FiUser size={14} /> Student Portal
                 </a>
                 <a
                   href="https://portal.brainchildintschools.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 w-full px-5 py-3 text-sm hover:bg-purple-50 text-purple-600 transition-colors font-medium"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "11px 18px",
+                    fontSize: "0.84rem",
+                    fontWeight: 500,
+                    color: "#9B1C2C",
+                    textDecoration: "none",
+                    transition: "background 0.15s",
+                  }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "#FFF5F6"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "none"; }}
                 >
-                  <FiBriefcase size={14} />
-                  Staff Portal
+                  <FiBriefcase size={14} /> Staff Portal
                 </a>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        <Link to="/contact">
-          <BrainButton variant="primary">Enroll my child</BrainButton>
+        {/* Enroll CTA */}
+        <Link to="/contact" style={{ textDecoration: "none" }}>
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            style={{
+              padding: "9px 22px",
+              borderRadius: 999,
+              fontSize: "0.84rem",
+              fontWeight: 700,
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+              background: "linear-gradient(135deg, #9B1C2C 0%, #C5305A 60%, #FF6B9D 100%)",
+              boxShadow: "0 4px 18px rgba(155,28,44,0.35)",
+              transition: "box-shadow 0.2s",
+              letterSpacing: "0.01em",
+            }}
+          >
+            Enroll My Child
+          </motion.button>
         </Link>
       </div>
 
-      {/* Mobile Hamburger */}
-      <button className="lg:hidden text-2xl text-[#303778]" onClick={() => setMenuOpen(!menuOpen)}>
+      {/* ── Mobile hamburger ── */}
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label={menuOpen ? "Close menu" : "Open menu"}
+        style={{
+          display: "none",
+          padding: 8,
+          border: "none",
+          background: "none",
+          cursor: "pointer",
+          color: "#1F2937",
+          fontSize: "1.4rem",
+          borderRadius: 8,
+        }}
+        className="mobile-hamburger"
+      >
         {menuOpen ? <FiX /> : <FiMenu />}
       </button>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile menu ── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 w-full bg-white shadow-xl lg:hidden z-50 p-6 flex flex-col gap-4 border-t border-gray-100 overflow-hidden"
+            ref={mobileMenuRef}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              right: 0,
+              background: "#fff",
+              borderBottom: "1px solid rgba(0,0,0,0.08)",
+              boxShadow: "0 16px 40px rgba(0,0,0,0.1)",
+              padding: "1.5rem",
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.25rem",
+              maxHeight: "calc(100vh - 72px)",
+              overflowY: "auto",
+            }}
           >
-            <div className="flex flex-col gap-2">
-              <p className="text-lg font-medium text-pink-500">📚 About Us</p>
-              {aboutDropdownItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleAboutDropdownClick(item.id)}
-                  className="text-left text-sm text-pink-400 font-medium ml-4 py-1"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+            {/* About section */}
+            <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#9B1C2C", textTransform: "uppercase", letterSpacing: "0.1em", margin: "0 0 6px" }}>
+              About Us
+            </p>
+            {aboutDropdownItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleAboutClick(item.id)}
+                style={{
+                  textAlign: "left",
+                  padding: "8px 12px",
+                  fontSize: "0.9rem",
+                  fontWeight: 500,
+                  color: "#374151",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  borderRadius: 8,
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+
+            <div style={{ height: 1, background: "rgba(0,0,0,0.07)", margin: "0.75rem 0" }} />
 
             {navItems.map((item) => (
               <Link
                 key={item.label}
                 to={item.href}
                 onClick={() => setMenuOpen(false)}
-                className={`text-lg font-medium py-1 ${item.color}`}
+                style={{
+                  textDecoration: "none",
+                  padding: "10px 12px",
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  color: location.pathname === item.href ? "#9B1C2C" : "#1F2937",
+                  borderRadius: 8,
+                  borderLeft: location.pathname === item.href ? "3px solid #9B1C2C" : "3px solid transparent",
+                  background: location.pathname === item.href ? "#FFF5F6" : "none",
+                }}
               >
                 {item.label}
               </Link>
             ))}
 
-            <div className="flex flex-col gap-3 mt-4">
-              <a href="https://portal.brainchildintschools.com/student" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
-                <BrainButton variant="secondary" className="w-full">
-                  <FiUser className="inline mr-1" /> Student Portal
-                </BrainButton>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: "0.75rem" }}>
+              <a
+                href="https://portal.brainchildintschools.com/student"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 8,
+                  padding: "11px",
+                  borderRadius: 999,
+                  fontSize: "0.9rem",
+                  fontWeight: 600,
+                  color: "#1D6FA4",
+                  background: "#EFF8FF",
+                  textDecoration: "none",
+                }}
+              >
+                <FiUser size={15} /> Student Portal
               </a>
-              <a href="https://portal.brainchildintschools.com/" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
-                <BrainButton variant="secondary" className="w-full">
-                  <FiBriefcase className="inline mr-1" /> Staff Portal
-                </BrainButton>
+              <a
+                href="https://portal.brainchildintschools.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 8,
+                  padding: "11px",
+                  borderRadius: 999,
+                  fontSize: "0.9rem",
+                  fontWeight: 600,
+                  color: "#9B1C2C",
+                  background: "#FFF0F3",
+                  textDecoration: "none",
+                }}
+              >
+                <FiBriefcase size={15} /> Staff Portal
               </a>
-              <Link to="/contact" onClick={() => setMenuOpen(false)}>
-                <BrainButton variant="primary" className="w-full">Enroll my child</BrainButton>
+              <Link to="/contact" onClick={() => setMenuOpen(false)} style={{ textDecoration: "none" }}>
+                <button
+                  style={{
+                    width: "100%",
+                    padding: "13px",
+                    borderRadius: 999,
+                    fontSize: "0.95rem",
+                    fontWeight: 700,
+                    color: "#fff",
+                    border: "none",
+                    cursor: "pointer",
+                    background: "linear-gradient(135deg, #9B1C2C 0%, #C5305A 60%, #FF6B9D 100%)",
+                    boxShadow: "0 4px 18px rgba(155,28,44,0.3)",
+                  }}
+                >
+                  Enroll My Child
+                </button>
               </Link>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <style>{`
+        @media (min-width: 1024px) {
+          .desktop-nav { display: flex !important; }
+          .desktop-actions { display: flex !important; }
+          .mobile-hamburger { display: none !important; }
+        }
+        @media (max-width: 1023px) {
+          .desktop-nav { display: none !important; }
+          .desktop-actions { display: none !important; }
+          .mobile-hamburger { display: flex !important; }
+        }
+      `}</style>
     </nav>
   );
 }

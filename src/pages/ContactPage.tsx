@@ -3,36 +3,42 @@ import { Navbar } from "@/components/brainchild/Navbar";
 import { Footer } from "@/components/brainchild/Footer";
 import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 
-import img1 from "@/assets/images/544A7353.jpg.jpg";
-import img2 from "@/assets/images/544A7364.jpg.jpg";
-import img3 from "@/assets/images/544A7290.jpg.jpg";
+import img1 from "@/assets/SKYVIEW-IMAGES/music.png";
+import img2 from "@/assets/SKYVIEW-IMAGES/playground.png";
+import img3 from "@/assets/SKYVIEW-IMAGES/craft.jpeg";
 
 const contactImages = [img1, img2, img3];
+
+// ─── Brand palette (matches index.css) ─────────────────────────────────────
+const WINE_RED = "#9B1C2C";
+const SKY_BLUE = "#4A9EDB";
+const PINK = "#FF6B9D";
+const NAVY = "#1F3A5F";
 
 const contactDetails = [
   {
     label: "Address",
-    value: "No. 8 D.C Onyekwelu Street\nBeside LomaLinda Estate, Enugu",
+    value: "Plot 125/127 Eke Layout\nOff Orji Udenta Street, Near Timber Market\nNike Lake Road, Enugu",
     icon: "↗",
-    accent: "#F4845F",
+    accent: WINE_RED,
   },
   {
     label: "Phone",
-    value: "+234 706 117 5897",
+    value: "+234 803 355 5262\n+234 804 084 1601",
     icon: "↗",
-    accent: "#4E9AF1",
+    accent: SKY_BLUE,
   },
   {
     label: "Email",
-    value: "info@brainchildintschools.com",
+    value: "skyviewmontessorischoolenugu@gmail.com",
     icon: "↗",
-    accent: "#6C63FF",
+    accent: PINK,
   },
   {
     label: "Office Hours",
-    value: "Mon – Fri: 7:30 AM – 4:00 PM\nSaturday: 8:00 AM – 12:00 PM",
+    value: "Monday – Friday: 8:00 AM – 3:00 PM",
     icon: "↗",
-    accent: "#2DCE89",
+    accent: NAVY,
   },
 ];
 
@@ -103,9 +109,9 @@ export default function ContactPage() {
           message: "",
         });
       }, 5000);
-     } catch (err: unknown) {
-  const message = err instanceof Error ? err.message : "Failed to send message. Please try again.";
-  setError(message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to send message. Please try again.";
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -120,7 +126,7 @@ export default function ContactPage() {
 
         /* HERO */
         .ct-hero {
-          background: #1A1A2E;
+          background: ${NAVY};
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
           min-height: 52vh;
@@ -141,31 +147,31 @@ export default function ContactPage() {
         .ct-hero-img-col::after {
           content: '';
           position: absolute; inset: 0;
-          background: linear-gradient(to bottom, transparent 50%, #1A1A2Ecc 100%);
+          background: linear-gradient(to bottom, transparent 50%, ${NAVY}cc 100%);
         }
 
         .ct-hero-content {
           position: absolute;
           bottom: 0; left: 0; right: 0;
           padding: 48px 60px;
-          background: linear-gradient(to top, #1A1A2E 0%, transparent 100%);
+          background: linear-gradient(to top, ${NAVY} 0%, transparent 100%);
           z-index: 10;
         }
         @media (max-width: 768px) { .ct-hero-content { padding: 28px 24px; position: relative; } }
 
         .ct-eyebrow {
           font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
-          color: #F4845F; margin-bottom: 14px;
+          color: ${PINK}; margin-bottom: 14px;
           display: flex; align-items: center; gap: 12px;
         }
-        .ct-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: #F4845F; }
+        .ct-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: ${PINK}; }
         .ct-hero-title {
           font-family: 'Fraunces', serif;
           font-size: clamp(2rem, 4vw, 3.8rem);
           color: #FAF8F5; font-weight: 300; line-height: 1.05;
           max-width: 700px;
         }
-        .ct-hero-title em { font-style: italic; color: #F4845F; }
+        .ct-hero-title em { font-style: italic; color: ${PINK}; }
         .ct-hero-sub { color: #FAF8F566; font-size: 14px; line-height: 1.7; font-weight: 300; margin-top: 14px; max-width: 480px; }
 
         /* MAIN BODY */
@@ -181,19 +187,19 @@ export default function ContactPage() {
         .ct-info {
           padding: 80px 60px;
           background: #FAF8F5;
-          border-right: 1px solid #1A1A2E0c;
+          border-right: 1px solid ${NAVY}0c;
         }
-        @media (max-width: 768px) { .ct-info { padding: 60px 24px; border-right: none; border-bottom: 1px solid #1A1A2E0c; } }
+        @media (max-width: 768px) { .ct-info { padding: 60px 24px; border-right: none; border-bottom: 1px solid ${NAVY}0c; } }
 
-        .ct-section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: #F4845F; margin-bottom: 12px; }
+        .ct-section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: ${WINE_RED}; margin-bottom: 12px; }
         .ct-section-title { font-family: 'Fraunces', serif; font-size: 2rem; color: #1A1A2E; font-weight: 300; margin-bottom: 48px; line-height: 1.2; }
-        .ct-section-title em { font-style: italic; color: #F4845F; }
+        .ct-section-title em { font-style: italic; color: ${WINE_RED}; }
 
         .ct-detail-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 48px; }
         .ct-detail-row {
           display: flex; gap: 20px; align-items: flex-start;
           padding: 24px 0;
-          border-bottom: 1px solid #1A1A2E0a;
+          border-bottom: 1px solid ${NAVY}0a;
           transition: background 0.2s;
         }
         .ct-detail-row:first-child { padding-top: 0; }
@@ -210,7 +216,7 @@ export default function ContactPage() {
 
         /* Map placeholder */
         .ct-map {
-          background: #1A1A2E;
+          background: ${NAVY};
           border-radius: 8px;
           overflow: hidden;
           position: relative;
@@ -222,7 +228,7 @@ export default function ContactPage() {
           position: absolute;
           width: 40px; height: 40px;
           border-radius: 50% 50% 50% 0;
-          background: #F4845F;
+          background: ${WINE_RED};
           transform: rotate(-45deg);
           top: 50%; left: 50%;
           margin-top: -20px; margin-left: -20px;
@@ -232,25 +238,25 @@ export default function ContactPage() {
           content: '';
           position: absolute;
           width: 14px; height: 14px;
-          background: #1A1A2E;
+          background: ${NAVY};
           border-radius: 50%;
           top: 50%; left: 50%;
           transform: translate(-50%, -50%) rotate(45deg);
         }
         @keyframes mapPulse {
-          0%, 100% { box-shadow: 0 0 0 0 #F4845F44; }
+          0%, 100% { box-shadow: 0 0 0 0 ${WINE_RED}44; }
           50% { box-shadow: 0 0 0 16px transparent; }
         }
 
         /* RIGHT: FORM */
         .ct-form-col {
           padding: 80px 60px;
-          background: #1A1A2E;
+          background: ${NAVY};
         }
         @media (max-width: 768px) { .ct-form-col { padding: 60px 24px; } }
 
         .ct-form-title { font-family: 'Fraunces', serif; font-size: 2rem; color: #FAF8F5; font-weight: 300; margin-bottom: 8px; }
-        .ct-form-title em { font-style: italic; color: #F4845F; }
+        .ct-form-title em { font-style: italic; color: ${PINK}; }
         .ct-form-sub { font-size: 14px; color: #FAF8F555; font-weight: 300; margin-bottom: 40px; line-height: 1.6; }
 
         .ct-form { display: flex; flex-direction: column; gap: 20px; }
@@ -277,8 +283,8 @@ export default function ContactPage() {
           box-sizing: border-box;
         }
         .ct-input::placeholder { color: #FAF8F533; }
-        .ct-input:focus { border-color: #F4845F; background: #FAF8F50c; }
-        .ct-input option { background: #1A1A2E; color: #FAF8F5; }
+        .ct-input:focus { border-color: ${PINK}; background: #FAF8F50c; }
+        .ct-input option { background: ${NAVY}; color: #FAF8F5; }
 
         .ct-textarea {
           width: 100%;
@@ -297,10 +303,10 @@ export default function ContactPage() {
           box-sizing: border-box;
         }
         .ct-textarea::placeholder { color: #FAF8F533; }
-        .ct-textarea:focus { border-color: #F4845F; background: #FAF8F50c; }
+        .ct-textarea:focus { border-color: ${PINK}; background: #FAF8F50c; }
 
         .ct-submit {
-          background: #F4845F;
+          background: ${WINE_RED};
           color: #FAF8F5;
           border: none; cursor: pointer;
           padding: 18px 40px;
@@ -311,17 +317,17 @@ export default function ContactPage() {
           transition: all 0.3s;
           width: 100%;
         }
-        .ct-submit:hover:not(:disabled) { background: #e8734f; transform: translateY(-2px); box-shadow: 0 12px 32px #F4845F33; }
+        .ct-submit:hover:not(:disabled) { background: #7A1623; transform: translateY(-2px); box-shadow: 0 12px 32px ${WINE_RED}33; }
         .ct-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-        .ct-submit.success { background: #2DCE89; }
+        .ct-submit.success { background: ${SKY_BLUE}; }
 
         .ct-success-msg {
           text-align: center;
           padding: 20px;
-          background: #2DCE8915;
-          border: 1px solid #2DCE8933;
+          background: ${SKY_BLUE}15;
+          border: 1px solid ${SKY_BLUE}33;
           border-radius: 4px;
-          color: #2DCE89;
+          color: ${SKY_BLUE};
           font-size: 14px;
           font-weight: 500;
           margin-top: 8px;
@@ -330,10 +336,10 @@ export default function ContactPage() {
         .ct-error-msg {
           text-align: center;
           padding: 16px 20px;
-          background: #FF6B6B15;
-          border: 1px solid #FF6B6B33;
+          background: ${WINE_RED}15;
+          border: 1px solid ${WINE_RED}33;
           border-radius: 4px;
-          color: #FF6B6B;
+          color: ${WINE_RED};
           font-size: 14px;
           font-weight: 500;
           margin-top: 8px;
@@ -368,7 +374,7 @@ export default function ContactPage() {
               We'd love to <em>hear</em> from you
             </h1>
             <p className="ct-hero-sub">
-              Whether it's a question about admissions, a tour request, or just a conversation — our doors are always open.
+              We're here to assist you and answer any questions you may have about Skyview Montessori School — admissions, school life, or anything else.
             </p>
           </div>
         </section>
@@ -405,7 +411,7 @@ export default function ContactPage() {
           {/* RIGHT: FORM */}
           <AnimatedSection delay={0.15}>
             <div className="ct-form-col">
-              <div className="ct-section-label" style={{ color: "#F4845F" }}>Send a Message</div>
+              <div className="ct-section-label" style={{ color: PINK }}>Send a Message</div>
               <h2 className="ct-form-title">Let's <em>talk</em></h2>
               <p className="ct-form-sub">Fill out the form below and our team will get back to you within one business day.</p>
 

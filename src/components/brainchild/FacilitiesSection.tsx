@@ -1,21 +1,13 @@
 import { AnimatedSection } from "./AnimatedSection";
 import { motion } from "framer-motion";
-import computer from "@/assets/images/computer.jpeg";
 import classRoomImg from "@/assets/images/curiculum.jpg";
-import playgroundImg from "@/assets/images/outside.jpg";
-import Music from "@/assets/images/music.jpg";
+import Music from "@/assets/skyview-images/music.png";
+import scienceimg from "@/assets/skyview-images/science.png";
+import playgroundimg from "@/assets/skyview-images/playground.png";
+import computer from "@/assets/skyview-images/computer.png";
 
 const facilities = [
-  {
-    title: "Classrooms",
-    tag: "Learning",
-    description: "Air-conditioned, well lit and brightly coloured with decorations. An idea-stimulating learning environment.",
-    emoji: "🏫",
-    border: "border-blue-200",
-    titleColor: "text-blue-700",
-    tagBg: "bg-blue-500",
-    image: classRoomImg,
-  },
+  
   {
     title: "Library",
     tag: "Reading",
@@ -44,7 +36,7 @@ const facilities = [
     border: "border-emerald-200",
     titleColor: "text-emerald-700",
     tagBg: "bg-emerald-500",
-    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop",
+    image: scienceimg,
   },
   {
     title: "Music & Dance Studio",
@@ -64,7 +56,7 @@ const facilities = [
     border: "border-orange-200",
     titleColor: "text-orange-700",
     tagBg: "bg-orange-500",
-    image: playgroundImg,
+    image: playgroundimg,
   },
   {
     title: "Sports Equipment",

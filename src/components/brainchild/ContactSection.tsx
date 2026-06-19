@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { AnimatedSection } from './AnimatedSection';
 
 export default function ContactSection() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -8,27 +9,22 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
-
     const formData = new FormData(e.currentTarget);
     const form = e.currentTarget;
-
     const body = {
-      user_name:  String(formData.get('user_name')  || ''),
+      user_name: String(formData.get('user_name') || ''),
       user_email: String(formData.get('user_email') || ''),
       child_name: String(formData.get('child_name') || ''),
       user_phone: String(formData.get('user_phone') || ''),
-      message:    String(formData.get('message')    || ''),
+      message: String(formData.get('message') || ''),
     };
-
     try {
       const res = await fetch('https://brainchild-backend-1pud.vercel.app/api/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-
       if (!res.ok) throw new Error('Network error');
-
       setStatus('success');
       form.reset();
       setTimeout(() => setStatus('idle'), 5000);
@@ -40,68 +36,150 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="bg-[#FFF5F7] py-24 px-6 md:px-12 lg:px-24 overflow-hidden relative">
-      <div className="max-w-[1400px] mx-auto relative z-10">
+    <section
+      id="contact"
+      className="relative py-24 md:py-32 px-4 md:px-12 lg:px-24 overflow-hidden"
+      style={{ backgroundColor: '#FFFFFF' }}
+    >
+      {/* Subtle top wash */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(155,28,44,0.04) 0%, transparent 65%)',
+        }}
+      />
 
-        {/* Header Section */}
-        <div className="text-center mb-20">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-[11px] font-black tracking-[0.4em] uppercase text-primary mb-6 block"
-          >
-            Get In Touch
-          </motion.span>
-          <h2 className="text-5xl md:text-8xl font-heading font-black text-slate-900 leading-[0.85] tracking-tighter">
-            Contact <span className="text-primary italic font-light">Us.</span>
-          </h2>
-        </div>
+      {/* Doodle accent — dashed left margin rule */}
+      <div
+        className="absolute left-0 top-0 bottom-0 w-[3px] pointer-events-none opacity-20"
+        style={{
+          background:
+            'repeating-linear-gradient(180deg, #9B1C2C 0px, #9B1C2C 8px, transparent 8px, transparent 18px)',
+        }}
+      />
+      {/* Corner watermark */}
+      <span
+        className="absolute top-6 right-8 select-none pointer-events-none opacity-[0.07] text-lg font-bold rotate-[10deg]"
+        style={{ fontFamily: "'Schoolbell', cursive", color: '#FF6B9D' }}
+      >
+        ✉️ Hello!
+      </span>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+      <div className="relative max-w-7xl mx-auto">
 
-          {/* Info Column */}
-          <div className="lg:col-span-5 space-y-12">
+        {/* HEADER */}
+        <AnimatedSection className="mb-16 md:mb-20">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
-              <h3 className="text-3xl font-black text-slate-900 mb-8 tracking-tight">Reach Us Directly</h3>
-              <div className="space-y-8">
-                <ContactDetail
-                  icon={<Phone className="w-5 h-5 text-blue-500" />}
-                  label="Phone"
-                  lines={['+234 706 117 5897', '+234 706 117 5897']}
-                />
-                <ContactDetail
-                  icon={<Mail className="w-5 h-5 text-rose-500" />}
-                  label="Email"
-                  lines={['info@brainchildintschools.com']}
-                />
-                <ContactDetail
-                  icon={<MapPin className="w-5 h-5 text-emerald-500" />}
-                  label="Address"
-                  lines={['No. 8 D.C Onyekwelu Street, Beside LomaLinda Estate, Enugu']}
-                />
+              <div className="flex items-center gap-3 mb-4">
+                <span className="block w-8 h-[2px] rounded-full" style={{ backgroundColor: '#FF6B9D' }} />
+                <span
+                  className="text-[11px] font-bold tracking-[0.18em] uppercase"
+                  style={{ color: '#9B1C2C', fontFamily: 'var(--font-body)' }}
+                >
+                  Get In Touch
+                </span>
               </div>
+              <h2
+                className="text-4xl md:text-5xl lg:text-[56px] font-bold leading-[1.1]"
+                style={{ fontFamily: 'var(--font-heading)', color: '#1F1F1F' }}
+              >
+                We'd love to{' '}
+                <span className="italic font-light" style={{ color: '#9B1C2C' }}>
+                  hear from you
+                </span>
+              </h2>
             </div>
-
-            <div className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-xl shadow-primary/5">
-              <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">School Hours</h4>
-              <p className="text-slate-600 font-medium leading-relaxed">
-                <span className="text-slate-900 font-black">Pre-school & KG:</span> 7:30am – 1:00pm daily<br />
-                <span className="text-slate-900 font-black">Elementary 1-6:</span> 7:30am – 3:00pm (Mon-Thu)
+            <div
+              className="hidden md:block text-right max-w-xs border-t pt-4"
+              style={{ borderColor: '#E5DDE0' }}
+            >
+              <p className="text-sm leading-relaxed" style={{ color: '#555555', fontFamily: 'var(--font-body)' }}>
+                We're here to assist you and answer any questions you may
+                have about Skyview Montessori School.
               </p>
             </div>
           </div>
+          <div className="mt-8 h-[1px] w-full" style={{ backgroundColor: '#E5DDE0' }} />
+        </AnimatedSection>
 
-          {/* Form Column */}
-          <div className="lg:col-span-7">
-            <div className="bg-white rounded-[3.5rem] p-8 md:p-14 shadow-2xl shadow-primary/5 border border-white">
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <InputField label="Parent's Name"  name="user_name"  placeholder="e.g. Mrs. Okonkwo"    required />
-                <InputField label="Child's Name"   name="child_name" placeholder="e.g. Chioma" />
-                <InputField label="Email Address"  name="user_email" type="email" placeholder="parent@email.com" required />
-                <InputField label="Phone Number"   name="user_phone" placeholder="+234 xxx xxx xxxx"    required />
+        {/* BODY */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+          {/* LEFT — contact details + hours */}
+          <AnimatedSection className="lg:col-span-4 flex flex-col gap-10">
+
+            {/* Contact details */}
+            <div className="flex flex-col gap-7">
+              <ContactDetail
+                icon={<Phone className="w-4 h-4" style={{ color: '#9B1C2C' }} />}
+                label="Phone"
+                lines={['+234 803 355 5262', '+234 804 084 1601']}
+                accent="#9B1C2C"
+              />
+              <ContactDetail
+                icon={<Mail className="w-4 h-4" style={{ color: '#4A9EDB' }} />}
+                label="Email"
+                lines={['skyviewmontessorischoolenugu@gmail.com']}
+                accent="#4A9EDB"
+              />
+              <ContactDetail
+                icon={<MapPin className="w-4 h-4" style={{ color: '#FF6B9D' }} />}
+                label="Address"
+                lines={['Plot 125/127 Eke Layout, off Orji Udenta Street, near Timber Market, Nike Lake Road, Enugu.']}
+                accent="#FF6B9D"
+              />
+            </div>
+
+            {/* School hours card */}
+            <div
+              className="rounded-2xl p-7 border"
+              style={{
+                backgroundColor: '#F8F4F6',
+                borderColor: '#E5DDE0',
+              }}
+            >
+              <span
+                className="text-[10px] font-bold tracking-[0.18em] uppercase block mb-4"
+                style={{ color: '#9B1C2C', fontFamily: 'var(--font-body)' }}
+              >
+                Office Hours
+              </span>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-start justify-between gap-4">
+                  <span className="text-sm font-semibold" style={{ color: '#1F1F1F', fontFamily: 'var(--font-body)' }}>
+                    Monday – Friday
+                  </span>
+                  <span className="text-sm text-right shrink-0" style={{ color: '#555555', fontFamily: 'var(--font-body)' }}>
+                    8:00am – 3:00pm
+                  </span>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* RIGHT — form */}
+          <AnimatedSection className="lg:col-span-8" delay={0.1}>
+            <div
+              className="rounded-2xl border p-8 md:p-12"
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderColor: '#E5DDE0',
+                boxShadow: '0 4px 32px rgba(155,28,44,0.07)',
+              }}
+            >
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-7">
+                <InputField label="Parent's Name" name="user_name" placeholder="e.g. Mrs. Okonkwo" required />
+                <InputField label="Child's Name" name="child_name" placeholder="e.g. Chioma" />
+                <InputField label="Email Address" name="user_email" type="email" placeholder="parent@email.com" required />
+                <InputField label="Phone Number" name="user_phone" placeholder="+234 xxx xxx xxxx" required />
 
                 <div className="md:col-span-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 block ml-2">
+                  <label
+                    className="block text-[10px] font-bold tracking-[0.15em] uppercase mb-2"
+                    style={{ color: '#9B1C2C', fontFamily: 'var(--font-body)' }}
+                  >
                     Message
                   </label>
                   <textarea
@@ -109,29 +187,44 @@ export default function ContactSection() {
                     required
                     rows={5}
                     placeholder="Tell us about your child's age, interests, or any questions you have..."
-                    className="w-full bg-slate-50 border border-slate-100 rounded-3xl p-6 text-slate-900 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:bg-white transition-all resize-none"
+                    className="w-full rounded-xl p-4 text-sm resize-none transition-all focus:outline-none"
+                    style={{
+                      backgroundColor: '#F8F4F6',
+                      border: '1.5px solid #E5DDE0',
+                      color: '#1F1F1F',
+                      fontFamily: 'var(--font-body)',
+                    }}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = '#9B1C2C')}
+                    onBlur={(e) => (e.currentTarget.style.borderColor = '#E5DDE0')}
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <button
+                  <motion.button
                     type="submit"
                     disabled={status === 'sending'}
-                    className={`w-full py-7 rounded-[2rem] font-black uppercase text-[11px] tracking-[0.3em] transition-all flex items-center justify-center gap-3 shadow-xl ${
-                      status === 'success' ? 'bg-emerald-500 text-white' :
-                      status === 'error'   ? 'bg-rose-500 text-white' :
-                      'bg-slate-900 text-white hover:bg-primary hover:-translate-y-1 shadow-slate-900/10 hover:shadow-primary/20'
-                    }`}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full py-5 rounded-xl font-bold uppercase text-[11px] tracking-[0.22em] flex items-center justify-center gap-3 transition-colors duration-300"
+                    style={{
+                      backgroundColor:
+                        status === 'success' ? '#4A9EDB'
+                          : status === 'error' ? '#C23D4F'
+                            : '#9B1C2C',
+                      color: '#FFFFFF',
+                      fontFamily: 'var(--font-body)',
+                      boxShadow: '0 4px 20px rgba(155,28,44,0.25)',
+                    }}
                   >
-                    {status === 'idle'    && <><Send size={16} /> Send Message</>}
-                    {status === 'sending' && 'Processing...'}
-                    {status === 'success' && <><CheckCircle2 size={16} /> Message Sent!</>}
-                    {status === 'error'   && <><AlertCircle size={16} /> Failed to Send</>}
-                  </button>
+                    {status === 'idle' && <><Send size={15} /> Send Message</>}
+                    {status === 'sending' && 'Sending…'}
+                    {status === 'success' && <><CheckCircle2 size={15} /> Message Sent!</>}
+                    {status === 'error' && <><AlertCircle size={15} /> Failed — Try Again</>}
+                  </motion.button>
                 </div>
               </form>
             </div>
-          </div>
+          </AnimatedSection>
 
         </div>
       </div>
@@ -139,17 +232,33 @@ export default function ContactSection() {
   );
 }
 
-// Sub-components
-function ContactDetail({ icon, label, lines }: { icon: React.ReactNode; label: string; lines: string[] }) {
+function ContactDetail({
+  icon, label, lines, accent,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  lines: string[];
+  accent: string;
+}) {
   return (
-    <div className="flex gap-6 group">
-      <div className="w-14 h-14 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500">
+    <div className="flex gap-5 group items-start">
+      <div
+        className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105"
+        style={{ backgroundColor: `${accent}14`, border: `1.5px solid ${accent}28` }}
+      >
         {icon}
       </div>
       <div>
-        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">{label}</span>
+        <span
+          className="text-[10px] font-bold tracking-[0.16em] uppercase block mb-1"
+          style={{ color: accent, fontFamily: 'var(--font-body)' }}
+        >
+          {label}
+        </span>
         {lines.map((line, i) => (
-          <p key={i} className="text-slate-900 font-bold text-base leading-tight">{line}</p>
+          <p key={i} className="text-sm font-semibold leading-snug" style={{ color: '#1F1F1F', fontFamily: 'var(--font-body)' }}>
+            {line}
+          </p>
         ))}
       </div>
     </div>
@@ -159,10 +268,23 @@ function ContactDetail({ icon, label, lines }: { icon: React.ReactNode; label: s
 function InputField({ label, ...props }: React.ComponentProps<'input'> & { label: string }) {
   return (
     <div>
-      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 block ml-2">{label}</label>
+      <label
+        className="block text-[10px] font-bold tracking-[0.15em] uppercase mb-2"
+        style={{ color: '#9B1C2C', fontFamily: 'var(--font-body)' }}
+      >
+        {label}
+      </label>
       <input
         {...props}
-        className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-6 text-slate-900 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:bg-white transition-all"
+        className="w-full rounded-xl p-4 text-sm transition-all focus:outline-none"
+        style={{
+          backgroundColor: '#F8F4F6',
+          border: '1.5px solid #E5DDE0',
+          color: '#1F1F1F',
+          fontFamily: 'var(--font-body)',
+        }}
+        onFocus={(e) => (e.currentTarget.style.borderColor = '#9B1C2C')}
+        onBlur={(e) => (e.currentTarget.style.borderColor = '#E5DDE0')}
       />
     </div>
   );
