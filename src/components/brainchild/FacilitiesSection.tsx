@@ -1,13 +1,13 @@
 import { AnimatedSection } from "./AnimatedSection";
 import { motion } from "framer-motion";
 import classRoomImg from "@/assets/images/curiculum.jpg";
-import Music from "@/assets/skyview-images/music.png";
-import scienceimg from "@/assets/skyview-images/science.png";
-import playgroundimg from "@/assets/skyview-images/playground.png";
-import computer from "@/assets/skyview-images/computer.png";
+import Music from "@/assets/SKYVIEW-IMAGES/music.png";
+import scienceimg from "@/assets/SKYVIEW-IMAGES/science.png";
+import playgroundimg from "@/assets/SKYVIEW-IMAGES/playground.png";
+import computer from "@/assets/SKYVIEW-IMAGES/computer.png";
 
 const facilities = [
-  
+
   {
     title: "Library",
     tag: "Reading",

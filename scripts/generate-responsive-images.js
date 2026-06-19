@@ -5,7 +5,7 @@ import sharp from 'sharp';
 // Folders to scan inside src/assets
 const INPUT_FOLDERS = [
     path.resolve('src/assets/images'),
-    path.resolve('src/assets/skyview-images'),
+    path.resolve('src/assets/SKYVIEW-IMAGES'),
 ];
 const OUTPUT_FOLDER = path.resolve('public/responsive');
 const SIZES = [480, 768, 1024, 1600];

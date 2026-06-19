@@ -4,17 +4,17 @@ import { Footer } from "@/components/brainchild/Footer";
 import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
 
-import blocksimg from "@/assets/skyview-images/building-blocks.jpeg";
-import bluildingimg from "@/assets/skyview-images/building2.jpeg";
-import computerLabImg from "@/assets/skyview-images/computer.png";
+import blocksimg from "@/assets/SKYVIEW-IMAGES/building-blocks.jpeg";
+import bluildingimg from "@/assets/SKYVIEW-IMAGES/building2.jpeg";
+import computerLabImg from "@/assets/SKYVIEW-IMAGES/computer.png";
 import craftImg from "@/assets/SKYVIEW-IMAGES/craft.jpeg";
-import directorImg from "@/assets/skyview-images/director.png";
-import footballImg from "@/assets/skyview-images/football.png";
-import judoimg from "@/assets/skyview-images/judo.png";
-import musicImg from "@/assets/skyview-images/music.png";
-import playgroundimg from "@/assets/skyview-images/playground.png";
-import scienceImg from "@/assets/skyview-images/science.png";
-import swimmingImg from "@/assets/skyview-images/swimming.jpeg";
+import directorImg from "@/assets/SKYVIEW-IMAGES/director.png";
+import footballImg from "@/assets/SKYVIEW-IMAGES/football.png";
+import judoimg from "@/assets/SKYVIEW-IMAGES/judo.png";
+import musicImg from "@/assets/SKYVIEW-IMAGES/music.png";
+import playgroundimg from "@/assets/SKYVIEW-IMAGES/playground.png";
+import scienceImg from "@/assets/SKYVIEW-IMAGES/science.png";
+import swimmingImg from "@/assets/SKYVIEW-IMAGES/swimming.jpeg";
 
 interface GalleryImage {
   id: string;

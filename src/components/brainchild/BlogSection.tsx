@@ -4,11 +4,11 @@ import BrainButton from "./BrainButton";
 import BlogGrid from "./BlogGrid";
 import { AnimatedSection } from "./AnimatedSection";
 import { BlogPost } from "@/types/blogs";
-import judoImg  from '@/assets/skyview-images/judo.png';
-import footballImg     from '@/assets/skyview-images/football.png';
-import computerLabImg    from "@/assets/skyview-images/computer.png";
-import schoolBuildingImg    from "@/assets/skyview-images/building.jpeg";
-import scienceCraftImg  from "@/assets/skyview-images/science.png";
+import judoImg from '@/assets/SKYVIEW-IMAGES/judo.png';
+import footballImg from '@/assets/SKYVIEW-IMAGES/football.png';
+import computerLabImg from "@/assets/SKYVIEW-IMAGES/computer.png";
+import schoolBuildingImg from "@/assets/SKYVIEW-IMAGES/building.jpeg";
+import scienceCraftImg from "@/assets/SKYVIEW-IMAGES/science.png";
 
 
 
@@ -16,57 +16,57 @@ export function BlogSection() {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
   const posts: BlogPost[] = [
-  {
-    id: "1",
-    title: "Judo & Character Development",
-    excerpt: "Our judo program teaches discipline, confidence, respect, and self-control while promoting physical fitness.",
-    coverImage: judoImg,
-    author: "Sports Department",
-    publishedAt: "2026-02-01",
-    slug: "judo-character-development",
-    link: "/blog",
-  },
-  {
-    id: "2",
-    title: "Football Excellence",
-    excerpt: "Through football training, students develop teamwork, leadership, sportsmanship, and healthy competition.",
-    coverImage: footballImg,
-    author: "Sports Department",
-    publishedAt: "2026-02-05",
-    slug: "football-excellence",
-    link: "/blog",
-  },
-  {
-    id: "3",
-    title: "Digital Learning & Computer Skills",
-    excerpt: "Our computer laboratory equips students with essential digital literacy and technology skills for the future.",
-    coverImage: computerLabImg,
-    author: "ICT Department",
-    publishedAt: "2026-02-10",
-    slug: "digital-learning",
-    link: "/blog",
-  },
-  {
-    id: "4",
-    title: "A Conducive Learning Environment",
-    excerpt: "Our modern school facilities provide a safe, comfortable, and inspiring atmosphere for academic success.",
-    coverImage: schoolBuildingImg,
-    author: "School Admin",
-    publishedAt: "2026-02-15",
-    slug: "learning-environment",
-    link: "/blog",
-  },
-  {
-    id: "5",
-    title: "Science, Creativity & Discovery",
-    excerpt: "From science experiments to creative crafts and outdoor activities, students learn by exploring and creating.",
-    coverImage: scienceCraftImg,
-    author: "Academic Team",
-    publishedAt: "2026-03-05",
-    slug: "science-creativity-discovery",
-    link: "/blog",
-  },
-];
+    {
+      id: "1",
+      title: "Judo & Character Development",
+      excerpt: "Our judo program teaches discipline, confidence, respect, and self-control while promoting physical fitness.",
+      coverImage: judoImg,
+      author: "Sports Department",
+      publishedAt: "2026-02-01",
+      slug: "judo-character-development",
+      link: "/blog",
+    },
+    {
+      id: "2",
+      title: "Football Excellence",
+      excerpt: "Through football training, students develop teamwork, leadership, sportsmanship, and healthy competition.",
+      coverImage: footballImg,
+      author: "Sports Department",
+      publishedAt: "2026-02-05",
+      slug: "football-excellence",
+      link: "/blog",
+    },
+    {
+      id: "3",
+      title: "Digital Learning & Computer Skills",
+      excerpt: "Our computer laboratory equips students with essential digital literacy and technology skills for the future.",
+      coverImage: computerLabImg,
+      author: "ICT Department",
+      publishedAt: "2026-02-10",
+      slug: "digital-learning",
+      link: "/blog",
+    },
+    {
+      id: "4",
+      title: "A Conducive Learning Environment",
+      excerpt: "Our modern school facilities provide a safe, comfortable, and inspiring atmosphere for academic success.",
+      coverImage: schoolBuildingImg,
+      author: "School Admin",
+      publishedAt: "2026-02-15",
+      slug: "learning-environment",
+      link: "/blog",
+    },
+    {
+      id: "5",
+      title: "Science, Creativity & Discovery",
+      excerpt: "From science experiments to creative crafts and outdoor activities, students learn by exploring and creating.",
+      coverImage: scienceCraftImg,
+      author: "Academic Team",
+      publishedAt: "2026-03-05",
+      slug: "science-creativity-discovery",
+      link: "/blog",
+    },
+  ];
 
   return (
     <section

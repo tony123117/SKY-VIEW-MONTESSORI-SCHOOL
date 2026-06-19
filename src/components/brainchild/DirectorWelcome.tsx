@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiStar, FiBriefcase, FiBook, FiHeart, FiChevronDown, FiChevronUp } from "react-icons/fi";
-import directorImg from "@/assets/skyview-images/director.png";
+import directorImg from "@/assets/SKYVIEW-IMAGES/director.png";
 const WINE_RED = "#9B1C2C";
 const SKY_BLUE = "#4A9EDB";
 const PINK = "#FF6B9D";

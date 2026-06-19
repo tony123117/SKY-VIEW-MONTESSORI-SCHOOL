@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import buildingImg from "@/assets/skyview-images/building.jpeg";
-import football from "@/assets/skyview-images/FOOTBALL.png";
-import judo from "@/assets/skyview-images/judo.png";
+import buildingImg from "@/assets/SKYVIEW-IMAGES/building.jpeg";
+import football from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
+import judo from "@/assets/SKYVIEW-IMAGES/judo.png";
 import ResponsiveImage from "@/components/ui/ResponsiveImage";
 
 const slides = [

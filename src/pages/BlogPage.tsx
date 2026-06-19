@@ -12,11 +12,11 @@ import {
 } from "@/components/ui/carousel";
 
 // ── Images from BlogSection ──────────────────────────────────────────────────
-import judoImg         from "@/assets/skyview-images/judo.png";
-import footballImg     from "@/assets/skyview-images/football.png";
-import computerLabImg  from "@/assets/skyview-images/computer.png";
-import schoolBuildingImg from "@/assets/skyview-images/building.jpeg";
-import scienceCraftImg from "@/assets/skyview-images/science.png";
+import judoImg from "@/assets/SKYVIEW-IMAGES/judo.png";
+import footballImg from "@/assets/SKYVIEW-IMAGES/football.png";
+import computerLabImg from "@/assets/SKYVIEW-IMAGES/computer.png";
+import schoolBuildingImg from "@/assets/SKYVIEW-IMAGES/building.jpeg";
+import scienceCraftImg from "@/assets/SKYVIEW-IMAGES/science.png";
 
 // ────────────────────────────────────────────────────────────────────────────
 
@@ -99,18 +99,18 @@ const posts = [
 ];
 
 const tagColors: Record<string, string> = {
-  Sports:     "#F4845F",
+  Sports: "#F4845F",
   Technology: "#6C63FF",
-  Campus:     "#4E9AF1",
-  Academics:  "#2DCE89",
+  Campus: "#4E9AF1",
+  Academics: "#2DCE89",
   Enrichment: "#F4845F",
-  Policies:   "#4E9AF1",
-  Wellness:   "#2DCE89",
-  Development:"#F7B731",
-  Community:  "#4E9AF1",
-  Insight:    "#F4845F",
-  Balance:    "#2DCE89",
-  Future:     "#6C63FF",
+  Policies: "#4E9AF1",
+  Wellness: "#2DCE89",
+  Development: "#F7B731",
+  Community: "#4E9AF1",
+  Insight: "#F4845F",
+  Balance: "#2DCE89",
+  Future: "#6C63FF",
 };
 
 export default function BlogPage() {

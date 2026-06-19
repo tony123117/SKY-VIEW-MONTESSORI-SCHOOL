@@ -4,7 +4,7 @@ import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-import director from "@/assets/skyview-images/director.png";
+import director from "@/assets/SKYVIEW-IMAGES/director.png";
 
 import buildingImg from "@/assets/SKYVIEW-IMAGES/building2.jpeg";
 import musicImg from "@/assets/SKYVIEW-IMAGES/music.png";

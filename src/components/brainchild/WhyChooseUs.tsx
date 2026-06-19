@@ -11,9 +11,9 @@ import environmentImg from "@/assets/images/env.jpg";
 import enterImg from "@/assets/images/enter.jpg";
 import Curriculum from "@/assets/images/curiculum.jpg";
 import { FileText } from "lucide-react";
-import blocksImg from "@/assets/skyview-images/building-blocks.jpeg";
-import artsImg from "@/assets/skyview-images/craft.jpeg";
-import swimmingImg from "@/assets/skyview-images/swimming.jpeg";
+import blocksImg from "@/assets/SKYVIEW-IMAGES/building-blocks.jpeg";
+import artsImg from "@/assets/SKYVIEW-IMAGES/craft.jpeg";
+import swimmingImg from "@/assets/SKYVIEW-IMAGES/swimming.jpeg";
 
 // ─── Centralized Theme ─────────────────────────────────────
 const THEME = {
