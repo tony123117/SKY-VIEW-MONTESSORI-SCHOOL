@@ -121,6 +121,9 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         marquee: "marquee 30s linear infinite",
       },
+      transitionDuration: {
+        '1100': '1100ms',
+      },
     },
   },
   plugins: [tailwindcssAnimate],

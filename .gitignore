@@ -16,6 +16,8 @@ git rm --cached "dist (2).zip"
 
 # Editor directories and files
 .vscode/*
+images/*
+icons/*
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -24,3 +26,7 @@ git rm --cached "dist (2).zip"
 *.njsproj
 *.sln
 *.sw?
+\n+# Ignore generated asset images and icons in src
+/src/assets/icons/
+/src/assets/images/
+/src/assets/SKYVIEW-IMAGES/

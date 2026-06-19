@@ -1,55 +1,52 @@
-import React from 'react';
-
-const NavLogo = () => {
+// Drop-in replacement for BrainChildLogo.tsx
+// Renders: SKY · VIEW (left-aligned) with tagline below — matching the screenshot exactly
+export default function BrainChildLogo() {
   return (
-    <div className="flex flex-col items-center leading-none select-none group cursor-pointer">
-
-      {/* Main logo text */}
-      <div
-        className="flex items-center gap-0 transition-transform duration-300 group-hover:scale-[1.03]"
-        style={{ fontFamily: 'var(--font-heading)' }}
-      >
-        {/* SKY */}
-        <span
-          className="text-2xl md:text-3xl font-extrabold tracking-tight text-blue drop-shadow-sm"
-        >
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", lineHeight: 1, userSelect: "none" }}>
+      {/* SKY · VIEW */}
+      <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
+        <span style={{
+          fontSize: "1.45rem",
+          fontWeight: 900,
+          color: "#1a1a1a",
+          letterSpacing: "-0.01em",
+          fontFamily: "var(--font-heading, sans-serif)",
+        }}>
           SKY
         </span>
-
-        {/* Divider pip */}
-        <span
-          className="mx-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 self-center"
-          style={{ background: 'linear-gradient(135deg, #FF6B9D, #9B1C2C)' }}
-        />
-
-        {/* VIEW */}
-        <span
-          className="text-2xl md:text-3xl font-extrabold tracking-tight"
-          style={{ color: '#FF6B9D' }}
-        >
+        <span style={{
+          margin: "0 4px",
+          color: "#FF6B9D",
+          fontSize: "1.45rem",
+          fontWeight: 900,
+          lineHeight: 1,
+        }}>
+          ·
+        </span>
+        <span style={{
+          fontSize: "1.45rem",
+          fontWeight: 900,
+          color: "#FF6B9D",
+          letterSpacing: "-0.01em",
+          fontFamily: "var(--font-heading, sans-serif)",
+        }}>
           VIEW
         </span>
       </div>
 
-      {/* Animated underline */}
-      <span
-        className="h-[2px] w-0 group-hover:w-full transition-all duration-300 mt-0.5 rounded-full"
-        style={{ background: 'linear-gradient(90deg, #4A9EDB 0%, #FF6B9D 100%)' }}
-      />
-
-      {/* Subtitle */}
-      <p
-        className="text-[9px] md:text-[10px] uppercase font-extrabold tracking-[0.55em] mt-1 whitespace-nowrap"
-        style={{
-          fontFamily: 'var(--font-body)',
-          color: 'rgba(0, 0, 0, 0.45)',
-          letterSpacing: '0.3em',
-        }}
-      >
+      {/* Tagline */}
+      <p style={{
+        margin: "3px 0 0",
+        fontSize: "0.58rem",
+        fontWeight: 700,
+        textTransform: "uppercase",
+        letterSpacing: "0.22em",
+        color: "rgba(0,0,0,0.42)",
+        whiteSpace: "nowrap",
+        fontFamily: "var(--font-body, sans-serif)",
+      }}>
         Nursery · Primary · Secondary
       </p>
     </div>
   );
-};
-
-export default NavLogo;
+}

@@ -44,7 +44,7 @@ export default function WhyChooseUsCard({
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-[1100ms] ease-out group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-1100 ease-out group-hover:scale-110"
           loading="lazy"
         />
 

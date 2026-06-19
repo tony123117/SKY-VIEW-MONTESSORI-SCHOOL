@@ -1,9 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "@/assets/images/brainlogo.png";
 import { FiMenu, FiX, FiChevronDown, FiUser, FiBriefcase } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import BrainChildLogo from "./BrainChildLogo";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -21,6 +19,101 @@ const aboutDropdownItems = [
   { label: "Extra-curricular Activities", id: "extracurricular" },
 ];
 
+// ── Logo ──────────────────────────────────────────────────────────────────────
+function NavLogo() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        textDecoration: "none",
+        flexShrink: 0,
+        userSelect: "none",
+      }}
+    >
+      {/* Red circle mark */}
+      <div
+        style={{
+          width: 44,
+          height: 44,
+          borderRadius: "50%",
+          background: "linear-gradient(135deg, #9B1C2C 0%, #C5305A 100%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#fff",
+          fontWeight: 900,
+          fontSize: "0.82rem",
+          letterSpacing: "0.05em",
+          flexShrink: 0,
+          boxShadow: "0 2px 12px rgba(155,28,44,0.3)",
+        }}
+      >
+        SKV
+      </div>
+
+      {/* Word-mark + tagline stacked, left-aligned */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", lineHeight: 1 }}>
+        {/* SKY · VIEW */}
+        <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
+          <span
+            style={{
+              fontSize: "1.4rem",
+              fontWeight: 900,
+              color: "#4A9EDB",
+              letterSpacing: "-0.02em",
+              fontFamily: "var(--font-heading, sans-serif)",
+            }}
+          >
+            SKY
+          </span>
+          <span
+            style={{
+              margin: "0 5px",
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #FF6B9D, #9B1C2C)",
+              display: "inline-block",
+              flexShrink: 0,
+              alignSelf: "center",
+            }}
+          />
+          <span
+            style={{
+              fontSize: "1.4rem",
+              fontWeight: 900,
+              color: "#FF6B9D",
+              letterSpacing: "-0.02em",
+              fontFamily: "var(--font-heading, sans-serif)",
+            }}
+          >
+            VIEW
+          </span>
+        </div>
+
+        {/* Tagline */}
+        <p
+          style={{
+            margin: "3px 0 0",
+            fontSize: "0.58rem",
+            fontWeight: 800,
+            textTransform: "uppercase",
+            letterSpacing: "0.28em",
+            color: "rgba(0,0,0,0.4)",
+            whiteSpace: "nowrap",
+            fontFamily: "var(--font-body, sans-serif)",
+          }}
+        >
+          Nursery · Primary · Secondary
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ── Navbar ────────────────────────────────────────────────────────────────────
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -62,9 +155,7 @@ export function Navbar() {
         justifyContent: "space-between",
         padding: "0 2.5rem",
         height: 72,
-        background: scrolled
-          ? "rgba(255,255,255,0.97)"
-          : "rgba(255,255,255,0.92)",
+        background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.92)",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
         borderBottom: scrolled
@@ -78,30 +169,8 @@ export function Navbar() {
       }}
     >
       {/* ── Logo ── */}
-      <Link
-        to="/"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          textDecoration: "none",
-          flexShrink: 0,
-        }}
-      >
-        <img
-          src={logo}
-          alt="Skyview Montessori logo"
-          style={{
-            width: 46,
-            height: 46,
-            borderRadius: "50%",
-            objectFit: "cover",
-            boxShadow: "0 2px 12px rgba(155,28,44,0.18)",
-          }}
-        />
-        <div style={{ color: "#1F2937", fontWeight: 700, fontSize: "0.95rem", lineHeight: 1.25 }}>
-          <BrainChildLogo />
-        </div>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <NavLogo />
       </Link>
 
       {/* ── Desktop nav ── */}
@@ -144,16 +213,9 @@ export function Navbar() {
               <FiChevronDown size={14} />
             </motion.span>
           </button>
-
-          {/* active underline */}
           <span style={{
-            position: "absolute",
-            bottom: -2,
-            left: 0,
-            height: 2,
-            borderRadius: 2,
-            background: "#9B1C2C",
-            transition: "width 0.25s ease",
+            position: "absolute", bottom: -2, left: 0, height: 2, borderRadius: 2,
+            background: "#9B1C2C", transition: "width 0.25s ease",
             width: location.pathname === "/about" || aboutOpen ? "100%" : 0,
           }} />
 
@@ -165,16 +227,11 @@ export function Navbar() {
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.15 }}
                 style={{
-                  position: "absolute",
-                  top: "calc(100% + 12px)",
-                  left: 0,
-                  minWidth: 220,
-                  background: "#fff",
-                  borderRadius: 14,
+                  position: "absolute", top: "calc(100% + 12px)", left: 0,
+                  minWidth: 220, background: "#fff", borderRadius: 14,
                   border: "1px solid rgba(0,0,0,0.08)",
                   boxShadow: "0 16px 48px rgba(0,0,0,0.12)",
-                  overflow: "hidden",
-                  borderTop: "3px solid #9B1C2C",
+                  overflow: "hidden", borderTop: "3px solid #9B1C2C",
                 }}
               >
                 {aboutDropdownItems.map((item) => (
@@ -182,16 +239,10 @@ export function Navbar() {
                     key={item.id}
                     onClick={() => handleAboutClick(item.id)}
                     style={{
-                      width: "100%",
-                      textAlign: "left",
-                      padding: "11px 18px",
-                      fontSize: "0.84rem",
-                      fontWeight: 500,
-                      color: "#374151",
-                      background: "none",
-                      border: "none",
-                      borderBottom: "1px solid rgba(0,0,0,0.05)",
-                      cursor: "pointer",
+                      width: "100%", textAlign: "left", padding: "11px 18px",
+                      fontSize: "0.84rem", fontWeight: 500, color: "#374151",
+                      background: "none", border: "none",
+                      borderBottom: "1px solid rgba(0,0,0,0.05)", cursor: "pointer",
                       transition: "background 0.15s, color 0.15s",
                     }}
                     onMouseEnter={(e) => {
@@ -219,13 +270,9 @@ export function Navbar() {
               <Link
                 to={item.href}
                 style={{
-                  textDecoration: "none",
-                  fontSize: "0.875rem",
-                  fontWeight: 600,
-                  color: active ? "#9B1C2C" : "#1F2937",
-                  padding: "4px 0",
-                  transition: "color 0.2s",
-                  display: "block",
+                  textDecoration: "none", fontSize: "0.875rem", fontWeight: 600,
+                  color: active ? "#9B1C2C" : "#1F2937", padding: "4px 0",
+                  transition: "color 0.2s", display: "block",
                 }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#C5305A"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = active ? "#9B1C2C" : "#1F2937"; }}
@@ -233,13 +280,8 @@ export function Navbar() {
                 {item.label}
               </Link>
               <span style={{
-                position: "absolute",
-                bottom: -2,
-                left: 0,
-                height: 2,
-                borderRadius: 2,
-                background: "#9B1C2C",
-                transition: "width 0.25s ease",
+                position: "absolute", bottom: -2, left: 0, height: 2, borderRadius: 2,
+                background: "#9B1C2C", transition: "width 0.25s ease",
                 width: active ? "100%" : 0,
               }} />
             </li>
@@ -257,17 +299,10 @@ export function Navbar() {
         >
           <button
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 5,
-              padding: "8px 18px",
-              borderRadius: 999,
-              fontSize: "0.84rem",
-              fontWeight: 600,
-              color: "#374151",
-              background: "#F3F4F6",
-              border: "1px solid rgba(0,0,0,0.1)",
-              cursor: "pointer",
+              display: "flex", alignItems: "center", gap: 5,
+              padding: "8px 18px", borderRadius: 999, fontSize: "0.84rem",
+              fontWeight: 600, color: "#374151", background: "#F3F4F6",
+              border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer",
               transition: "background 0.2s",
             }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "#E5E7EB"; }}
@@ -287,32 +322,20 @@ export function Navbar() {
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.15 }}
                 style={{
-                  position: "absolute",
-                  top: "calc(100% + 10px)",
-                  right: 0,
-                  minWidth: 200,
-                  background: "#fff",
-                  borderRadius: 14,
+                  position: "absolute", top: "calc(100% + 10px)", right: 0,
+                  minWidth: 200, background: "#fff", borderRadius: 14,
                   border: "1px solid rgba(0,0,0,0.08)",
                   boxShadow: "0 16px 48px rgba(0,0,0,0.12)",
-                  overflow: "hidden",
-                  borderTop: "3px solid #4A9EDB",
+                  overflow: "hidden", borderTop: "3px solid #4A9EDB",
                 }}
               >
                 <a
                   href="https://portal.brainchildintschools.com/student"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target="_blank" rel="noopener noreferrer"
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    padding: "11px 18px",
-                    fontSize: "0.84rem",
-                    fontWeight: 500,
-                    color: "#1D6FA4",
-                    textDecoration: "none",
-                    borderBottom: "1px solid rgba(0,0,0,0.05)",
+                    display: "flex", alignItems: "center", gap: 8, padding: "11px 18px",
+                    fontSize: "0.84rem", fontWeight: 500, color: "#1D6FA4",
+                    textDecoration: "none", borderBottom: "1px solid rgba(0,0,0,0.05)",
                     transition: "background 0.15s",
                   }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "#EFF8FF"; }}
@@ -322,18 +345,11 @@ export function Navbar() {
                 </a>
                 <a
                   href="https://portal.brainchildintschools.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target="_blank" rel="noopener noreferrer"
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    padding: "11px 18px",
-                    fontSize: "0.84rem",
-                    fontWeight: 500,
-                    color: "#9B1C2C",
-                    textDecoration: "none",
-                    transition: "background 0.15s",
+                    display: "flex", alignItems: "center", gap: 8, padding: "11px 18px",
+                    fontSize: "0.84rem", fontWeight: 500, color: "#9B1C2C",
+                    textDecoration: "none", transition: "background 0.15s",
                   }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "#FFF5F6"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "none"; }}
@@ -345,7 +361,7 @@ export function Navbar() {
           </AnimatePresence>
         </div>
 
-        {/* Enroll CTA */}
+        {/* Enroll CTA — sky blue */}
         <Link to="/contact" style={{ textDecoration: "none" }}>
           <motion.button
             whileHover={{ scale: 1.03 }}
@@ -358,9 +374,8 @@ export function Navbar() {
               color: "#fff",
               border: "none",
               cursor: "pointer",
-              background: "linear-gradient(135deg, #9B1C2C 0%, #C5305A 60%, #FF6B9D 100%)",
-              boxShadow: "0 4px 18px rgba(155,28,44,0.35)",
-              transition: "box-shadow 0.2s",
+              background: "linear-gradient(135deg, #2980b9 0%, #4A9EDB 60%, #7BC8F0 100%)",
+              boxShadow: "0 4px 18px rgba(74,158,219,0.4)",
               letterSpacing: "0.01em",
             }}
           >
@@ -374,14 +389,8 @@ export function Navbar() {
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label={menuOpen ? "Close menu" : "Open menu"}
         style={{
-          display: "none",
-          padding: 8,
-          border: "none",
-          background: "none",
-          cursor: "pointer",
-          color: "#1F2937",
-          fontSize: "1.4rem",
-          borderRadius: 8,
+          display: "none", padding: 8, border: "none", background: "none",
+          cursor: "pointer", color: "#1F2937", fontSize: "1.4rem", borderRadius: 8,
         }}
         className="mobile-hamburger"
       >
@@ -398,39 +407,22 @@ export function Navbar() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
             style={{
-              position: "absolute",
-              top: "100%",
-              left: 0,
-              right: 0,
-              background: "#fff",
-              borderBottom: "1px solid rgba(0,0,0,0.08)",
+              position: "absolute", top: "100%", left: 0, right: 0,
+              background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.08)",
               boxShadow: "0 16px 40px rgba(0,0,0,0.1)",
-              padding: "1.5rem",
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.25rem",
-              maxHeight: "calc(100vh - 72px)",
-              overflowY: "auto",
+              padding: "1.5rem", display: "flex", flexDirection: "column",
+              gap: "0.25rem", maxHeight: "calc(100vh - 72px)", overflowY: "auto",
             }}
           >
-            {/* About section */}
             <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#9B1C2C", textTransform: "uppercase", letterSpacing: "0.1em", margin: "0 0 6px" }}>
               About Us
             </p>
             {aboutDropdownItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleAboutClick(item.id)}
+              <button key={item.id} onClick={() => handleAboutClick(item.id)}
                 style={{
-                  textAlign: "left",
-                  padding: "8px 12px",
-                  fontSize: "0.9rem",
-                  fontWeight: 500,
-                  color: "#374151",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  borderRadius: 8,
+                  textAlign: "left", padding: "8px 12px", fontSize: "0.9rem",
+                  fontWeight: 500, color: "#374151", background: "none",
+                  border: "none", cursor: "pointer", borderRadius: 8,
                 }}
               >
                 {item.label}
@@ -440,14 +432,9 @@ export function Navbar() {
             <div style={{ height: 1, background: "rgba(0,0,0,0.07)", margin: "0.75rem 0" }} />
 
             {navItems.map((item) => (
-              <Link
-                key={item.label}
-                to={item.href}
-                onClick={() => setMenuOpen(false)}
+              <Link key={item.label} to={item.href} onClick={() => setMenuOpen(false)}
                 style={{
-                  textDecoration: "none",
-                  padding: "10px 12px",
-                  fontSize: "0.95rem",
+                  textDecoration: "none", padding: "10px 12px", fontSize: "0.95rem",
                   fontWeight: 600,
                   color: location.pathname === item.href ? "#9B1C2C" : "#1F2937",
                   borderRadius: 8,
@@ -460,63 +447,33 @@ export function Navbar() {
             ))}
 
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: "0.75rem" }}>
-              <a
-                href="https://portal.brainchildintschools.com/student"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMenuOpen(false)}
+              <a href="https://portal.brainchildintschools.com/student"
+                target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 8,
-                  padding: "11px",
-                  borderRadius: 999,
-                  fontSize: "0.9rem",
-                  fontWeight: 600,
-                  color: "#1D6FA4",
-                  background: "#EFF8FF",
-                  textDecoration: "none",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  gap: 8, padding: "11px", borderRadius: 999, fontSize: "0.9rem",
+                  fontWeight: 600, color: "#1D6FA4", background: "#EFF8FF", textDecoration: "none",
                 }}
               >
                 <FiUser size={15} /> Student Portal
               </a>
-              <a
-                href="https://portal.brainchildintschools.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMenuOpen(false)}
+              <a href="https://portal.brainchildintschools.com/"
+                target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 8,
-                  padding: "11px",
-                  borderRadius: 999,
-                  fontSize: "0.9rem",
-                  fontWeight: 600,
-                  color: "#9B1C2C",
-                  background: "#FFF0F3",
-                  textDecoration: "none",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  gap: 8, padding: "11px", borderRadius: 999, fontSize: "0.9rem",
+                  fontWeight: 600, color: "#9B1C2C", background: "#FFF0F3", textDecoration: "none",
                 }}
               >
                 <FiBriefcase size={15} /> Staff Portal
               </a>
               <Link to="/contact" onClick={() => setMenuOpen(false)} style={{ textDecoration: "none" }}>
-                <button
-                  style={{
-                    width: "100%",
-                    padding: "13px",
-                    borderRadius: 999,
-                    fontSize: "0.95rem",
-                    fontWeight: 700,
-                    color: "#fff",
-                    border: "none",
-                    cursor: "pointer",
-                    background: "linear-gradient(135deg, #9B1C2C 0%, #C5305A 60%, #FF6B9D 100%)",
-                    boxShadow: "0 4px 18px rgba(155,28,44,0.3)",
-                  }}
-                >
+                <button style={{
+                  width: "100%", padding: "13px", borderRadius: 999, fontSize: "0.95rem",
+                  fontWeight: 700, color: "#fff", border: "none", cursor: "pointer",
+                  background: "linear-gradient(135deg, #2980b9 0%, #4A9EDB 60%, #7BC8F0 100%)",
+                  boxShadow: "0 4px 18px rgba(74,158,219,0.3)",
+                }}>
                   Enroll My Child
                 </button>
               </Link>
