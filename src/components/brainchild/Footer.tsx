@@ -1,4 +1,4 @@
-import logo from "@/assets/SKYVIEW-IMAGES/logo.png";
+import logo from "@/assets/SKYVIEW-IMAGES/Logo.png";
 import x from "@/assets/icons/x.png";
 import insta from "@/assets/icons/insta.png";
 import facebook from "@/assets/icons/facebook.png";
