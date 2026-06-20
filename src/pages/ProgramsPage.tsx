@@ -12,7 +12,8 @@ import {
 import BuildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
 import playgroundImg from "@/assets/SKYVIEW-IMAGES/playground.png";
 import swimmingImg from "@/assets/SKYVIEW-IMAGES/swimming.jpeg";
-import getResponsiveSrc from '@/lib/image';
+
+import KidsStudyingImg from "@/assets/SKYVIEW-IMAGES/computer.png";
 
 const programsImages = [BuildingImg, playgroundImg, swimmingImg];
 
@@ -381,7 +382,7 @@ export default function ProgramsPage() {
         {/* HERO */}
         <section className="pg-hero">
           <div className="pg-hero-right">
-            <img src={getResponsiveSrc(kidsStudyingImg)} alt="Students learning" />
+            <img src={KidsStudyingImg} alt="Students learning" />
             <div className="pg-hero-overlay" />
             <div className="pg-float-badge" style={{ position: "absolute", bottom: 48, left: 40 }}>
               <div className="pg-float-badge-num">500+</div>
@@ -424,7 +425,7 @@ export default function ProgramsPage() {
                 {programsImages.map((image, i) => (
                   <CarouselItem key={i} style={{ paddingLeft: 16 }}>
                     <img
-                      src={getResponsiveSrc(image)}
+                      src={image}
                       alt={`Campus life ${i + 1}`}
                       style={{
                         width: "100%", height: 480, objectFit: "cover",

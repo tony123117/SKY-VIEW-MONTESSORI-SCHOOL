@@ -1,7 +1,6 @@
 import ProgramCard from "./ProgramCard";
 import buildingimg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg"
 import programbg from '@/assets/SKYVIEW-IMAGES/building-blocks.jpeg'
-import getResponsiveSrc from '@/lib/image';
 import { AnimatedSection } from "./AnimatedSection";
 import { motion } from 'framer-motion';
 import { staggerContainer, fadeIn } from '@/components/ui/motionVariants';
@@ -98,7 +97,7 @@ export default function ProgramsSection() {
           <div className="absolute w-[350px] h-[350px] bg-rose-200 blur-[80px] opacity-20 rounded-full" />
 
           <img
-            src={getResponsiveSrc(programbg)}
+            src={programbg}
             alt="Students"
             className="
               relative
@@ -136,7 +135,7 @@ export default function ProgramsSection() {
             <div className="absolute w-[650px] h-[650px] bg-rose-200 blur-[120px] opacity-30 rounded-full" />
 
             <img
-              src={getResponsiveSrc(buildingimg)}
+              src={buildingimg}
               alt="Students"
               className="relative w-[600px] h-[600px] xl:w-[700px] xl:h-[700px] object-cover rounded-full shadow-2xl"
               style={{ border: "18px solid white", outline: "5px solid #f5c518" }}

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import buildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
 import football from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
 import judo from "@/assets/SKYVIEW-IMAGES/judo.png";
-import ResponsiveImage from "@/components/ui/ResponsiveImage";
+
 
 const slides = [
   {
@@ -472,17 +472,18 @@ export function HeroSection() {
               transition: "opacity 1s ease-in-out",
             }}
           >
-            <ResponsiveImage
+            <img
               src={s.image}
               alt={s.titleWhite}
               className="w-full h-full object-cover"
-              widths={[480, 768, 1024, 1600]}
+              loading="lazy"
+              decoding="async"
               style={{ filter: "brightness(1.02) contrast(1.02) saturate(0.96)" }}
             />
           </div>
         ))}
 
-        
+
 
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(115deg, rgba(15,22,45,0.82) 0%, rgba(58,16,28,0.62) 38%, rgba(58,16,28,0.22) 62%, rgba(58,16,28,0.04) 82%, transparent 100%)" }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 3, background: "linear-gradient(to top, rgba(10,14,28,0.45) 0%, rgba(10,14,28,0.06) 22%, transparent 42%)" }} />

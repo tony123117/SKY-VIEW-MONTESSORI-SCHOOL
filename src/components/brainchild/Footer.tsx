@@ -6,7 +6,7 @@ import { AnimatedSection } from "./AnimatedSection";
 import SkyViewLogo from "./SkyViewLogo";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import getResponsiveSrc from '@/lib/image';
+
 
 export function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -103,7 +103,7 @@ export function Footer() {
           }}
         >
           <img
-            src={getResponsiveSrc(footerImage)}
+            src={footerImage}
             alt="Build a better future"
             style={{
               width: "100%",
@@ -154,7 +154,7 @@ export function Footer() {
             >
               <Link to="/" style={{ display: "flex", alignItems: "center", gap: 12, width: "fit-content" }}>
                 <motion.img
-                  src={getResponsiveSrc(logo)}
+                  src={logo}
                   alt="Sky View Logo"
                   style={{ width: 64, height: "auto", flexShrink: 0 }}
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -202,7 +202,7 @@ export function Footer() {
                   >
                     {icon.svg
                       ? icon.svg
-                      : <img src={getResponsiveSrc(icon.src)} alt={icon.alt} style={{ width: 16, height: 16, filter: "invert(1)", opacity: 0.7 }} />
+                      : <img src={icon.src} alt={icon.alt} style={{ width: 16, height: 16, filter: "invert(1)", opacity: 0.7 }} />
                     }
                   </motion.a>
                 ))}

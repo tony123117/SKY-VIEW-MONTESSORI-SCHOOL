@@ -8,7 +8,7 @@ import playgroundimg from "@/assets/SKYVIEW-IMAGES/playground.png";
 import buildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
 import football from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
 import judo from "@/assets/SKYVIEW-IMAGES/judo.png";
-import ResponsiveImage from "@/components/ui/ResponsiveImage";
+
 import computer from "@/assets/SKYVIEW-IMAGES/computer.png";
 import {
   Carousel,
@@ -17,7 +17,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import getResponsiveSrc from '@/lib/image';
+
 
 const notFoundImages = [buildingImg, football, judo, Music, scienceimg, playgroundimg, computer];
 
@@ -89,7 +89,7 @@ const NotFound = () => {
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
                     <img
-                      src={getResponsiveSrc(image)}
+                      src={image}
                       alt={`School life ${index + 1}`}
                       className="w-full h-48 object-cover rounded-2xl shadow-lg"
                     />
