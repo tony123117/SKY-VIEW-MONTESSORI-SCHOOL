@@ -26,7 +26,5 @@ icons/*
 *.njsproj
 *.sln
 *.sw?
-\n+# Ignore generated asset images and icons in src
-/src/assets/icons/
-/src/assets/images/
-/src/assets/SKYVIEW-IMAGES/
+# Ignore generated asset images and icons in src
+# (Keep project asset folders tracked so Vercel builds include required images)
