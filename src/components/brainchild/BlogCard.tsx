@@ -21,7 +21,7 @@ export default function BlogCard({ post, onPostClick }: BlogCardProps) {
           src={post.coverImage}
           alt={post.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-          widths={[480,768,1024,1600]}
+          widths={[480, 768, 1024, 1600]}
         />
 
         {/* Overlay Gradient */}

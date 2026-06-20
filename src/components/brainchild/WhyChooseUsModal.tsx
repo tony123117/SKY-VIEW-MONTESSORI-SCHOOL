@@ -118,9 +118,8 @@ export default function WhyChooseUsModal({
               <div className="mb-5">
                 {category && (
                   <span
-                    className={`inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 ${
-                      categoryStyles[category] ?? "bg-slate-100 text-slate-600"
-                    }`}
+                    className={`inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 ${categoryStyles[category] ?? "bg-slate-100 text-slate-600"
+                      }`}
                   >
                     {category}
                   </span>
@@ -162,7 +161,7 @@ export default function WhyChooseUsModal({
 
               {/* Actions */}
               <div className="flex gap-3 flex-wrap pb-1">
-                
+
                 <button
                   onClick={onClose}
                   className="px-5 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50 active:scale-95 transition-all"

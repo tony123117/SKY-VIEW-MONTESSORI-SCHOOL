@@ -374,7 +374,7 @@ export default function BlogPage() {
             <div className="bl-cal-month">April Events</div>
             <div className="bl-cal-year">2026</div>
             <div className="bl-cal-labels">
-              {["M","T","W","T","F","S","S"].map((d, i) => <div key={i} className="bl-cal-label">{d}</div>)}
+              {["M", "T", "W", "T", "F", "S", "S"].map((d, i) => <div key={i} className="bl-cal-label">{d}</div>)}
             </div>
             <div className="bl-cal-grid">
               {Array.from({ length: 28 }).map((_, i) => {

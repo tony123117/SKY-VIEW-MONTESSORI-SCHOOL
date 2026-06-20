@@ -372,8 +372,8 @@ export default function AdmissionsPage() {
             <CarouselContent>
               {heroSlides.map((slide, i) => (
                 <CarouselItem key={i}>
-                    <img src={getResponsiveSrc(slide.image)} alt={`Campus ${i + 1}`} className="ad-carousel-img" />
-                  </CarouselItem>
+                  <img src={getResponsiveSrc(slide.image)} alt={`Campus ${i + 1}`} className="ad-carousel-img" />
+                </CarouselItem>
               ))}
             </CarouselContent>
             <CarouselPrevious style={{ left: 16, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)", color: "white" }} />

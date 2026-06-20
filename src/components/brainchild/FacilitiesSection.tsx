@@ -5,7 +5,6 @@ import Music from "@/assets/SKYVIEW-IMAGES/music.png";
 import scienceimg from "@/assets/SKYVIEW-IMAGES/SCIENCE.png";
 import playgroundimg from "@/assets/SKYVIEW-IMAGES/playground.png";
 import computer from "@/assets/SKYVIEW-IMAGES/computer.png";
-import getResponsiveSrc from '@/lib/image';
 
 const facilities = [
 
@@ -17,7 +16,7 @@ const facilities = [
     border: "border-pink-200",
     titleColor: "text-pink-700",
     tagBg: "bg-pink-500",
-    image: "https://SKYVIEW-IMAGES.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "Computer Lab",
@@ -67,7 +66,7 @@ const facilities = [
     border: "border-amber-200",
     titleColor: "text-amber-700",
     tagBg: "bg-amber-500",
-    image: "https://SKYVIEW-IMAGES.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
@@ -153,7 +152,7 @@ export function FacilitiesSection() {
                 {/* Image */}
                 <div className="relative h-44 overflow-hidden flex-shrink-0">
                   <img
-                    src={getResponsiveSrc(f.image)}
+                    src={f.image}
                     alt={f.title}
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
