@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiMenu, FiX, FiChevronDown, FiUser, FiBriefcase } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import SkyViewLogo from "./SkyViewLogo";
-import logoImg from "@/assets/SKYVIEW-IMAGES/logo.png";
+import logoImg from "@/assets/SKYVIEW-IMAGES/Logo.png";
 
 const navItems = [
   { label: "Home", href: "/" },
