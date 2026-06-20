@@ -7,72 +7,53 @@ import {
 import { useNavigate } from "react-router-dom";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const PHONE_NUMBER = "2347061175897";
+const PHONE_NUMBER = "2348033555262";
 const STORAGE_KEYS = {
-  chat: "bc_chat_v3",
-  leads: "bc_leads_v2",
-  analytics: "bc_analytics_v2",
-  profile: "bc_profile_v1",
+  chat: "sv_chat_v1",
+  leads: "sv_leads_v1",
+  analytics: "sv_analytics_v1",
+  profile: "sv_profile_v1",
 };
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type MessageType = "user" | "bot";
 type LeadCaptureStep = "name" | "age" | "done";
 type TabId = "chat" | "leads" | "analytics";
-type AgeGroup = "Pre-School" | "Nursery" | "Lower Grade" | "Upper Grade";
+type AgeGroup = "Pre-School" | "Nursery" | "Primary" | "Secondary";
 
-interface ChatLink {
-  label: string;
-  path?: string;
-  url?: string;
-}
-
+interface ChatLink { label: string; path?: string; url?: string; }
 interface Message {
-  id: string;
-  type: MessageType;
-  text: string;
+  id: string; type: MessageType; text: string;
   links?: ChatLink[];
   richType?: "datePicker" | "agePicker" | "rating" | "leadForm" | "handoffForm";
   timestamp: Date;
 }
-
 interface Lead {
-  name: string;
-  ageGroup?: AgeGroup;
-  phone?: string;
-  note?: string;
-  type?: "chat" | "handoff";
-  time: string;
+  name: string; ageGroup?: AgeGroup; phone?: string; note?: string;
+  type?: "chat" | "handoff"; time: string;
 }
-
 interface Analytics {
-  totalChats: number;
-  totalMessages: number;
-  handoffs: number;
-  tourBookings: number;
-  brochureRequests: number;
-  openCount: number;
-  topTopics: Record<string, number>;
-  satisfactionRatings: number[];
+  totalChats: number; totalMessages: number; handoffs: number;
+  tourBookings: number; brochureRequests: number; openCount: number;
+  topTopics: Record<string, number>; satisfactionRatings: number[];
 }
-
-interface UserProfile {
-  name: string | null;
-  ageGroup: AgeGroup | null;
-}
+interface UserProfile { name: string | null; ageGroup: AgeGroup | null; }
 
 // ─── School data ──────────────────────────────────────────────────────────────
 const SCHOOL = {
-  name: "SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL",
-  phone: "+234 706 117 5897",
-  email: "info@skyviewintschools.com",
-  address: "Plot 125, off Orji Udenta Street, Eke Layout, Nike Lake Road (after the Building Material Market), Trans-Ekulu, Enugu, Nigeria.",
+  name: "Skyview Montessori School",
+  shortName: "Skyview",
+  phone: "+234 8033 555 262",
+  phone2: "+234 8040 841 601",
+  email: "skyviewmontessorischoolenugu@gmail.com",
+  address: "Plot 125/127 Eke Layout, Off Orji Udenta Street, Near Timber Market, Nike Lake Road, Enugu.",
   brochureUrl: "/brochure.pdf",
+  hours: "Monday – Friday: 8am – 3pm",
   programs: [
     "Pre-School (Ages 1½–2)",
     "Nursery 1–3 (Ages 2½–5)",
-    "Lower Grade (Ages 5½–8)",
-    "Upper Grade (Ages 8½–11)",
+    "Primary School (Ages 5½–11)",
+    "Secondary School (Ages 11+)",
   ],
   facilities: [
     "Air-conditioned classrooms",
@@ -87,28 +68,30 @@ const SCHOOL = {
 const AGE_GROUPS: { label: string; sublabel: string; val: AgeGroup }[] = [
   { label: "Pre-School", sublabel: "Ages 1½–2", val: "Pre-School" },
   { label: "Nursery", sublabel: "Ages 2½–5", val: "Nursery" },
-  { label: "Lower Grade", sublabel: "Ages 5½–8", val: "Lower Grade" },
-  { label: "Upper Grade", sublabel: "Ages 8½–11", val: "Upper Grade" },
+  { label: "Primary", sublabel: "Ages 5½–11", val: "Primary" },
+  { label: "Secondary", sublabel: "Ages 11+", val: "Secondary" },
 ];
 
 const SUGGESTED_QUESTIONS = [
   "Tell me about admissions",
   "What programs do you offer?",
-  "What are the facilities like?",
+  "What are the facilities?",
   "How much are the fees?",
   "How do I book a campus tour?",
 ];
 
-// ─── Design tokens ────────────────────────────────────────────────────────────
+// ─── Design tokens — Sky View brand (wine red + sky blue + pink) ──────────────
 const G = {
-  p: "#22c55e",
-  d: "#16a34a",
-  dk: "#15803d",
-  header: "#064e3b",
-  bubble: "#f0fdf4",
-  userBubble: "#dcfce7",
-  border: "#bbf7d0",
-  text: "#14532d",
+  p: "#9B1C2C",       // wine red primary
+  d: "#7a1522",       // darker wine
+  dk: "#5c0f19",      // darkest wine
+  header: "#5c0f19",
+  accent: "#4A9EDB",  // sky blue
+  pink: "#FF6B9D",
+  bubble: "#FFF5F6",
+  userBubble: "#FFE8EC",
+  border: "#f5c6cc",
+  text: "#5c0f19",
 };
 
 // ─── WhatsApp SVG path ────────────────────────────────────────────────────────
@@ -120,9 +103,7 @@ const fmt = (d: Date) => d.toLocaleTimeString([], { hour: "2-digit", minute: "2-
 const uid = () => `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 function findLastIndex<T>(arr: T[], predicate: (item: T) => boolean): number {
-  for (let i = arr.length - 1; i >= 0; i--) {
-    if (predicate(arr[i])) return i;
-  }
+  for (let i = arr.length - 1; i >= 0; i--) { if (predicate(arr[i])) return i; }
   return -1;
 }
 
@@ -137,24 +118,20 @@ function useIsMobile() {
 }
 
 function loadJson<T>(key: string, fallback: T): T {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as T) : fallback;
-  } catch {
-    return fallback;
-  }
+  try { const raw = localStorage.getItem(key); return raw ? (JSON.parse(raw) as T) : fallback; }
+  catch { return fallback; }
 }
 
 function trackTopic(text: string, topics: Record<string, number>): Record<string, number> {
   const m = text.toLowerCase();
-  const updated = { ...topics };
-  if (/(admiss|enroll|apply|register)/.test(m)) updated.admissions = (updated.admissions || 0) + 1;
-  else if (/(program|curriculum|class|grade)/.test(m)) updated.programs = (updated.programs || 0) + 1;
-  else if (/(fee|cost|tuition|price)/.test(m)) updated.fees = (updated.fees || 0) + 1;
-  else if (/(facilit|campus|lab|playground)/.test(m)) updated.facilities = (updated.facilities || 0) + 1;
-  else if (/(contact|phone|email|address|location)/.test(m)) updated.contact = (updated.contact || 0) + 1;
-  else updated.other = (updated.other || 0) + 1;
-  return updated;
+  const u = { ...topics };
+  if (/(admiss|enroll|apply|register)/.test(m)) u.admissions = (u.admissions || 0) + 1;
+  else if (/(program|curriculum|class|grade|nursery|primary|secondary)/.test(m)) u.programs = (u.programs || 0) + 1;
+  else if (/(fee|cost|tuition|price)/.test(m)) u.fees = (u.fees || 0) + 1;
+  else if (/(facilit|campus|lab|playground|library)/.test(m)) u.facilities = (u.facilities || 0) + 1;
+  else if (/(contact|phone|email|address|location|hours)/.test(m)) u.contact = (u.contact || 0) + 1;
+  else u.other = (u.other || 0) + 1;
+  return u;
 }
 
 const DEFAULT_ANALYTICS: Analytics = {
@@ -164,46 +141,54 @@ const DEFAULT_ANALYTICS: Analytics = {
   satisfactionRatings: [],
 };
 
-// ─── Keyword-based response engine ───────────────────────────────────────────
+// ─── Response engine ──────────────────────────────────────────────────────────
 function getBotReply(text: string, profile: UserProfile): string {
   const m = text.toLowerCase();
   const name = profile.name ? `, ${profile.name}` : "";
 
   if (/(admiss|enroll|apply|register|how do i join|how to apply)/.test(m))
-    return `To apply${name}, visit our school in person at ${SCHOOL.address} or call us at ${SCHOOL.phone}. You can also download our brochure for full admission requirements. We'd love to welcome your child! 😊`;
+    return `To apply${name}, visit us at ${SCHOOL.address} or call ${SCHOOL.phone}. You can also download our brochure below for full admission requirements. We'd love to welcome your child! 😊`;
 
-  if (/(program|curriculum|class|grade|offer|course)/.test(m))
-    return `We offer four programs${name}:\n• ${SCHOOL.programs.join("\n• ")}\n\nEach is designed to nurture your child's growth at every stage. Which age group is your child in?`;
+  if (/(program|curriculum|class|grade|offer|course|nursery|primary|secondary)/.test(m))
+    return `We offer four programs${name}:\n• ${SCHOOL.programs.join("\n• ")}\n\nEach is designed to nurture your child at every stage. Which age group is your child in?`;
 
   if (/(fee|cost|tuition|price|how much)/.test(m))
-    return `Fees vary by program${name}. Please contact us directly at ${SCHOOL.phone} or visit the school for the current fee schedule. We also have a downloadable prospectus with full details! 📄`;
+    return `Fees vary by program${name}. Please contact us at ${SCHOOL.phone} or visit the school for the current schedule. Our brochure also has full details! 📄`;
 
   if (/(facilit|campus|lab|playground|library|computer|music|science)/.test(m))
-    return `Our facilities include${name}:\n• ${SCHOOL.facilities.join("\n• ")}\n\nWe believe a great environment is key to great learning! 🏫`;
+    return `Our facilities include${name}:\n• ${SCHOOL.facilities.join("\n• ")}\n\nWe believe a great environment creates great learners! 🏫`;
 
-  if (/(contact|phone|email|address|location|where|find you)/.test(m))
-    return `You can reach us${name} at:\n📞 ${SCHOOL.phone}\n📧 ${SCHOOL.email}\n📍 ${SCHOOL.address}\n\nWe're open Mon–Fri, 8am–4pm.`;
+  if (/(contact|phone|email|address|location|where|find you|hours|open)/.test(m))
+    return `You can reach us${name} at:\n📞 ${SCHOOL.phone}\n📞 ${SCHOOL.phone2}\n📧 ${SCHOOL.email}\n📍 ${SCHOOL.address}\n⏰ ${SCHOOL.hours}`;
 
   if (/(tour|visit|campus tour|see the school|come around)/.test(m))
-    return `We'd love to show you around${name}! Tap the **Visit** button below to pick a date and time for your campus tour. 📅`;
+    return `We'd love to show you around${name}! Tap **Visit** below to pick a date for your campus tour. 📅`;
 
   if (/(brochure|prospectus|pdf|download)/.test(m))
-    return `Tap the **Brochure** button below to download our prospectus${name}. It covers programs, fees, and everything you need to know! 📄`;
+    return `Tap **Brochure** below to download our prospectus${name}. It covers programs, fees, and everything you need to know! 📄`;
 
   if (/(staff|teacher|speak to someone|human|person|talk to)/.test(m))
-    return `Of course${name}! Tap the **Staff** button below and a team member will reach out to you via WhatsApp shortly. 👤`;
+    return `Of course${name}! Tap **Staff** below and a team member will reach out via WhatsApp shortly. 👤`;
+
+  if (/(social|facebook|instagram|twitter)/.test(m))
+    return `Follow us on social media${name} to stay updated on school news and events! Links are available on our Contact page. 📲`;
+
+  if (/(calendar|event|holiday|schedule|term)/.test(m))
+    return `For our school calendar, events, and term dates${name}, please visit our Calendar page or call us at ${SCHOOL.phone}. 📅`;
+
+  if (/(faq|question|common|help)/.test(m))
+    return `Great question${name}! Check our FAQ page for answers to the most common questions from parents. You can also ask me anything here! 😊`;
 
   if (/(hi|hello|hey|good morning|good afternoon|good evening)/.test(m))
-    return `Hello${name}! 👋 Welcome to **${SCHOOL.name}**. How can I help you today? You can ask me about admissions, programs, fees, facilities, or booking a campus tour!`;
+    return `Hello${name}! 👋 Welcome to **${SCHOOL.name}**. How can I help you today? Ask me about admissions, programs, fees, facilities, or booking a campus tour!`;
 
   if (/(thank|thanks|thank you)/.test(m))
-    return `You're welcome${name}! 😊 Feel free to ask if you have any other questions. We look forward to welcoming your child to SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL!`;
+    return `You're welcome${name}! 😊 Feel free to ask if you have more questions. We look forward to welcoming your child to ${SCHOOL.name}!`;
 
-  return `Thanks for your message${name}! For the best answer, please call us at **${SCHOOL.phone}** or tap **Staff** below to chat with our team directly. We're happy to help! 😊`;
+  return `Thanks for your message${name}! For the best answer, call us at **${SCHOOL.phone}** or tap **Staff** below to chat with our team directly. 😊`;
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
-
 function TypingBubble() {
   return (
     <div style={{ display: "flex", alignItems: "flex-start" }}>
@@ -217,7 +202,7 @@ function TypingBubble() {
           <motion.span key={i}
             animate={{ y: [0, -5, 0] }}
             transition={{ delay: i * 0.14, repeat: Infinity, duration: 0.65, ease: "easeInOut" }}
-            style={{ width: 7, height: 7, borderRadius: "50%", background: G.d, display: "block" }}
+            style={{ width: 7, height: 7, borderRadius: "50%", background: G.p, display: "block" }}
           />
         ))}
       </div>
@@ -228,22 +213,16 @@ function TypingBubble() {
 function AgePickerCard({ onSelect }: { onSelect: (val: AgeGroup) => void }) {
   const [selected, setSelected] = useState<AgeGroup | null>(null);
   return (
-    <div style={{
-      background: "#fff", border: `1px solid ${G.border}`, borderRadius: 12,
-      padding: 12, maxWidth: "82%",
-    }}>
-      <p style={{ fontSize: 12, fontWeight: 700, color: G.header, marginBottom: 8 }}>
-        Select your child's age group:
-      </p>
+    <div style={{ background: "#fff", border: `1px solid ${G.border}`, borderRadius: 12, padding: 12, maxWidth: "82%" }}>
+      <p style={{ fontSize: 12, fontWeight: 700, color: G.header, marginBottom: 8 }}>Select your child's age group:</p>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
         {AGE_GROUPS.map((g) => (
           <button key={g.val} onClick={() => { setSelected(g.val); onSelect(g.val); }}
             style={{
               background: selected === g.val ? G.userBubble : "#fff",
-              border: `1.5px solid ${selected === g.val ? G.d : G.border}`,
+              border: `1.5px solid ${selected === g.val ? G.p : G.border}`,
               borderRadius: 10, padding: "8px 6px", fontSize: 11, fontWeight: 600,
-              color: G.dk, cursor: "pointer", textAlign: "center", lineHeight: 1.4,
-              transition: "all 0.15s",
+              color: G.dk, cursor: "pointer", textAlign: "center", lineHeight: 1.4, transition: "all 0.15s",
             }}>
             <div>{g.label}</div>
             <div style={{ fontWeight: 400, color: "#9ca3af", fontSize: 10 }}>{g.sublabel}</div>
@@ -257,19 +236,12 @@ function AgePickerCard({ onSelect }: { onSelect: (val: AgeGroup) => void }) {
 function DatePickerCard({ onBook }: { onBook: (date: string, time: string) => void }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("9:00 AM");
-  const times = ["9:00 AM", "10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM", "3:00 PM"];
+  const times = ["9:00 AM", "10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM"];
   const today = new Date().toISOString().split("T")[0];
-
   return (
-    <div style={{
-      background: "#fff", border: `1px solid ${G.border}`, borderRadius: 12,
-      padding: 12, maxWidth: "82%",
-    }}>
-      <p style={{ fontSize: 12, fontWeight: 700, color: G.header, marginBottom: 8 }}>
-        📅 Pick a date & time:
-      </p>
-      <input type="date" min={today} value={date} onChange={(e) => setDate(e.target.value)}
-        style={inputStyle} />
+    <div style={{ background: "#fff", border: `1px solid ${G.border}`, borderRadius: 12, padding: 12, maxWidth: "82%" }}>
+      <p style={{ fontSize: 12, fontWeight: 700, color: G.header, marginBottom: 8 }}>📅 Pick a date & time:</p>
+      <input type="date" min={today} value={date} onChange={(e) => setDate(e.target.value)} style={inputStyle} />
       <select value={time} onChange={(e) => setTime(e.target.value)} style={{ ...inputStyle, marginTop: 6 }}>
         {times.map((t) => <option key={t}>{t}</option>)}
       </select>
@@ -278,8 +250,7 @@ function DatePickerCard({ onBook }: { onBook: (date: string, time: string) => vo
           marginTop: 8, width: "100%",
           background: date ? `linear-gradient(135deg, ${G.p}, ${G.dk})` : "#e5e7eb",
           color: date ? "#fff" : "#9ca3af", border: "none", borderRadius: 8,
-          padding: "8px", fontSize: 12, fontWeight: 700,
-          cursor: date ? "pointer" : "default", transition: "all 0.2s",
+          padding: "8px", fontSize: 12, fontWeight: 700, cursor: date ? "pointer" : "default", transition: "all 0.2s",
         }}>
         Confirm Visit ✓
       </button>
@@ -290,12 +261,8 @@ function DatePickerCard({ onBook }: { onBook: (date: string, time: string) => vo
 function RatingCard({ onRate }: { onRate: (n: number) => void }) {
   const [hovered, setHovered] = useState(0);
   const [rated, setRated] = useState(0);
-
   return (
-    <div style={{
-      background: "#fff", border: `1px solid ${G.border}`, borderRadius: 12,
-      padding: 12, maxWidth: "82%", textAlign: "center",
-    }}>
+    <div style={{ background: "#fff", border: `1px solid ${G.border}`, borderRadius: 12, padding: 12, maxWidth: "82%", textAlign: "center" }}>
       <p style={{ fontSize: 12, color: "#6b7280", marginBottom: 8 }}>How's our chat going?</p>
       <div style={{ display: "flex", justifyContent: "center", gap: 6 }}>
         {[1, 2, 3, 4, 5].map((i) => (
@@ -305,11 +272,7 @@ function RatingCard({ onRate }: { onRate: (n: number) => void }) {
             onClick={() => { if (!rated) { setRated(i); onRate(i); } }}
             onMouseEnter={() => !rated && setHovered(i)}
             onMouseLeave={() => !rated && setHovered(0)}
-            style={{
-              fontSize: 24, cursor: rated ? "default" : "pointer",
-              filter: i <= (hovered || rated) ? "grayscale(0)" : "grayscale(1)",
-              transition: "filter 0.15s",
-            }}>
+            style={{ fontSize: 24, cursor: rated ? "default" : "pointer", filter: i <= (hovered || rated) ? "grayscale(0)" : "grayscale(1)", transition: "filter 0.15s" }}>
             ⭐
           </motion.span>
         ))}
@@ -322,17 +285,10 @@ function HandoffForm({ onSubmit }: { onSubmit: (phone: string, note: string) => 
   const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
   return (
-    <div style={{
-      background: "#fff", border: `1px solid ${G.border}`, borderRadius: 12,
-      padding: 12, maxWidth: "82%",
-    }}>
-      <p style={{ fontSize: 12, fontWeight: 700, color: G.header, marginBottom: 8 }}>
-        👤 Connect with a staff member:
-      </p>
-      <input type="tel" placeholder="Your WhatsApp number" value={phone}
-        onChange={(e) => setPhone(e.target.value)} style={inputStyle} />
-      <input type="text" placeholder="Brief message (optional)" value={note}
-        onChange={(e) => setNote(e.target.value)} style={{ ...inputStyle, marginTop: 6 }} />
+    <div style={{ background: "#fff", border: `1px solid ${G.border}`, borderRadius: 12, padding: 12, maxWidth: "82%" }}>
+      <p style={{ fontSize: 12, fontWeight: 700, color: G.header, marginBottom: 8 }}>👤 Connect with a staff member:</p>
+      <input type="tel" placeholder="Your WhatsApp number" value={phone} onChange={(e) => setPhone(e.target.value)} style={inputStyle} />
+      <input type="text" placeholder="Brief message (optional)" value={note} onChange={(e) => setNote(e.target.value)} style={{ ...inputStyle, marginTop: 6 }} />
       <button onClick={() => phone.trim() && onSubmit(phone.trim(), note.trim())}
         style={{
           marginTop: 8, width: "100%",
@@ -362,12 +318,12 @@ function AnalyticsTab({ analytics, leads }: { analytics: Analytics; leads: Lead[
   const StatRow = ({ label, val }: { label: string; val: string | number }) => (
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "5px 0", borderBottom: `1px solid ${G.bubble}` }}>
       <span style={{ fontSize: 12, color: "#6b7280" }}>{label}</span>
-      <span style={{ fontSize: 13, fontWeight: 700, color: G.dk }}>{val}</span>
+      <span style={{ fontSize: 13, fontWeight: 700, color: G.p }}>{val}</span>
     </div>
   );
 
   return (
-    <div style={{ flex: 1, overflowY: "auto", padding: 14, background: "#f6fef9" }}>
+    <div style={{ flex: 1, overflowY: "auto", padding: 14, background: "#fff9fa" }}>
       <div style={cardStyle}>
         <div style={cardTitle}>📊 Overview</div>
         <StatRow label="Total chats" val={analytics.totalChats} />
@@ -389,7 +345,7 @@ function AnalyticsTab({ analytics, leads }: { analytics: Analytics; leads: Lead[
             <div style={{ height: 6, background: G.bubble, borderRadius: 3, overflow: "hidden" }}>
               <motion.div initial={{ width: 0 }} animate={{ width: `${Math.round(v / maxTopic * 100)}%` }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                style={{ height: "100%", background: `linear-gradient(90deg, ${G.p}, ${G.dk})`, borderRadius: 3 }} />
+                style={{ height: "100%", background: `linear-gradient(90deg, ${G.pink}, ${G.p})`, borderRadius: 3 }} />
             </div>
           </div>
         ))}
@@ -415,7 +371,7 @@ function LeadsTab({ leads }: { leads: Lead[] }) {
     );
   }
   return (
-    <div style={{ flex: 1, overflowY: "auto", padding: 14, background: "#f6fef9" }}>
+    <div style={{ flex: 1, overflowY: "auto", padding: 14, background: "#fff9fa" }}>
       {[...leads].reverse().map((l, i) => (
         <div key={i} style={{ ...cardStyle, marginBottom: 8 }}>
           <div style={{ fontWeight: 700, color: G.header, fontSize: 13, marginBottom: 4 }}>{l.name}</div>
@@ -447,7 +403,7 @@ const cardTitle: React.CSSProperties = {
 };
 const tagStyle: React.CSSProperties = {
   background: G.bubble, border: `1px solid ${G.border}`, borderRadius: 20,
-  padding: "2px 8px", fontSize: 10, color: G.dk, fontWeight: 600,
+  padding: "2px 8px", fontSize: 10, color: G.p, fontWeight: 600,
 };
 
 // ─── Main Widget ──────────────────────────────────────────────────────────────
@@ -478,25 +434,19 @@ export function WhatsAppWidget(): JSX.Element {
   const [profile, setProfile] = useState<UserProfile>(() =>
     loadJson<UserProfile>(STORAGE_KEYS.profile, { name: null, ageGroup: null })
   );
-
   const [messages, setMessages] = useState<Message[]>(() =>
-    loadJson<Message[]>(STORAGE_KEYS.chat, []).map((m) => ({
-      ...m, timestamp: new Date(m.timestamp),
-    }))
+    loadJson<Message[]>(STORAGE_KEYS.chat, []).map((m) => ({ ...m, timestamp: new Date(m.timestamp) }))
   );
-
   const [leads, setLeads] = useState<Lead[]>(() => loadJson<Lead[]>(STORAGE_KEYS.leads, []));
   const [analytics, setAnalytics] = useState<Analytics>(() =>
     loadJson<Analytics>(STORAGE_KEYS.analytics, DEFAULT_ANALYTICS)
   );
-
   const [ratingShown, setRatingShown] = useState(false);
 
   useEffect(() => { localStorage.setItem(STORAGE_KEYS.chat, JSON.stringify(messages)); }, [messages]);
   useEffect(() => { localStorage.setItem(STORAGE_KEYS.leads, JSON.stringify(leads)); }, [leads]);
   useEffect(() => { localStorage.setItem(STORAGE_KEYS.analytics, JSON.stringify(analytics)); }, [analytics]);
   useEffect(() => { localStorage.setItem(STORAGE_KEYS.profile, JSON.stringify(profile)); }, [profile]);
-
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, isTyping]);
   useEffect(() => { if (isOpen) setTimeout(() => inputRef.current?.focus(), 320); }, [isOpen]);
 
@@ -507,9 +457,7 @@ export function WhatsAppWidget(): JSX.Element {
   }, [isOpen]);
 
   useEffect(() => {
-    const t = setTimeout(() => {
-      if (!isOpen) { setShowNotif(true); bumpBadge(); }
-    }, 8000);
+    const t = setTimeout(() => { if (!isOpen) { setShowNotif(true); bumpBadge(); } }, 8000);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
@@ -524,9 +472,7 @@ export function WhatsAppWidget(): JSX.Element {
     setAnalytics((a) => ({ ...a, ...patch }));
   }, []);
 
-  const addLead = useCallback((lead: Lead) => {
-    setLeads((l) => [...l, lead]);
-  }, []);
+  const addLead = useCallback((lead: Lead) => { setLeads((l) => [...l, lead]); }, []);
 
   const addMessage = useCallback((msg: Omit<Message, "id" | "timestamp">) => {
     setMessages((prev) => [...prev, { ...msg, id: uid(), timestamp: new Date() }]);
@@ -546,7 +492,6 @@ export function WhatsAppWidget(): JSX.Element {
     setShowNotif(false);
     setBadgeCount(0);
     updateAnalytics({ openCount: analytics.openCount + 1 });
-
     if (messages.length === 0) {
       updateAnalytics({ totalChats: analytics.totalChats + 1 });
       setTimeout(() => {
@@ -579,12 +524,10 @@ export function WhatsAppWidget(): JSX.Element {
     addUserMessage(ageGroup);
     setLeadCaptureActive(false);
     setLeadStep("done");
-
     addLead({ name: profile.name ?? "Unknown", ageGroup, type: "chat", time: new Date().toISOString() });
-
     const prog = SCHOOL.programs.find((p) => p.startsWith(ageGroup)) ?? ageGroup;
     setTimeout(() => addBotMessage(
-      `Perfect! 🎉 The **${prog}** program sounds like a great fit.\n\nI'm SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL's AI assistant — ask me anything about our admissions, programs, facilities, or fees!`
+      `Perfect! 🎉 The **${prog}** program sounds like a great fit.\n\nI'm ${SCHOOL.name}'s AI assistant — ask me anything about our admissions, programs, facilities, or fees!`
     ), 600);
   }, [profile, addUserMessage, addBotMessage, addLead]);
 
@@ -594,7 +537,6 @@ export function WhatsAppWidget(): JSX.Element {
     setInputValue("");
     addUserMessage(t);
     setAnalytics((a) => ({ ...a, topTopics: trackTopic(t, a.topTopics) }));
-
     const reply = getBotReply(t, profile);
     setTimeout(() => {
       addBotMessage(reply);
@@ -608,10 +550,10 @@ export function WhatsAppWidget(): JSX.Element {
 
   const handleAction = useCallback((type: string) => {
     if (type === "call") {
-      addBotMessage(`📞 Reach us at **${SCHOOL.phone}**. Lines open Mon–Fri, 8am–4pm.`);
-      window.open(`tel:+${PHONE_NUMBER}`);
+      addBotMessage(`📞 Reach us at:\n**${SCHOOL.phone}**\n**${SCHOOL.phone2}**\n\n⏰ ${SCHOOL.hours}`);
+      window.open(`tel:${PHONE_NUMBER}`);
     } else if (type === "visit") {
-      addBotMessage("Let's schedule your campus tour! Pick a date and time that works for you:", undefined, "datePicker");
+      addBotMessage("Let's schedule your campus tour! Pick a date and time:", undefined, "datePicker");
     } else if (type === "brochure") {
       setAnalytics((a) => ({ ...a, brochureRequests: a.brochureRequests + 1 }));
       addBotMessage("📄 Here's our digital brochure! You can also collect one at our front office.", [
@@ -626,9 +568,7 @@ export function WhatsAppWidget(): JSX.Element {
     const formatted = new Date(date).toLocaleDateString("en-NG", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
     addUserMessage(`Book visit: ${formatted} at ${time}`);
     setAnalytics((a) => ({ ...a, tourBookings: a.tourBookings + 1 }));
-    addBotMessage(
-      `✅ Tour request noted for **${formatted} at ${time}**!\n\n${profile.name ? profile.name + ", a" : "A"} staff member will confirm via WhatsApp shortly. We look forward to welcoming you! 🏫`
-    );
+    addBotMessage(`✅ Tour request noted for **${formatted} at ${time}**!\n\n${profile.name ? profile.name + ", a" : "A"} staff member will confirm via WhatsApp shortly. We look forward to welcoming you! 🏫`);
     const waText = `TOUR BOOKING\nName: ${profile.name ?? "Visitor"}\nAge Group: ${profile.ageGroup ?? "Not specified"}\nDate: ${formatted}\nTime: ${time}`;
     window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(waText)}`, "_blank");
   }, [addUserMessage, addBotMessage, profile]);
@@ -653,6 +593,16 @@ export function WhatsAppWidget(): JSX.Element {
     window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(history.slice(0, 1500))}`, "_blank");
   }, [messages]);
 
+  const renderRich = (msg: Message, idx: number) => {
+    const isLatestOfType = findLastIndex(messages, (m) => m.richType === msg.richType) === idx;
+    if (!isLatestOfType) return null;
+    if (msg.richType === "agePicker" && leadStep === "age") return <AgePickerCard onSelect={submitAge} />;
+    if (msg.richType === "datePicker") return <DatePickerCard onBook={handleTourBook} />;
+    if (msg.richType === "rating") return <RatingCard onRate={handleRating} />;
+    if (msg.richType === "handoffForm") return <HandoffForm onSubmit={handleHandoff} />;
+    return null;
+  };
+
   const panelW = isMobile ? "calc(100vw - 2rem)" : "22rem";
   const panelBottom = isMobile ? "5rem" : "5.25rem";
   const panelRight = isMobile ? "1rem" : "0";
@@ -664,46 +614,25 @@ export function WhatsAppWidget(): JSX.Element {
     { id: "analytics", label: "Stats", icon: <FiBarChart2 size={12} /> },
   ];
 
-  const renderRich = (msg: Message, idx: number) => {
-    const isLatestOfType = findLastIndex(messages, (m) => m.richType === msg.richType) === idx;
-    if (!isLatestOfType) return null;
-
-    if (msg.richType === "agePicker" && leadStep === "age") {
-      return <AgePickerCard onSelect={submitAge} />;
-    }
-    if (msg.richType === "datePicker") {
-      return <DatePickerCard onBook={handleTourBook} />;
-    }
-    if (msg.richType === "rating") {
-      return <RatingCard onRate={handleRating} />;
-    }
-    if (msg.richType === "handoffForm") {
-      return <HandoffForm onSubmit={handleHandoff} />;
-    }
-    return null;
-  };
-
   return (
     <div style={{ position: "fixed", bottom: "1.5rem", right: "1.5rem", zIndex: 9999 }}>
 
+      {/* Notification bubble */}
       <AnimatePresence>
         {showNotif && !isOpen && (
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            transition={{ type: "spring", stiffness: 400, damping: 28 }}
+            initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }} transition={{ type: "spring", stiffness: 400, damping: 28 }}
             style={{
               position: "fixed", bottom: 100, right: 90,
               background: "#fff", border: `1px solid ${G.border}`,
               borderRadius: 12, padding: "10px 14px",
               boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-              display: "flex", alignItems: "center", gap: 10,
-              maxWidth: 220, zIndex: 9998,
+              display: "flex", alignItems: "center", gap: 10, maxWidth: 220, zIndex: 9998,
             }}>
             <span style={{ fontSize: 20 }}>👋</span>
             <p style={{ fontSize: 12, color: G.header, fontWeight: 500, lineHeight: 1.4 }}>
-              Hi! Any questions about admissions?
+              Hi! Any questions about admissions at Skyview?
             </p>
             <button onClick={() => setShowNotif(false)}
               style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#9ca3af", flexShrink: 0 }}>
@@ -713,6 +642,7 @@ export function WhatsAppWidget(): JSX.Element {
         )}
       </AnimatePresence>
 
+      {/* Chat panel */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -729,39 +659,46 @@ export function WhatsAppWidget(): JSX.Element {
               border: "1px solid rgba(0,0,0,0.055)",
             }}>
 
-            <div style={{ background: "linear-gradient(160deg, #064e3b 0%, #065f46 100%)", padding: "14px 14px 0", flexShrink: 0 }}>
+            {/* Header */}
+            <div style={{
+              background: `linear-gradient(160deg, ${G.dk} 0%, ${G.p} 100%)`,
+              padding: "14px 14px 0", flexShrink: 0,
+            }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <div style={{ position: "relative", flexShrink: 0 }}>
                     <div style={{
                       width: 44, height: 44, borderRadius: "50%",
-                      background: "linear-gradient(135deg, #22c55e, #15803d)",
+                      background: "linear-gradient(135deg, #FF6B9D, #9B1C2C)",
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      border: "2.5px solid rgba(255,255,255,0.18)",
+                      border: "2.5px solid rgba(255,255,255,0.22)",
+                      fontWeight: 900, color: "#fff", fontSize: "0.72rem", letterSpacing: "0.05em",
                     }}>
-                      <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d={WA_PATH} /></svg>
+                      SKV
                     </div>
-                    <span style={{ position: "absolute", bottom: 1, right: 1, width: 10, height: 10, borderRadius: "50%", background: "#4ade80", border: "2px solid #064e3b" }} />
+                    <span style={{ position: "absolute", bottom: 1, right: 1, width: 10, height: 10, borderRadius: "50%", background: "#4ade80", border: `2px solid ${G.dk}` }} />
                   </div>
                   <div>
-                    <div style={{ color: "#fff", fontWeight: 700, fontSize: 14 }}>SKY - VIEW NURSERY , PRIMARY AND SECONDARY SCHOOL Support</div>
-                    <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 11, marginTop: 2, display: "flex", alignItems: "center", gap: 5 }}>
+                    <div style={{ color: "#fff", fontWeight: 700, fontSize: 13 }}>{SCHOOL.name}</div>
+                    <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 10, marginTop: 2, display: "flex", alignItems: "center", gap: 5 }}>
                       <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ade80", display: "inline-block" }} />
                       Online · AI-powered
                     </div>
                   </div>
                 </div>
-                <button onClick={closePanel} style={{
-                  width: 30, height: 30, borderRadius: "50%", border: "none",
-                  background: "rgba(255,255,255,0.1)", cursor: "pointer",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  color: "rgba(255,255,255,0.75)", transition: "background 0.15s",
-                }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.2)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
+                <button onClick={closePanel}
+                  style={{
+                    width: 30, height: 30, borderRadius: "50%", border: "none",
+                    background: "rgba(255,255,255,0.12)", cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    color: "rgba(255,255,255,0.8)", transition: "background 0.15s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.22)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
                 ><FiX size={16} /></button>
               </div>
 
+              {/* Tabs */}
               <div style={{ display: "flex", background: "rgba(255,255,255,0.08)", margin: "10px 0 0", borderRadius: 8, padding: 3, gap: 2 }}>
                 {TABS.map((tab) => (
                   <button key={tab.id} onClick={() => setActiveTab(tab.id)}
@@ -778,9 +715,10 @@ export function WhatsAppWidget(): JSX.Element {
               </div>
             </div>
 
+            {/* Chat tab */}
             {activeTab === "chat" && (
               <>
-                <div style={{ flex: 1, overflowY: "auto", padding: 14, background: "#f6fef9", display: "flex", flexDirection: "column", gap: 8 }}>
+                <div style={{ flex: 1, overflowY: "auto", padding: 14, background: "#fff9fa", display: "flex", flexDirection: "column", gap: 8 }}>
                   {messages.map((msg, idx) => {
                     const isUser = msg.type === "user";
                     const showTime = idx === messages.length - 1 || messages[idx + 1]?.type !== msg.type;
@@ -811,9 +749,9 @@ export function WhatsAppWidget(): JSX.Element {
                                 <button key={i}
                                   onClick={() => l.url ? window.open(l.url, "_blank") : l.path && navigate(l.path)}
                                   style={{
-                                    fontSize: 11, background: G.dk, color: "#fff",
-                                    border: "none", borderRadius: 6, padding: "3px 9px",
-                                    cursor: "pointer", fontWeight: 600, display: "flex", alignItems: "center", gap: 3,
+                                    fontSize: 11, background: G.p, color: "#fff", border: "none",
+                                    borderRadius: 6, padding: "3px 9px", cursor: "pointer", fontWeight: 600,
+                                    display: "flex", alignItems: "center", gap: 3,
                                   }}>
                                   {l.label}<FiChevronRight size={9} />
                                 </button>
@@ -831,25 +769,20 @@ export function WhatsAppWidget(): JSX.Element {
                     );
                   })}
 
+                  {/* Name capture inline */}
                   {leadCaptureActive && leadStep === "name" && (
                     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
                       style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
                       <div style={{ background: "#fff", border: `1px solid ${G.border}`, borderRadius: 12, padding: 12, maxWidth: "82%" }}>
-                        <input
-                          autoFocus
-                          placeholder="Your full name"
-                          value={leadNameInput}
-                          onChange={(e) => setLeadNameInput(e.target.value)}
-                          onKeyDown={(e) => e.key === "Enter" && submitName()}
-                          style={inputStyle}
-                        />
-                        <button onClick={submitName}
-                          style={{
-                            marginTop: 8, width: "100%",
-                            background: `linear-gradient(135deg, ${G.p}, ${G.dk})`,
-                            color: "#fff", border: "none", borderRadius: 8,
-                            padding: "8px", fontSize: 12, fontWeight: 700, cursor: "pointer",
-                          }}>
+                        <input autoFocus placeholder="Your full name"
+                          value={leadNameInput} onChange={(e) => setLeadNameInput(e.target.value)}
+                          onKeyDown={(e) => e.key === "Enter" && submitName()} style={inputStyle} />
+                        <button onClick={submitName} style={{
+                          marginTop: 8, width: "100%",
+                          background: `linear-gradient(135deg, ${G.p}, ${G.dk})`,
+                          color: "#fff", border: "none", borderRadius: 8,
+                          padding: "8px", fontSize: 12, fontWeight: 700, cursor: "pointer",
+                        }}>
                           Continue →
                         </button>
                       </div>
@@ -866,6 +799,7 @@ export function WhatsAppWidget(): JSX.Element {
                   <div ref={messagesEndRef} />
                 </div>
 
+                {/* Suggested questions */}
                 {leadStep === "done" && messages.length < 8 && (
                   <div style={{ padding: "8px 12px 6px", background: "#fff", borderTop: `1px solid ${G.border}`, flexShrink: 0 }}>
                     <p style={{ fontSize: 10, color: "#9ca3af", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 5 }}>
@@ -875,8 +809,7 @@ export function WhatsAppWidget(): JSX.Element {
                       {SUGGESTED_QUESTIONS.map((q) => (
                         <button key={q} onClick={() => sendMessage(q)}
                           style={{
-                            fontSize: 11, padding: "4px 10px",
-                            background: G.bubble, color: G.dk,
+                            fontSize: 11, padding: "4px 10px", background: G.bubble, color: G.p,
                             border: `1px solid ${G.border}`, borderRadius: 100,
                             cursor: "pointer", fontWeight: 500, transition: "all 0.15s",
                           }}
@@ -889,6 +822,7 @@ export function WhatsAppWidget(): JSX.Element {
                   </div>
                 )}
 
+                {/* Input bar */}
                 <div style={{ padding: "10px 12px", background: "#fff", borderTop: `1px solid ${G.border}`, flexShrink: 0 }}>
                   <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "center" }}>
                     <input ref={inputRef} value={inputValue}
@@ -903,14 +837,16 @@ export function WhatsAppWidget(): JSX.Element {
                         color: "#1c1c1e", transition: "border-color 0.15s",
                         opacity: leadStep !== "done" ? 0.6 : 1,
                       }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = G.d)}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = G.p)}
                       onBlur={(e) => (e.currentTarget.style.borderColor = G.border)}
                     />
                     <motion.button onClick={() => sendMessage()} disabled={!inputValue.trim() || isTyping}
                       whileTap={inputValue.trim() ? { scale: 0.88 } : {}}
                       style={{
                         width: 38, height: 38, borderRadius: "50%", border: "none", flexShrink: 0,
-                        background: inputValue.trim() && !isTyping ? "linear-gradient(135deg, #22c55e, #15803d)" : "#e5e7eb",
+                        background: inputValue.trim() && !isTyping
+                          ? `linear-gradient(135deg, ${G.pink}, ${G.p})`
+                          : "#e5e7eb",
                         color: inputValue.trim() && !isTyping ? "#fff" : "#9ca3af",
                         cursor: inputValue.trim() && !isTyping ? "pointer" : "default",
                         display: "flex", alignItems: "center", justifyContent: "center",
@@ -920,6 +856,7 @@ export function WhatsAppWidget(): JSX.Element {
                     </motion.button>
                   </div>
 
+                  {/* Action buttons */}
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 5, marginBottom: 8 }}>
                     {[
                       { icon: <FiPhone size={13} />, label: "Call", key: "call" },
@@ -931,17 +868,18 @@ export function WhatsAppWidget(): JSX.Element {
                         style={{
                           display: "flex", flexDirection: "column", alignItems: "center", gap: 3,
                           padding: "7px 4px", border: `1.5px solid ${G.border}`, borderRadius: 10,
-                          background: "#fff", color: G.dk, cursor: "pointer", fontSize: 10,
+                          background: "#fff", color: G.p, cursor: "pointer", fontSize: 10,
                           fontWeight: 600, transition: "all 0.15s",
                         }}
-                        onMouseEnter={(e) => { e.currentTarget.style.background = G.bubble; e.currentTarget.style.borderColor = G.d; }}
+                        onMouseEnter={(e) => { e.currentTarget.style.background = G.bubble; e.currentTarget.style.borderColor = G.p; }}
                         onMouseLeave={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.borderColor = G.border; }}>
-                        <span style={{ color: G.d, display: "flex" }}>{icon}</span>
+                        <span style={{ color: G.p, display: "flex" }}>{icon}</span>
                         {label}
                       </button>
                     ))}
                   </div>
 
+                  {/* WhatsApp CTA */}
                   <button onClick={openWhatsApp}
                     style={{
                       width: "100%",
@@ -966,18 +904,17 @@ export function WhatsAppWidget(): JSX.Element {
         )}
       </AnimatePresence>
 
+      {/* Badge */}
       <AnimatePresence>
         {!isOpen && badgeCount > 0 && (
-          <motion.div
-            key={badgeCount}
+          <motion.div key={badgeCount}
             initial={{ scale: 0.6, opacity: 0 }}
             animate={{ scale: badgeBump ? 1.4 : 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: "spring", stiffness: 500, damping: 22 }}
             style={{
-              position: "absolute", top: -4, right: -4,
-              minWidth: 18, height: 18, borderRadius: 9,
-              background: "#ef4444", color: "#fff",
+              position: "absolute", top: -4, right: -4, minWidth: 18, height: 18,
+              borderRadius: 9, background: "#ef4444", color: "#fff",
               fontSize: 10, fontWeight: 800,
               display: "flex", alignItems: "center", justifyContent: "center",
               border: "2.5px solid #fff", padding: "0 3px", zIndex: 1, pointerEvents: "none",
@@ -987,15 +924,15 @@ export function WhatsAppWidget(): JSX.Element {
         )}
       </AnimatePresence>
 
+      {/* FAB — wine red for Sky View */}
       <motion.button onClick={isOpen ? closePanel : openPanel}
-        whileHover={{ scale: 1.06 }}
-        whileTap={{ scale: 0.91 }}
+        whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.91 }}
         style={{
           width: 58, height: 58, borderRadius: "50%", border: "none",
-          background: "linear-gradient(135deg, #22c55e 0%, #15803d 100%)",
+          background: `linear-gradient(135deg, ${G.p} 0%, ${G.dk} 100%)`,
           color: "#fff", cursor: "pointer",
           display: "flex", alignItems: "center", justifyContent: "center",
-          boxShadow: "0 4px 20px rgba(34,197,94,0.42), 0 2px 8px rgba(0,0,0,0.12)",
+          boxShadow: "0 4px 20px rgba(155,28,44,0.42), 0 2px 8px rgba(0,0,0,0.12)",
           position: "relative",
         }}>
         {!isOpen && (
@@ -1003,17 +940,23 @@ export function WhatsAppWidget(): JSX.Element {
             initial={{ scale: 1, opacity: 0.45 }}
             animate={{ scale: 2, opacity: 0 }}
             transition={{ duration: 1.1, ease: "easeOut" }}
-            style={{ position: "absolute", inset: 0, borderRadius: "50%", background: "#22c55e", pointerEvents: "none" }}
+            style={{ position: "absolute", inset: 0, borderRadius: "50%", background: G.p, pointerEvents: "none" }}
           />
         )}
         <AnimatePresence mode="wait">
           {isOpen ? (
-            <motion.span key="close" initial={{ rotate: -45, opacity: 0, scale: 0.7 }} animate={{ rotate: 0, opacity: 1, scale: 1 }} exit={{ rotate: 45, opacity: 0, scale: 0.7 }} transition={{ duration: 0.16 }} style={{ display: "flex" }}>
+            <motion.span key="close"
+              initial={{ rotate: -45, opacity: 0, scale: 0.7 }} animate={{ rotate: 0, opacity: 1, scale: 1 }}
+              exit={{ rotate: 45, opacity: 0, scale: 0.7 }} transition={{ duration: 0.16 }}
+              style={{ display: "flex" }}>
               <FiX size={24} />
             </motion.span>
           ) : (
-            <motion.span key="whatsapp" initial={{ rotate: 45, opacity: 0, scale: 0.7 }} animate={{ rotate: 0, opacity: 1, scale: 1 }} exit={{ rotate: -45, opacity: 0, scale: 0.7 }} transition={{ duration: 0.16 }} style={{ display: "flex" }}>
-              <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d={WA_PATH} /></svg>
+            <motion.span key="chat"
+              initial={{ rotate: 45, opacity: 0, scale: 0.7 }} animate={{ rotate: 0, opacity: 1, scale: 1 }}
+              exit={{ rotate: -45, opacity: 0, scale: 0.7 }} transition={{ duration: 0.16 }}
+              style={{ display: "flex" }}>
+              <svg width="26" height="26" fill="white" viewBox="0 0 24 24"><path d={WA_PATH} /></svg>
             </motion.span>
           )}
         </AnimatePresence>

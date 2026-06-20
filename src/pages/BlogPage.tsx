@@ -11,11 +11,11 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-// ── Images from BlogSection ──────────────────────────────────────────────────
+// ── SKYVIEW-IMAGES from BlogSection ──────────────────────────────────────────────────
 import judoImg from "@/assets/SKYVIEW-IMAGES/judo.png";
-import footballImg from "@/assets/SKYVIEW-IMAGES/football.png";
+import footballImg from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
 import computerLabImg from "@/assets/SKYVIEW-IMAGES/computer.png";
-import schoolBuildingImg from "@/assets/SKYVIEW-IMAGES/building.jpeg";
+import schoolBuildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
 import scienceCraftImg from "@/assets/SKYVIEW-IMAGES/science.png";
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -39,7 +39,7 @@ const calendarEvents: Record<number, string> = {
   27: "Holiday Celebration",
 };
 
-// ── Posts — same stories & images as BlogSection ─────────────────────────────
+// ── Posts — same stories & SKYVIEW-IMAGES as BlogSection ─────────────────────────────
 const posts = [
   {
     id: "1",

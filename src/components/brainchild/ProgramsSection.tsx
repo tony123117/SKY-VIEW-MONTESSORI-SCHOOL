@@ -1,6 +1,6 @@
 import ProgramCard from "./ProgramCard";
 import buildingimg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg"
-import programbg from '@/assets/images/program.jpeg'
+import programbg from '@/assets/SKYVIEW-IMAGES/building-blocks.jpeg'
 import { AnimatedSection } from "./AnimatedSection";
 import { motion } from 'framer-motion';
 import { staggerContainer, fadeIn } from '@/components/ui/motionVariants';

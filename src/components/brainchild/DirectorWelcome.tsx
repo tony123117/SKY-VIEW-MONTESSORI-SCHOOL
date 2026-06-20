@@ -8,7 +8,7 @@ const PINK = "#FF6B9D";
 const NAVY = "#1F3A5F";
 
 const director = {
-  name: "The Director",
+  name: "The Director: Mrs Amaka Phillip",
   role: "Director & Founder — Sky View Nursery, Primary & Secondary School",
   headline: "An Independent Achiever Who Unlocks Every Child's God-Given Potential",
   intro: [

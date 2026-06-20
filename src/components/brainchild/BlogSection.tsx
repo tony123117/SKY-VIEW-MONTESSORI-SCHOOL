@@ -5,10 +5,10 @@ import BlogGrid from "./BlogGrid";
 import { AnimatedSection } from "./AnimatedSection";
 import { BlogPost } from "@/types/blogs";
 import judoImg from '@/assets/SKYVIEW-IMAGES/judo.png';
-import footballImg from '@/assets/SKYVIEW-IMAGES/football.png';
+import footballImg from '@/assets/SKYVIEW-IMAGES/FOOTBALL.png';
 import computerLabImg from "@/assets/SKYVIEW-IMAGES/computer.png";
-import schoolBuildingImg from "@/assets/SKYVIEW-IMAGES/building.jpeg";
-import scienceCraftImg from "@/assets/SKYVIEW-IMAGES/science.png";
+import schoolBuildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
+import scienceCraftImg from "@/assets/SKYVIEW-IMAGES/SCIENCE.png";
 
 
 

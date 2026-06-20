@@ -1,10 +1,10 @@
-import logo from "@/assets/images/brainlogo.png";
+import logo from "@/assets/SKYVIEW-IMAGES/logo.png";
 import x from "@/assets/icons/x.png";
 import insta from "@/assets/icons/insta.png";
 import facebook from "@/assets/icons/facebook.png";
 import footerImage from "@/assets/images/image.png";
 import { AnimatedSection } from "./AnimatedSection";
-import BrainChildLogo from "./BrainChildLogo";
+import SkyViewLogo from "./SkyViewLogo";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -95,13 +95,15 @@ export function Footer() {
                 <motion.img
                   src={logo}
                   alt="Brainchild Logo"
-                  className="w-[48px] h-[48px] flex-shrink-0"
+                  className="w-[78px] h-[58px] flex-shrink-0"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                 />
                 <div className="min-w-0">
-                  <h3 className="text-lg text-primary font-bold leading-tight truncate group-hover:opacity-80 transition-opacity">
-                    {BrainChildLogo()}
-                  </h3>
+                  <div className="min-w-0">
+                    <div className="text-lg text-primary font-bold leading-tight truncate group-hover:opacity-80 transition-opacity">
+                      <SkyViewLogo />
+                    </div>
+                  </div>
                 </div>
               </Link>
 

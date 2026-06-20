@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Testimonial } from "@/types/testimonialcard";
 import { TestimonialCard } from "./TestimonialCard";
-import parents1 from '@/assets/images/parents1.jpg'
-import parents2 from '@/assets/images/parents2.jpg'
-import parents3 from '@/assets/images/parents3.jpg'
-import parents4 from '@/assets/images/parents4.jpg'
+import parents1 from '@/assets/SKYVIEW-IMAGES/parents1.jpg'
+import parents2 from '@/assets/SKYVIEW-IMAGES/parents2.jpg'
+import parents3 from '@/assets/SKYVIEW-IMAGES/parents3.jpg'
+import parents4 from '@/assets/SKYVIEW-IMAGES/parents4.jpg'
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { AnimatedSection } from "./AnimatedSection";
 

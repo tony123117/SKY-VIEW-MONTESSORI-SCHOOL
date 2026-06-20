@@ -1,6 +1,6 @@
-// Drop-in replacement for BrainChildLogo.tsx
+// Drop-in replacement for SkyViewLogo.tsx
 // Renders: SKY · VIEW (left-aligned) with tagline below — matching the screenshot exactly
-export default function BrainChildLogo() {
+export default function SkyViewLogo() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", lineHeight: 1, userSelect: "none" }}>
       {/* SKY · VIEW */}
@@ -8,7 +8,7 @@ export default function BrainChildLogo() {
         <span style={{
           fontSize: "1.45rem",
           fontWeight: 900,
-          color: "#1a1a1a",
+          color: "#2074e3",
           letterSpacing: "-0.01em",
           fontFamily: "var(--font-heading, sans-serif)",
         }}>
@@ -41,7 +41,7 @@ export default function BrainChildLogo() {
         fontWeight: 700,
         textTransform: "uppercase",
         letterSpacing: "0.22em",
-        color: "rgba(0,0,0,0.42)",
+        color: "rgba(255, 8, 8, 0.42)",
         whiteSpace: "nowrap",
         fontFamily: "var(--font-body, sans-serif)",
       }}>

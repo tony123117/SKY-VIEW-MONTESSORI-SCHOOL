@@ -52,8 +52,8 @@ export default function WhyChooseUsCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent" />
 
         {/* Top accent bar (Hero-inspired) */}
-        <div 
-          className="absolute top-0 left-0 right-0 h-1.5" 
+        <div
+          className="absolute top-0 left-0 right-0 h-1.5"
           style={{ background: color }}
         />
 
@@ -72,9 +72,8 @@ export default function WhyChooseUsCard({
         {/* Category badge */}
         {category && (
           <div
-            className={`absolute top-5 right-5 z-10 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm ${
-              categoryStyles[category] ?? "bg-slate-100 text-slate-600"
-            }`}
+            className={`absolute top-5 right-5 z-10 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm ${categoryStyles[category] ?? "bg-slate-100 text-slate-600"
+              }`}
           >
             {category}
           </div>

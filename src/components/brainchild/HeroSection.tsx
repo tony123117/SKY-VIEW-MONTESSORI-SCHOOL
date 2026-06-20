@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import buildingImg from "@/assets/SKYVIEW-IMAGES/building.jpeg";
+import buildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
 import football from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
 import judo from "@/assets/SKYVIEW-IMAGES/judo.png";
 import ResponsiveImage from "@/components/ui/ResponsiveImage";

@@ -20,7 +20,7 @@ export default function ResponsiveImage({ src, alt = '', widths = [480, 768, 102
     const largest = widths[widths.length - 1];
 
     return (
-        // Note: generated images live in /public/responsive after running the generator
+        // Note: generated SKYVIEW-IMAGES live in /public/responsive after running the generator
         <img src={`/responsive/${base}-w${largest}.${ext}`} srcSet={srcset} sizes="(max-width: 1024px) 100vw, 1200px" alt={alt} loading="lazy" decoding="async" {...rest} />
     );
 }

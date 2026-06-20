@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiMenu, FiX, FiChevronDown, FiUser, FiBriefcase } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import SkyViewLogo from "./SkyViewLogo";
+import logoImg from "@/assets/SKYVIEW-IMAGES/logo.png";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -10,6 +12,7 @@ const navItems = [
   { label: "Gallery", href: "/gallery" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
+  { label: "Community", href: "/community" },
 ];
 
 const aboutDropdownItems = [
@@ -32,83 +35,23 @@ function NavLogo() {
         userSelect: "none",
       }}
     >
-      {/* Red circle mark */}
-      <div
+      {/* Logo image */}
+      <img
+        src={logoImg}
+        alt="Sky View Logo"
         style={{
           width: 44,
           height: 44,
           borderRadius: "50%",
-          background: "linear-gradient(135deg, #9B1C2C 0%, #C5305A 100%)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#fff",
-          fontWeight: 900,
-          fontSize: "0.82rem",
-          letterSpacing: "0.05em",
+          objectFit: "cover",
+          display: "block",
           flexShrink: 0,
           boxShadow: "0 2px 12px rgba(155,28,44,0.3)",
         }}
-      >
-        SKV
-      </div>
+      />
 
-      {/* Word-mark + tagline stacked, left-aligned */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", lineHeight: 1 }}>
-        {/* SKY · VIEW */}
-        <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
-          <span
-            style={{
-              fontSize: "1.4rem",
-              fontWeight: 900,
-              color: "#4A9EDB",
-              letterSpacing: "-0.02em",
-              fontFamily: "var(--font-heading, sans-serif)",
-            }}
-          >
-            SKY
-          </span>
-          <span
-            style={{
-              margin: "0 5px",
-              width: 6,
-              height: 6,
-              borderRadius: "50%",
-              background: "linear-gradient(135deg, #FF6B9D, #9B1C2C)",
-              display: "inline-block",
-              flexShrink: 0,
-              alignSelf: "center",
-            }}
-          />
-          <span
-            style={{
-              fontSize: "1.4rem",
-              fontWeight: 900,
-              color: "#FF6B9D",
-              letterSpacing: "-0.02em",
-              fontFamily: "var(--font-heading, sans-serif)",
-            }}
-          >
-            VIEW
-          </span>
-        </div>
-
-        {/* Tagline */}
-        <p
-          style={{
-            margin: "3px 0 0",
-            fontSize: "0.58rem",
-            fontWeight: 800,
-            textTransform: "uppercase",
-            letterSpacing: "0.28em",
-            color: "rgba(0,0,0,0.4)",
-            whiteSpace: "nowrap",
-            fontFamily: "var(--font-body, sans-serif)",
-          }}
-        >
-          Nursery · Primary · Secondary
-        </p>
-      </div>
+      {/* Word-mark + tagline component */}
+      <SkyViewLogo />
     </div>
   );
 }
@@ -447,7 +390,7 @@ export function Navbar() {
             ))}
 
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: "0.75rem" }}>
-              <a href="https://portal.brainchildintschools.com/student"
+              <a href=""
                 target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center",
@@ -457,7 +400,7 @@ export function Navbar() {
               >
                 <FiUser size={15} /> Student Portal
               </a>
-              <a href="https://portal.brainchildintschools.com/"
+              <a href=""
                 target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center",

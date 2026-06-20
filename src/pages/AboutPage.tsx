@@ -334,7 +334,7 @@ export default function AboutPage() {
                   className="text-xl md:text-2xl mb-1 font-bold"
                   style={{ fontFamily: "var(--font-heading)", color: NAVY }}
                 >
-                  THE DIRECTOR
+                  The Director: Mrs Amaka Phillip
                 </h3>
                 <p className="text-[12px] font-bold tracking-[0.1em] uppercase mb-5" style={{ color: SKY_BLUE }}>
                   17+ Years in Education

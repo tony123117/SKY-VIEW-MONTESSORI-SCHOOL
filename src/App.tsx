@@ -12,7 +12,7 @@ import ProgramsPage from "./pages/ProgramsPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import PortalPage from "./pages/PortalPage.tsx";
 import GalleryPage from "./pages/GalleryPage.tsx";
-import CommunityPage from "./pages/BrainChildCommunity.tsx";
+import CommunityPage from "./pages/SkyViewCommunity.tsx";
 import { ScrollToTop } from "./components/ScrollToTop.tsx";
 import { WhatsAppWidget } from "./components/brainchild/WhatsAppWidget.tsx";
 
