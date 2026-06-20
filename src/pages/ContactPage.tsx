@@ -7,7 +7,6 @@ import img1 from "@/assets/SKYVIEW-IMAGES/music.png";
 import img2 from "@/assets/SKYVIEW-IMAGES/playground.png";
 import img3 from "@/assets/SKYVIEW-IMAGES/craft.jpeg";
 import getResponsiveSrc from '@/lib/image';
-import ResponsiveImage from '@/components/ui/ResponsiveImage';
 
 const contactImages = [img1, img2, img3];
 
@@ -393,7 +392,7 @@ export default function ContactPage() {
         <section className="ct-hero">
           {contactImages.map((img, i) => (
             <div key={i} className="ct-hero-img-col">
-              <ResponsiveImage src={img} alt={`Contact ${i + 1}`} widths={[480,768,1024]} />
+              <img src={getResponsiveSrc(img)} alt={`Contact ${i + 1}`} />
             </div>
           ))}
           <div className="ct-hero-content">

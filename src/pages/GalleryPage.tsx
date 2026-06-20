@@ -3,7 +3,6 @@ import { Navbar } from "@/components/brainchild/Navbar";
 import { Footer } from "@/components/brainchild/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import getResponsiveSrc from '@/lib/image';
-import ResponsiveImage from '@/components/ui/ResponsiveImage';
 
 import blocksimg from "@/assets/SKYVIEW-IMAGES/building-blocks.jpeg";
 import bluildingimg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
@@ -436,7 +435,7 @@ export default function GalleryPage() {
                       className="gl-item"
                       onClick={() => setLightbox(img)}
                     >
-                      <ResponsiveImage src={img.src} alt={img.title} loading="lazy" widths={[480,768,1024]} />
+                      <img src={getResponsiveSrc(img.src)} alt={img.title} loading="lazy" />
                       <div className="gl-item-overlay">
                         <div
                           className="gl-item-cat"
@@ -485,7 +484,7 @@ export default function GalleryPage() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <button className="gl-lightbox-close" onClick={() => setLightbox(null)}>✕</button>
-                <ResponsiveImage src={lightbox.src} alt={lightbox.title} className="gl-lightbox-img" widths={[480,768,1024,1600]} />
+                <img src={getResponsiveSrc(lightbox.src)} alt={lightbox.title} className="gl-lightbox-img" />
                 <div className="gl-lightbox-meta">
                   <div
                     style={{

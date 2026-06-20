@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiStar, FiBriefcase, FiBook, FiHeart, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import directorImg from "@/assets/SKYVIEW-IMAGES/director.png";
 import getResponsiveSrc from '@/lib/image';
-import ResponsiveImage from '@/components/ui/ResponsiveImage';
 const WINE_RED = "#9B1C2C";
 const SKY_BLUE = "#4A9EDB";
 const PINK = "#FF6B9D";
@@ -168,7 +167,7 @@ export default function DirectorWelcome() {
               justifyContent: "center",
               fontSize: "5rem",
             }}>
-              <ResponsiveImage src={directorImg} alt="Director" widths={[480,768,1024,1600]} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src={getResponsiveSrc(directorImg)} alt="Director" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
             <div style={{
               position: "absolute", bottom: -16, left: "50%", transform: "translateX(-50%)",

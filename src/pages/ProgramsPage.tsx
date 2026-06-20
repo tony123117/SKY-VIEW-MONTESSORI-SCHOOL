@@ -13,7 +13,6 @@ import BuildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
 import playgroundImg from "@/assets/SKYVIEW-IMAGES/playground.png";
 import swimmingImg from "@/assets/SKYVIEW-IMAGES/swimming.jpeg";
 import getResponsiveSrc from '@/lib/image';
-import ResponsiveImage from '@/components/ui/ResponsiveImage';
 
 const programsImages = [BuildingImg, playgroundImg, swimmingImg];
 
@@ -382,7 +381,7 @@ export default function ProgramsPage() {
         {/* HERO */}
         <section className="pg-hero">
           <div className="pg-hero-right">
-            <ResponsiveImage src={BuildingImg} alt="Students learning" widths={[480,768,1024,1600]} />
+            <img src={getResponsiveSrc(kidsStudyingImg)} alt="Students learning" />
             <div className="pg-hero-overlay" />
             <div className="pg-float-badge" style={{ position: "absolute", bottom: 48, left: 40 }}>
               <div className="pg-float-badge-num">500+</div>

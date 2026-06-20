@@ -1,4 +1,4 @@
-// logo is served from the public/ folder as /Logo.png
+import logo from "@/assets/SKYVIEW-IMAGES/Logo.png";
 import insta from "@/assets/icons/insta.png";
 import facebook from "@/assets/icons/facebook.png";
 import footerImage from "@/assets/SKYVIEW-IMAGES/image.png";
@@ -7,7 +7,6 @@ import SkyViewLogo from "./SkyViewLogo";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import getResponsiveSrc from '@/lib/image';
-import ResponsiveImage from '@/components/ui/ResponsiveImage';
 
 export function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -91,7 +90,7 @@ export function Footer() {
         viewport={{ once: true }}
         transition={{ duration: 0.65, ease: "easeOut" }}
       >
-          <div
+        <div
           style={{
             width: "100%",
             maxWidth: 900,
@@ -103,13 +102,13 @@ export function Footer() {
             flexShrink: 0,
           }}
         >
-          <ResponsiveImage
-            src={footerImage}
+          <img
+            src={getResponsiveSrc(footerImage)}
             alt="Build a better future"
-            widths={[480,768,1024,1600]}
             style={{
               width: "100%",
               height: "auto",
+              /* clamp: never shorter than 180px, never taller than 420px */
               minHeight: "clamp(180px, 28vw, 420px)",
               maxHeight: 420,
               objectFit: "cover",
@@ -153,10 +152,13 @@ export function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-                <Link to="/" style={{ display: "flex", alignItems: "center", gap: 12, width: "fit-content" }}>
-                <motion.div whileHover={{ scale: 1.1, rotate: 5 }} style={{ width: 64, height: "auto", flexShrink: 0 }}>
-                  <img src="/Logo.png" alt="Sky View Logo" style={{ width: 64, height: "auto", flexShrink: 0, display: 'block' }} />
-                </motion.div>
+              <Link to="/" style={{ display: "flex", alignItems: "center", gap: 12, width: "fit-content" }}>
+                <motion.img
+                  src={getResponsiveSrc(logo)}
+                  alt="Sky View Logo"
+                  style={{ width: 64, height: "auto", flexShrink: 0 }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                />
                 <div style={{ fontSize: "1.1rem", color: "var(--color-primary, #9B1C2C)", fontWeight: 700, lineHeight: 1.2 }}>
                   <SkyViewLogo />
                 </div>
@@ -200,7 +202,7 @@ export function Footer() {
                   >
                     {icon.svg
                       ? icon.svg
-                      : <ResponsiveImage src={icon.src} alt={icon.alt} widths={[16,32]} style={{ width: 16, height: 16, filter: "invert(1)", opacity: 0.7 }} />
+                      : <img src={getResponsiveSrc(icon.src)} alt={icon.alt} style={{ width: 16, height: 16, filter: "invert(1)", opacity: 0.7 }} />
                     }
                   </motion.a>
                 ))}
