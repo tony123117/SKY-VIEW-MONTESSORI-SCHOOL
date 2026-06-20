@@ -1,6 +1,5 @@
 import { AnimatedSection } from "./AnimatedSection";
 import { motion } from "framer-motion";
-import classRoomImg from "@/assets/images/curiculum.jpg";
 import Music from "@/assets/SKYVIEW-IMAGES/music.png";
 import scienceimg from "@/assets/SKYVIEW-IMAGES/SCIENCE.png";
 import playgroundimg from "@/assets/SKYVIEW-IMAGES/playground.png";

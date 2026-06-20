@@ -1,54 +1,25 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
 
-export default defineConfig(({ mode }) => ({
-  base: "./", // ✅ ADD THIS LINE (VERY IMPORTANT)
-
-  server: {
-    host: "::",
-    port: 8080,
-    hmr: {
-      overlay: false,
-    },
-  },
-
-  assetsInclude: ["**/*.JPG", "**/*.jpg", "**/*.png"],
-
-  plugins: [
-    react(),
-    mode === "development" && componentTagger()
-  ].filter(Boolean),
-
+export default defineConfig({
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    dedupe: [
-      "react",
-      "react-dom",
-      "react/jsx-runtime",
-      "react/jsx-dev-runtime",
-      "@tanstack/react-query",
-      "@tanstack/query-core"
-    ],
   },
-
   build: {
+    // Increase the inline limit so images are NEVER inlined as base64
+    // — they always get copied as real files into dist/assets/
     assetsInlineLimit: 0,
-    chunkSizeWarningLimit: 1000,
+    // Make sure the assets folder is named consistently
+    assetsDir: "assets",
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
-          if (id.includes(path.resolve(__dirname, 'src/components/brainchild'))) {
-            return 'brainchild';
-          }
-        }
-      }
-    }
-  }
-}));
+        // Keep asset file names readable for debugging
+        assetFileNames: "assets/[name]-[hash][extname]",
+      },
+    },
+  },
+});

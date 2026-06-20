@@ -2,11 +2,14 @@ import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import BrainButton from "@/components/brainchild/BrainButton";
-import creativeImg from "@/assets/images/creative.jpeg";
-import teachersImg from "@/assets/images/teachers.jpg";
-import enterImg from "@/assets/images/enter.jpg";
-import outsideImg from "@/assets/images/outside.jpg";
-import danceImg from "@/assets/images/dance.jpeg";
+import Music from "@/assets/SKYVIEW-IMAGES/music.png";
+import scienceimg from "@/assets/SKYVIEW-IMAGES/SCIENCE.png";
+import playgroundimg from "@/assets/SKYVIEW-IMAGES/playground.png";
+import buildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
+import football from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
+import judo from "@/assets/SKYVIEW-IMAGES/judo.png";
+import ResponsiveImage from "@/components/ui/ResponsiveImage";
+import computer from "@/assets/SKYVIEW-IMAGES/computer.png";
 import {
   Carousel,
   CarouselContent,
@@ -16,7 +19,7 @@ import {
 } from "@/components/ui/carousel";
 import getResponsiveSrc from '@/lib/image';
 
-const notFoundImages = [creativeImg, teachersImg, enterImg, outsideImg, danceImg];
+const notFoundImages = [buildingImg, football, judo, Music, scienceimg, playgroundimg, computer];
 
 const pageSuggestions = [
   { title: "Admissions", description: "Begin the enrollment journey with our guided support.", href: "/admissions" },

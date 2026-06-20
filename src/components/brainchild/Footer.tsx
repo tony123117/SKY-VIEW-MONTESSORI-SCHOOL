@@ -1,7 +1,7 @@
 import logo from "@/assets/SKYVIEW-IMAGES/Logo.png";
 import insta from "@/assets/icons/insta.png";
 import facebook from "@/assets/icons/facebook.png";
-import footerImage from "@/assets/images/image.png";
+import footerImage from "@/assets/SKYVIEW-IMAGES/image.png";
 import { AnimatedSection } from "./AnimatedSection";
 import SkyViewLogo from "./SkyViewLogo";
 import { Link } from "react-router-dom";
