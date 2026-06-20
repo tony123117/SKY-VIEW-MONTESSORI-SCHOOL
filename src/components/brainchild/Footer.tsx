@@ -50,8 +50,8 @@ export function Footer() {
 
   const resourceLinks = [
     { label: "Blog", href: "/blog" },
-    { label: "Student Portal", href: "https://portal.brainchildintschools.com/student" },
-    { label: "Staff Portal", href: "https://portal.brainchildintschools.com/" },
+    { label: "Student Portal", href: "" },
+    { label: "Staff Portal", href: "/" },
     { label: "Our Story", href: "/about" },
   ];
 

@@ -131,7 +131,7 @@ export default function BrochurePanel({ open, onClose }: BrochurePanelProps) {
               <div className="flex gap-3 flex-wrap">
 
                 <a
-                  href="https://portal.brainchildintschools.com/enroll"
+                  href=""
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-pink-500 text-white text-sm font-bold hover:bg-pink-600 active:scale-95 transition-all no-underline"

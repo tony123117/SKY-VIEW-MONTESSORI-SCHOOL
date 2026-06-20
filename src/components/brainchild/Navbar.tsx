@@ -6,21 +6,23 @@ import SkyViewLogo from "./SkyViewLogo";
 import logoImg from "@/assets/SKYVIEW-IMAGES/Logo.png";
 
 const navItems = [
-  { label: "Home",      href: "/" },
-  { label: "Programs",  href: "/programs" },
-  { label: "Admissions",href: "/admissions" },
-  { label: "Gallery",   href: "/gallery" },
-  { label: "Blog",      href: "/blog" },
-  { label: "Contact",   href: "/contact" },
+  { label: "Home", href: "/" },
+  { label: "Programs", href: "/programs" },
+  { label: "Admissions", href: "/admissions" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
   { label: "Community", href: "/community" },
 ];
 
 const aboutDropdownItems = [
-  { label: "Welcome Note",               id: "welcome-note" },
-  { label: "Curriculum",                 id: "curriculum" },
-  { label: "Departments",                id: "departments" },
-  { label: "Extra-curricular Activities",id: "extracurricular" },
+  { label: "Welcome Note", id: "welcome-note" },
+  { label: "Curriculum", id: "curriculum" },
+  { label: "Departments", id: "departments" },
+  { label: "Extra-curricular Activities", id: "extracurricular" },
 ];
+
+// mobile drawer state (moved into component)
 
 const CSS = `
   *, *::before, *::after { box-sizing: border-box; }
@@ -116,7 +118,7 @@ const CSS = `
     border: 1px solid rgba(0,0,0,0.08);
     border-top: 3px solid #9B1C2C;
     box-shadow: 0 16px 48px rgba(0,0,0,0.11), 0 4px 12px rgba(0,0,0,0.06);
-    overflow: hidden; z-index: 100;
+    overflow: visible; z-index: 1300;
   }
   .nv-dropdown-right { left: auto; right: 0; border-top-color: #4A9EDB; }
 
@@ -192,7 +194,7 @@ const CSS = `
     display: flex; flex-direction: column;
     padding: clamp(16px, 4vw, 24px);
     gap: 4px;
-    z-index: 98;
+    z-index: 1100;
   }
 
   .nv-drawer-section-label {
@@ -265,8 +267,17 @@ const CSS = `
 
   @media (max-width: 1023px) {
     .nv-links   { display: none !important; }
-    .nv-actions { display: none !important; }
+    /* keep actions container so hamburger can be visible; hide non-hamburger children */
+    .nv-actions { display: flex !important; }
+    .nv-actions > *:not(.nv-ham) { display: none !important; }
     .nv-ham     { display: flex !important; }
+  }
+
+  /* Extra safety: ensure hamburger shows and drawer items render on small viewports */
+  @media (max-width: 1024px) {
+    .nv-ham { display: flex !important; color: #1a1a2e !important; }
+    .nv-drawer { display: flex !important; }
+    .nv-drawer-item { display: block !important; }
   }
 
   @media (max-width: 768px) {
@@ -299,19 +310,19 @@ function PortalDropdown({ open }: { open: boolean }) {
         <motion.div
           className="nv-dropdown nv-dropdown-right"
           initial={{ opacity: 0, y: -6, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0,  scale: 1 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -6, scale: 0.97 }}
           transition={{ duration: 0.15 }}
         >
           <a
-            href="https://portal.brainchildintschools.com/student"
+            href=""
             target="_blank" rel="noopener noreferrer"
             className="nv-drop-item portal"
           >
             <FiUser size={14} /> Student Portal
           </a>
           <a
-            href="https://portal.brainchildintschools.com/"
+            href=""
             target="_blank" rel="noopener noreferrer"
             className="nv-drop-item"
           >
@@ -331,7 +342,7 @@ function AboutDropdown({ open, onSelect }: { open: boolean; onSelect: (id: strin
         <motion.div
           className="nv-dropdown"
           initial={{ opacity: 0, y: -6, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0,  scale: 1 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -6, scale: 0.97 }}
           transition={{ duration: 0.15 }}
         >
@@ -352,13 +363,14 @@ function AboutDropdown({ open, onSelect }: { open: boolean; onSelect: (id: strin
 
 // ── Main Navbar ──────────────────────────────────────────────────────────────
 export function Navbar() {
-  const [menuOpen,   setMenuOpen]   = useState(false);
-  const [aboutOpen,  setAboutOpen]  = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [portalOpen, setPortalOpen] = useState(false);
-  const [scrolled,   setScrolled]   = useState(false);
-  const location   = useLocation();
-  const navigate   = useNavigate();
-  const drawerRef  = useRef<HTMLDivElement>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const drawerRef = useRef<HTMLDivElement>(null);
 
   // Scroll listener
   useEffect(() => {
@@ -509,19 +521,19 @@ export function Navbar() {
             <AnimatePresence mode="wait" initial={false}>
               {menuOpen
                 ? <motion.span key="x"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.18 }}>
-                    <FiX size={22} />
-                  </motion.span>
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.18 }}>
+                  <FiX size={22} />
+                </motion.span>
                 : <motion.span key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.18 }}>
-                    <FiMenu size={22} />
-                  </motion.span>
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.18 }}>
+                  <FiMenu size={22} />
+                </motion.span>
               }
             </AnimatePresence>
           </button>
@@ -540,20 +552,44 @@ export function Navbar() {
             transition={{ duration: 0.22, ease: "easeOut" }}
             aria-label="Mobile navigation"
           >
-            {/* About section */}
-            <p className="nv-drawer-section-label">About Us</p>
-            {aboutDropdownItems.map((item, i) => (
-              <motion.button
-                key={item.id}
-                className="nv-drawer-item"
-                onClick={() => handleAboutClick(item.id)}
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.04 }}
-              >
-                {item.label}
-              </motion.button>
-            ))}
+            {/* About section (collapsible on mobile) */}
+            <button
+              className="nv-drawer-section-label"
+              onClick={() => setMobileAboutOpen((v) => !v)}
+              aria-expanded={mobileAboutOpen}
+              aria-controls="nv-mobile-about"
+            >
+              <span>About Us</span>
+              <motion.span animate={{ rotate: mobileAboutOpen ? 180 : 0 }} transition={{ duration: 0.18 }} style={{ display: 'inline-flex', marginLeft: 8 }}>
+                <FiChevronDown size={14} />
+              </motion.span>
+            </button>
+
+            <AnimatePresence>
+              {mobileAboutOpen && (
+                <motion.div
+                  id="nv-mobile-about"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.16 }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  {aboutDropdownItems.map((item, i) => (
+                    <motion.button
+                      key={item.id}
+                      className="nv-drawer-item"
+                      onClick={() => handleAboutClick(item.id)}
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.04 }}
+                    >
+                      {item.label}
+                    </motion.button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <div className="nv-drawer-divider" />
 
@@ -581,7 +617,7 @@ export function Navbar() {
             {/* Portal buttons */}
             <div className="nv-drawer-portal-row">
               <a
-                href="https://portal.brainchildintschools.com/student"
+                href=""
                 target="_blank" rel="noopener noreferrer"
                 className="nv-drawer-portal-btn nv-drawer-portal-student"
                 onClick={() => setMenuOpen(false)}
@@ -589,7 +625,7 @@ export function Navbar() {
                 <FiUser size={14} /> Student Portal
               </a>
               <a
-                href="https://portal.brainchildintschools.com/"
+                href=""
                 target="_blank" rel="noopener noreferrer"
                 className="nv-drawer-portal-btn nv-drawer-portal-staff"
                 onClick={() => setMenuOpen(false)}
