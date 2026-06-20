@@ -15,6 +15,7 @@ import img1 from "@/assets/SKYVIEW-IMAGES/music.png";
 import img2 from "@/assets/SKYVIEW-IMAGES/computer.png";
 import img3 from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
 import getResponsiveSrc from '@/lib/image';
+import ResponsiveImage from '@/components/ui/ResponsiveImage';
 
 const heroSlides = [
   { image: img1, label: "A" },
@@ -345,7 +346,7 @@ export default function AdmissionsPage() {
 
         {/* HERO */}
         <section className="ad-hero">
-          <img src={getResponsiveSrc(img1)} alt="Admissions hero" className="ad-hero-bg" />
+          <ResponsiveImage src={img1} alt="Admissions hero" className="ad-hero-bg" widths={[480,768,1024,1600]} />
           <div className="ad-hero-overlay" />
           <div className="ad-hero-content">
             <div className="ad-eyebrow" style={{ flexDirection: "row-reverse" }}>
@@ -372,7 +373,7 @@ export default function AdmissionsPage() {
             <CarouselContent>
               {heroSlides.map((slide, i) => (
                 <CarouselItem key={i}>
-                  <img src={getResponsiveSrc(slide.image)} alt={`Campus ${i + 1}`} className="ad-carousel-img" />
+                  <ResponsiveImage src={slide.image} alt={`Campus ${i + 1}`} className="ad-carousel-img" widths={[480,768,1024]} />
                 </CarouselItem>
               ))}
             </CarouselContent>

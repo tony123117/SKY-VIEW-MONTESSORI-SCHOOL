@@ -1,6 +1,7 @@
 import { BlogPost } from "@/types/blogs";
 import { motion, AnimatePresence } from "framer-motion";
 import getResponsiveSrc from '@/lib/image';
+import ResponsiveImage from '@/components/ui/ResponsiveImage';
 
 export default function BlogModal({ post, onClose }: { post: BlogPost | null, onClose: () => void }) {
   return (
@@ -14,7 +15,7 @@ export default function BlogModal({ post, onClose }: { post: BlogPost | null, on
               className="bg-white rounded-[3rem] shadow-2xl w-full max-w-4xl overflow-hidden pointer-events-auto max-h-[85vh] flex flex-col md:flex-row"
             >
               <div className="md:w-1/2 h-64 md:h-auto overflow-hidden">
-                <img src={getResponsiveSrc(post.coverImage)} className="w-full h-full object-cover" />
+                <ResponsiveImage src={post.coverImage} className="w-full h-full object-cover" widths={[480,768,1024,1600]} />
               </div>
               <div className="md:w-1/2 p-8 md:p-12 overflow-y-auto">
                 <button onClick={onClose} className="text-slate-400 hover:text-primary mb-6 font-bold uppercase text-xs tracking-widest">← Back</button>

@@ -4,6 +4,7 @@ import { Footer } from "@/components/brainchild/Footer";
 import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import { motion } from "framer-motion";
 import getResponsiveSrc from '@/lib/image';
+import ResponsiveImage from '@/components/ui/ResponsiveImage';
 import {
   Carousel,
   CarouselContent,
@@ -435,7 +436,7 @@ export default function BlogPage() {
                   className={`bl-post-card${i % 2 === 1 ? " reversed" : ""}`}
                 >
                   <div className="bl-post-img">
-                    <img src={getResponsiveSrc(post.image)} alt={post.title} loading="lazy" />
+                    <ResponsiveImage src={post.image} alt={post.title} loading="lazy" widths={[480,768,1024]} />
                   </div>
                   <div className="bl-post-body">
                     <div className="bl-post-meta">

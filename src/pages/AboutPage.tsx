@@ -5,6 +5,7 @@ import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import getResponsiveSrc from '@/lib/image';
+import ResponsiveImage from '@/components/ui/ResponsiveImage';
 
 import director from "@/assets/SKYVIEW-IMAGES/director.png";
 import buildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
@@ -371,8 +372,8 @@ export default function AboutPage() {
                     whileHover={{ scale: 1.04, rotate: i % 2 === 0 ? 1.5 : -1.5 }}
                     transition={{ duration: 0.25 }}
                     style={{ overflow: "hidden", borderRadius: 16, boxShadow: "0 8px 24px rgba(0,0,0,0.1)", border: "2px solid #fff", height: 170 }}
-                  >
-                    <img src={getResponsiveSrc(img)} alt="school life" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease", display: "block" }} />
+                    >
+                    <ResponsiveImage src={img} alt="school life" className="w-full h-full object-cover" widths={[480,768,1024,1600]} style={{ transition: "transform 0.5s ease", display: "block" }} />
                   </motion.div>
                 ))}
               </div>
@@ -428,7 +429,7 @@ export default function AboutPage() {
               style={{ background: "#fff", borderRadius: 24, overflow: "hidden", boxShadow: "0 8px 32px rgba(0,0,0,0.08)", display: "grid", gridTemplateColumns: "280px 1fr" }}
             >
               <div style={{ position: "relative", minHeight: 280, overflow: "hidden" }}>
-                <img src={getResponsiveSrc(director)} alt="Director" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                <ResponsiveImage src={director} alt="Director" widths={[480,768,1024,1600]} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${NAVY}99 0%, transparent 45%)` }} />
                 <span style={{ position: "absolute", bottom: 16, left: 16, color: "#fff", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, padding: "5px 12px", borderRadius: 999, background: WINE_RED }}>
                   Director & Founder

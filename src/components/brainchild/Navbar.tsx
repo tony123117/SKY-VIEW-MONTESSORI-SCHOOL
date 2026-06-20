@@ -3,8 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiMenu, FiX, FiChevronDown, FiUser, FiBriefcase } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import SkyViewLogo from "./SkyViewLogo";
-import logoImg from "@/assets/SKYVIEW-IMAGES/Logo.png";
-import getResponsiveSrc from '@/lib/image';
+// logo served from public/Logo.png
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -105,7 +104,7 @@ function NavLogo() {
     >
       {/* Logo image */}
       <img
-        src={getResponsiveSrc(logoImg)}
+        src="/Logo.png"
         alt="Sky View Logo"
         className="nav-logo-img"
         style={{
