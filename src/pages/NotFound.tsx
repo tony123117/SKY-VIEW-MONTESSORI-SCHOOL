@@ -14,6 +14,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import getResponsiveSrc from '@/lib/image';
 
 const notFoundImages = [creativeImg, teachersImg, enterImg, outsideImg, danceImg];
 
@@ -85,7 +86,7 @@ const NotFound = () => {
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
                     <img
-                      src={image}
+                      src={getResponsiveSrc(image)}
                       alt={`School life ${index + 1}`}
                       className="w-full h-48 object-cover rounded-2xl shadow-lg"
                     />

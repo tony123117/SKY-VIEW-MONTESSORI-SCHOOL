@@ -3,6 +3,7 @@ import { Navbar } from "@/components/brainchild/Navbar";
 import { Footer } from "@/components/brainchild/Footer";
 import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import { motion } from "framer-motion";
+import getResponsiveSrc from '@/lib/image';
 import {
   Carousel,
   CarouselContent,
@@ -434,7 +435,7 @@ export default function BlogPage() {
                   className={`bl-post-card${i % 2 === 1 ? " reversed" : ""}`}
                 >
                   <div className="bl-post-img">
-                    <img src={post.image} alt={post.title} loading="lazy" />
+                    <img src={getResponsiveSrc(post.image)} alt={post.title} loading="lazy" />
                   </div>
                   <div className="bl-post-body">
                     <div className="bl-post-meta">

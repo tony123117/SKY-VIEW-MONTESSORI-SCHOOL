@@ -1,5 +1,6 @@
 import { BlogPost } from "@/types/blogs";
 import { motion } from "framer-motion";
+import ResponsiveImage from '@/components/ui/ResponsiveImage';
 
 interface BlogCardProps {
   post: BlogPost;
@@ -16,11 +17,11 @@ export default function BlogCard({ post, onPostClick }: BlogCardProps) {
     >
       {/* Image Container */}
       <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] mb-6">
-        <img
+        <ResponsiveImage
           src={post.coverImage}
           alt={post.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-          loading="lazy"
+          widths={[480,768,1024,1600]}
         />
 
         {/* Overlay Gradient */}

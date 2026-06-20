@@ -4,6 +4,7 @@ import { FiMenu, FiX, FiChevronDown, FiUser, FiBriefcase } from "react-icons/fi"
 import { motion, AnimatePresence } from "framer-motion";
 import SkyViewLogo from "./SkyViewLogo";
 import logoImg from "@/assets/SKYVIEW-IMAGES/Logo.png";
+import getResponsiveSrc from '@/lib/image';
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -104,7 +105,7 @@ function NavLogo() {
     >
       {/* Logo image */}
       <img
-        src={logoImg}
+        src={getResponsiveSrc(logoImg)}
         alt="Sky View Logo"
         className="nav-logo-img"
         style={{

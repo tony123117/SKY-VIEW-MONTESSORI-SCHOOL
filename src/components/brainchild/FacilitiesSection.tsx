@@ -5,6 +5,7 @@ import Music from "@/assets/SKYVIEW-IMAGES/music.png";
 import scienceimg from "@/assets/SKYVIEW-IMAGES/SCIENCE.png";
 import playgroundimg from "@/assets/SKYVIEW-IMAGES/playground.png";
 import computer from "@/assets/SKYVIEW-IMAGES/computer.png";
+import getResponsiveSrc from '@/lib/image';
 
 const facilities = [
 
@@ -152,7 +153,7 @@ export function FacilitiesSection() {
                 {/* Image */}
                 <div className="relative h-44 overflow-hidden flex-shrink-0">
                   <img
-                    src={f.image}
+                    src={getResponsiveSrc(f.image)}
                     alt={f.title}
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

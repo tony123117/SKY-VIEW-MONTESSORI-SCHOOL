@@ -5,6 +5,7 @@ import BrochurePanel from "./BrochurePanel";
 import { AnimatedSection } from "./AnimatedSection";
 import BrainButton from "./BrainButton";
 import doodles from "@/assets/SKYVIEW-IMAGES/playground.png";
+import getResponsiveSrc from '@/lib/image';
 import { FileText } from "lucide-react";
 import blocksImg from "@/assets/SKYVIEW-IMAGES/building-blocks.jpeg";
 import artsImg from "@/assets/SKYVIEW-IMAGES/craft.jpeg";
@@ -141,7 +142,7 @@ export function WhyChooseUs() {
     >
       {/* Background doodle */}
       <img
-        src={doodles}
+        src={getResponsiveSrc(doodles)}
         alt=""
         aria-hidden="true"
         loading="lazy"

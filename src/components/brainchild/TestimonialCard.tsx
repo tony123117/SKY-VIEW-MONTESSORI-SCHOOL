@@ -1,5 +1,6 @@
 import { Testimonial } from "@/types/testimonialcard";
 import { motion } from "framer-motion";
+import getResponsiveSrc from '@/lib/image';
 
 interface TestimonialCardProps extends Testimonial {
   isActive?: boolean;
@@ -46,7 +47,7 @@ export function TestimonialCard({
       <div className="flex items-center gap-3 pt-3 border-t border-border/40 mt-auto">
         <div className="relative shrink-0">
           <img
-            src={profileImage}
+            src={getResponsiveSrc(profileImage)}
             alt={name}
             className="w-10 h-10 rounded-full object-cover ring-2 ring-secondary/30 ring-offset-2"
           />

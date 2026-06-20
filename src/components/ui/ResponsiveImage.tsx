@@ -1,4 +1,5 @@
 import React from 'react';
+import getResponsiveSrc from '@/lib/image';
 
 interface ResponsiveImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
     src: string; // original src (e.g. /src/assets/... or imported path)
@@ -6,7 +7,6 @@ interface ResponsiveImageProps extends React.ImgHTMLAttributes<HTMLImageElement>
 }
 
 export default function ResponsiveImage({ src, alt = '', widths = [480, 768, 1024, 1600], ...rest }: ResponsiveImageProps) {
-    // if src is a module URL (Vite import), extract filename
     const url = typeof src === 'string' ? src : '';
     const parts = url.split('/');
     const filename = parts[parts.length - 1] || '';
@@ -20,7 +20,6 @@ export default function ResponsiveImage({ src, alt = '', widths = [480, 768, 102
     const largest = widths[widths.length - 1];
 
     return (
-        // Note: generated SKYVIEW-IMAGES live in /public/responsive after running the generator
-        <img src={`/responsive/${base}-w${largest}.${ext}`} srcSet={srcset} sizes="(max-width: 1024px) 100vw, 1200px" alt={alt} loading="lazy" decoding="async" {...rest} />
+        <img src={getResponsiveSrc(src, largest)} srcSet={srcset} sizes="(max-width: 1024px) 100vw, 1200px" alt={alt} loading="lazy" decoding="async" {...rest} />
     );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { MdOutlineArrowForward } from "react-icons/md";
+import getResponsiveSrc from '@/lib/image';
 
 export type WhyChooseUsCardProps = {
   number: string;
@@ -42,7 +43,7 @@ export default function WhyChooseUsCard({
       {/* IMAGE */}
       <div className="relative h-[52%] w-full overflow-hidden">
         <img
-          src={image}
+          src={getResponsiveSrc(image)}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-1100 ease-out group-hover:scale-110"
           loading="lazy"

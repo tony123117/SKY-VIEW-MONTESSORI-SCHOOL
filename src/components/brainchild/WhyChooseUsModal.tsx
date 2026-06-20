@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
+import getResponsiveSrc from '@/lib/image';
 import { X, Download } from "lucide-react";
 
 interface ModalProps {
@@ -76,7 +77,7 @@ export default function WhyChooseUsModal({
             {/* Hero image */}
             <div className="relative h-56 sm:h-64 w-full flex-shrink-0 overflow-hidden">
               <img
-                src={image}
+                src={getResponsiveSrc(image)}
                 alt={title}
                 className="w-full h-full object-cover"
                 loading="lazy"
