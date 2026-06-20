@@ -11,8 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
-git rm --cached dist.zip
-git rm --cached "dist (2).zip"
+dist.zip
+dist (2).zip
 
 # Editor directories and files
 .vscode/*
