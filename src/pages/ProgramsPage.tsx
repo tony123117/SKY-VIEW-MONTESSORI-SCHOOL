@@ -9,12 +9,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import kidsStudyingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
-import activitiesImg from "@/assets/SKYVIEW-IMAGES/playground.png";
-import creativeImg from "@/assets/SKYVIEW-IMAGES/swimming.jpeg";
+import BuildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
+import playgroundImg from "@/assets/SKYVIEW-IMAGES/playground.png";
+import swimmingImg from "@/assets/SKYVIEW-IMAGES/swimming.jpeg";
 import getResponsiveSrc from '@/lib/image';
 
-const programsImages = [kidsStudyingImg, activitiesImg, creativeImg];
+const programsImages = [BuildingImg, playgroundImg, swimmingImg];
 
 const programs = [
   {
