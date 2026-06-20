@@ -114,7 +114,7 @@ export default function BlogPage() {
 
         *, *::before, *::after { box-sizing: border-box; }
 
-        .bl-root { font-family: 'DM Sans', sans-serif; background: #FAF8F5; color: #1A1A2E; }
+        .bl-root { font-family: 'DM Sans', sans-serif; background: #FAF8F5; color: #1A1A2E; overflow-x: hidden; }
 
         /* ── HERO ── */
         .bl-hero {
@@ -214,7 +214,7 @@ export default function BlogPage() {
         .bl-cal-event-dot { width: 4px; height: 4px; border-radius: 50%; background: #F4845F; position: absolute; bottom: 4px; right: 4px; }
 
         /* ── FEATURED ── */
-        .bl-featured { background: #FAF8F5; padding: clamp(48px, 8vw, 100px) clamp(20px, 5vw, 60px); }
+        .bl-featured { background: #FAF8F5; padding: clamp(48px, 8vw, 100px) clamp(20px, 5vw, 60px); overflow: hidden; }
         .bl-featured-header {
           display: flex; justify-content: space-between; align-items: flex-end;
           margin-bottom: clamp(28px, 4vw, 48px); gap: 20px; flex-wrap: wrap;
@@ -234,6 +234,12 @@ export default function BlogPage() {
         }
         .bl-featured-card-title { font-family: 'Fraunces', serif; font-size: clamp(1.1rem, 2.5vw, 1.4rem); color: #FAF8F5; font-weight: 300; margin-bottom: 12px; line-height: 1.25; }
         .bl-featured-card-desc { font-size: 13px; color: #FAF8F566; line-height: 1.7; font-weight: 300; }
+
+        /* Featured carousel nav buttons — mobile-safe */
+        .bl-featured [data-slot="carousel-previous"],
+        .bl-featured [data-slot="carousel-next"] {
+          width: 40px; height: 40px;
+        }
 
         /* ── POSTS ── */
         .bl-posts { padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 60px); }
@@ -281,9 +287,46 @@ export default function BlogPage() {
         }
         .bl-btn-back:hover { background: #F4845F; }
 
-        /* Carousel mobile fix */
+        /* ════════════════════════════════
+           RESPONSIVE — CAROUSEL & BUTTONS
+        ════════════════════════════════ */
+
+        /* Tablet */
+        @media (max-width: 1024px) {
+          .bl-news-cal { padding-bottom: 56px; }
+        }
+
+        /* Mobile — ≤ 768px */
+        @media (max-width: 768px) {
+          .bl-cal-grid { gap: 2px; }
+          .bl-cal-day { padding: 3px; }
+
+          /* featured carousel: shrink cards + nav buttons, keep arrows inside view */
+          .bl-featured [data-slot="carousel-previous"],
+          .bl-featured [data-slot="carousel-next"] {
+            width: 34px; height: 34px;
+          }
+          .bl-featured [data-slot="carousel-previous"] { left: 4px !important; }
+          .bl-featured [data-slot="carousel-next"] { right: 4px !important; }
+          .bl-featured-card { min-height: 200px; padding: 24px 20px; }
+
+          .bl-post-body { padding: 20px; }
+        }
+
+        /* Small mobile — ≤ 640px: carousel items take most of the width, full item peeking */
         @media (max-width: 640px) {
           [data-carousel-item] { flex: 0 0 85% !important; }
+          .bl-cal-labels, .bl-cal-grid { gap: 2px; }
+        }
+
+        /* Very small — ≤ 420px */
+        @media (max-width: 420px) {
+          .bl-featured [data-slot="carousel-previous"],
+          .bl-featured [data-slot="carousel-next"] {
+            width: 30px; height: 30px;
+          }
+          .bl-cal-day-num { font-size: 8px; }
+          .bl-post-title { font-size: 1.1rem; }
         }
       `}</style>
 
@@ -357,7 +400,7 @@ export default function BlogPage() {
             <Carousel className="w-full">
               <CarouselContent>
                 {featuredTopics.map((topic) => (
-                  <CarouselItem key={topic.title} style={{ paddingLeft: 16, flex: "0 0 min(45%, 320px)" }}>
+                  <CarouselItem key={topic.title} data-carousel-item style={{ paddingLeft: 16, flex: "0 0 min(45%, 320px)" }}>
                     <div className="bl-featured-card">
                       <div>
                         <div className="bl-featured-tag" style={{ background: `${tagColors[topic.tag] ?? "#F4845F"}22`, color: tagColors[topic.tag] ?? "#F4845F" }}>
@@ -370,8 +413,8 @@ export default function BlogPage() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious style={{ background: "#1A1A2E", color: "#FAF8F5", border: "none" }} />
-              <CarouselNext style={{ background: "#1A1A2E", color: "#FAF8F5", border: "none" }} />
+              <CarouselPrevious data-slot="carousel-previous" style={{ background: "#1A1A2E", color: "#FAF8F5", border: "none" }} />
+              <CarouselNext data-slot="carousel-next" style={{ background: "#1A1A2E", color: "#FAF8F5", border: "none" }} />
             </Carousel>
           </div>
         </section>

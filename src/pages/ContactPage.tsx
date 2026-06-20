@@ -122,7 +122,8 @@ export default function ContactPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-        .ct-root { font-family: 'DM Sans', sans-serif; background: #FAF8F5; color: #1A1A2E; }
+        * { box-sizing: border-box; }
+        .ct-root { font-family: 'DM Sans', sans-serif; background: #FAF8F5; color: #1A1A2E; overflow-x: hidden; }
 
         /* HERO */
         .ct-hero {
@@ -133,7 +134,6 @@ export default function ContactPage() {
           overflow: hidden;
           position: relative;
         }
-        @media (max-width: 768px) { .ct-hero { grid-template-columns: 1fr; min-height: auto; } }
 
         .ct-hero-img-col {
           position: relative;
@@ -141,7 +141,6 @@ export default function ContactPage() {
           height: 52vh;
           min-height: 340px;
         }
-        @media (max-width: 768px) { .ct-hero-img-col { display: none; } .ct-hero-img-col:first-child { display: block; height: 260px; } }
         .ct-hero-img-col img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: transform 0.6s; }
         .ct-hero-img-col:hover img { transform: scale(1.04); }
         .ct-hero-img-col::after {
@@ -157,18 +156,17 @@ export default function ContactPage() {
           background: linear-gradient(to top, ${NAVY} 0%, transparent 100%);
           z-index: 10;
         }
-        @media (max-width: 768px) { .ct-hero-content { padding: 28px 24px; position: relative; } }
 
         .ct-eyebrow {
           font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
           color: ${PINK}; margin-bottom: 14px;
-          display: flex; align-items: center; gap: 12px;
+          display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
         }
-        .ct-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: ${PINK}; }
+        .ct-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: ${PINK}; flex-shrink: 0; }
         .ct-hero-title {
           font-family: 'Fraunces', serif;
-          font-size: clamp(2rem, 4vw, 3.8rem);
-          color: #FAF8F5; font-weight: 300; line-height: 1.05;
+          font-size: clamp(1.8rem, 4vw, 3.8rem);
+          color: #FAF8F5; font-weight: 300; line-height: 1.1;
           max-width: 700px;
         }
         .ct-hero-title em { font-style: italic; color: ${PINK}; }
@@ -181,7 +179,6 @@ export default function ContactPage() {
           gap: 0;
           max-width: 100%;
         }
-        @media (max-width: 900px) { .ct-body { grid-template-columns: 1fr; } }
 
         /* LEFT: CONTACT INFO */
         .ct-info {
@@ -189,7 +186,6 @@ export default function ContactPage() {
           background: #FAF8F5;
           border-right: 1px solid ${NAVY}0c;
         }
-        @media (max-width: 768px) { .ct-info { padding: 60px 24px; border-right: none; border-bottom: 1px solid ${NAVY}0c; } }
 
         .ct-section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: ${WINE_RED}; margin-bottom: 12px; }
         .ct-section-title { font-family: 'Fraunces', serif; font-size: 2rem; color: #1A1A2E; font-weight: 300; margin-bottom: 48px; line-height: 1.2; }
@@ -212,7 +208,7 @@ export default function ContactPage() {
           margin-top: 2px;
         }
         .ct-detail-label { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #1A1A2E44; margin-bottom: 5px; }
-        .ct-detail-value { font-size: 14px; color: #1A1A2E; line-height: 1.6; font-weight: 300; white-space: pre-line; }
+        .ct-detail-value { font-size: 14px; color: #1A1A2E; line-height: 1.6; font-weight: 300; white-space: pre-line; word-break: break-word; }
 
         /* Map placeholder */
         .ct-map {
@@ -223,7 +219,7 @@ export default function ContactPage() {
           aspect-ratio: 16/7;
           display: flex; align-items: center; justify-content: center;
         }
-        .ct-map-text { font-family: 'Fraunces', serif; font-style: italic; color: #FAF8F533; font-size: 1.1rem; font-weight: 300; }
+        .ct-map-text { font-family: 'Fraunces', serif; font-style: italic; color: #FAF8F533; font-size: 1.1rem; font-weight: 300; text-align: center; padding: 0 16px; }
         .ct-map-pin {
           position: absolute;
           width: 40px; height: 40px;
@@ -253,7 +249,6 @@ export default function ContactPage() {
           padding: 80px 60px;
           background: ${NAVY};
         }
-        @media (max-width: 768px) { .ct-form-col { padding: 60px 24px; } }
 
         .ct-form-title { font-family: 'Fraunces', serif; font-size: 2rem; color: #FAF8F5; font-weight: 300; margin-bottom: 8px; }
         .ct-form-title em { font-style: italic; color: ${PINK}; }
@@ -261,7 +256,6 @@ export default function ContactPage() {
 
         .ct-form { display: flex; flex-direction: column; gap: 20px; }
         .ct-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        @media (max-width: 600px) { .ct-form-row { grid-template-columns: 1fr; } }
 
         .ct-field-label {
           display: block; font-size: 10px; font-weight: 600;
@@ -356,6 +350,38 @@ export default function ContactPage() {
           vertical-align: middle;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ════════════════════════════════
+           RESPONSIVE BREAKPOINTS
+        ════════════════════════════════ */
+
+        @media (max-width: 1024px) {
+          .ct-info, .ct-form-col { padding: 64px 40px; }
+        }
+
+        @media (max-width: 900px) {
+          .ct-body { grid-template-columns: 1fr; }
+          .ct-info { border-right: none; border-bottom: 1px solid ${NAVY}0c; }
+        }
+
+        @media (max-width: 768px) {
+          .ct-hero { grid-template-columns: 1fr; min-height: auto; }
+          .ct-hero-img-col { display: none; height: 260px; }
+          .ct-hero-img-col:first-child { display: block; }
+          .ct-hero-content { padding: 28px 24px; position: relative; }
+          .ct-info, .ct-form-col { padding: 48px 24px; }
+          .ct-section-title, .ct-form-title { font-size: 1.6rem; }
+          .ct-form-row { grid-template-columns: 1fr; gap: 16px; }
+        }
+
+        @media (max-width: 480px) {
+          .ct-hero-img-col:first-child { height: 200px; }
+          .ct-hero-content { padding: 20px 16px; }
+          .ct-info, .ct-form-col { padding: 36px 16px; }
+          .ct-detail-row { gap: 14px; }
+          .ct-detail-icon { width: 34px; height: 34px; }
+          .ct-submit { padding: 16px 24px; font-size: 12px; }
+        }
       `}</style>
 
       <div className="ct-root">

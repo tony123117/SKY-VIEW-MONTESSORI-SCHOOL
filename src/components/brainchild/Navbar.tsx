@@ -22,6 +22,72 @@ const aboutDropdownItems = [
   { label: "Extra-curricular Activities", id: "extracurricular" },
 ];
 
+// ── Responsive styles ──────────────────────────────────────────────────────
+const NAV_CSS = `
+  .nav-root {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 72px;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+    font-family: var(--font-heading, sans-serif);
+  }
+
+  .nav-logo-img { width: 44px; height: 44px; }
+
+  .nav-desktop-list { display: none; gap: 2rem; align-items: center; list-style: none; margin: 0; padding: 0; }
+  .nav-desktop-actions { display: flex; gap: 10px; align-items: center; }
+  .nav-hamburger { display: none; padding: 8px; border: none; background: none; cursor: pointer; color: #1F2937; font-size: 1.4rem; border-radius: 8px; }
+
+  .nav-link { white-space: nowrap; }
+  .nav-portal-btn { white-space: nowrap; }
+  .nav-enroll-btn { white-space: nowrap; }
+
+  .nav-mobile-menu { padding: 1.5rem; }
+
+  /* ── Large desktop ───────────────────────────────────────────────── */
+  @media (min-width: 1280px) {
+    .nav-desktop-list { display: flex !important; }
+    .nav-desktop-actions { display: flex !important; }
+    .nav-hamburger { display: none !important; }
+  }
+
+  /* ── Small / medium desktop & tablets in landscape: tighten gaps ──── */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .nav-desktop-list { display: flex !important; gap: 1.1rem !important; }
+    .nav-desktop-actions { display: flex !important; gap: 6px !important; }
+    .nav-hamburger { display: none !important; }
+    .nav-root { padding: 0 1.5rem !important; }
+    .nav-link { font-size: 0.8rem !important; }
+    .nav-portal-btn { padding: 7px 14px !important; font-size: 0.78rem !important; }
+    .nav-enroll-btn { padding: 8px 16px !important; font-size: 0.78rem !important; }
+  }
+
+  /* ── Tablets & phones: collapse to hamburger ─────────────────────── */
+  @media (max-width: 1023px) {
+    .nav-desktop-list { display: none !important; }
+    .nav-desktop-actions { display: none !important; }
+    .nav-hamburger { display: flex !important; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-root { padding: 0 1.25rem; height: 64px; }
+    .nav-logo-img { width: 38px; height: 38px; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-root { padding: 0 1rem; height: 58px; }
+    .nav-logo-img { width: 32px; height: 32px; }
+    .nav-mobile-menu { padding: 1.1rem; }
+  }
+
+  @media (max-width: 360px) {
+    .nav-root { padding: 0 0.75rem; height: 54px; }
+    .nav-logo-img { width: 28px; height: 28px; }
+    .nav-mobile-menu { padding: 0.9rem; }
+  }
+`;
+
 // ── Logo ──────────────────────────────────────────────────────────────────────
 function NavLogo() {
   return (
@@ -33,15 +99,15 @@ function NavLogo() {
         textDecoration: "none",
         flexShrink: 0,
         userSelect: "none",
+        minWidth: 0,
       }}
     >
       {/* Logo image */}
       <img
         src={logoImg}
         alt="Sky View Logo"
+        className="nav-logo-img"
         style={{
-          width: 44,
-          height: 44,
           borderRadius: "50%",
           objectFit: "cover",
           display: "block",
@@ -78,6 +144,15 @@ export function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  // Close mobile menu automatically if the viewport grows back to desktop size
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 1024 && menuOpen) setMenuOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [menuOpen]);
+
   function handleAboutClick(id: string) {
     setAboutOpen(false);
     setMenuOpen(false);
@@ -89,45 +164,26 @@ export function Navbar() {
 
   return (
     <nav
+      className="nav-root"
       style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 2.5rem",
-        height: 72,
         background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.92)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
         borderBottom: scrolled
           ? "1px solid rgba(155,28,44,0.12)"
           : "1px solid rgba(0,0,0,0.06)",
         boxShadow: scrolled
           ? "0 4px 32px rgba(0,0,0,0.08)"
           : "0 1px 12px rgba(0,0,0,0.04)",
-        transition: "all 0.3s ease",
-        fontFamily: "var(--font-heading, sans-serif)",
       }}
     >
+      <style>{NAV_CSS}</style>
+
       {/* ── Logo ── */}
-      <Link to="/" style={{ textDecoration: "none" }}>
+      <Link to="/" style={{ textDecoration: "none", minWidth: 0 }}>
         <NavLogo />
       </Link>
 
       {/* ── Desktop nav ── */}
-      <ul
-        style={{
-          display: "none",
-          gap: "2rem",
-          alignItems: "center",
-          listStyle: "none",
-          margin: 0,
-          padding: 0,
-        }}
-        className="desktop-nav"
-      >
+      <ul className="nav-desktop-list">
         {/* About Us dropdown */}
         <li
           style={{ position: "relative" }}
@@ -135,6 +191,7 @@ export function Navbar() {
           onMouseLeave={() => setAboutOpen(false)}
         >
           <button
+            className="nav-link"
             style={{
               display: "flex",
               alignItems: "center",
@@ -212,6 +269,7 @@ export function Navbar() {
             <li key={item.label} style={{ position: "relative" }}>
               <Link
                 to={item.href}
+                className="nav-link"
                 style={{
                   textDecoration: "none", fontSize: "0.875rem", fontWeight: 600,
                   color: active ? "#9B1C2C" : "#1F2937", padding: "4px 0",
@@ -233,7 +291,7 @@ export function Navbar() {
       </ul>
 
       {/* ── Desktop action buttons ── */}
-      <div style={{ display: "flex", gap: 10, alignItems: "center" }} className="desktop-actions">
+      <div className="nav-desktop-actions">
         {/* Portal dropdown */}
         <div
           style={{ position: "relative" }}
@@ -241,6 +299,7 @@ export function Navbar() {
           onMouseLeave={() => setPortalOpen(false)}
         >
           <button
+            className="nav-portal-btn"
             style={{
               display: "flex", alignItems: "center", gap: 5,
               padding: "8px 18px", borderRadius: 999, fontSize: "0.84rem",
@@ -307,6 +366,7 @@ export function Navbar() {
         {/* Enroll CTA — sky blue */}
         <Link to="/contact" style={{ textDecoration: "none" }}>
           <motion.button
+            className="nav-enroll-btn"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             style={{
@@ -331,11 +391,7 @@ export function Navbar() {
       <button
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label={menuOpen ? "Close menu" : "Open menu"}
-        style={{
-          display: "none", padding: 8, border: "none", background: "none",
-          cursor: "pointer", color: "#1F2937", fontSize: "1.4rem", borderRadius: 8,
-        }}
-        className="mobile-hamburger"
+        className="nav-hamburger"
       >
         {menuOpen ? <FiX /> : <FiMenu />}
       </button>
@@ -349,12 +405,13 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
+            className="nav-mobile-menu"
             style={{
               position: "absolute", top: "100%", left: 0, right: 0,
               background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.08)",
               boxShadow: "0 16px 40px rgba(0,0,0,0.1)",
-              padding: "1.5rem", display: "flex", flexDirection: "column",
-              gap: "0.25rem", maxHeight: "calc(100vh - 72px)", overflowY: "auto",
+              display: "flex", flexDirection: "column",
+              gap: "0.25rem", maxHeight: "calc(100vh - 64px)", overflowY: "auto",
             }}
           >
             <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#9B1C2C", textTransform: "uppercase", letterSpacing: "0.1em", margin: "0 0 6px" }}>
@@ -424,19 +481,6 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>{`
-        @media (min-width: 1024px) {
-          .desktop-nav { display: flex !important; }
-          .desktop-actions { display: flex !important; }
-          .mobile-hamburger { display: none !important; }
-        }
-        @media (max-width: 1023px) {
-          .desktop-nav { display: none !important; }
-          .desktop-actions { display: none !important; }
-          .mobile-hamburger { display: flex !important; }
-        }
-      `}</style>
     </nav>
   );
 }

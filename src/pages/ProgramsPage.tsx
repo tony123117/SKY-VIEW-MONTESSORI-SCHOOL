@@ -59,7 +59,7 @@ export default function ProgramsPage() {
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
         * { box-sizing: border-box; }
-        .pg-root { font-family: 'DM Sans', sans-serif; background: #FFF6F8; color: #5A1018; }
+        .pg-root { font-family: 'DM Sans', sans-serif; background: #FFF6F8; color: #5A1018; overflow-x: hidden; }
         .pg-heading { font-family: 'Fraunces', serif; }
 
         /* ── HERO ── */
@@ -99,10 +99,10 @@ export default function ProgramsPage() {
         .pg-eyebrow {
           font-size: 11px; font-weight: 600; letter-spacing: 0.25em;
           text-transform: uppercase; color: #FF6B9D; margin-bottom: 24px;
-          display: flex; align-items: center; gap: 12px;
+          display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
         }
         .pg-eyebrow::before {
-          content: ''; display: block; width: 32px; height: 2px; background: #FF6B9D;
+          content: ''; display: block; width: 32px; height: 2px; background: #FF6B9D; flex-shrink: 0;
         }
 
         .pg-hero-title {
@@ -182,6 +182,12 @@ export default function ProgramsPage() {
         }
         .pg-carousel-section .pg-eyebrow { color: #5A101888; }
         .pg-carousel-section .pg-eyebrow::before { background: #5A101888; }
+
+        /* carousel nav buttons — mobile-safe sizing/position */
+        .pg-carousel-section [data-slot="carousel-previous"],
+        .pg-carousel-section [data-slot="carousel-next"] {
+          width: 40px; height: 40px;
+        }
 
         /* ── PROGRAMS ── */
         .pg-programs { background: #3D0B11; padding: 100px 60px; }
@@ -277,6 +283,7 @@ export default function ProgramsPage() {
           .pg-program-num { display: none; }
           .pg-program-features-grid { min-width: unset; grid-template-columns: 1fr 1fr; }
           .pg-cta { padding: 80px 40px; gap: 48px; }
+          .pg-carousel-section { padding: 60px 40px; }
         }
 
         /* Mobile — ≤ 768px */
@@ -314,9 +321,15 @@ export default function ProgramsPage() {
           .pg-stat-item:nth-child(4) { border-bottom: none; }
           .pg-stat-num { font-size: 2rem; }
 
-          /* Carousel */
+          /* Carousel — buttons shrink + tuck closer to edges, never overlap image text */
           .pg-carousel-section { padding: 48px 20px; }
           .pg-carousel-section img { height: 240px !important; }
+          .pg-carousel-section [data-slot="carousel-previous"],
+          .pg-carousel-section [data-slot="carousel-next"] {
+            width: 34px; height: 34px;
+          }
+          .pg-carousel-section [data-slot="carousel-previous"] { left: 8px !important; }
+          .pg-carousel-section [data-slot="carousel-next"] { right: 8px !important; }
 
           /* Programs */
           .pg-programs { padding: 60px 20px; }
@@ -347,6 +360,11 @@ export default function ProgramsPage() {
           .pg-stats { grid-template-columns: repeat(2, 1fr); }
           .pg-stat-num { font-size: 1.8rem; }
           .pg-stat-label { font-size: 10px; }
+          .pg-carousel-section img { height: 200px !important; }
+          .pg-carousel-section [data-slot="carousel-previous"],
+          .pg-carousel-section [data-slot="carousel-next"] {
+            width: 30px; height: 30px;
+          }
           .pg-programs { padding: 48px 16px; }
           .pg-program-body-title { font-size: 1.3rem; }
           .pg-program-features-grid { grid-template-columns: 1fr; }
@@ -415,8 +433,8 @@ export default function ProgramsPage() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious style={{ background: "#5A1018", color: "#FFF6F8", border: "none" }} />
-              <CarouselNext style={{ background: "#5A1018", color: "#FFF6F8", border: "none" }} />
+              <CarouselPrevious data-slot="carousel-previous" style={{ background: "#5A1018", color: "#FFF6F8", border: "none" }} />
+              <CarouselNext data-slot="carousel-next" style={{ background: "#5A1018", color: "#FFF6F8", border: "none" }} />
             </Carousel>
           </div>
         </section>
