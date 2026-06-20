@@ -37,5 +37,18 @@ export default defineConfig(({ mode }) => ({
 
   build: {
     assetsInlineLimit: 0,
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+          if (id.includes(path.resolve(__dirname, 'src/components/brainchild'))) {
+            return 'brainchild';
+          }
+        }
+      }
+    }
   }
 }));
