@@ -5,15 +5,15 @@ import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
 
 import blocksimg from "@/assets/SKYVIEW-IMAGES/building-blocks.jpeg";
-import bluildingimg from "@/assets/SKYVIEW-IMAGES/building2.jpeg";
+import bluildingimg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
 import computerLabImg from "@/assets/SKYVIEW-IMAGES/computer.png";
 import craftImg from "@/assets/SKYVIEW-IMAGES/craft.jpeg";
 import directorImg from "@/assets/SKYVIEW-IMAGES/director.png";
-import footballImg from "@/assets/SKYVIEW-IMAGES/football.png";
+import footballImg from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
 import judoimg from "@/assets/SKYVIEW-IMAGES/judo.png";
 import musicImg from "@/assets/SKYVIEW-IMAGES/music.png";
 import playgroundimg from "@/assets/SKYVIEW-IMAGES/playground.png";
-import scienceImg from "@/assets/SKYVIEW-IMAGES/science.png";
+import scienceImg from "@/assets/SKYVIEW-IMAGES/SCIENCE.png";
 import swimmingImg from "@/assets/SKYVIEW-IMAGES/swimming.jpeg";
 
 interface GalleryImage {

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import director from "@/assets/SKYVIEW-IMAGES/director.png";
 
-import buildingImg from "@/assets/SKYVIEW-IMAGES/building2.jpeg";
+import buildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
 import musicImg from "@/assets/SKYVIEW-IMAGES/music.png";
 import curiculum from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
 
