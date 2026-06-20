@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import buildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
 import football from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
@@ -33,20 +33,119 @@ const slides = [
 ];
 
 const stats = [
-  { value: "15+", label: "Years of Excellence" },
-  { value: "500+", label: "Happy Students" },
-  { value: "40+", label: "Expert Teachers" },
-  { value: "95%", label: "Parent Satisfaction" },
+  { value: "15+", label: "Years of Excellence", target: 15, suffix: "+" },
+  { value: "500+", label: "Happy Students", target: 500, suffix: "+" },
+  { value: "40+", label: "Expert Teachers", target: 40, suffix: "+" },
+  { value: "95%", label: "Parent Satisfaction", target: 95, suffix: "%" },
 ];
+
+const trustIndicators = [
+  { icon: "🎓", value: "1200+", label: "Students" },
+  { icon: "👩‍🏫", value: "85+", label: "Teachers" },
+  { icon: "🏆", value: "10+", label: "Years Excellence" },
+  { icon: "🛡️", value: "100%", label: "Safe Environment" },
+];
+
+const trustBadges = [
+  "Montessori Approach",
+  "British & Nigerian Curriculum",
+  "Safe Learning Environment",
+  "Qualified Teachers",
+];
+
+// fixed particle layout so they don't reshuffle on re-render
+const particles = Array.from({ length: 14 }).map((_, i) => ({
+  id: i,
+  left: (i * 37 + 5) % 100,
+  top: (i * 53 + 8) % 100,
+  size: 4 + (i % 4) * 2,
+  color: i % 2 === 0 ? "#4A9EDB" : "#FF6B9D",
+  duration: 6 + (i % 5),
+  delay: (i % 7) * 0.6,
+}));
+
+// ─── animated counter ───────────────────────────────────────────────────────
+function useCountUp(target: number, active: boolean, duration = 1400) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    let start: number | null = null;
+    let raf: number;
+    const step = (ts: number) => {
+      if (start === null) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(target * eased));
+      if (progress < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [active, target, duration]);
+  return value;
+}
+
+function StatCounter({ target, suffix, label }: { target: number; suffix: string; label: string }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  const count = useCountUp(target, inView);
+  return (
+    <div ref={ref} className="hs-stat">
+      <div className="hs-stat-value">{count}{suffix}</div>
+      <div className="hs-stat-label">{label}</div>
+    </div>
+  );
+}
 
 const HERO_CSS = `
   .hs-section {
     position: relative;
-    height: 92vh;
-    min-height: 580px;
+    height: 96vh;
+    min-height: 620px;
     overflow: hidden;
     display: flex;
     align-items: center;
+  }
+
+  @keyframes zoomHero {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.12) translate(-1%, -1%); }
+  }
+
+  .hs-bg-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    will-change: transform;
+  }
+  .hs-bg-layer img {
+    animation: zoomHero 16s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  /* ── floating particles ── */
+  .hs-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 6;
+    filter: blur(0.4px);
+  }
+  @keyframes particleFloat {
+    0%   { transform: translateY(0) translateX(0); opacity: 0.15; }
+    50%  { transform: translateY(-26px) translateX(10px); opacity: 0.9; }
+    100% { transform: translateY(0) translateX(0); opacity: 0.15; }
   }
 
   .hs-arrow {
@@ -91,11 +190,21 @@ const HERO_CSS = `
     letter-spacing: 0.14em;
   }
 
-  .hs-content {
+  /* ── content split: text ~40%, floating card occupies right space ── */
+  .hs-layout {
     position: relative;
     z-index: 20;
-    max-width: 800px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
     padding: 0 4rem;
+  }
+
+  .hs-content {
+    max-width: 620px;
+    flex: 0 1 58%;
   }
 
   .hs-badge {
@@ -134,7 +243,7 @@ const HERO_CSS = `
   }
 
   .hs-subtitle {
-    margin: 0 0 34px;
+    margin: 0 0 28px;
     color: rgba(255,255,255,0.80);
     font-size: 1rem;
     line-height: 1.8;
@@ -147,6 +256,7 @@ const HERO_CSS = `
     display: flex;
     gap: 14px;
     flex-wrap: wrap;
+    margin-bottom: 30px;
   }
 
   .hs-btn-primary {
@@ -181,6 +291,69 @@ const HERO_CSS = `
     letter-spacing: 0.01em;
   }
 
+  /* ── trust badges row ── */
+  .hs-trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .hs-trust-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    white-space: nowrap;
+  }
+  .hs-trust-pill-check {
+    color: #4A9EDB;
+    font-weight: 900;
+  }
+
+  /* ── floating stats card (right side) ── */
+  .hs-float-card {
+    flex: 0 0 320px;
+    background: rgba(15,18,26,0.55);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 20px;
+    padding: 26px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+  }
+  .hs-float-card-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #FF9EBE;
+    margin-bottom: 16px;
+  }
+  .hs-float-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .hs-float-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 12px 10px;
+  }
+  .hs-float-icon { font-size: 1.3rem; line-height: 1; }
+  .hs-float-value { font-size: 0.98rem; font-weight: 800; color: #fff; line-height: 1.1; }
+  .hs-float-text { font-size: 0.66rem; color: rgba(255,255,255,0.65); font-weight: 500; }
+
+  /* ── stats bar (animated counters) ── */
   .hs-stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -210,13 +383,16 @@ const HERO_CSS = `
 
   /* ── TABLET ───────────────────────────────────────────────────────── */
   @media (max-width: 1024px) {
-    .hs-content { padding: 0 2.5rem; }
+    .hs-layout { padding: 0 2.5rem; }
+    .hs-float-card { display: none; }
+    .hs-content { flex: 1 1 100%; max-width: 100%; }
+    .hs-section { height: auto; min-height: 86vh; padding: 64px 0 48px; align-items: flex-start; }
   }
 
   /* ── MOBILE ───────────────────────────────────────────────────────── */
   @media (max-width: 768px) {
-    .hs-section { height: auto; min-height: 100vh; padding: 100px 0 64px; align-items: flex-start; }
-    .hs-content { padding: 0 1.5rem; max-width: 100%; }
+    .hs-section { min-height: 100vh; padding: 96px 0 56px; }
+    .hs-layout { padding: 0 1.5rem; }
     .hs-arrow { width: 38px; height: 38px; font-size: 1.3rem; }
     .hs-arrow-left { left: 12px; }
     .hs-arrow-right { right: 12px; }
@@ -226,28 +402,51 @@ const HERO_CSS = `
     .hs-subtitle { font-size: 0.92rem; max-width: 100%; }
     .hs-actions { gap: 10px; }
     .hs-btn-primary, .hs-btn-secondary { padding: 12px 22px; font-size: 0.85rem; flex: 1 1 auto; justify-content: center; }
+    .hs-trust-row { gap: 8px; }
+    .hs-trust-pill { font-size: 0.68rem; padding: 6px 11px; }
 
     .hs-stats { grid-template-columns: repeat(2, 1fr); }
     .hs-stat { padding: 20px 14px; border-right: 1px solid rgba(255,255,255,0.15); border-bottom: 1px solid rgba(255,255,255,0.15); }
     .hs-stat:nth-child(2n) { border-right: none; }
     .hs-stat:nth-last-child(-n+2) { border-bottom: none; }
+
+    /* thin out particles so they don't clutter a small screen */
+    .hs-particle:nth-child(n+9) { display: none; }
   }
 
   @media (max-width: 480px) {
-    .hs-content { padding: 0 1.1rem; }
-    .hs-badge { padding: 5px 14px; margin-bottom: 20px; }
-    .hs-badge span:last-child { font-size: 0.62rem; }
-    .hs-title-line, .hs-title-accent { font-size: clamp(1.8rem, 9vw, 2.3rem); }
-    .hs-subtitle { font-size: 0.85rem; line-height: 1.65; margin-bottom: 24px; }
-    .hs-actions { flex-direction: column; }
+    .hs-layout { padding: 0 1.1rem; }
+    .hs-badge { padding: 5px 14px; margin-bottom: 18px; }
+    .hs-badge span:last-child { font-size: 0.6rem; white-space: nowrap; }
+    .hs-title-line, .hs-title-accent { font-size: clamp(1.7rem, 9vw, 2.2rem); }
+    .hs-subtitle { font-size: 0.85rem; line-height: 1.6; margin-bottom: 22px; }
+    .hs-actions { flex-direction: column; margin-bottom: 22px; }
     .hs-btn-primary, .hs-btn-secondary { width: 100%; }
     .hs-arrow { display: none; }
+    .hs-trust-row { gap: 7px; }
+    .hs-trust-pill { font-size: 0.64rem; padding: 5px 10px; gap: 5px; }
+    .hs-stat-value { font-size: 1.5rem; }
+    .hs-stat-label { font-size: 0.7rem; }
+
+    /* keep only a handful of particles on very small screens */
+    .hs-particle:nth-child(n+6) { display: none; }
+  }
+
+  @media (max-width: 360px) {
+    .hs-title-line, .hs-title-accent { font-size: 1.6rem; }
+    .hs-trust-pill { font-size: 0.6rem; padding: 5px 9px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hs-bg-layer img { animation: none; }
+    .hs-particle { animation: none; }
   }
 `;
 
 export function HeroSection() {
   const [index, setIndex] = useState(0);
   const [busy, setBusy] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   function goTo(next: number) {
     if (busy) return;
@@ -270,14 +469,15 @@ export function HeroSection() {
       <style>{HERO_CSS}</style>
 
       {/* ── Hero ── */}
-      <section className="hs-section">
+      <section
+        ref={sectionRef}
+        className="hs-section"
+      >
         {slides.map((s, i) => (
           <div
             key={i}
+            className="hs-bg-layer"
             style={{
-              position: "absolute",
-              inset: 0,
-              zIndex: 1,
               opacity: i === index ? 1 : 0,
               transition: "opacity 1s ease-in-out",
             }}
@@ -287,14 +487,32 @@ export function HeroSection() {
               alt={s.titleWhite}
               className="w-full h-full object-cover"
               widths={[480, 768, 1024, 1600]}
-              style={{ filter: "brightness(1.08) contrast(1.05) saturate(1.1)" }}
+              style={{ filter: "brightness(1.02) contrast(1.02) saturate(0.96)" }}
             />
           </div>
         ))}
 
-        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(100deg, rgba(6,10,18,0.80) 0%, rgba(6,10,18,0.65) 30%, rgba(6,10,18,0.30) 58%, rgba(6,10,18,0.05) 80%, transparent 100%)" }} />
-        <div style={{ position: "absolute", inset: 0, zIndex: 3, background: "linear-gradient(to top, rgba(6,10,18,0.55) 0%, rgba(6,10,18,0.08) 18%, transparent 40%)" }} />
-        <div style={{ position: "absolute", inset: 0, zIndex: 4, background: "radial-gradient(ellipse at 8% 55%, rgba(155,28,44,0.14) 0%, transparent 42%)", pointerEvents: "none" }} />
+        {/* floating particles */}
+        {particles.map((p) => (
+          <span
+            key={p.id}
+            className="hs-particle"
+            style={{
+              left: `${p.left}%`,
+              top: `${p.top}%`,
+              width: p.size,
+              height: p.size,
+              background: p.color,
+              boxShadow: `0 0 ${p.size * 1.4}px ${p.color}99`,
+              animation: `particleFloat ${p.duration}s ease-in-out ${p.delay}s infinite`,
+            }}
+          />
+        ))}
+
+        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(115deg, rgba(15,22,45,0.82) 0%, rgba(58,16,28,0.62) 38%, rgba(58,16,28,0.22) 62%, rgba(58,16,28,0.04) 82%, transparent 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 3, background: "linear-gradient(to top, rgba(10,14,28,0.45) 0%, rgba(10,14,28,0.06) 22%, transparent 42%)" }} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 4, background: "radial-gradient(ellipse at 8% 55%, rgba(155,28,44,0.20) 0%, transparent 45%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 4, background: "radial-gradient(ellipse at 92% 30%, rgba(74,158,219,0.14) 0%, transparent 45%)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", left: 0, top: "22%", bottom: "22%", width: 3, zIndex: 20, background: "linear-gradient(to bottom, transparent 0%, #FF6B9D 30%, #9B1C2C 70%, transparent 100%)", borderRadius: 2 }} />
 
         <button className="hs-arrow hs-arrow-left" aria-label="Previous" onClick={() => goTo((index - 1 + slides.length) % slides.length)}>‹</button>
@@ -324,46 +542,75 @@ export function HeroSection() {
           0{index + 1} / 0{slides.length}
         </div>
 
-        <AnimatePresence mode="wait">
+        <div className="hs-layout">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              className="hs-content"
+            >
+              <div className="hs-badge">
+                <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#FF6B9D", display: "inline-block", flexShrink: 0, boxShadow: "0 0 8px rgba(255,107,157,0.9)" }} />
+                <span style={{ color: "#fff", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase" }}>{slide.badge}</span>
+              </div>
+
+              <h1 className="hs-title">
+                <span className="hs-title-line">{slide.titleWhite}</span>
+                <span className="hs-title-accent">{slide.titleAccent}</span>
+              </h1>
+
+              <p className="hs-subtitle">{slide.subtitle}</p>
+
+              <div className="hs-actions">
+                <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href="/admissions" className="hs-btn-primary">
+                  Apply Now →
+                </motion.a>
+                <motion.a whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} href="/community" className="hs-btn-secondary">
+                  Book a School Tour
+                </motion.a>
+              </div>
+
+              {/* trust badges */}
+              <div className="hs-trust-row">
+                {trustBadges.map((b) => (
+                  <span key={b} className="hs-trust-pill">
+                    <span className="hs-trust-pill-check">✓</span>{b}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* floating stats card — fills the unused right-hand space */}
           <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="hs-content"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="hs-float-card"
           >
-            <div className="hs-badge">
-              <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#FF6B9D", display: "inline-block", flexShrink: 0, boxShadow: "0 0 8px rgba(255,107,157,0.9)" }} />
-              <span style={{ color: "#fff", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase" }}>{slide.badge}</span>
-            </div>
-
-            <h1 className="hs-title">
-              <span className="hs-title-line">{slide.titleWhite}</span>
-              <span className="hs-title-accent">{slide.titleAccent}</span>
-            </h1>
-
-            <p className="hs-subtitle">{slide.subtitle}</p>
-
-            <div className="hs-actions">
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href="/admissions" className="hs-btn-primary">
-                Apply Now →
-              </motion.a>
-              <motion.a whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} href="/community" className="hs-btn-secondary">
-                Book a School Tour
-              </motion.a>
+            <div className="hs-float-card-label">Trusted by Families</div>
+            <div className="hs-float-grid">
+              {trustIndicators.map((t) => (
+                <div key={t.label} className="hs-float-item">
+                  <span className="hs-float-icon">{t.icon}</span>
+                  <div>
+                    <div className="hs-float-value">{t.value}</div>
+                    <div className="hs-float-text">{t.label}</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
-        </AnimatePresence>
+        </div>
       </section>
 
-      {/* ── Stats bar — RED background ── */}
+      {/* ── Stats bar — RED background, animated counters ── */}
       <div className="hs-stats">
         {stats.map((s) => (
-          <div key={s.label} className="hs-stat">
-            <div className="hs-stat-value">{s.value}</div>
-            <div className="hs-stat-label">{s.label}</div>
-          </div>
+          <StatCounter key={s.label} target={s.target} suffix={s.suffix} label={s.label} />
         ))}
       </div>
     </div>

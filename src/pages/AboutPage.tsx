@@ -1,40 +1,53 @@
+import { useState, useEffect, useRef } from "react";
 import { Navbar } from "@/components/brainchild/Navbar";
 import { Footer } from "@/components/brainchild/Footer";
 import { AnimatedSection } from "@/components/brainchild/AnimatedSection";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 
 import director from "@/assets/SKYVIEW-IMAGES/director.png";
-
 import buildingImg from "@/assets/SKYVIEW-IMAGES/BUILDING2.jpeg";
 import musicImg from "@/assets/SKYVIEW-IMAGES/music.png";
 import curiculum from "@/assets/SKYVIEW-IMAGES/FOOTBALL.png";
-
 import img1 from "@/assets/SKYVIEW-IMAGES/director.png";
 import img2 from "@/assets/SKYVIEW-IMAGES/computer.png";
 import img3 from "@/assets/SKYVIEW-IMAGES/playground.png";
 import img4 from "@/assets/SKYVIEW-IMAGES/craft.jpeg";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-
-// ─── Brand palette (matches index.css) ─────────────────────────────────────
 const WINE_RED = "#9B1C2C";
 const SKY_BLUE = "#4A9EDB";
 const PINK = "#FF6B9D";
 const NAVY = "#1F3A5F";
 
-// ─── data ────────────────────────────────────────────────────────────────────
-
 const heroSlides = [
-  { image: buildingImg, title: "Discover Skyview", subtitle: "Educational excellence since July 4th, 2015" },
-  { image: musicImg, title: "Great Achievers", subtitle: "Creative thinkers, entrepreneurs, researchers, solution providers" },
-  { image: curiculum, title: "Montessori Approach", subtitle: "Hands-on, interactive, and enjoyable learning" },
+  {
+    image: buildingImg,
+    badge: "Our School",
+    titleWhite: "Unlocking",
+    titleAccent: "Greatness.",
+    subtitle: "Educational excellence since July 4th, 2015 — Montessori · Nursery · Primary · Secondary.",
+  },
+  {
+    image: musicImg,
+    badge: "Our Students",
+    titleWhite: "Where Curiosity",
+    titleAccent: "Becomes Confidence.",
+    subtitle: "Creative thinkers, entrepreneurs, researchers, and solution providers — built right here.",
+  },
+  {
+    image: curiculum,
+    badge: "Our Approach",
+    titleWhite: "Preparing Great",
+    titleAccent: "Achievers For Tomorrow.",
+    subtitle: "Hands-on, interactive, and enjoyable learning that fosters a lifelong love for education.",
+  },
+];
+
+const trustStats = [
+  { value: 1200, suffix: "+", label: "Students" },
+  { value: 85, suffix: "+", label: "Teachers" },
+  { value: 10, suffix: "+", label: "Years of Excellence" },
+  { value: 100, suffix: "%", label: "Safe Campus" },
 ];
 
 const stats = [
@@ -43,7 +56,6 @@ const stats = [
   { num: "30+", label: "Qualified Staff", color: SKY_BLUE },
 ];
 
-// "Our Commitment to Excellence" — drawn from the school's About Us copy
 const commitments = [
   { icon: "🎻", title: "Musical Instrument Lessons", desc: "Nurturing creativity through music from an early age." },
   { icon: "🎤", title: "Leadership & Public Speaking", desc: "Training that builds confidence in every Great Achiever." },
@@ -57,169 +69,307 @@ const commitments = [
 
 const coreValues = ["Respect", "Integrity", "Self-confidence", "Discipline", "Excellence", "Determination", "Perseverance"];
 
-// ─── colour strip ─────────────────────────────────────────────────────────────
-
 function ColorStrip() {
   return (
-    <div className="flex h-[5px] w-full">
-      <div className="flex-1" style={{ background: WINE_RED }} />
-      <div className="flex-1" style={{ background: SKY_BLUE }} />
-      <div className="flex-1" style={{ background: PINK }} />
-      <div className="flex-1" style={{ background: NAVY }} />
+    <div style={{ display: "flex", height: 5, width: "100%" }}>
+      <div style={{ flex: 1, background: WINE_RED }} />
+      <div style={{ flex: 1, background: SKY_BLUE }} />
+      <div style={{ flex: 1, background: PINK }} />
+      <div style={{ flex: 1, background: NAVY }} />
     </div>
   );
 }
 
-// ─── page ─────────────────────────────────────────────────────────────────────
+// ── Count-up number, triggers once when scrolled into view ─────────────────
+function CountUp({ value, suffix = "", duration = 1.6 }: { value: number; suffix?: string; duration?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10%" });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    let start: number | null = null;
+    let raf: number;
+    const step = (ts: number) => {
+      if (start === null) start = ts;
+      const progress = Math.min((ts - start) / (duration * 1000), 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(eased * value));
+      if (progress < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, value, duration]);
+
+  return (
+    <span ref={ref}>
+      {display.toLocaleString()}{suffix}
+    </span>
+  );
+}
+
+function HeroCarousel() {
+  const [index, setIndex] = useState(0);
+  const [busy, setBusy] = useState(false);
+
+  function goTo(next: number) {
+    if (busy) return;
+    setBusy(true);
+    setIndex(next);
+    setTimeout(() => setBusy(false), 750);
+  }
+
+  useEffect(() => {
+    const t = setInterval(() => goTo((index + 1) % heroSlides.length), 6000);
+    return () => clearInterval(t);
+  }, [index]);
+
+  const slide = heroSlides[index];
+
+  return (
+    <section style={{ position: "relative", minHeight: "88vh", overflow: "hidden" }}>
+      {heroSlides.map((s, i) => (
+        <motion.div
+          key={i}
+          style={{
+            position: "absolute", inset: 0, zIndex: 1,
+            opacity: i === index ? 1 : 0,
+            transition: "opacity 1.1s ease-in-out",
+          }}
+        >
+          <motion.img
+            src={s.image}
+            alt={s.titleAccent}
+            initial={{ scale: 1 }}
+            animate={{ scale: i === index ? 1.08 : 1 }}
+            transition={{ duration: 7, ease: "linear" }}
+            style={{
+              width: "100%", height: "100%", objectFit: "cover",
+              filter: "brightness(1.08) contrast(1.05) saturate(1.1)",
+            }}
+          />
+        </motion.div>
+      ))}
+
+      <div style={{
+        position: "absolute", inset: 0, zIndex: 2,
+        background: "linear-gradient(90deg, rgba(10,15,30,0.75) 0%, rgba(10,15,30,0.35) 55%, rgba(10,15,30,0.1) 100%)",
+      }} />
+
+      <div style={{
+        position: "absolute", inset: 0, zIndex: 3,
+        background: "linear-gradient(to top, rgba(10,15,30,0.55) 0%, rgba(10,15,30,0.05) 26%, transparent 48%)",
+      }} />
+
+      <div style={{
+        position: "absolute", inset: 0, zIndex: 4, pointerEvents: "none",
+        background: "radial-gradient(ellipse at 10% 55%, rgba(155,28,44,0.14) 0%, transparent 44%)",
+      }} />
+
+      <div style={{
+        position: "absolute", left: 0, top: "18%", bottom: "18%",
+        width: 3, zIndex: 20, borderRadius: 2,
+        background: "linear-gradient(to bottom, transparent, #FF6B9D 30%, #9B1C2C 70%, transparent)",
+      }} />
+
+      {[
+        { side: "left" as const, icon: "‹", fn: () => goTo((index - 1 + heroSlides.length) % heroSlides.length) },
+        { side: "right" as const, icon: "›", fn: () => goTo((index + 1) % heroSlides.length) },
+      ].map(({ side, icon, fn }) => (
+        <button
+          key={side}
+          onClick={fn}
+          style={{
+            position: "absolute", [side]: 20, top: "44%",
+            transform: "translateY(-50%)", zIndex: 30,
+            width: 44, height: 44, borderRadius: "50%",
+            background: "rgba(255,255,255,0.10)",
+            border: "1px solid rgba(255,255,255,0.22)",
+            color: "#fff", fontSize: "1.5rem",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            cursor: "pointer", backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)", lineHeight: 1,
+            transition: "background 0.2s, transform 0.2s",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "rgba(155,28,44,0.55)";
+            (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1.08)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.10)";
+            (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1)";
+          }}
+        >
+          {icon}
+        </button>
+      ))}
+
+      <div style={{ position: "absolute", bottom: 24, left: "50%", transform: "translateX(-50%)", zIndex: 30, display: "flex", gap: 8 }}>
+        {heroSlides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            style={{
+              height: 6, width: i === index ? 28 : 6,
+              borderRadius: 999, border: "none", cursor: "pointer", padding: 0,
+              background: i === index ? PINK : "rgba(255,255,255,0.35)",
+              transition: "width 0.35s ease, background 0.35s ease",
+            }}
+          />
+        ))}
+      </div>
+
+      <div style={{ position: "absolute", bottom: 22, right: 28, zIndex: 30, color: "rgba(255,255,255,0.32)", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.14em" }}>
+        0{index + 1} / 0{heroSlides.length}
+      </div>
+
+      <div style={{ position: "relative", zIndex: 20, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: "88vh", padding: "120px clamp(1.5rem, 6vw, 5rem) 60px" }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 36 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            style={{ maxWidth: 800 }}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: "rgba(155,28,44,0.22)",
+                border: "1px solid rgba(255,107,157,0.45)",
+                borderRadius: 999, padding: "7px 20px", marginBottom: 28,
+                backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)",
+              }}
+            >
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: PINK, display: "inline-block", flexShrink: 0, boxShadow: `0 0 8px ${PINK}cc` }} />
+              <span style={{ color: "#fff", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" }}>
+                {slide.badge}
+              </span>
+            </motion.div>
+
+            <h1 style={{ margin: "0 0 24px", lineHeight: 1.02, fontWeight: 900, letterSpacing: "-0.03em", fontFamily: "var(--font-heading, sans-serif)" }}>
+              <span style={{ display: "block", color: "#fff", fontSize: "clamp(3rem, 8vw, 6.2rem)", textShadow: "0 2px 24px rgba(0,0,0,0.4)" }}>
+                {slide.titleWhite}
+              </span>
+              <span style={{
+                display: "block", fontSize: "clamp(3rem, 8vw, 6.2rem)",
+                background: "linear-gradient(110deg, #FF6B9D 0%, #D4436A 50%, #9B1C2C 100%)",
+                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+              }}>
+                {slide.titleAccent}
+              </span>
+            </h1>
+
+            <p style={{ margin: "0 0 40px", color: "rgba(255,255,255,0.85)", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", lineHeight: 1.7, maxWidth: 600, textShadow: "0 1px 8px rgba(0,0,0,0.4)" }}>
+              {slide.subtitle}
+            </p>
+
+            <Link
+              to="/admissions"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: "linear-gradient(135deg, #9B1C2C 0%, #C5305A 55%, #FF6B9D 100%)",
+                color: "#fff", padding: "15px 32px", borderRadius: 999,
+                fontWeight: 700, fontSize: "0.95rem", textDecoration: "none",
+                boxShadow: "0 8px 28px rgba(155,28,44,0.45)",
+              }}
+            >
+              Apply Now →
+            </Link>
+          </motion.div>
+        </AnimatePresence>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35, duration: 0.6 }}
+          style={{
+            marginTop: 56,
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "clamp(20px, 4vw, 48px)",
+            background: "rgba(255,255,255,0.07)",
+            border: "1px solid rgba(255,255,255,0.16)",
+            borderRadius: 20,
+            padding: "22px clamp(20px, 3vw, 36px)",
+            backdropFilter: "blur(14px)",
+            WebkitBackdropFilter: "blur(14px)",
+            maxWidth: "fit-content",
+          }}
+        >
+          {trustStats.map((s) => (
+            <div key={s.label} style={{ minWidth: 90 }}>
+              <div style={{ fontSize: "clamp(1.5rem, 2.4vw, 2rem)", fontWeight: 900, color: "#fff", lineHeight: 1, fontFamily: "var(--font-heading)" }}>
+                <CountUp value={s.value} suffix={s.suffix} />
+              </div>
+              <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.65)", fontWeight: 600, marginTop: 4, letterSpacing: "0.03em" }}>
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
 export default function AboutPage() {
   return (
     <>
       <Navbar />
-
-      <div className="min-h-screen" style={{ fontFamily: "var(--font-body)" }}>
-
-        {/* ── TOP COLOUR STRIP ──────────────────────────────────────────── */}
+      <div style={{ minHeight: "100vh", fontFamily: "var(--font-body)" }}>
         <ColorStrip />
 
-        {/* ── HERO CAROUSEL ─────────────────────────────────────────────── */}
-        <section className="relative">
-          <Carousel className="w-full">
-            <CarouselContent>
-              {heroSlides.map((slide, i) => (
-                <CarouselItem key={i}>
-                  <div className="relative h-[62vh] md:h-[75vh] flex items-center justify-center overflow-hidden">
-
-                    {/* bg image */}
-                    <div className="absolute inset-0">
-                      <img src={slide.image} className="w-full h-full object-cover" alt={slide.title} />
-                      <div
-                        className="absolute inset-0"
-                        style={{ background: `linear-gradient(135deg, ${NAVY}e0 0%, ${WINE_RED}55 55%, ${NAVY}e0 100%)` }}
-                      />
-                    </div>
-
-                    {/* floating colour blobs */}
-                    <div className="absolute top-8 right-10 w-32 h-32 rounded-full blur-2xl pointer-events-none" style={{ background: `${PINK}30` }} />
-                    <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full blur-2xl pointer-events-none" style={{ background: `${SKY_BLUE}25` }} />
-
-                    {/* content */}
-                    <div className="relative z-10 text-center text-white px-4 max-w-3xl">
-                      <AnimatedSection>
-                        <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-white/60 mb-3">
-                          Skyview Montessori School
-                        </p>
-
-                        <span
-                          className="inline-flex items-center gap-2 border text-white text-[11px] font-bold tracking-[0.12em] uppercase px-5 py-2 rounded-full mb-5"
-                          style={{ background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)" }}
-                        >
-                          🏫 About Us
-                        </span>
-
-                        <h1
-                          className="text-4xl md:text-6xl leading-tight mb-4 text-white font-bold"
-                          style={{ fontFamily: "var(--font-heading)" }}
-                        >
-                          {slide.title.split(" ").map((word, wi) =>
-                            wi === slide.title.split(" ").length - 1 ? (
-                              <span key={wi} className="italic" style={{ color: PINK }}> {word}</span>
-                            ) : (
-                              <span key={wi}>{word} </span>
-                            )
-                          )}
-                        </h1>
-                        <p className="text-base text-white/75 max-w-md mx-auto leading-relaxed">
-                          {slide.subtitle}
-                        </p>
-                      </AnimatedSection>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-4 bg-white/15 border-white/25 text-white hover:bg-white/25" />
-            <CarouselNext className="right-4 bg-white/15 border-white/25 text-white hover:bg-white/25" />
-          </Carousel>
-        </section>
+        <HeroCarousel />
 
         <ColorStrip />
 
-        {/* ── STORY ─────────────────────────────────────────────────────── */}
-        <section className="relative py-20 px-6 overflow-hidden bg-white">
-          {/* soft tinted bg blobs */}
-          <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none" style={{ background: `${PINK}10` }} />
-          <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl pointer-events-none" style={{ background: `${SKY_BLUE}10` }} />
+        <section style={{ position: "relative", padding: "80px 24px", overflow: "hidden", background: "#fff" }}>
+          <div style={{ position: "absolute", top: 0, right: 0, width: 384, height: 384, borderRadius: "50%", filter: "blur(80px)", background: `${PINK}10`, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", bottom: 0, left: 0, width: 320, height: 320, borderRadius: "50%", filter: "blur(80px)", background: `${SKY_BLUE}10`, pointerEvents: "none" }} />
 
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
-
+          <div style={{ maxWidth: 1152, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "4rem", alignItems: "center", position: "relative", zIndex: 10 }}>
             <AnimatedSection>
-              {/* eyebrow */}
-              <span
-                className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border"
-                style={{ background: `${WINE_RED}10`, color: WINE_RED, borderColor: `${WINE_RED}25` }}
-              >
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, padding: "6px 16px", borderRadius: 999, marginBottom: 20, background: `${WINE_RED}10`, color: WINE_RED, border: `1px solid ${WINE_RED}25` }}>
                 📖 Our Story
               </span>
-
-              <h2
-                className="text-3xl md:text-4xl leading-tight mb-5 font-bold"
-                style={{ fontFamily: "var(--font-heading)", color: NAVY }}
-              >
+              <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", fontWeight: 900, color: NAVY, lineHeight: 1.1, marginBottom: 20, fontFamily: "var(--font-heading)" }}>
                 Educational Excellence{" "}
-                <span className="italic" style={{ color: WINE_RED }}>Since 2015</span>
+                <em style={{ color: WINE_RED, fontStyle: "italic" }}>Since 2015</em>
               </h2>
-
-              <p className="text-[15px] leading-relaxed mb-4" style={{ color: `${NAVY}aa` }}>
-                Skyview Montessori School began its journey of educational excellence on July 4th, 2015, and we
-                attribute our growth in size, quality of education, and reputation to the grace of God. At Skyview,
-                we are committed to providing a Montessori-style education that sets the standard for excellence.
+              <p style={{ fontSize: "0.94rem", lineHeight: 1.8, color: `${NAVY}aa`, marginBottom: 14 }}>
+                Skyview Montessori School began its journey of educational excellence on July 4th, 2015. At Skyview, we are committed to providing a Montessori-style education that sets the standard for excellence.
               </p>
-              <p className="text-[15px] leading-relaxed mb-4" style={{ color: `${NAVY}aa` }}>
-                Our curriculum is thoughtfully designed, drawing from both British and Nigerian topics to offer a
-                well-rounded education. We believe in active learning, and our approach relies heavily on
-                interactive, hands-on, and enjoyable activities that foster a love for learning.
+              <p style={{ fontSize: "0.94rem", lineHeight: 1.8, color: `${NAVY}aa`, marginBottom: 14 }}>
+                Our curriculum draws from both British and Nigerian topics to offer a well-rounded education built on active, hands-on, and enjoyable learning that fosters a love for knowledge.
               </p>
-              <p className="text-[15px] leading-relaxed mb-10" style={{ color: `${NAVY}aa` }}>
-                We refer to our students as the <strong>"Great Achievers"</strong> — and we aim to shape them into
-                Creative Thinkers, Entrepreneurs, Researchers, and Solution Providers, ready to unlock their potential
-                and turn their passion for learning into a lifelong habit.
+              <p style={{ fontSize: "0.94rem", lineHeight: 1.8, color: `${NAVY}aa`, marginBottom: 36 }}>
+                We call our students <strong>"Great Achievers"</strong> — shaping them into Creative Thinkers, Entrepreneurs, Researchers, and Solution Providers ready to turn their passion into purpose.
               </p>
-
-              {/* stats row */}
-              <div className="flex gap-8 flex-wrap">
+              <div style={{ display: "flex", gap: 32, flexWrap: "wrap" as const }}>
                 {stats.map((s) => (
-                  <div key={s.label} className="text-center">
-                    <div
-                      className="text-4xl font-black"
-                      style={{ fontFamily: "var(--font-heading)", color: s.color }}
-                    >
-                      {s.num}
-                    </div>
-                    <div className="text-[11px] font-bold tracking-widest uppercase mt-1" style={{ color: `${NAVY}80` }}>
-                      {s.label}
-                    </div>
+                  <div key={s.label} style={{ textAlign: "center" }}>
+                    <div style={{ fontSize: "2.2rem", fontWeight: 900, color: s.color, lineHeight: 1, fontFamily: "var(--font-heading)" }}>{s.num}</div>
+                    <div style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: `${NAVY}70`, marginTop: 4 }}>{s.label}</div>
                   </div>
                 ))}
               </div>
             </AnimatedSection>
 
-            {/* photo grid */}
             <AnimatedSection delay={0.15}>
-              <div className="grid grid-cols-2 gap-3">
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 {[img1, img2, img3, img4].map((img, i) => (
                   <motion.div
                     key={i}
-                    whileHover={{ scale: 1.03, rotate: i % 2 === 0 ? 1 : -1 }}
+                    whileHover={{ scale: 1.04, rotate: i % 2 === 0 ? 1.5 : -1.5 }}
                     transition={{ duration: 0.25 }}
-                    className="overflow-hidden rounded-2xl shadow-lg border-2 border-white"
-                    style={{ height: "170px" }}
+                    style={{ overflow: "hidden", borderRadius: 16, boxShadow: "0 8px 24px rgba(0,0,0,0.1)", border: "2px solid #fff", height: 170 }}
                   >
-                    <img
-                      src={img}
-                      alt="school life"
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                    />
+                    <img src={img} alt="school life" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease", display: "block" }} />
                   </motion.div>
                 ))}
               </div>
@@ -229,56 +379,28 @@ export default function AboutPage() {
 
         <ColorStrip />
 
-        {/* ── OUR COMMITMENT TO EXCELLENCE ──────────────────────────────── */}
-        <section className="relative py-20 px-6 overflow-hidden" style={{ background: "#FAF8F5" }}>
-          <div className="absolute inset-0 pointer-events-none opacity-40"
-            style={{
-              backgroundImage: `radial-gradient(circle, ${PINK}22 1px, transparent 1px)`,
-              backgroundSize: "32px 32px",
-            }}
-          />
-
-          <AnimatedSection className="text-center mb-14 relative z-10">
-            <span
-              className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border"
-              style={{ background: `${SKY_BLUE}15`, color: SKY_BLUE, borderColor: `${SKY_BLUE}30` }}
-            >
-              ⭐ Our Commitment to Excellence
+        <section style={{ position: "relative", padding: "80px 24px", overflow: "hidden", background: "#FAF8F5" }}>
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.4, backgroundImage: `radial-gradient(circle, ${PINK}22 1px, transparent 1px)`, backgroundSize: "32px 32px" }} />
+          <AnimatedSection style={{ textAlign: "center", marginBottom: 56, position: "relative", zIndex: 10 }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, padding: "6px 16px", borderRadius: 999, marginBottom: 20, background: `${SKY_BLUE}15`, color: SKY_BLUE, border: `1px solid ${SKY_BLUE}30` }}>
+              ⭐ Our Commitment
             </span>
-            <h2
-              className="text-3xl md:text-4xl leading-tight font-bold"
-              style={{ fontFamily: "var(--font-heading)", color: NAVY }}
-            >
+            <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", fontWeight: 900, color: NAVY, lineHeight: 1.1, fontFamily: "var(--font-heading)" }}>
               World-Class Learning,{" "}
-              <span className="italic" style={{ color: PINK }}>Every Day</span>
+              <em style={{ color: PINK, fontStyle: "italic" }}>Every Day</em>
             </h2>
-            <p className="text-sm max-w-lg mx-auto mt-3" style={{ color: `${NAVY}90` }}>
-              Your partner in providing the best educational experience for your child.
-            </p>
           </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto relative z-10">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20, maxWidth: 1152, margin: "0 auto", position: "relative", zIndex: 10 }}>
             {commitments.map((item, i) => (
               <AnimatedSection key={item.title} delay={i * 0.05}>
                 <motion.div
                   whileHover={{ y: -6 }}
                   transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  className="bg-white border-2 rounded-2xl p-6 h-full hover:shadow-xl transition-all duration-300"
-                  style={{ borderColor: `${WINE_RED}15` }}
+                  style={{ background: "#fff", border: `2px solid ${WINE_RED}15`, borderRadius: 20, padding: "24px", height: "100%", transition: "box-shadow 0.3s" }}
                 >
-                  <span
-                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl text-2xl mb-4"
-                    style={{ background: `${WINE_RED}10` }}
-                  >
-                    {item.icon}
-                  </span>
-                  <h3
-                    className="text-base mb-2 font-bold"
-                    style={{ fontFamily: "var(--font-heading)", color: NAVY }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p className="text-[13px] leading-relaxed" style={{ color: `${NAVY}90` }}>{item.desc}</p>
+                  <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 48, height: 48, borderRadius: 14, background: `${WINE_RED}10`, fontSize: "1.5rem", marginBottom: 16 }}>{item.icon}</span>
+                  <h3 style={{ fontSize: "0.95rem", fontWeight: 800, color: NAVY, marginBottom: 8, fontFamily: "var(--font-heading)" }}>{item.title}</h3>
+                  <p style={{ fontSize: "0.82rem", lineHeight: 1.7, color: `${NAVY}90` }}>{item.desc}</p>
                 </motion.div>
               </AnimatedSection>
             ))}
@@ -287,85 +409,40 @@ export default function AboutPage() {
 
         <ColorStrip />
 
-        {/* ── LEADERSHIP (DIRECTOR) ─────────────────────────────────────── */}
-        <section className="relative py-20 px-6 overflow-hidden" style={{ background: `${SKY_BLUE}0c` }}>
-          <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-3xl pointer-events-none" style={{ background: `${WINE_RED}10` }} />
-
-          <AnimatedSection className="text-center mb-14">
-            <span
-              className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border"
-              style={{ background: `${WINE_RED}10`, color: WINE_RED, borderColor: `${WINE_RED}25` }}
-            >
+        <section style={{ position: "relative", padding: "80px 24px", overflow: "hidden", background: `${SKY_BLUE}0c` }}>
+          <AnimatedSection style={{ textAlign: "center", marginBottom: 56 }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, padding: "6px 16px", borderRadius: 999, marginBottom: 20, background: `${WINE_RED}10`, color: WINE_RED, border: `1px solid ${WINE_RED}25` }}>
               👑 Leadership
             </span>
-            <h2
-              className="text-3xl md:text-4xl leading-tight font-bold"
-              style={{ fontFamily: "var(--font-heading)", color: NAVY }}
-            >
-              About Our{" "}
-              <span className="italic" style={{ color: WINE_RED }}>School Director</span>
+            <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", fontWeight: 900, color: NAVY, lineHeight: 1.1, fontFamily: "var(--font-heading)" }}>
+              About Our{" "}<em style={{ color: WINE_RED, fontStyle: "italic" }}>School Director</em>
             </h2>
           </AnimatedSection>
-
-          <div className="max-w-5xl mx-auto">
+          <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 260, damping: 24 }}
-              className="bg-white rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.08)] grid md:grid-cols-[280px_1fr]"
+              style={{ background: "#fff", borderRadius: 24, overflow: "hidden", boxShadow: "0 8px 32px rgba(0,0,0,0.08)", display: "grid", gridTemplateColumns: "280px 1fr" }}
             >
-              {/* photo */}
-              <div className="relative h-64 md:h-full min-h-[280px] overflow-hidden">
-                <img src={director} alt="Dr. (Mrs.) Ijeoma Darling Onwubuya" className="w-full h-full object-cover" />
-                <div
-                  className="absolute inset-0"
-                  style={{ background: `linear-gradient(to top, ${NAVY}99 0%, transparent 45%)` }}
-                />
-                <span
-                  className="absolute bottom-4 left-4 text-white text-[10px] font-bold tracking-[0.12em] uppercase px-3 py-1.5 rounded-full"
-                  style={{ background: WINE_RED }}
-                >
+              <div style={{ position: "relative", minHeight: 280, overflow: "hidden" }}>
+                <img src={director} alt="Director" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${NAVY}99 0%, transparent 45%)` }} />
+                <span style={{ position: "absolute", bottom: 16, left: 16, color: "#fff", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, padding: "5px 12px", borderRadius: 999, background: WINE_RED }}>
                   Director & Founder
                 </span>
               </div>
-
-              {/* bio */}
-              <div className="px-7 md:px-10 py-8 md:py-10">
-                <h3
-                  className="text-xl md:text-2xl mb-1 font-bold"
-                  style={{ fontFamily: "var(--font-heading)", color: NAVY }}
-                >
-                  The Director: Mrs Amaka Phillip
-                </h3>
-                <p className="text-[12px] font-bold tracking-[0.1em] uppercase mb-5" style={{ color: SKY_BLUE }}>
-                  17+ Years in Education
+              <div style={{ padding: "40px 40px" }}>
+                <h3 style={{ fontSize: "1.35rem", fontWeight: 900, color: NAVY, marginBottom: 4, fontFamily: "var(--font-heading)" }}>Mrs Amaka Phillip</h3>
+                <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: SKY_BLUE, marginBottom: 20 }}>17+ Years in Education</p>
+                <p style={{ fontSize: "0.88rem", lineHeight: 1.8, color: `${NAVY}aa`, marginBottom: 12 }}>
+                  An independent, diligent, and resourceful achiever with more than 17 years' experience in education. She manages Skyview effortlessly with creative and innovative leadership.
                 </p>
-
-                <p className="text-[14px] leading-relaxed mb-3" style={{ color: `${NAVY}aa` }}>
-                  An independent, diligent, organised, and resourceful achiever with more than 17 years' experience
-                  in the educational sector. She has good communication, organisational, and planning skills, with
-                  administrative experience in the education sector, and has been able to manage the school
-                  effortlessly with creative and innovative skills.
+                <p style={{ fontSize: "0.88rem", lineHeight: 1.8, color: `${NAVY}aa`, marginBottom: 20 }}>
+                  A progressive-minded educationist who believes no child is a dullard — every child unwraps their God-given potential at their own pace. B.A. English (UNN) · M.Ed English (UNIJOS).
                 </p>
-                <p className="text-[14px] leading-relaxed mb-3" style={{ color: `${NAVY}aa` }}>
-                  A progressive-minded educationist who believes that no child is a dullard — however, they unwrap
-                  their God-given potential at different paces. She works tirelessly to discover the ability of
-                  every child in her care, and is a team player and a leader par excellence, with the urge to lead
-                  her team positively and efficiently for self-development and growth.
-                </p>
-                <p className="text-[14px] leading-relaxed mb-5" style={{ color: `${NAVY}aa` }}>
-                  She is a graduate of English Language from the University of Nigeria, Nsukka, and also holds a
-                  Master's degree in Ed/English from the University of Jos, Plateau State. She has attended various
-                  courses to enhance professionalism and brings this to bear in the growth and quality of learning
-                  at Skyview. She is a Christian, happily married, with children.
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {["B.A. English (UNN)", "M.Ed/English (UNIJOS)", "17+ Yrs Experience"].map((c) => (
-                    <span
-                      key={c}
-                      className="text-[10px] font-bold tracking-wide uppercase px-3 py-1.5 rounded-full"
-                      style={{ background: `${SKY_BLUE}12`, color: SKY_BLUE }}
-                    >
+                <div style={{ display: "flex", flexWrap: "wrap" as const, gap: 8 }}>
+                  {["B.A. English (UNN)", "M.Ed (UNIJOS)", "17+ Yrs Experience"].map((c) => (
+                    <span key={c} style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase" as const, padding: "5px 12px", borderRadius: 999, background: `${SKY_BLUE}12`, color: SKY_BLUE }}>
                       {c}
                     </span>
                   ))}
@@ -377,79 +454,38 @@ export default function AboutPage() {
 
         <ColorStrip />
 
-        {/* ── VISION / MISSION / VALUES ─────────────────────────────────── */}
-        <section className="relative py-20 px-6 overflow-hidden" style={{ background: NAVY }}>
-          {/* background glow blobs */}
-          <div className="absolute top-10 left-1/4 w-80 h-80 rounded-full blur-3xl pointer-events-none" style={{ background: `${SKY_BLUE}20` }} />
-          <div className="absolute bottom-10 right-1/4 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: `${WINE_RED}20` }} />
-          <div className="absolute top-1/2 left-10 w-40 h-40 rounded-full blur-2xl pointer-events-none" style={{ background: `${PINK}15` }} />
-
-          {/* subtle dot grid */}
-          <div className="absolute inset-0 pointer-events-none opacity-20"
-            style={{
-              backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)",
-              backgroundSize: "28px 28px",
-            }}
-          />
-
-          <AnimatedSection className="relative z-10 text-center mb-14">
-            <span
-              className="inline-flex items-center gap-2 border text-white text-[11px] font-bold tracking-[0.12em] uppercase px-5 py-2 rounded-full mb-5"
-              style={{ background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)" }}
-            >
+        <section style={{ position: "relative", padding: "80px 24px", overflow: "hidden", background: NAVY }}>
+          <div style={{ position: "absolute", top: 40, left: "25%", width: 320, height: 320, borderRadius: "50%", filter: "blur(80px)", background: `${SKY_BLUE}20`, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", bottom: 40, right: "25%", width: 256, height: 256, borderRadius: "50%", filter: "blur(80px)", background: `${WINE_RED}20`, pointerEvents: "none" }} />
+          <AnimatedSection style={{ position: "relative", zIndex: 10, textAlign: "center", marginBottom: 56 }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, padding: "6px 18px", borderRadius: 999, marginBottom: 20, color: "#fff", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}>
               ⭐ Vision, Mission & Values
             </span>
-            <h2
-              className="text-3xl md:text-4xl text-white leading-tight font-bold"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              What We{" "}
-              <span className="italic" style={{ color: PINK }}>Stand For</span>
+            <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", fontWeight: 900, color: "#fff", lineHeight: 1.1, fontFamily: "var(--font-heading)" }}>
+              What We <em style={{ color: PINK, fontStyle: "italic" }}>Stand For</em>
             </h2>
           </AnimatedSection>
-
-          <div className="relative z-10 grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
-            <AnimatedSection delay={0}>
-              <div
-                className="rounded-2xl p-8 h-full border-2"
-                style={{ background: "rgba(255,255,255,0.06)", borderColor: `${SKY_BLUE}40` }}
-              >
-                <span className="text-3xl mb-4 block select-none">🔭</span>
-                <h3 className="text-xl mb-3 font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
-                  Our Vision
-                </h3>
-                <p className="text-sm leading-relaxed text-white/70">
-                  To harness the potentials of each child towards holistic formation.
-                </p>
-              </div>
-            </AnimatedSection>
-            <AnimatedSection delay={0.1}>
-              <div
-                className="rounded-2xl p-8 h-full border-2"
-                style={{ background: "rgba(255,255,255,0.06)", borderColor: `${PINK}40` }}
-              >
-                <span className="text-3xl mb-4 block select-none">🎯</span>
-                <h3 className="text-xl mb-3 font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
-                  Our Mission
-                </h3>
-                <p className="text-sm leading-relaxed text-white/70">
-                  To promote sound moral and quality education built on Godly principles.
-                </p>
-              </div>
-            </AnimatedSection>
+          <div style={{ position: "relative", zIndex: 10, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, maxWidth: 800, margin: "0 auto 40px" }}>
+            {[
+              { icon: "🔭", title: "Our Vision", text: "To harness the potentials of each child towards holistic formation.", accent: SKY_BLUE },
+              { icon: "🎯", title: "Our Mission", text: "To promote sound moral and quality education built on Godly principles.", accent: PINK },
+            ].map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.1}>
+                <div style={{ borderRadius: 20, padding: 32, height: "100%", background: "rgba(255,255,255,0.06)", border: `2px solid ${item.accent}40` }}>
+                  <span style={{ fontSize: "2rem", marginBottom: 16, display: "block" }}>{item.icon}</span>
+                  <h3 style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", marginBottom: 12, fontFamily: "var(--font-heading)" }}>{item.title}</h3>
+                  <p style={{ fontSize: "0.875rem", lineHeight: 1.75, color: "rgba(255,255,255,0.70)" }}>{item.text}</p>
+                </div>
+              </AnimatedSection>
+            ))}
           </div>
-
-          <AnimatedSection delay={0.15} className="relative z-10">
-            <h3 className="text-center text-white/80 text-[12px] font-bold tracking-[0.2em] uppercase mb-5">
+          <AnimatedSection delay={0.15} style={{ position: "relative", zIndex: 10 }}>
+            <p style={{ textAlign: "center", color: "rgba(255,255,255,0.50)", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase" as const, marginBottom: 20 }}>
               Our Core Values
-            </h3>
-            <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap" as const, justifyContent: "center", gap: 12, maxWidth: 700, margin: "0 auto" }}>
               {coreValues.map((v) => (
-                <span
-                  key={v}
-                  className="text-sm font-semibold px-5 py-2.5 rounded-full text-white"
-                  style={{ background: "rgba(255,255,255,0.08)", border: `1px solid ${PINK}40` }}
-                >
+                <span key={v} style={{ fontSize: "0.875rem", fontWeight: 600, padding: "9px 20px", borderRadius: 999, color: "#fff", background: "rgba(255,255,255,0.08)", border: `1px solid ${PINK}40` }}>
                   {v}
                 </span>
               ))}
@@ -459,89 +495,36 @@ export default function AboutPage() {
 
         <ColorStrip />
 
-        {/* ── CONTACT ───────────────────────────────────────────────────── */}
-        <section className="relative py-20 px-6 overflow-hidden bg-white">
-          <div className="absolute top-0 left-0 w-72 h-72 rounded-full blur-3xl pointer-events-none" style={{ background: `${WINE_RED}08` }} />
-          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none" style={{ background: `${SKY_BLUE}08` }} />
-
-          <AnimatedSection className="text-center mb-12 relative z-10">
-            <span
-              className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full mb-5 border"
-              style={{ background: `${WINE_RED}10`, color: WINE_RED, borderColor: `${WINE_RED}25` }}
-            >
+        <section style={{ position: "relative", padding: "80px 24px", overflow: "hidden", background: "#fff" }}>
+          <AnimatedSection style={{ textAlign: "center", marginBottom: 48, position: "relative", zIndex: 10 }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, padding: "6px 16px", borderRadius: 999, marginBottom: 20, background: `${WINE_RED}10`, color: WINE_RED, border: `1px solid ${WINE_RED}25` }}>
               📍 Visit & Reach Us
             </span>
-            <h2
-              className="text-3xl md:text-4xl leading-tight font-bold"
-              style={{ fontFamily: "var(--font-heading)", color: NAVY }}
-            >
-              Get In{" "}
-              <span className="italic" style={{ color: SKY_BLUE }}>Touch</span>
+            <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", fontWeight: 900, color: NAVY, lineHeight: 1.1, fontFamily: "var(--font-heading)" }}>
+              Get In <em style={{ color: SKY_BLUE, fontStyle: "italic" }}>Touch</em>
             </h2>
-            <p className="text-sm max-w-md mx-auto mt-3" style={{ color: `${NAVY}90` }}>
-              We'd love to welcome you to the Skyview family. Reach out anytime.
-            </p>
           </AnimatedSection>
-
-          <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto relative z-10">
-            <AnimatedSection delay={0}>
-              <div className="rounded-2xl p-7 h-full border-2" style={{ background: `${WINE_RED}08`, borderColor: `${WINE_RED}25` }}>
-                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl text-2xl mb-4" style={{ background: `${WINE_RED}12` }}>
-                  📍
-                </span>
-                <h3 className="text-[15px] font-bold mb-2" style={{ fontFamily: "var(--font-heading)", color: NAVY }}>
-                  Our Address
-                </h3>
-                <p className="text-[13px] leading-relaxed" style={{ color: `${NAVY}90` }}>
-                  Plot 125/127 Eke Layout, Off Orji Udenta Street,<br />
-                  Near Timber Market, Nike Lake Road,<br />
-                  Enugu, Nigeria.
-                </p>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.08}>
-              <div className="rounded-2xl p-7 h-full border-2" style={{ background: `${SKY_BLUE}08`, borderColor: `${SKY_BLUE}25` }}>
-                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl text-2xl mb-4" style={{ background: `${SKY_BLUE}12` }}>
-                  ✉️
-                </span>
-                <h3 className="text-[15px] font-bold mb-2" style={{ fontFamily: "var(--font-heading)", color: NAVY }}>
-                  Email Us
-                </h3>
-                <a
-                  href="mailto:skyviewmontessorischoolenugu@gmail.com"
-                  className="text-[13px] font-semibold leading-relaxed break-all hover:underline"
-                  style={{ color: SKY_BLUE }}
-                >
-                  skyviewmontessorischoolenugu@gmail.com
-                </a>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.16}>
-              <div className="rounded-2xl p-7 h-full border-2" style={{ background: `${PINK}08`, borderColor: `${PINK}30` }}>
-                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl text-2xl mb-4" style={{ background: `${PINK}14` }}>
-                  📞
-                </span>
-                <h3 className="text-[15px] font-bold mb-2" style={{ fontFamily: "var(--font-heading)", color: NAVY }}>
-                  Call Us
-                </h3>
-                <p className="text-[13px] leading-relaxed" style={{ color: `${NAVY}90` }}>
-                  <a href="tel:+2348033555262" className="font-semibold hover:underline" style={{ color: WINE_RED }}>+234 803 355 5262</a>
-                  <br />
-                  <a href="tel:+2348140841601" className="font-semibold hover:underline" style={{ color: WINE_RED }}>+234 814 084 1601</a>
-                </p>
-              </div>
-            </AnimatedSection>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20, maxWidth: 900, margin: "0 auto", position: "relative", zIndex: 10 }}>
+            {[
+              { icon: "📍", title: "Our Address", color: WINE_RED, content: <p style={{ fontSize: "0.84rem", lineHeight: 1.7, color: `${NAVY}90`, margin: 0 }}>Plot 125/127 Eke Layout, Off Orji Udenta Street,<br />Near Timber Market, Nike Lake Road, Enugu.</p> },
+              { icon: "✉️", title: "Email Us", color: SKY_BLUE, content: <a href="mailto:skyviewmontessorischoolenugu@gmail.com" style={{ fontSize: "0.84rem", fontWeight: 600, color: SKY_BLUE, wordBreak: "break-all" as const, textDecoration: "none" }}>skyviewmontessorischoolenugu@gmail.com</a> },
+              { icon: "📞", title: "Call Us", color: PINK, content: <p style={{ margin: 0 }}><a href="tel:+2348033555262" style={{ display: "block", fontSize: "0.84rem", fontWeight: 600, color: WINE_RED, textDecoration: "none" }}>+234 803 355 5262</a><a href="tel:+2348140841601" style={{ display: "block", fontSize: "0.84rem", fontWeight: 600, color: WINE_RED, textDecoration: "none", marginTop: 4 }}>+234 814 084 1601</a></p> },
+            ].map((card, i) => (
+              <AnimatedSection key={card.title} delay={i * 0.08}>
+                <div style={{ borderRadius: 20, padding: 28, height: "100%", background: `${card.color}08`, border: `2px solid ${card.color}25` }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 48, height: 48, borderRadius: 14, background: `${card.color}12`, fontSize: "1.5rem", marginBottom: 16 }}>{card.icon}</span>
+                  <h3 style={{ fontSize: "0.95rem", fontWeight: 800, color: NAVY, marginBottom: 10, fontFamily: "var(--font-heading)" }}>{card.title}</h3>
+                  {card.content}
+                </div>
+              </AnimatedSection>
+            ))}
           </div>
-
-          <div className="text-center mt-10 relative z-10">
+          <div style={{ textAlign: "center", marginTop: 40, position: "relative", zIndex: 10 }}>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 text-white text-[13px] font-bold tracking-[0.06em] px-6 py-3 rounded-full transition-colors duration-200"
-              style={{ background: NAVY }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = WINE_RED)}
-              onMouseLeave={(e) => (e.currentTarget.style.background = NAVY)}
+              style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "#fff", fontSize: "0.84rem", fontWeight: 700, letterSpacing: "0.06em", padding: "12px 28px", borderRadius: 999, background: NAVY, textDecoration: "none", transition: "background 0.2s" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = WINE_RED; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = NAVY; }}
             >
               Contact Admissions →
             </Link>
@@ -549,9 +532,7 @@ export default function AboutPage() {
         </section>
 
         <ColorStrip />
-
       </div>
-
       <Footer />
     </>
   );
