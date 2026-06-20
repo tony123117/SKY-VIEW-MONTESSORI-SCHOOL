@@ -121,9 +121,11 @@ function HeroCarousel() {
   }
 
   useEffect(() => {
-    const t = setInterval(() => goTo((index + 1) % heroSlides.length), 6000);
+    const t = setInterval(() => {
+      setIndex((i) => (i + 1) % heroSlides.length);
+    }, 6000);
     return () => clearInterval(t);
-  }, [index]);
+  }, []);
 
   const slide = heroSlides[index];
 
