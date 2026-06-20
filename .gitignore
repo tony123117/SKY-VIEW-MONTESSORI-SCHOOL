@@ -16,8 +16,6 @@ dist (2).zip
 
 # Editor directories and files
 .vscode/*
-images/*
-icons/*
 !.vscode/extensions.json
 .idea
 .DS_Store
