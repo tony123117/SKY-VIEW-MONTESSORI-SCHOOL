@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "prebuild": "npm run generate:images",
     "generate:images": "node scripts/generate-responsive-images.js",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",

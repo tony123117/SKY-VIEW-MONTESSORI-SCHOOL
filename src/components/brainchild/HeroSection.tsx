@@ -53,16 +53,6 @@ const trustBadges = [
   "Qualified Teachers",
 ];
 
-// fixed particle layout so they don't reshuffle on re-render
-const particles = Array.from({ length: 14 }).map((_, i) => ({
-  id: i,
-  left: (i * 37 + 5) % 100,
-  top: (i * 53 + 8) % 100,
-  size: 4 + (i % 4) * 2,
-  color: i % 2 === 0 ? "#4A9EDB" : "#FF6B9D",
-  duration: 6 + (i % 5),
-  delay: (i % 7) * 0.6,
-}));
 
 // ─── animated counter ───────────────────────────────────────────────────────
 function useCountUp(target: number, active: boolean, duration = 1400) {
@@ -492,22 +482,7 @@ export function HeroSection() {
           </div>
         ))}
 
-        {/* floating particles */}
-        {particles.map((p) => (
-          <span
-            key={p.id}
-            className="hs-particle"
-            style={{
-              left: `${p.left}%`,
-              top: `${p.top}%`,
-              width: p.size,
-              height: p.size,
-              background: p.color,
-              boxShadow: `0 0 ${p.size * 1.4}px ${p.color}99`,
-              animation: `particleFloat ${p.duration}s ease-in-out ${p.delay}s infinite`,
-            }}
-          />
-        ))}
+        
 
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(115deg, rgba(15,22,45,0.82) 0%, rgba(58,16,28,0.62) 38%, rgba(58,16,28,0.22) 62%, rgba(58,16,28,0.04) 82%, transparent 100%)" }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 3, background: "linear-gradient(to top, rgba(10,14,28,0.45) 0%, rgba(10,14,28,0.06) 22%, transparent 42%)" }} />
